@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-    <title>Endless Sky</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endless Sky Web</title>
 
     <style>
         html, body {
@@ -18,24 +15,374 @@
             overflow: hidden;
         }
 
-        canvas {
+        #canvas {
             display: block;
             width: 100vw;
             height: 100vh;
             outline: none;
+            background: #000;
+        }
+
+        #status {
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            right: 0;
+            top: 0;
+            padding: 16px 20px;
+            box-sizing: border-box;
+
+            background: rgba(0, 0, 0, 0.90);
+            color: #fff;
+
+            font-family: monospace;
+            font-size: 15px;
+            line-height: 1.5;
+
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        #status.error {
+            color: #ff8080;
+            background: rgba(40, 0, 0, 0.96);
+        }
+
+        #status.hidden {
+            display: none;
         }
     </style>
 </head>
 
 <body>
+    <div id="status">Beginning Endless Sky startup...</div>
+
     <canvas id="canvas" tabindex="0"></canvas>
 
     <script>
-        var Module = {
-            canvas: document.getElementById("canvas")
-        };
-    </script>
+        "use strict";
 
-    <script src="endless-sky.js"></script>
+        const PART_COUNT = 16;
+        const statusElement = document.getElementById("status");
+        const canvas = document.getElementById("canvas");
+
+        function status(message) {
+            console.log("[Endless Sky]", message);
+            statusElement.textContent = message;
+        }
+
+        function fatal(message, error) {
+            console.error("[Endless Sky]", message, error || "");
+
+            statusElement.classList.remove("hidden");
+            statusElement.classList.add("error");
+
+            let detail = "";
+
+            if (error) {
+                detail =
+                    "\n\n" +
+                    (
+                        error.stack ||
+                        error.message ||
+                        String(error)
+                    );
+            }
+
+            statusElement.textContent =
+                "ENDLESS SKY FAILED\n\n" +
+                message +
+                detail +
+                "\n\nOpen the browser console for additional details.";
+        }
+
+        window.addEventListener("error", function (event) {
+            fatal(
+                "JavaScript error: " +
+                (event.message || "unknown error") +
+                (
+                    event.filename
+                        ? "\nFile: " + event.filename
+                        : ""
+                ) +
+                (
+                    event.lineno
+                        ? "\nLine: " + event.lineno
+                        : ""
+                )
+            );
+        });
+
+        window.addEventListener("unhandledrejection", function (event) {
+            fatal(
+                "Unhandled promise rejection",
+                event.reason
+            );
+        });
+
+        function partURL(index) {
+            return (
+                "data/endless-sky.data.part" +
+                String(index).padStart(2, "0")
+            );
+        }
+
+        async function fetchPart(index) {
+            const url = partURL(index);
+
+            status(
+                "Downloading data part " +
+                (index + 1) +
+                " / " +
+                PART_COUNT +
+                "\n" +
+                url
+            );
+
+            const response = await fetch(url, {
+                cache: "no-cache"
+            });
+
+            if (!response.ok) {
+                throw new Error(
+                    "HTTP " +
+                    response.status +
+                    " " +
+                    response.statusText +
+                    " while loading " +
+                    url
+                );
+            }
+
+            const buffer = await response.arrayBuffer();
+
+            console.log(
+                "[Endless Sky] Loaded",
+                url,
+                buffer.byteLength,
+                "bytes"
+            );
+
+            return new Uint8Array(buffer);
+        }
+
+        async function reconstructData() {
+            /*
+             * The splitter used:
+             *
+             *   chunk_size = ceil(original_size / 16)
+             *
+             * Therefore the first 15 chunks have the same size and
+             * the 16th chunk contains the remainder.
+             */
+
+            status("Downloading data part 1 / 16");
+
+            const first = await fetchPart(0);
+            const chunkSize = first.byteLength;
+
+            status(
+                "First part loaded: " +
+                chunkSize.toLocaleString() +
+                " bytes\n" +
+                "Determining total package size..."
+            );
+
+            const last = await fetchPart(PART_COUNT - 1);
+
+            const totalSize =
+                chunkSize * (PART_COUNT - 1) +
+                last.byteLength;
+
+            status(
+                "Reconstructing endless-sky.data\n" +
+                "Total size: " +
+                totalSize.toLocaleString() +
+                " bytes (" +
+                (totalSize / (1024 * 1024)).toFixed(2) +
+                " MiB)"
+            );
+
+            const packageData =
+                new Uint8Array(totalSize);
+
+            packageData.set(first, 0);
+
+            /*
+             * Release the first reference as soon as it is copied.
+             */
+            // eslint-disable-next-line no-unused-vars
+            const unusedFirst = null;
+
+            for (let i = 1; i < PART_COUNT - 1; i++) {
+                const part = await fetchPart(i);
+
+                if (part.byteLength !== chunkSize) {
+                    throw new Error(
+                        "Part " +
+                        i +
+                        " has " +
+                        part.byteLength +
+                        " bytes, but expected " +
+                        chunkSize +
+                        " bytes."
+                    );
+                }
+
+                packageData.set(
+                    part,
+                    i * chunkSize
+                );
+
+                status(
+                    "Reconstructing endless-sky.data\n" +
+                    "Copied " +
+                    (i + 1) +
+                    " / " +
+                    PART_COUNT +
+                    " parts"
+                );
+            }
+
+            packageData.set(
+                last,
+                chunkSize * (PART_COUNT - 1)
+            );
+
+            status(
+                "Data reconstruction complete.\n" +
+                totalSize.toLocaleString() +
+                " bytes ready for Emscripten.\n\n" +
+                "Loading endless-sky.js..."
+            );
+
+            return packageData.buffer;
+        }
+
+        async function start() {
+            try {
+                /*
+                 * Do not start endless-sky.js until the complete data
+                 * package is available. This is the same basic strategy
+                 * used by Emscripten's manual-data loading example.
+                 */
+                const packageBuffer =
+                    await reconstructData();
+
+                /*
+                 * Make Module explicitly global before inserting the
+                 * generated Emscripten script.
+                 */
+                window.Module = {
+                    canvas: canvas,
+
+                    getPreloadedPackage:
+                        function (
+                            remotePackageName,
+                            remotePackageSize
+                        ) {
+                            console.log(
+                                "[Endless Sky] Emscripten requested:",
+                                remotePackageName,
+                                "expected:",
+                                remotePackageSize,
+                                "actual:",
+                                packageBuffer.byteLength
+                            );
+
+                            if (
+                                remotePackageSize &&
+                                Number(remotePackageSize) !==
+                                    packageBuffer.byteLength
+                            ) {
+                                throw new Error(
+                                    "Data size mismatch.\n" +
+                                    "Emscripten expected " +
+                                    remotePackageSize +
+                                    " bytes.\n" +
+                                    "Reconstructed package is " +
+                                    packageBuffer.byteLength +
+                                    " bytes."
+                                );
+                            }
+
+                            return packageBuffer;
+                        },
+
+                    print: function (text) {
+                        console.log("[Endless Sky stdout]", text);
+                    },
+
+                    printErr: function (text) {
+                        console.error("[Endless Sky stderr]", text);
+                    },
+
+                    onRuntimeInitialized: function () {
+                        console.log(
+                            "[Endless Sky] WebAssembly runtime initialized."
+                        );
+
+                        /*
+                         * Keep this visible for a moment so we know
+                         * initialization actually happened.
+                         */
+                        status(
+                            "WebAssembly runtime initialized.\n" +
+                            "Endless Sky is starting..."
+                        );
+
+                        setTimeout(function () {
+                            statusElement.classList.add("hidden");
+                            canvas.focus();
+                        }, 1000);
+                    },
+
+                    onAbort: function (reason) {
+                        fatal(
+                            "Emscripten aborted.\n" +
+                            String(reason || "")
+                        );
+                    }
+                };
+
+                /*
+                 * Load the original generated JS unchanged.
+                 */
+                const script =
+                    document.createElement("script");
+
+                script.src = "endless-sky.js";
+
+                script.onload = function () {
+                    console.log(
+                        "[Endless Sky] endless-sky.js loaded."
+                    );
+
+                    /*
+                     * If Emscripten does not call onRuntimeInitialized,
+                     * a later error handler will still report the error.
+                     */
+                };
+
+                script.onerror = function () {
+                    fatal(
+                        "The browser could not load endless-sky.js.\n" +
+                        "Check that endless-sky.js is in the same directory " +
+                        "as index.html."
+                    );
+                };
+
+                document.body.appendChild(script);
+
+            } catch (error) {
+                fatal(
+                    "Startup failed before the WebAssembly runtime started.",
+                    error
+                );
+            }
+        }
+
+        start();
+    </script>
 </body>
 </html>
