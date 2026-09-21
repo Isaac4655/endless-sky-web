@@ -36,6 +36,11 @@
          On first load it will register the worker and reload the page once automatically. -->
     <script src="coi-serviceworker.js"></script>
 
+    <!-- Must load before endless-sky.js: patches fetch/XHR so that any request for
+         "endless-sky.data" is transparently reassembled from the 16 split part files
+         in data/endless-sky.data.part00 .. part15 (GitHub's file size limits forced the split). -->
+    <script src="data-reassembler.js"></script>
+
     <script>
         var Module = {
             canvas: document.getElementById("canvas")
