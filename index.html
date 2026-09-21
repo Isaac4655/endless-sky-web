@@ -2,10 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Endless Sky</title>
 
     <style>
@@ -24,29 +21,71 @@
             height: 100vh;
             outline: none;
         }
+
+        #status {
+            color: #fff;
+            font-family: sans-serif;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
+    <div id="status">Loading environment...</div>
     <canvas id="canvas" tabindex="0"></canvas>
 
-    <!-- Must load before anything else: registers a service worker that injects the
-         Cross-Origin-Opener-Policy / Cross-Origin-Embedder-Policy headers that GitHub Pages
-         won't let us set server-side. Required for SharedArrayBuffer / pthreads to work.
-         On first load it will register the worker and reload the page once automatically. -->
+    <!-- Configure COI before loading coi-serviceworker.js -->
+    <script>
+        window.coi = {
+            coepCredentialless: () => false // Force require-corp for full pthread worker compatibility
+        };
+    </script>
+
+    <!-- Must load before anything else: registers COOP/COEP headers -->
     <script src="coi-serviceworker.js"></script>
 
-    <!-- Must load before endless-sky.js: patches fetch/XHR so that any request for
-         "endless-sky.data" is transparently reassembled from the 16 split part files
-         in data/endless-sky.data.part00 .. part15 (GitHub's file size limits forced the split). -->
+    <!-- Must load before endless-sky.js: reassembles data chunks -->
     <script src="data-reassembler.js"></script>
 
     <script>
         var Module = {
-            canvas: document.getElementById("canvas")
+            canvas: document.getElementById("canvas"),
+            // Pre-allocate pthread pool so static C++ constructors have workers available
+            pthreadPoolSize: navigator.hardwareConcurrency || 4,
+            setStatus: function(text) {
+                var statusEl = document.getElementById("status");
+                if (statusEl) {
+                    if (text) {
+                        statusEl.innerText = text;
+                    } else {
+                        statusEl.style.display = "none";
+                    }
+                }
+            }
         };
-    </script>
 
-    <script src="endless-sky.js"></script>
+        function loadGameScript() {
+            var script = document.createElement("script");
+            script.src = "endless-sky.js";
+            document.body.appendChild(script);
+        }
+
+        // Only load endless-sky.js once Cross-Origin Isolation is active
+        if (window.crossOriginIsolated) {
+            loadGameScript();
+        } else {
+            console.warn("[COI] Waiting for Cross-Origin Isolation reload...");
+            setTimeout(function() {
+                if (!window.crossOriginIsolated) {
+                    document.getElementById("status").innerText = 
+                        "Cross-Origin Isolation is required. If the page does not reload automatically, try refreshing manually or opening in HTTPS.";
+                }
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
