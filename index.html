@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Endless Sky Web</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Endless Sky</title>
 
     <style>
         html, body {
@@ -16,389 +18,30 @@
             overflow: hidden;
         }
 
-        #canvas {
+        canvas {
             display: block;
             width: 100vw;
             height: 100vh;
             outline: none;
-            background: #000;
-        }
-
-        #status {
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            right: 0;
-            top: 0;
-
-            max-height: 100vh;
-            overflow: auto;
-
-            padding: 16px 20px;
-            box-sizing: border-box;
-
-            background: rgba(0, 0, 0, 0.94);
-            color: white;
-
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 1.5;
-
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
-
-        #status.error {
-            color: #ff8080;
-            background: rgba(40, 0, 0, 0.97);
         }
     </style>
 </head>
 
 <body>
+    <canvas id="canvas" tabindex="0"></canvas>
 
-<div id="status">Starting...</div>
+    <!-- Must load before anything else: registers a service worker that injects the
+         Cross-Origin-Opener-Policy / Cross-Origin-Embedder-Policy headers that GitHub Pages
+         won't let us set server-side. Required for SharedArrayBuffer / pthreads to work.
+         On first load it will register the worker and reload the page once automatically. -->
+    <script src="coi-serviceworker.js"></script>
 
-<canvas id="canvas" tabindex="0"></canvas>
-
-<script>
-"use strict";
-
-const PART_COUNT = 16;
-
-const statusElement =
-    document.getElementById("status");
-
-const canvas =
-    document.getElementById("canvas");
-
-let nativeMessages = [];
-
-function showStatus(text) {
-    console.log("[Endless Sky]", text);
-    statusElement.textContent = text;
-}
-
-function addNativeMessage(text) {
-    if (text === undefined || text === null)
-        return;
-
-    text = String(text);
-
-    console.log("[Endless Sky native]", text);
-
-    nativeMessages.push(text);
-
-    /*
-     * Keep the most recent messages. This prevents an enormous
-     * diagnostic output from consuming the entire browser DOM.
-     */
-    if (nativeMessages.length > 100)
-        nativeMessages.shift();
-}
-
-function showFailure(title, error) {
-    console.error(title, error);
-
-    let output = title;
-
-    if (nativeMessages.length) {
-        output +=
-            "\n\n=== Endless Sky native output ===\n" +
-            nativeMessages.join("\n");
-    }
-
-    if (error) {
-        output +=
-            "\n\n=== JavaScript/WebAssembly error ===\n" +
-            (
-                error.stack ||
-                error.message ||
-                String(error)
-            );
-    }
-
-    output +=
-        "\n\n=== End ===";
-
-    statusElement.classList.add("error");
-    statusElement.textContent = output;
-}
-
-window.addEventListener("error", function(event) {
-    showFailure(
-        "JavaScript error: " +
-        (event.message || "unknown error")
-    );
-});
-
-window.addEventListener(
-    "unhandledrejection",
-    function(event) {
-        showFailure(
-            "Unhandled promise rejection",
-            event.reason
-        );
-    }
-);
-
-function partURL(index) {
-    return (
-        "data/endless-sky.data.part" +
-        String(index).padStart(2, "0")
-    );
-}
-
-async function fetchPart(index) {
-    const url = partURL(index);
-
-    showStatus(
-        "Loading Endless Sky data part " +
-        (index + 1) +
-        " / " +
-        PART_COUNT +
-        "\n\n" +
-        url
-    );
-
-    const response = await fetch(
-        url,
-        { cache: "no-cache" }
-    );
-
-    if (!response.ok) {
-        throw new Error(
-            "HTTP " +
-            response.status +
-            " " +
-            response.statusText +
-            "\n" +
-            url
-        );
-    }
-
-    const buffer =
-        await response.arrayBuffer();
-
-    console.log(
-        url,
-        buffer.byteLength,
-        "bytes"
-    );
-
-    return new Uint8Array(buffer);
-}
-
-async function reconstructData() {
-
-    const first =
-        await fetchPart(0);
-
-    const chunkSize =
-        first.byteLength;
-
-    const last =
-        await fetchPart(
-            PART_COUNT - 1
-        );
-
-    const totalSize =
-        chunkSize * (PART_COUNT - 1) +
-        last.byteLength;
-
-    showStatus(
-        "Reconstructing Endless Sky data...\n\n" +
-        "Expected original size: 403,539,473 bytes\n" +
-        "Reconstructed size: " +
-        totalSize.toLocaleString() +
-        " bytes"
-    );
-
-    const packageData =
-        new Uint8Array(totalSize);
-
-    packageData.set(first, 0);
-
-    for (
-        let i = 1;
-        i < PART_COUNT - 1;
-        i++
-    ) {
-        const part =
-            await fetchPart(i);
-
-        if (part.byteLength !== chunkSize) {
-            throw new Error(
-                "Unexpected size for " +
-                partURL(i) +
-                "\nExpected: " +
-                chunkSize +
-                "\nReceived: " +
-                part.byteLength
-            );
-        }
-
-        packageData.set(
-            part,
-            i * chunkSize
-        );
-    }
-
-    packageData.set(
-        last,
-        chunkSize * (PART_COUNT - 1)
-    );
-
-    if (totalSize !== 403539473) {
-        throw new Error(
-            "The reconstructed package has the wrong size:\n" +
-            totalSize +
-            " bytes\n\n" +
-            "Expected:\n" +
-            "403539473 bytes"
-        );
-    }
-
-    showStatus(
-        "Data package reconstructed successfully.\n\n" +
-        "403,539,473 bytes\n\n" +
-        "Loading endless-sky.js..."
-    );
-
-    return packageData.buffer;
-}
-
-async function start() {
-
-    try {
-
-        const packageBuffer =
-            await reconstructData();
-
-        /*
-         * Everything Emscripten may need is placed on the global
-         * Module object before endless-sky.js executes.
-         */
-        window.Module = {
-
-            canvas: canvas,
-
-            getPreloadedPackage:
-                function(
-                    remotePackageName,
-                    remotePackageSize
-                ) {
-
-                    console.log(
-                        "Emscripten requested:",
-                        remotePackageName
-                    );
-
-                    console.log(
-                        "Expected size:",
-                        remotePackageSize
-                    );
-
-                    console.log(
-                        "Actual size:",
-                        packageBuffer.byteLength
-                    );
-
-                    if (
-                        remotePackageSize &&
-                        Number(remotePackageSize) !==
-                            packageBuffer.byteLength
-                    ) {
-                        throw new Error(
-                            "Data size mismatch.\n" +
-                            "Emscripten expected " +
-                            remotePackageSize +
-                            " bytes.\n" +
-                            "Actual package is " +
-                            packageBuffer.byteLength +
-                            " bytes."
-                        );
-                    }
-
-                    return packageBuffer;
-                },
-
-            print:
-                function(text) {
-                    addNativeMessage(text);
-                },
-
-            printErr:
-                function(text) {
-                    addNativeMessage(
-                        "[stderr] " + text
-                    );
-                },
-
-            onAbort:
-                function(reason) {
-
-                    showFailure(
-                        "Endless Sky aborted during startup.\n" +
-                        "Abort reason: " +
-                        String(reason || "unknown")
-                    );
-                },
-
-            onRuntimeInitialized:
-                function() {
-
-                    showStatus(
-                        "WebAssembly initialized.\n\n" +
-                        "Endless Sky is starting..."
-                    );
-
-                    setTimeout(
-                        function() {
-                            statusElement.textContent = "";
-                            statusElement.style.display =
-                                "none";
-
-                            canvas.focus();
-                        },
-                        1500
-                    );
-                }
+    <script>
+        var Module = {
+            canvas: document.getElementById("canvas")
         };
+    </script>
 
-        const script =
-            document.createElement("script");
-
-        script.src =
-            "endless-sky.js";
-
-        script.onload =
-            function() {
-                console.log(
-                    "endless-sky.js loaded."
-                );
-            };
-
-        script.onerror =
-            function() {
-                showFailure(
-                    "Could not load endless-sky.js."
-                );
-            };
-
-        document.body.appendChild(script);
-
-    } catch (error) {
-
-        showFailure(
-            "Startup failed before Endless Sky could initialize.",
-            error
-        );
-    }
-}
-
-start();
-</script>
-
+    <script src="endless-sky.js"></script>
 </body>
 </html>
