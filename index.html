@@ -35,27 +35,56 @@
 </head>
 
 <body>
-    <div id="status">Loading environment...</div>
+    <div id="status">Loading environment hacks...</div>
     <canvas id="canvas" tabindex="0"></canvas>
 
-    <!-- Configure COI before loading coi-serviceworker.js -->
     <script>
         window.coi = {
-            coepCredentialless: () => false // Force require-corp for full pthread worker compatibility
+            coepCredentialless: () => false
         };
     </script>
-
-    <!-- Must load before anything else: registers COOP/COEP headers -->
     <script src="coi-serviceworker.js"></script>
-
-    <!-- Must load before endless-sky.js: reassembles data chunks -->
     <script src="data-reassembler.js"></script>
 
     <script>
+        // HACK 1: Force single-threaded fallback mode.
+        // Endless Sky's C++ ThreadPool uses std::thread::hardware_concurrency().
+        // By forcing it to 1, we may prevent it from trying to spawn background workers entirely.
+        Object.defineProperty(navigator, 'hardwareConcurrency', {
+            get: function() { return 1; }
+        });
+
+        // HACK 2: Bypass Emscripten's internal SharedArrayBuffer type checks.
+        if (typeof SharedArrayBuffer === 'undefined') {
+            console.warn("[Hack] Polyfilling SharedArrayBuffer to bypass JS checks");
+            window.SharedArrayBuffer = window.ArrayBuffer;
+        }
+
+        // HACK 3: Intercept WebAssembly instantiation to neuter pthread_create.
+        // If the JS runtime attempts to link pthread_create, we force it to return 0 (success) 
+        // instead of 138 (ENOTSUP). This stops the C++ exception from aborting the program.
+        const originalInstantiate = WebAssembly.instantiate;
+        WebAssembly.instantiate = function(buffer, imports) {
+            if (imports && imports.env && imports.env.pthread_create) {
+                console.warn("[Hack] Intercepting imports.env.pthread_create");
+                imports.env.pthread_create = function() { return 0; };
+            }
+            return originalInstantiate(buffer, imports);
+        };
+
+        if (WebAssembly.instantiateStreaming) {
+            const originalInstantiateStreaming = WebAssembly.instantiateStreaming;
+            WebAssembly.instantiateStreaming = function(response, imports) {
+                if (imports && imports.env && imports.env.pthread_create) {
+                    console.warn("[Hack] Intercepting imports.env.pthread_create (streaming)");
+                    imports.env.pthread_create = function() { return 0; };
+                }
+                return originalInstantiateStreaming(response, imports);
+            };
+        }
+
         var Module = {
             canvas: document.getElementById("canvas"),
-            // Pre-allocate pthread pool so static C++ constructors have workers available
-            pthreadPoolSize: navigator.hardwareConcurrency || 4,
             setStatus: function(text) {
                 var statusEl = document.getElementById("status");
                 if (statusEl) {
@@ -70,11 +99,11 @@
 
         function loadGameScript() {
             var script = document.createElement("script");
-            script.src = "endless-sky.js";
+            // Cache-bust to ensure we don't load a failed, cached script instance
+            script.src = "endless-sky.js?t=" + new Date().getTime();
             document.body.appendChild(script);
         }
 
-        // Only load endless-sky.js once Cross-Origin Isolation is active
         if (window.crossOriginIsolated) {
             loadGameScript();
         } else {
@@ -82,7 +111,7 @@
             setTimeout(function() {
                 if (!window.crossOriginIsolated) {
                     document.getElementById("status").innerText = 
-                        "Cross-Origin Isolation is required. If the page does not reload automatically, try refreshing manually or opening in HTTPS.";
+                        "Cross-Origin Isolation failed. Check browser restrictions.";
                 }
             }, 3000);
         }
