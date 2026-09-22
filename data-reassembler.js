@@ -29,27 +29,51 @@
             }
         }
 
-        const partPromises = [];
-        for (let i = 0; i < PART_COUNT; i++) {
+        async function fetchPart(i) {
             const url = base + PART_DIR + PART_PREFIX + String(i).padStart(PART_DIGITS, "0");
-            partPromises.push(
-                fetch(url).then((res) => {
-                    if (!res.ok) {
-                        reportPartDone(i, 0, false, "HTTP " + res.status + " for " + url);
-                        throw new Error("Failed to fetch data part " + i + " (" + url + "): " + res.status);
-                    }
-                    return res.arrayBuffer();
-                }).then((buf) => {
-                    reportPartDone(i, buf.byteLength, true);
-                    return buf;
-                }, (err) => {
-                    reportPartDone(i, 0, false, err.message || String(err));
-                    throw err;
-                })
-            );
+            const controller = new AbortController();
+            const perPartTimeout = setTimeout(() => {
+                console.error("[data-reassembler] Part " + i + " timed out after 20s (no response) — aborting: " + url);
+                controller.abort();
+            }, 20000);
+
+            try {
+                const res = await fetch(url, { signal: controller.signal });
+                clearTimeout(perPartTimeout);
+                if (!res.ok) {
+                    reportPartDone(i, 0, false, "HTTP " + res.status + " for " + url);
+                    throw new Error("Failed to fetch data part " + i + " (" + url + "): " + res.status);
+                }
+                const buf = await res.arrayBuffer();
+                reportPartDone(i, buf.byteLength, true);
+                return buf;
+            } catch (err) {
+                clearTimeout(perPartTimeout);
+                reportPartDone(i, 0, false, err.message || String(err));
+                throw err;
+            }
         }
 
-        const parts = await Promise.all(partPromises);
+        // Fetch with bounded concurrency instead of firing all 16 requests at once.
+        // Browsers cap concurrent connections per origin (often 6), so launching
+        // everything in parallel can strand later requests behind the connection
+        // limit indefinitely if any earlier one stalls without erroring.
+        const CONCURRENCY = 4;
+        const results = new Array(PART_COUNT);
+        let nextIndex = 0;
+
+        async function worker() {
+            while (nextIndex < PART_COUNT) {
+                const i = nextIndex++;
+                results[i] = await fetchPart(i);
+            }
+        }
+
+        const workers = [];
+        for (let w = 0; w < CONCURRENCY; w++) workers.push(worker());
+        await Promise.all(workers);
+
+        const parts = results;
 
         let totalLength = 0;
         for (const p of parts) totalLength += p.byteLength;
