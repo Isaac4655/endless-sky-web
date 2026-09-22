@@ -66,9 +66,22 @@
             }
         }
 
-        console.log("[data-reassembler] Assembly complete: " + totalLength + " bytes ready.");
+        console.log("[data-reassembler] Assembly complete: " + totalLength + " bytes ready. Handing off as a stream...");
 
-        return new Response(combined.buffer, {
+        // Build the Response body as an explicit ReadableStream we fully control,
+        // rather than relying on the runtime to convert a raw ArrayBuffer into a
+        // lazily-streamed body. This guarantees the consumer's
+        // `response.body.getReader().read()` loop sees exactly one chunk and a
+        // clean `done: true` afterwards, instead of potentially hanging.
+        const body = new ReadableStream({
+            start(controller) {
+                controller.enqueue(combined);
+                controller.close();
+                console.log("[data-reassembler] Stream closed after enqueueing " + totalLength + " bytes.");
+            }
+        });
+
+        return new Response(body, {
             status: 200,
             statusText: "OK",
             headers: {
@@ -86,7 +99,20 @@
         // FIX: Use regex to match endless-sky.data even if query parameters are attached
         if (url && /endless-sky\.data(\?.*)?$/.test(url)) {
             console.log("[data-reassembler] Intercepting fetch for", url, "- reassembling from", PART_COUNT, "parts");
-            return fetchAndAssembleData(url);
+
+            const watchdog = setTimeout(() => {
+                console.error("[data-reassembler] WATCHDOG: still assembling after 30s. Something is stuck (check the part logs above for the last one that completed).");
+            }, 30000);
+
+            return fetchAndAssembleData(url).then((response) => {
+                clearTimeout(watchdog);
+                console.log("[data-reassembler] Returning assembled Response to caller.");
+                return response;
+            }).catch((err) => {
+                clearTimeout(watchdog);
+                console.error("[data-reassembler] fetchAndAssembleData failed:", err);
+                throw err;
+            });
         }
 
         return originalFetch(input, init);
