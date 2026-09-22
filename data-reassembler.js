@@ -31,34 +31,47 @@
 
         async function fetchPart(i) {
             const url = base + PART_DIR + PART_PREFIX + String(i).padStart(PART_DIGITS, "0");
-            const controller = new AbortController();
-            const perPartTimeout = setTimeout(() => {
-                console.error("[data-reassembler] Part " + i + " timed out after 20s (no response) — aborting: " + url);
-                controller.abort();
-            }, 20000);
+            const MAX_ATTEMPTS = 4;
 
-            try {
-                const res = await fetch(url, { signal: controller.signal });
-                clearTimeout(perPartTimeout);
-                if (!res.ok) {
-                    reportPartDone(i, 0, false, "HTTP " + res.status + " for " + url);
-                    throw new Error("Failed to fetch data part " + i + " (" + url + "): " + res.status);
+            for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+                const controller = new AbortController();
+                const perPartTimeout = setTimeout(() => {
+                    console.error("[data-reassembler] Part " + i + " (attempt " + attempt + ") timed out after 30s — aborting: " + url);
+                    controller.abort();
+                }, 30000);
+
+                try {
+                    const res = await fetch(url, { signal: controller.signal, cache: "no-store" });
+                    clearTimeout(perPartTimeout);
+                    if (!res.ok) {
+                        throw new Error("HTTP " + res.status + " for " + url);
+                    }
+                    const buf = await res.arrayBuffer();
+                    reportPartDone(i, buf.byteLength, true);
+                    return buf;
+                } catch (err) {
+                    clearTimeout(perPartTimeout);
+                    const willRetry = attempt < MAX_ATTEMPTS;
+                    console.error(
+                        "[data-reassembler] Part " + i + " attempt " + attempt + "/" + MAX_ATTEMPTS +
+                        " failed: " + (err.message || err) +
+                        (willRetry ? " — retrying..." : " — giving up.")
+                    );
+                    if (!willRetry) {
+                        reportPartDone(i, 0, false, err.message || String(err));
+                        throw err;
+                    }
+                    // Exponential backoff before retrying: 500ms, 1s, 2s...
+                    await new Promise((r) => setTimeout(r, 500 * Math.pow(2, attempt - 1)));
                 }
-                const buf = await res.arrayBuffer();
-                reportPartDone(i, buf.byteLength, true);
-                return buf;
-            } catch (err) {
-                clearTimeout(perPartTimeout);
-                reportPartDone(i, 0, false, err.message || String(err));
-                throw err;
             }
         }
 
         // Fetch with bounded concurrency instead of firing all 16 requests at once.
-        // Browsers cap concurrent connections per origin (often 6), so launching
-        // everything in parallel can strand later requests behind the connection
-        // limit indefinitely if any earlier one stalls without erroring.
-        const CONCURRENCY = 4;
+        // GitHub Pages (and browsers generally) throttle/limit concurrent requests
+        // per origin, and pushing too many large parts at once can cause outright
+        // connection failures ("Failed to fetch"), not just slowness.
+        const CONCURRENCY = 2;
         const results = new Array(PART_COUNT);
         let nextIndex = 0;
 
@@ -125,8 +138,8 @@
             console.log("[data-reassembler] Intercepting fetch for", url, "- reassembling from", PART_COUNT, "parts");
 
             const watchdog = setTimeout(() => {
-                console.error("[data-reassembler] WATCHDOG: still assembling after 30s. Something is stuck (check the part logs above for the last one that completed).");
-            }, 30000);
+                console.error("[data-reassembler] WATCHDOG: still assembling after 90s. If you see repeated retry messages above this is expected to take a while on a slow connection; otherwise something is stuck.");
+            }, 90000);
 
             return fetchAndAssembleData(url).then((response) => {
                 clearTimeout(watchdog);
