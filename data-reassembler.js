@@ -1,33 +1,14 @@
 /*
- * data-reassembler.js
- *
- * endless-sky.js expects to fetch a single file called "endless-sky.data".
- * Because that file is too large for a normal GitHub push, it has been split
- * into 16 raw binary chunks living in data/endless-sky.data.part00 ... part15.
- *
- * This script patches window.fetch so that any request whose URL ends in
- * "endless-sky.data" is transparently redirected: it fetches all 16 parts,
- * concatenates them in order into a single ArrayBuffer, and returns a
- * synthetic Response built from that buffer - indistinguishable to
- * endless-sky.js's loader from a normal single-file fetch.
- *
- * Must be loaded BEFORE endless-sky.js.
+ * data-reassembler.js (Fixed)
  */
 
 (function () {
     const PART_DIR = "data/";
     const PART_PREFIX = "endless-sky.data.part";
-    const PART_COUNT = 16; // part00 .. part15
-    const PART_DIGITS = 2; // "00", "01", ... "15"
-
-    function partUrl(index) {
-        const n = String(index).padStart(PART_DIGITS, "0");
-        return PART_DIR + PART_PREFIX + n;
-    }
+    const PART_COUNT = 16;
+    const PART_DIGITS = 2;
 
     async function fetchAndAssembleData(originalUrl) {
-        // Preserve any path prefix the original request had, in case
-        // endless-sky.js is served from a subdirectory.
         const base = originalUrl.replace(/endless-sky\.data(\?.*)?$/, "");
 
         const partPromises = [];
@@ -68,9 +49,10 @@
     const originalFetch = window.fetch.bind(window);
 
     window.fetch = function (input, init) {
-        const url = typeof input === "string" ? input : input.url;
+        const url = typeof input === "string" ? input : (input && input.url ? input.url : "");
 
-        if (url && url.endsWith("endless-sky.data")) {
+        // FIX: Use regex to match endless-sky.data even if query parameters are attached
+        if (url && /endless-sky\.data(\?.*)?$/.test(url)) {
             console.log("[data-reassembler] Intercepting fetch for", url, "- reassembling from", PART_COUNT, "parts");
             return fetchAndAssembleData(url);
         }
@@ -78,8 +60,6 @@
         return originalFetch(input, init);
     };
 
-    // Emscripten's loader can also use XMLHttpRequest instead of fetch,
-    // depending on build settings. Patch that path too as a safety net.
     const OriginalXHR = window.XMLHttpRequest;
 
     function PatchedXHR() {
@@ -87,12 +67,10 @@
         const originalOpen = xhr.open.bind(xhr);
 
         xhr.open = function (method, url, ...rest) {
-            if (url && url.endsWith("endless-sky.data")) {
+            // FIX: Use regex here as well
+            if (url && /endless-sky\.data(\?.*)?$/.test(url)) {
                 console.log("[data-reassembler] Intercepting XHR for", url, "- reassembling from", PART_COUNT, "parts");
 
-                // Swap this XHR instance's behavior: fetch+assemble the data,
-                // then fake out the readyState/response fields and events
-                // that Emscripten's XHR-based loader listens for.
                 xhr._interceptedUrl = url;
                 xhr._isIntercepted = true;
 
