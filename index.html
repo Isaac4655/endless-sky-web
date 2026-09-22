@@ -116,27 +116,6 @@
     <script src="data-reassembler.js"></script>
 
     <script>
-        // HACK 1: Force single-threaded fallback mode.
-        Object.defineProperty(navigator, 'hardwareConcurrency', {
-            get: function() { return 1; }
-        });
-
-        // HACK 2: Bypass Emscripten's internal SharedArrayBuffer type checks.
-        if (typeof SharedArrayBuffer === 'undefined') {
-            console.warn("[Hack] Polyfilling SharedArrayBuffer to bypass JS checks");
-            window.SharedArrayBuffer = window.ArrayBuffer;
-        }
-
-        // HACK 3: Intercept WebAssembly instantiation to neuter pthread_create.
-        const originalInstantiate = WebAssembly.instantiate;
-        WebAssembly.instantiate = function(buffer, imports) {
-            if (imports && imports.env && imports.env.pthread_create) {
-                console.warn("[Hack] Intercepting imports.env.pthread_create");
-                imports.env.pthread_create = function() { return 0; };
-            }
-            return originalInstantiate(buffer, imports);
-        };
-
         if (WebAssembly.instantiateStreaming) {
             const originalInstantiateStreaming = WebAssembly.instantiateStreaming;
             WebAssembly.instantiateStreaming = function(response, imports) {
