@@ -5,6 +5,9 @@
 // which are required for SharedArrayBuffer / pthreads to work, but which
 // static hosts like GitHub Pages don't let you set server-side.
 
+// Change this line at the very top of coi-serviceworker.js:
+let coepCredentialless = true;
+
 let coepCredentialless = false;
 if (typeof window === 'undefined') {
     self.addEventListener("install", () => self.skipWaiting());
