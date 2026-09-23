@@ -89,7 +89,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: C:\Users\Isaac\AppData\Local\Temp\tmp5aqzu7mk.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpuwx7opnw.js
 if (!Module["expectedDataFileDownloads"]) Module["expectedDataFileDownloads"] = 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -29983,23 +29983,23 @@ Module["expectedDataFileDownloads"]++;
   });
 })();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmp5aqzu7mk.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmp7ih5kyx_.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpuwx7opnw.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpdhabrmz4.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if ((typeof ENVIRONMENT_IS_WASM_WORKER != "undefined" && ENVIRONMENT_IS_WASM_WORKER) || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD) || (typeof ENVIRONMENT_IS_AUDIO_WORKLET != "undefined" && ENVIRONMENT_IS_AUDIO_WORKLET)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmp7ih5kyx_.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpi0xvm56b.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpdhabrmz4.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmppj7m0ie_.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpi0xvm56b.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmppj7m0ie_.js
 var programArgs = [];
 
 var thisProgram = "./this.program";
@@ -31065,8 +31065,14 @@ function _proc_exit(code) {
   quit_(code, new ExitStatus(code));
 }
 
+var runtimeKeepalivePop = () => {
+  assert(runtimeKeepaliveCounter > 0);
+  runtimeKeepaliveCounter -= 1;
+};
+
 function exitOnMainThread(returnCode) {
   if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(1, 0, 0, returnCode);
+  runtimeKeepalivePop();
   _exit(returnCode);
 }
 
@@ -31113,7 +31119,7 @@ var PThread = {
     }
   },
   initMainThread() {
-    var pthreadPoolSize = 32;
+    var pthreadPoolSize = 24;
     // Start loading up the Worker pool, if requested.
     while (pthreadPoolSize--) {
       PThread.allocateUnusedWorker();
@@ -31172,6 +31178,13 @@ var PThread = {
     // Detach the worker from the pthread object, and return it to the
     // worker pool as an unused worker.
     worker.pthread_ptr = 0;
+    if (ENVIRONMENT_IS_NODE) {
+      // Once the proxied main thread has finished, mark it as weakly
+      // referenced so that its existence does not prevent Node.js from
+      // exiting.  This has no effect if the worker is already weakly
+      // referenced.
+      worker.unref();
+    }
     // Clear any pending waitAsync waiter armed on this thread's struct
     // BEFORE freeing the memory so that memory recycled by malloc in another
     // thread will not have a window where a stale async waiter is still active.
@@ -31308,11 +31321,6 @@ var PThread = {
   getNewWorker() {
     if (PThread.unusedWorkers.length == 0) {
       // PTHREAD_POOL_SIZE_STRICT should show a warning and, if set to level `2`, return from the function.
-      // However, if we're in Node.js, then we can create new workers on the fly and PTHREAD_POOL_SIZE_STRICT
-      // should be ignored altogether.
-      if (!ENVIRONMENT_IS_NODE) {
-        err("Tried to spawn a new thread, but the thread pool is exhausted.\n" + "This might result in a deadlock unless some threads eventually exit or the code explicitly breaks out to the event loop.\n" + "If you want to increase the pool size, use setting `-sPTHREAD_POOL_SIZE=...`." + "\nIf you want to throw an explicit error instead of the risk of deadlocking in those cases, use setting `-sPTHREAD_POOL_SIZE_STRICT=2`.");
-      }
       var newWorker = PThread.allocateUnusedWorker();
       PThread.loadWasmModuleToWorker(newWorker);
     }
@@ -31391,6 +31399,10 @@ var invokeEntryPoint = (ptr, arg) => {
 var noExitRuntime = true;
 
 var registerTLSInit = tlsInitFunc => PThread.tlsInitFunctions.push(tlsInitFunc);
+
+var runtimeKeepalivePush = () => {
+  runtimeKeepaliveCounter += 1;
+};
 
 var warnOnce = text => {
   warnOnce.shown ||= {};
@@ -35172,10 +35184,6 @@ var __tzset_js = (timezone, daylight, std_name, dst_name) => {
   }
 };
 
-var runtimeKeepalivePush = () => {
-  runtimeKeepaliveCounter += 1;
-};
-
 var _emscripten_set_main_loop_timing = (mode, value) => {
   MainLoop.timingMode = mode;
   MainLoop.timingValue = value;
@@ -35310,11 +35318,6 @@ var _emscripten_get_now = () => performance.timeOrigin + performance.now();
   if (simulateInfiniteLoop) {
     throw "unwind";
   }
-};
-
-var runtimeKeepalivePop = () => {
-  assert(runtimeKeepaliveCounter > 0);
-  runtimeKeepaliveCounter -= 1;
 };
 
 var MainLoop = {
@@ -42063,6 +42066,8 @@ var _emscripten_resize_heap = requestedSize => {
   return false;
 };
 
+var _emscripten_runtime_keepalive_check = keepRuntimeAlive;
+
 /** @suppress {checkTypes} */ function _emscripten_sample_gamepad_data() {
   if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(71, 0, 1);
   try {
@@ -42823,11 +42828,15 @@ var _glAttachShader = _emscripten_glAttachShader;
 
 var _glBindBuffer = _emscripten_glBindBuffer;
 
+var _glBindFramebuffer = _emscripten_glBindFramebuffer;
+
 var _glBindTexture = _emscripten_glBindTexture;
 
 var _glBlendFunc = _emscripten_glBlendFunc;
 
 var _glBufferData = _emscripten_glBufferData;
+
+var _glCheckFramebufferStatus = _emscripten_glCheckFramebufferStatus;
 
 var _glClear = _emscripten_glClear;
 
@@ -42840,6 +42849,8 @@ var _glCompileShader = _emscripten_glCompileShader;
 var _glCreateProgram = _emscripten_glCreateProgram;
 
 var _glCreateShader = _emscripten_glCreateShader;
+
+var _glDeleteFramebuffers = _emscripten_glDeleteFramebuffers;
 
 var _glDeleteTextures = _emscripten_glDeleteTextures;
 
@@ -42855,7 +42866,11 @@ var _glEnable = _emscripten_glEnable;
 
 var _glEnableVertexAttribArray = _emscripten_glEnableVertexAttribArray;
 
+var _glFramebufferTexture2D = _emscripten_glFramebufferTexture2D;
+
 var _glGenBuffers = _emscripten_glGenBuffers;
+
+var _glGenFramebuffers = _emscripten_glGenFramebuffers;
 
 var _glGenTextures = _emscripten_glGenTextures;
 
@@ -43173,7 +43188,7 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  387576: $0 => {
+  387592: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -43181,7 +43196,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  387791: () => {
+  387807: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -43189,7 +43204,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  387938: () => {
+  387954: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -43197,7 +43212,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  388172: $0 => {
+  388188: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -43221,11 +43236,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  388724: () => {
+  388740: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  388792: ($0, $1, $2, $3) => {
+  388808: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -43267,7 +43282,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  390485: ($0, $1, $2, $3) => {
+  390501: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -43299,7 +43314,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  391660: ($0, $1) => {
+  391676: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -43318,7 +43333,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  392265: ($0, $1) => {
+  392281: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -43332,7 +43347,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  392754: $0 => {
+  392770: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -43366,10 +43381,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  393760: $0 => {
+  393776: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  393800: ($0, $1, $2) => {
+  393816: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -43440,7 +43455,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  395266: ($0, $1, $2, $3, $4) => {
+  395282: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -43477,18 +43492,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  396254: $0 => {
+  396270: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  396337: () => {
+  396353: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  396406: () => window.innerWidth,
-  396436: () => window.innerHeight
+  396422: () => window.innerWidth,
+  396452: () => window.innerHeight
 };
 
 // Imports from the Wasm binary.
@@ -43508,6 +43523,12 @@ var _fflush = makeInvalidEarlyAccess("_fflush");
 
 var __emscripten_tls_init = makeInvalidEarlyAccess("__emscripten_tls_init");
 
+var __emscripten_proxy_main = Module["__emscripten_proxy_main"] = makeInvalidEarlyAccess("__emscripten_proxy_main");
+
+var _emscripten_stack_get_base = makeInvalidEarlyAccess("_emscripten_stack_get_base");
+
+var _emscripten_stack_get_end = makeInvalidEarlyAccess("_emscripten_stack_get_end");
+
 var __emscripten_run_callback_on_thread = makeInvalidEarlyAccess("__emscripten_run_callback_on_thread");
 
 var _memcpy = makeInvalidEarlyAccess("_memcpy");
@@ -43517,10 +43538,6 @@ var __emscripten_thread_init = makeInvalidEarlyAccess("__emscripten_thread_init"
 var ___set_thread_state = makeInvalidEarlyAccess("___set_thread_state");
 
 var __emscripten_thread_crashed = makeInvalidEarlyAccess("__emscripten_thread_crashed");
-
-var _emscripten_stack_get_end = makeInvalidEarlyAccess("_emscripten_stack_get_end");
-
-var _emscripten_stack_get_base = makeInvalidEarlyAccess("_emscripten_stack_get_base");
 
 var __emscripten_run_js_on_main_thread_done = makeInvalidEarlyAccess("__emscripten_run_js_on_main_thread_done");
 
@@ -43571,13 +43588,14 @@ function assignWasmExports(wasmExports) {
   assert(typeof wasmExports["strerror"] != "undefined", "missing Wasm export: strerror");
   assert(typeof wasmExports["fflush"] != "undefined", "missing Wasm export: fflush");
   assert(typeof wasmExports["_emscripten_tls_init"] != "undefined", "missing Wasm export: _emscripten_tls_init");
+  assert(typeof wasmExports["_emscripten_proxy_main"] != "undefined", "missing Wasm export: _emscripten_proxy_main");
+  assert(typeof wasmExports["emscripten_stack_get_base"] != "undefined", "missing Wasm export: emscripten_stack_get_base");
+  assert(typeof wasmExports["emscripten_stack_get_end"] != "undefined", "missing Wasm export: emscripten_stack_get_end");
   assert(typeof wasmExports["_emscripten_run_callback_on_thread"] != "undefined", "missing Wasm export: _emscripten_run_callback_on_thread");
   assert(typeof wasmExports["memcpy"] != "undefined", "missing Wasm export: memcpy");
   assert(typeof wasmExports["_emscripten_thread_init"] != "undefined", "missing Wasm export: _emscripten_thread_init");
   assert(typeof wasmExports["__set_thread_state"] != "undefined", "missing Wasm export: __set_thread_state");
   assert(typeof wasmExports["_emscripten_thread_crashed"] != "undefined", "missing Wasm export: _emscripten_thread_crashed");
-  assert(typeof wasmExports["emscripten_stack_get_end"] != "undefined", "missing Wasm export: emscripten_stack_get_end");
-  assert(typeof wasmExports["emscripten_stack_get_base"] != "undefined", "missing Wasm export: emscripten_stack_get_base");
   assert(typeof wasmExports["_emscripten_run_js_on_main_thread_done"] != "undefined", "missing Wasm export: _emscripten_run_js_on_main_thread_done");
   assert(typeof wasmExports["_emscripten_run_js_on_main_thread"] != "undefined", "missing Wasm export: _emscripten_run_js_on_main_thread");
   assert(typeof wasmExports["_emscripten_thread_free_data"] != "undefined", "missing Wasm export: _emscripten_thread_free_data");
@@ -43605,13 +43623,14 @@ function assignWasmExports(wasmExports) {
   _strerror = createExportWrapper("strerror", wasmExports["strerror"], 1);
   _fflush = createExportWrapper("fflush", wasmExports["fflush"], 1);
   __emscripten_tls_init = createExportWrapper("_emscripten_tls_init", wasmExports["_emscripten_tls_init"], 0);
+  __emscripten_proxy_main = Module["__emscripten_proxy_main"] = createExportWrapper("_emscripten_proxy_main", wasmExports["_emscripten_proxy_main"], 2);
+  _emscripten_stack_get_base = wasmExports["emscripten_stack_get_base"];
+  _emscripten_stack_get_end = wasmExports["emscripten_stack_get_end"];
   __emscripten_run_callback_on_thread = createExportWrapper("_emscripten_run_callback_on_thread", wasmExports["_emscripten_run_callback_on_thread"], 6);
   _memcpy = createExportWrapper("memcpy", wasmExports["memcpy"], 3);
   __emscripten_thread_init = createExportWrapper("_emscripten_thread_init", wasmExports["_emscripten_thread_init"], 6);
   ___set_thread_state = createExportWrapper("__set_thread_state", wasmExports["__set_thread_state"], 4);
   __emscripten_thread_crashed = createExportWrapper("_emscripten_thread_crashed", wasmExports["_emscripten_thread_crashed"], 0);
-  _emscripten_stack_get_end = wasmExports["emscripten_stack_get_end"];
-  _emscripten_stack_get_base = wasmExports["emscripten_stack_get_base"];
   __emscripten_run_js_on_main_thread_done = createExportWrapper("_emscripten_run_js_on_main_thread_done", wasmExports["_emscripten_run_js_on_main_thread_done"], 3);
   __emscripten_run_js_on_main_thread = createExportWrapper("_emscripten_run_js_on_main_thread", wasmExports["_emscripten_run_js_on_main_thread"], 5);
   __emscripten_thread_free_data = createExportWrapper("_emscripten_thread_free_data", wasmExports["_emscripten_thread_free_data"], 1);
@@ -44015,6 +44034,7 @@ function assignWasmImports() {
     /** @export */ emscripten_request_fullscreen_strategy: _emscripten_request_fullscreen_strategy,
     /** @export */ emscripten_request_pointerlock: _emscripten_request_pointerlock,
     /** @export */ emscripten_resize_heap: _emscripten_resize_heap,
+    /** @export */ emscripten_runtime_keepalive_check: _emscripten_runtime_keepalive_check,
     /** @export */ emscripten_sample_gamepad_data: _emscripten_sample_gamepad_data,
     /** @export */ emscripten_set_beforeunload_callback_on_thread: _emscripten_set_beforeunload_callback_on_thread,
     /** @export */ emscripten_set_blur_callback_on_thread: _emscripten_set_blur_callback_on_thread,
@@ -44053,16 +44073,19 @@ function assignWasmImports() {
     /** @export */ glActiveTexture: _glActiveTexture,
     /** @export */ glAttachShader: _glAttachShader,
     /** @export */ glBindBuffer: _glBindBuffer,
+    /** @export */ glBindFramebuffer: _glBindFramebuffer,
     /** @export */ glBindTexture: _glBindTexture,
     /** @export */ glBindVertexArray: _glBindVertexArray,
     /** @export */ glBlendFunc: _glBlendFunc,
     /** @export */ glBufferData: _glBufferData,
+    /** @export */ glCheckFramebufferStatus: _glCheckFramebufferStatus,
     /** @export */ glClear: _glClear,
     /** @export */ glClearBufferfv: _glClearBufferfv,
     /** @export */ glClearColor: _glClearColor,
     /** @export */ glCompileShader: _glCompileShader,
     /** @export */ glCreateProgram: _glCreateProgram,
     /** @export */ glCreateShader: _glCreateShader,
+    /** @export */ glDeleteFramebuffers: _glDeleteFramebuffers,
     /** @export */ glDeleteTextures: _glDeleteTextures,
     /** @export */ glDetachShader: _glDetachShader,
     /** @export */ glDisable: _glDisable,
@@ -44071,7 +44094,9 @@ function assignWasmImports() {
     /** @export */ glDrawBuffers: _glDrawBuffers,
     /** @export */ glEnable: _glEnable,
     /** @export */ glEnableVertexAttribArray: _glEnableVertexAttribArray,
+    /** @export */ glFramebufferTexture2D: _glFramebufferTexture2D,
     /** @export */ glGenBuffers: _glGenBuffers,
+    /** @export */ glGenFramebuffers: _glGenFramebuffers,
     /** @export */ glGenTextures: _glGenTextures,
     /** @export */ glGenVertexArrays: _glGenVertexArrays,
     /** @export */ glGetAttribLocation: _glGetAttribLocation,
@@ -44429,7 +44454,10 @@ var calledRun;
 function callMain(args = []) {
   assert(runDependencies == 0, 'cannot call main when async dependencies remain! (listen on Module["onRuntimeInitialized"])');
   assert(typeof onPreRuns === "undefined" || onPreRuns.length == 0, "cannot call main when preRun functions remain to be called");
-  var entryFunction = _main;
+  var entryFunction = __emscripten_proxy_main;
+  // With PROXY_TO_PTHREAD make sure we keep the runtime alive until the
+  // proxied main calls exit (see exitOnMainThread() for where Pop is called).
+  runtimeKeepalivePush();
   args.unshift(thisProgram);
   var argc = args.length;
   var argv = stackAlloc((argc + 1) * 4);
