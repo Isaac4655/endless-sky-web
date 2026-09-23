@@ -28,12 +28,12 @@
     return;
   }
   var currentSafariVersion = userAgent.includes("Safari/") && !userAgent.includes("Chrome/") && userAgent.match(/Version\/(\d+\.?\d*\.?\d*)/) ? humanReadableVersionToPacked(userAgent.match(/Version\/(\d+\.?\d*\.?\d*)/)[1]) : TARGET_NOT_SUPPORTED;
-  if (currentSafariVersion < 15e4) {
-    throw new Error(`This emscripten-generated code requires Safari v${packedVersionToHumanReadable(15e4)} (detected v${currentSafariVersion})`);
+  if (currentSafariVersion < 17e4) {
+    throw new Error(`This emscripten-generated code requires Safari v${packedVersionToHumanReadable(17e4)} (detected v${currentSafariVersion})`);
   }
   var currentFirefoxVersion = userAgent.match(/Firefox\/(\d+(?:\.\d+)?)/) ? parseFloat(userAgent.match(/Firefox\/(\d+(?:\.\d+)?)/)[1]) : TARGET_NOT_SUPPORTED;
-  if (currentFirefoxVersion < 79) {
-    throw new Error(`This emscripten-generated code requires Firefox v79 (detected v${currentFirefoxVersion})`);
+  if (currentFirefoxVersion < 105) {
+    throw new Error(`This emscripten-generated code requires Firefox v105 (detected v${currentFirefoxVersion})`);
   }
   var currentChromeVersion = userAgent.match(/Chrome\/(\d+(?:\.\d+)?)/) ? parseFloat(userAgent.match(/Chrome\/(\d+(?:\.\d+)?)/)[1]) : TARGET_NOT_SUPPORTED;
   if (currentChromeVersion < 85) {
@@ -89,7 +89,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: C:\Users\Isaac\AppData\Local\Temp\tmp4l1vsh2l.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmp2ggmjnf_.js
 if (!Module["expectedDataFileDownloads"]) Module["expectedDataFileDownloads"] = 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -29983,23 +29983,23 @@ Module["expectedDataFileDownloads"]++;
   });
 })();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmp4l1vsh2l.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpsgvpbqtl.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmp2ggmjnf_.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmp0_gxtwik.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if ((typeof ENVIRONMENT_IS_WASM_WORKER != "undefined" && ENVIRONMENT_IS_WASM_WORKER) || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD) || (typeof ENVIRONMENT_IS_AUDIO_WORKLET != "undefined" && ENVIRONMENT_IS_AUDIO_WORKLET)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpsgvpbqtl.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmp1gegavkf.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmp0_gxtwik.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpmvk7ebtw.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmp1gegavkf.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpmvk7ebtw.js
 var programArgs = [];
 
 var thisProgram = "./this.program";
@@ -30566,6 +30566,7 @@ if (ENVIRONMENT_IS_PTHREAD) {
         establishStackSpace(msgData.pthread_ptr);
         // Pass the thread address to wasm to store it for fast access.
         __emscripten_thread_init(msgData.pthread_ptr, /*is_main=*/ 0, /*is_runtime=*/ 0, /*can_block=*/ 1, 0, 0);
+        PThread.receiveOffscreenCanvases(msgData);
         PThread.threadInitTLS();
         // Await mailbox notifications with `Atomics.waitAsync` so we can start
         // using the fast `Atomics.notify` notification path.
@@ -30997,6 +30998,10 @@ var spawnThread = threadParams => {
     arg: threadParams.arg,
     pthread_ptr: threadParams.pthread_ptr
   };
+  // Note that we do not need to quote these names because they are only used
+  // in this file, and not from the external worker.js.
+  msg.moduleCanvasId = threadParams.moduleCanvasId;
+  msg.offscreenCanvases = threadParams.offscreenCanvases;
   // Ask the worker to start executing its pthread entry point function.
   worker.postMessage(msg, threadParams.transferList);
   return 0;
@@ -31192,6 +31197,15 @@ var PThread = {
     // Finally, free the underlying (and now-unused) pthread structure in
     // linear memory.
     __emscripten_thread_free_data(pthread_ptr);
+  },
+  receiveOffscreenCanvases(data) {
+    if (typeof GL != "undefined") {
+      Object.assign(GL.offscreenCanvases, data.offscreenCanvases);
+      if (!Module["canvas"] && data.moduleCanvasId && GL.offscreenCanvases[data.moduleCanvasId]) {
+        Module["canvas"] = GL.offscreenCanvases[data.moduleCanvasId].offscreenCanvas;
+        Module["canvas"].id = data.moduleCanvasId;
+      }
+    }
   },
   threadInitTLS() {
     // Call thread init functions (these are the _emscripten_tls_init for each
@@ -31688,6 +31702,93 @@ var ___pthread_create_js = (pthread_ptr, attr, startRoutine, arg) => {
   // List of JS objects that will transfer ownership to the Worker hosting the thread
   var transferList = [];
   var error = 0;
+  // Deduce which WebGL canvases (HTMLCanvasElements or OffscreenCanvases) should be passed over to the
+  // Worker that hosts the spawned pthread.
+  // Comma-delimited list of CSS selectors that must identify canvases by IDs: "#canvas1, #canvas2, ..."
+  var transferredCanvasNames = attr ? (growMemViews(), HEAPU32)[(((attr) + (40)) >> 2)] : 0;
+  // Proxied canvases string pointer -1/MAX_PTR is used as a special token to
+  // fetch whatever canvases were passed to build in
+  // -sOFFSCREENCANVASES_TO_PTHREAD= command line.
+  if (transferredCanvasNames == 4294967295) {
+    transferredCanvasNames = "#canvas";
+  } else {
+    transferredCanvasNames = UTF8ToString(transferredCanvasNames).trim();
+  }
+  transferredCanvasNames = transferredCanvasNames ? transferredCanvasNames.split(",") : [];
+  var offscreenCanvases = {};
+  // Dictionary of OffscreenCanvas objects we'll transfer to the created thread to own
+  var moduleCanvasId = Module["canvas"]?.id ?? "";
+  // Note that transferredCanvasNames might be null (so we cannot do a for-of loop).
+  for (var name of transferredCanvasNames) {
+    name = name.trim();
+    var offscreenCanvasInfo;
+    try {
+      if (name == "#canvas") {
+        if (!Module["canvas"]) {
+          err(`pthread_create: could not find canvas with ID "${name}" to transfer to thread!`);
+          error = 28;
+          break;
+        }
+        name = Module["canvas"].id;
+      }
+      assert(typeof GL == "object", "OFFSCREENCANVAS_SUPPORT assumes GL is in use (you can force-include it with '-sDEFAULT_LIBRARY_FUNCS_TO_INCLUDE=$GL')");
+      if (GL.offscreenCanvases[name]) {
+        offscreenCanvasInfo = GL.offscreenCanvases[name];
+        GL.offscreenCanvases[name] = null;
+        // This thread no longer owns this canvas.
+        if (Module["canvas"] instanceof OffscreenCanvas && name === Module["canvas"].id) Module["canvas"] = null;
+      } else if (!ENVIRONMENT_IS_PTHREAD) {
+        var canvas = (Module["canvas"] && Module["canvas"].id === name) ? Module["canvas"] : document.querySelector(name);
+        if (!canvas) {
+          err(`pthread_create: could not find canvas with ID "${name}" to transfer to thread!`);
+          error = 28;
+          break;
+        }
+        if (canvas.controlTransferredOffscreen) {
+          err(`pthread_create: cannot transfer canvas with ID "${name}" to thread, since the current thread does not have control over it!`);
+          error = 63;
+          // Operation not permitted, some other thread is accessing the canvas.
+          break;
+        }
+        if (canvas.transferControlToOffscreen) {
+          // Create a shared information block in heap so that we can control
+          // the canvas size from any thread.
+          if (!canvas.canvasSharedPtr) {
+            canvas.canvasSharedPtr = _malloc(12);
+            (growMemViews(), HEAP32)[((canvas.canvasSharedPtr) >> 2)] = canvas.width;
+            (growMemViews(), HEAP32)[(((canvas.canvasSharedPtr) + (4)) >> 2)] = canvas.height;
+            (growMemViews(), HEAPU32)[(((canvas.canvasSharedPtr) + (8)) >> 2)] = 0;
+          }
+          offscreenCanvasInfo = {
+            offscreenCanvas: canvas.transferControlToOffscreen(),
+            canvasSharedPtr: canvas.canvasSharedPtr,
+            id: canvas.id
+          };
+          // After calling canvas.transferControlToOffscreen(), it is no
+          // longer possible to access certain operations on the canvas, such
+          // as resizing it or obtaining GL contexts via it.
+          // Use this field to remember that we have permanently converted
+          // this Canvas to be controlled via an OffscreenCanvas (there is no
+          // way to undo this in the spec)
+          canvas.controlTransferredOffscreen = true;
+        } else {
+          err(`pthread_create: cannot transfer control of canvas "${name}" to pthread, because current browser does not support OffscreenCanvas!`);
+          // If building with OFFSCREEN_FRAMEBUFFER=1 mode, we don't need to
+          // be able to transfer control to offscreen, but WebGL can be
+          // proxied from worker to main thread.
+          err("pthread_create: Build with -sOFFSCREEN_FRAMEBUFFER to enable fallback proxying of GL commands from pthread to main thread.");
+          return 52;
+        }
+      }
+      if (offscreenCanvasInfo) {
+        transferList.push(offscreenCanvasInfo.offscreenCanvas);
+        offscreenCanvases[offscreenCanvasInfo.id] = offscreenCanvasInfo;
+      }
+    } catch (e) {
+      err(`pthread_create: failed to transfer control of canvas "${name}" to OffscreenCanvas! Error: ${e}`);
+      return 28;
+    }
+  }
   // Synchronously proxy the thread creation to main thread if possible. If we
   // need to transfer ownership of objects, then proxy asynchronously via
   // postMessage.
@@ -31697,10 +31798,18 @@ var ___pthread_create_js = (pthread_ptr, attr, startRoutine, arg) => {
   // If on the main thread, and accessing Canvas/OffscreenCanvas failed, abort
   // with the detected error.
   if (error) return error;
+  // Register for each of the transferred canvases that the new thread now
+  // owns the OffscreenCanvas.
+  for (var canvas of Object.values(offscreenCanvases)) {
+    // pthread ptr to the thread that owns this canvas.
+    (growMemViews(), HEAPU32)[(((canvas.canvasSharedPtr) + (8)) >> 2)] = pthread_ptr;
+  }
   var threadParams = {
     startRoutine,
     pthread_ptr,
     arg,
+    moduleCanvasId,
+    offscreenCanvases,
     transferList
   };
   if (ENVIRONMENT_IS_PTHREAD) {
@@ -37350,7 +37459,7 @@ function _clock_time_get(clk_id, ignored_precision, ptime) {
 }
 
 function getFullscreenElement() {
-  return document.fullscreenElement ?? document.webkitFullscreenElement;
+  return document.fullscreenElement;
 }
 
 /** @param {number=} timeout */ var safeSetTimeout = (func, timeout) => {
@@ -37572,16 +37681,12 @@ var Browser = {
     if (!Browser.fullscreenHandlersInstalled) {
       Browser.fullscreenHandlersInstalled = true;
       document.addEventListener("fullscreenchange", fullscreenChange);
-      document.addEventListener("webkitfullscreenchange", fullscreenChange);
     }
     // create a new parent to ensure the canvas has no siblings. this allows browsers to optimize full screen performance when its parent is the full screen root
     var canvasContainer = document.createElement("div");
     canvas.parentNode.insertBefore(canvasContainer, canvas);
     canvasContainer.appendChild(canvas);
     // use parent of canvas as full screen root to allow aspect ratio correction (Firefox stretches the root to screen size)
-    // Safari didn't support Element.requestFullscreen until 16.4
-    // See: https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen
-    /** @suppress {checkTypes} */ canvasContainer.requestFullscreen ??= (canvasContainer["webkitRequestFullscreen"] ? () => canvasContainer["webkitRequestFullscreen"](Element.ALLOW_KEYBOARD_INPUT) : null) ?? (canvasContainer["webkitRequestFullScreen"] ? () => canvasContainer["webkitRequestFullScreen"](Element.ALLOW_KEYBOARD_INPUT) : null);
     canvasContainer.requestFullscreen();
   },
   exitFullscreen() {
@@ -37591,8 +37696,7 @@ var Browser = {
     if (!Browser.isFullscreen) {
       return false;
     }
-    var CFS = document.exitFullscreen ?? document["webkitCancelFullScreen"];
-    CFS.apply(document, []);
+    document.exitFullscreen();
     return true;
   },
   safeSetTimeout(func, timeout) {
@@ -38903,7 +39007,7 @@ var JSEvents = {
     return target?.nodeName ?? "";
   },
   fullscreenEnabled() {
-    return document.fullscreenEnabled ?? document.webkitFullscreenEnabled;
+    return document.fullscreenEnabled;
   }
 };
 
@@ -38911,18 +39015,35 @@ var JSEvents = {
 
 var maybeCStringToJsString = cString => cString > 2 ? UTF8ToString(cString) : cString;
 
-var findEventTarget = target => {
+var findCanvasEventTarget = target => {
   target = maybeCStringToJsString(target);
-  var domElement = specialHTMLTargets[target] || globalThis.document?.querySelector(target);
-  return domElement;
+  // When compiling with OffscreenCanvas support and looking up a canvas to target,
+  // we first look up if the target Canvas has been transferred to OffscreenCanvas use.
+  // These transfers are represented/tracked by GL.offscreenCanvases object, which contain
+  // the OffscreenCanvas element for each regular Canvas element that has been transferred.
+  // Note that each pthread/worker have their own set of GL.offscreenCanvases. That is,
+  // when an OffscreenCanvas is transferred from a pthread/main thread to another pthread,
+  // it will move in the GL.offscreenCanvases array between threads. Hence GL.offscreenCanvases
+  // represents the set of OffscreenCanvases owned by the current calling thread.
+  // First check out the list of OffscreenCanvases by CSS selector ID ('#myCanvasID')
+  return GL.offscreenCanvases[target.slice(1)] || (target == "canvas" && Object.values(GL.offscreenCanvases)[0]) || specialHTMLTargets[target] || globalThis.document?.querySelector(target);
 };
-
-var findCanvasEventTarget = findEventTarget;
 
 var getCanvasSizeCallingThread = (target, width, height) => {
   var canvas = findCanvasEventTarget(target);
   if (!canvas) return -4;
-  if (!canvas.controlTransferredOffscreen) {
+  if (canvas.canvasSharedPtr) {
+    // N.B. Reading the size of the Canvas takes priority from our shared state structure, which is not the actual size.
+    // However if is possible that there is a canvas size set event pending on an OffscreenCanvas owned by another thread,
+    // so that the real sizes of the canvas have not updated yet. Therefore reading the real values would be racy.
+    var w = (growMemViews(), HEAP32)[((canvas.canvasSharedPtr) >> 2)];
+    var h = (growMemViews(), HEAP32)[(((canvas.canvasSharedPtr) + (4)) >> 2)];
+    (growMemViews(), HEAP32)[((width) >> 2)] = w;
+    (growMemViews(), HEAP32)[((height) >> 2)] = h;
+  } else if (canvas.offscreenCanvas) {
+    (growMemViews(), HEAP32)[((width) >> 2)] = canvas.offscreenCanvas.width;
+    (growMemViews(), HEAP32)[((height) >> 2)] = canvas.offscreenCanvas.height;
+  } else if (!canvas.controlTransferredOffscreen) {
     (growMemViews(), HEAP32)[((width) >> 2)] = canvas.width;
     (growMemViews(), HEAP32)[((height) >> 2)] = canvas.height;
   } else {
@@ -38962,10 +39083,29 @@ var getCanvasElementSize = target => {
   return size;
 };
 
+var setOffscreenCanvasSizeOnTargetThread = (targetThread, targetCanvas, width, height) => {
+  targetCanvas = targetCanvas ? UTF8ToString(targetCanvas) : "";
+  var targetCanvasPtr = 0;
+  if (targetCanvas) {
+    targetCanvasPtr = stringToNewUTF8(targetCanvas);
+  }
+  __emscripten_set_offscreencanvas_size_on_thread(targetThread, targetCanvasPtr, width, height);
+};
+
 var setCanvasElementSizeCallingThread = (target, width, height) => {
   var canvas = findCanvasEventTarget(target);
   if (!canvas) return -4;
-  if (!canvas.controlTransferredOffscreen) {
+  if (canvas.canvasSharedPtr) {
+    // N.B. We hold the canvasSharedPtr info structure as the authoritative source for specifying the size of a canvas
+    // since the actual canvas size changes are asynchronous if the canvas is owned by an OffscreenCanvas on another thread.
+    // Therefore when setting the size, eagerly set the size of the canvas on the calling thread here, though this thread
+    // might not be the one that actually ends up specifying the size, but the actual size change may be dispatched
+    // as an asynchronous event below.
+    (growMemViews(), HEAP32)[((canvas.canvasSharedPtr) >> 2)] = width;
+    (growMemViews(), HEAP32)[(((canvas.canvasSharedPtr) + (4)) >> 2)] = height;
+  }
+  if (canvas.offscreenCanvas || !canvas.controlTransferredOffscreen) {
+    if (canvas.offscreenCanvas) canvas = canvas.offscreenCanvas;
     var autoResizeViewport = false;
     if (canvas.GLctxObject?.GLctx) {
       var prevViewport = canvas.GLctxObject.GLctx.getParameter(2978);
@@ -38979,6 +39119,10 @@ var setCanvasElementSizeCallingThread = (target, width, height) => {
       // but this can be quite disruptive.
       canvas.GLctxObject.GLctx.viewport(0, 0, width, height);
     }
+  } else if (canvas.canvasSharedPtr) {
+    var targetThread = (growMemViews(), HEAPU32)[(((canvas.canvasSharedPtr) + (8)) >> 2)];
+    setOffscreenCanvasSizeOnTargetThread(targetThread, target, width, height);
+    return 1;
   } else {
     return -4;
   }
@@ -39050,7 +39194,6 @@ var registerRestoreOldStyle = canvas => {
   function restoreOldStyle() {
     if (!getFullscreenElement()) {
       document.removeEventListener("fullscreenchange", restoreOldStyle);
-      document.removeEventListener("webkitfullscreenchange", restoreOldStyle);
       setCanvasElementSize(canvas, oldWidth, oldHeight);
       canvas.style.width = oldCssWidth;
       canvas.style.height = oldCssHeight;
@@ -39083,7 +39226,6 @@ var registerRestoreOldStyle = canvas => {
     }
   }
   document.addEventListener("fullscreenchange", restoreOldStyle);
-  document.addEventListener("webkitfullscreenchange", restoreOldStyle);
   return restoreOldStyle;
 };
 
@@ -39158,10 +39300,6 @@ var JSEvents_requestFullscreen = (target, strategy) => {
   }
   if (target.requestFullscreen) {
     target.requestFullscreen();
-  } else if (target.webkitRequestFullscreen) {
-    // Safari didn't Element.requestFullscreen support until 16.4
-    // See: https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen
-    target.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
   } else {
     return JSEvents.fullscreenEnabled() ? -3 : -1;
   }
@@ -39178,8 +39316,6 @@ function _emscripten_exit_fullscreen() {
   var d = specialHTMLTargets[1];
   if (d.exitFullscreen) {
     d.fullscreenElement && d.exitFullscreen();
-  } else if (d.webkitExitFullscreen) {
-    d.webkitFullscreenElement && d.webkitExitFullscreen();
   } else {
     return -1;
   }
@@ -39218,6 +39354,12 @@ function _emscripten_get_device_pixel_ratio() {
   if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(64, 0, 1);
   return globalThis.devicePixelRatio ?? 1;
 }
+
+var findEventTarget = target => {
+  target = maybeCStringToJsString(target);
+  var domElement = specialHTMLTargets[target] || globalThis.document?.querySelector(target);
+  return domElement;
+};
 
 function _emscripten_get_element_css_size(target, width, height) {
   if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(65, 0, 1, target, width, height);
@@ -41949,7 +42091,7 @@ var doRequestFullscreen = (target, strategy) => {
   if (!JSEvents.fullscreenEnabled()) return -1;
   target = findEventTarget(target);
   if (!target) return -4;
-  if (!target.requestFullscreen && !target.webkitRequestFullscreen) {
+  if (!target.requestFullscreen) {
     return -3;
   }
   // Queue this function call if we're not currently in an event handler and
@@ -42204,8 +42346,6 @@ function _emscripten_set_fullscreenchange_callback_on_thread(target, userData, u
   if (!JSEvents.fullscreenEnabled()) return -1;
   target = findEventTarget(target);
   if (!target) return -4;
-  // TODO: When this block is removed, also change test/test_html5_remove_event_listener.c test expectation on emscripten_set_fullscreenchange_callback().
-  registerFullscreenChangeEventCallback(target, userData, useCapture, callbackfunc, 19, "webkitfullscreenchange", targetThread);
   return registerFullscreenChangeEventCallback(target, userData, useCapture, callbackfunc, 19, "fullscreenchange", targetThread);
 }
 
@@ -43143,7 +43283,7 @@ var missingLibrarySymbols = [ "writeI53ToI64Clamped", "writeI53ToI64Signaling", 
 
 missingLibrarySymbols.forEach(missingLibrarySymbol);
 
-var unexportedSymbols = [ "run", "out", "err", "callMain", "abort", "wasmExports", "writeStackCookie", "checkStackCookie", "writeI53ToI64", "readI53FromI64", "readI53FromU64", "INT53_MAX", "INT53_MIN", "bigintToI53Checked", "HEAP8", "HEAPU8", "HEAP16", "HEAPU16", "HEAP32", "HEAPU32", "HEAPF32", "HEAPF64", "HEAP64", "HEAPU64", "stackSave", "stackRestore", "stackAlloc", "setTempRet0", "ptrToString", "exitJS", "getHeapMax", "growMemory", "ENV", "ERRNO_CODES", "strError", "DNS", "Protocols", "Sockets", "timers", "warnOnce", "readEmAsmArgsArray", "readEmAsmArgs", "runEmAsmFunction", "runMainThreadEmAsm", "jstoi_q", "getExecutableName", "autoResumeAudioContext", "dynCall", "handleException", "keepRuntimeAlive", "runtimeKeepalivePush", "runtimeKeepalivePop", "callUserCallback", "maybeExit", "asyncLoad", "alignMemory", "mmapAlloc", "wasmTable", "wasmMemory", "getUniqueRunDependency", "noExitRuntime", "addOnPreRun", "addOnExit", "addOnPostRun", "freeTableIndexes", "functionsInTableMap", "setValue", "PATH", "PATH_FS", "UTF8Decoder", "UTF8ArrayToString", "UTF8ToString", "stringToUTF8Array", "stringToUTF8", "lengthBytesUTF8", "intArrayFromString", "UTF16Decoder", "stringToNewUTF8", "stringToUTF8OnStack", "JSEvents", "registerKeyEventCallback", "specialHTMLTargets", "maybeCStringToJsString", "findEventTarget", "findCanvasEventTarget", "getBoundingClientRect", "fillMouseEventData", "registerMouseEventCallback", "registerWheelEventCallback", "registerUiEventCallback", "registerFocusEventCallback", "fillFullscreenChangeEventData", "registerFullscreenChangeEventCallback", "callCanvasResizedCallback", "JSEvents_requestFullscreen", "JSEvents_resizeCanvasForFullscreen", "registerRestoreOldStyle", "setLetterbox", "currentFullscreenStrategy", "restoreOldWindowedStyle", "doRequestFullscreen", "fillPointerlockChangeEventData", "registerPointerlockChangeEventCallback", "requestPointerLock", "fillVisibilityChangeEventData", "registerVisibilityChangeEventCallback", "registerTouchEventCallback", "fillGamepadEventData", "registerGamepadEventCallback", "registerBeforeUnloadEventCallback", "setCanvasElementSizeCallingThread", "setCanvasElementSizeMainThread", "setCanvasElementSize", "getCanvasSizeCallingThread", "getCanvasSizeMainThread", "getCanvasElementSize", "UNWIND_CACHE", "ExitStatus", "getEnvStrings", "checkWasiClock", "doReadv", "doWritev", "initRandomFill", "randomFill", "safeSetTimeout", "emSetImmediate", "emClearImmediate_deps", "emClearImmediate", "registerPreMainLoop", "promiseMap", "uncaughtExceptionCount", "exceptionLast", "exceptionCaught", "ExceptionInfo", "findMatchingCatch", "getExceptionMessageCommon", "incrementExceptionRefcount", "decrementExceptionRefcount", "getExceptionMessage", "Browser", "requestFullscreen", "setCanvasSize", "getUserMedia", "getPreloadedImageData__data", "wget", "MONTH_DAYS_REGULAR", "MONTH_DAYS_LEAP", "MONTH_DAYS_REGULAR_CUMULATIVE", "MONTH_DAYS_LEAP_CUMULATIVE", "isLeapYear", "ydayFromDate", "SYSCALLS", "preloadPlugins", "FS_createPreloadedFile", "FS_modeStringToFlags", "FS_getMode", "FS_fileDataToTypedArray", "FS_stdin_getChar_buffer", "FS_stdin_getChar", "FS_readFile", "FS", "FS_root", "FS_mounts", "FS_devices", "FS_streams", "FS_nextInode", "FS_nameTable", "FS_currentPath", "FS_initialized", "FS_ignorePermissions", "FS_filesystems", "FS_syncFSRequests", "FS_lookupPath", "FS_getPath", "FS_hashName", "FS_hashAddNode", "FS_hashRemoveNode", "FS_lookupNode", "FS_createNode", "FS_destroyNode", "FS_isRoot", "FS_isMountpoint", "FS_isFile", "FS_isDir", "FS_isLink", "FS_isChrdev", "FS_isBlkdev", "FS_isFIFO", "FS_isSocket", "FS_flagsToPermissionString", "FS_nodePermissions", "FS_mayLookup", "FS_mayCreate", "FS_mayDelete", "FS_mayOpen", "FS_checkOpExists", "FS_nextfd", "FS_getStreamChecked", "FS_getStream", "FS_createStream", "FS_closeStream", "FS_dupStream", "FS_doSetAttr", "FS_chrdev_stream_ops", "FS_major", "FS_minor", "FS_makedev", "FS_registerDevice", "FS_getDevice", "FS_getMounts", "FS_syncfs", "FS_mount", "FS_unmount", "FS_lookup", "FS_mknod", "FS_statfs", "FS_statfsStream", "FS_statfsNode", "FS_create", "FS_mkdir", "FS_mkdev", "FS_symlink", "FS_link", "FS_rename", "FS_rmdir", "FS_readdir", "FS_readlink", "FS_stat", "FS_fstat", "FS_lstat", "FS_doChmod", "FS_chmod", "FS_lchmod", "FS_fchmod", "FS_doChown", "FS_chown", "FS_lchown", "FS_fchown", "FS_doTruncate", "FS_truncate", "FS_ftruncate", "FS_utime", "FS_open", "FS_close", "FS_isClosed", "FS_llseek", "FS_read", "FS_write", "FS_mmap", "FS_msync", "FS_ioctl", "FS_writeFile", "FS_cwd", "FS_chdir", "FS_createDefaultDirectories", "FS_createDefaultDevices", "FS_createSpecialDirectories", "FS_createStandardStreams", "FS_staticInit", "FS_init", "FS_quit", "FS_findObject", "FS_analyzePath", "FS_createFile", "FS_forceLoadFile", "MEMFS", "TTY", "PIPEFS", "SOCKFS", "tempFixedLengthArray", "miniTempWebGLFloatBuffers", "miniTempWebGLIntBuffers", "heapObjectForWebGLType", "toTypedArrayIndex", "webgl_enable_ANGLE_instanced_arrays", "webgl_enable_OES_vertex_array_object", "webgl_enable_WEBGL_draw_buffers", "webgl_enable_WEBGL_multi_draw", "webgl_enable_EXT_polygon_offset_clamp", "webgl_enable_EXT_clip_control", "webgl_enable_WEBGL_polygon_mode", "GL", "emscriptenWebGLGet", "computeUnpackAlignedImageSize", "colorChannelsInGlTextureFormat", "emscriptenWebGLGetTexPixelData", "emscriptenWebGLGetUniform", "webglGetProgramUniformLocation", "webglGetUniformLocation", "webglPrepareUniformLocationsBeforeFirstUse", "webglGetLeftBracePos", "emscriptenWebGLGetVertexAttrib", "__glGetActiveAttribOrUniform", "emscriptenWebGLGetBufferBinding", "emscriptenWebGLValidateMapBufferTarget", "AL", "GLUT", "EGL", "GLEW", "IDBStore", "waitAsyncPolyfilled", "emscriptenWebGLGetIndexed", "webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance", "webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance", "print", "printErr", "jstoi_s", "PThread", "terminateWorker", "cleanupThread", "registerTLSInit", "spawnThread", "exitOnMainThread", "proxyToMainThread", "proxiedJSCallArgs", "invokeEntryPoint", "checkMailbox" ];
+var unexportedSymbols = [ "run", "out", "err", "callMain", "abort", "wasmExports", "writeStackCookie", "checkStackCookie", "writeI53ToI64", "readI53FromI64", "readI53FromU64", "INT53_MAX", "INT53_MIN", "bigintToI53Checked", "HEAP8", "HEAPU8", "HEAP16", "HEAPU16", "HEAP32", "HEAPU32", "HEAPF32", "HEAPF64", "HEAP64", "HEAPU64", "stackSave", "stackRestore", "stackAlloc", "setTempRet0", "ptrToString", "exitJS", "getHeapMax", "growMemory", "ENV", "ERRNO_CODES", "strError", "DNS", "Protocols", "Sockets", "timers", "warnOnce", "readEmAsmArgsArray", "readEmAsmArgs", "runEmAsmFunction", "runMainThreadEmAsm", "jstoi_q", "getExecutableName", "autoResumeAudioContext", "dynCall", "handleException", "keepRuntimeAlive", "runtimeKeepalivePush", "runtimeKeepalivePop", "callUserCallback", "maybeExit", "asyncLoad", "alignMemory", "mmapAlloc", "wasmTable", "wasmMemory", "getUniqueRunDependency", "noExitRuntime", "addOnPreRun", "addOnExit", "addOnPostRun", "freeTableIndexes", "functionsInTableMap", "setValue", "PATH", "PATH_FS", "UTF8Decoder", "UTF8ArrayToString", "UTF8ToString", "stringToUTF8Array", "stringToUTF8", "lengthBytesUTF8", "intArrayFromString", "UTF16Decoder", "stringToNewUTF8", "stringToUTF8OnStack", "JSEvents", "registerKeyEventCallback", "specialHTMLTargets", "maybeCStringToJsString", "findEventTarget", "findCanvasEventTarget", "getBoundingClientRect", "fillMouseEventData", "registerMouseEventCallback", "registerWheelEventCallback", "registerUiEventCallback", "registerFocusEventCallback", "fillFullscreenChangeEventData", "registerFullscreenChangeEventCallback", "callCanvasResizedCallback", "JSEvents_requestFullscreen", "JSEvents_resizeCanvasForFullscreen", "registerRestoreOldStyle", "setLetterbox", "currentFullscreenStrategy", "restoreOldWindowedStyle", "doRequestFullscreen", "fillPointerlockChangeEventData", "registerPointerlockChangeEventCallback", "requestPointerLock", "fillVisibilityChangeEventData", "registerVisibilityChangeEventCallback", "registerTouchEventCallback", "fillGamepadEventData", "registerGamepadEventCallback", "registerBeforeUnloadEventCallback", "setCanvasElementSizeCallingThread", "setOffscreenCanvasSizeOnTargetThread", "setCanvasElementSizeMainThread", "setCanvasElementSize", "getCanvasSizeCallingThread", "getCanvasSizeMainThread", "getCanvasElementSize", "UNWIND_CACHE", "ExitStatus", "getEnvStrings", "checkWasiClock", "doReadv", "doWritev", "initRandomFill", "randomFill", "safeSetTimeout", "emSetImmediate", "emClearImmediate_deps", "emClearImmediate", "registerPreMainLoop", "promiseMap", "uncaughtExceptionCount", "exceptionLast", "exceptionCaught", "ExceptionInfo", "findMatchingCatch", "getExceptionMessageCommon", "incrementExceptionRefcount", "decrementExceptionRefcount", "getExceptionMessage", "Browser", "requestFullscreen", "setCanvasSize", "getUserMedia", "getPreloadedImageData__data", "wget", "MONTH_DAYS_REGULAR", "MONTH_DAYS_LEAP", "MONTH_DAYS_REGULAR_CUMULATIVE", "MONTH_DAYS_LEAP_CUMULATIVE", "isLeapYear", "ydayFromDate", "SYSCALLS", "preloadPlugins", "FS_createPreloadedFile", "FS_modeStringToFlags", "FS_getMode", "FS_fileDataToTypedArray", "FS_stdin_getChar_buffer", "FS_stdin_getChar", "FS_readFile", "FS", "FS_root", "FS_mounts", "FS_devices", "FS_streams", "FS_nextInode", "FS_nameTable", "FS_currentPath", "FS_initialized", "FS_ignorePermissions", "FS_filesystems", "FS_syncFSRequests", "FS_lookupPath", "FS_getPath", "FS_hashName", "FS_hashAddNode", "FS_hashRemoveNode", "FS_lookupNode", "FS_createNode", "FS_destroyNode", "FS_isRoot", "FS_isMountpoint", "FS_isFile", "FS_isDir", "FS_isLink", "FS_isChrdev", "FS_isBlkdev", "FS_isFIFO", "FS_isSocket", "FS_flagsToPermissionString", "FS_nodePermissions", "FS_mayLookup", "FS_mayCreate", "FS_mayDelete", "FS_mayOpen", "FS_checkOpExists", "FS_nextfd", "FS_getStreamChecked", "FS_getStream", "FS_createStream", "FS_closeStream", "FS_dupStream", "FS_doSetAttr", "FS_chrdev_stream_ops", "FS_major", "FS_minor", "FS_makedev", "FS_registerDevice", "FS_getDevice", "FS_getMounts", "FS_syncfs", "FS_mount", "FS_unmount", "FS_lookup", "FS_mknod", "FS_statfs", "FS_statfsStream", "FS_statfsNode", "FS_create", "FS_mkdir", "FS_mkdev", "FS_symlink", "FS_link", "FS_rename", "FS_rmdir", "FS_readdir", "FS_readlink", "FS_stat", "FS_fstat", "FS_lstat", "FS_doChmod", "FS_chmod", "FS_lchmod", "FS_fchmod", "FS_doChown", "FS_chown", "FS_lchown", "FS_fchown", "FS_doTruncate", "FS_truncate", "FS_ftruncate", "FS_utime", "FS_open", "FS_close", "FS_isClosed", "FS_llseek", "FS_read", "FS_write", "FS_mmap", "FS_msync", "FS_ioctl", "FS_writeFile", "FS_cwd", "FS_chdir", "FS_createDefaultDirectories", "FS_createDefaultDevices", "FS_createSpecialDirectories", "FS_createStandardStreams", "FS_staticInit", "FS_init", "FS_quit", "FS_findObject", "FS_analyzePath", "FS_createFile", "FS_forceLoadFile", "MEMFS", "TTY", "PIPEFS", "SOCKFS", "tempFixedLengthArray", "miniTempWebGLFloatBuffers", "miniTempWebGLIntBuffers", "heapObjectForWebGLType", "toTypedArrayIndex", "webgl_enable_ANGLE_instanced_arrays", "webgl_enable_OES_vertex_array_object", "webgl_enable_WEBGL_draw_buffers", "webgl_enable_WEBGL_multi_draw", "webgl_enable_EXT_polygon_offset_clamp", "webgl_enable_EXT_clip_control", "webgl_enable_WEBGL_polygon_mode", "GL", "emscriptenWebGLGet", "computeUnpackAlignedImageSize", "colorChannelsInGlTextureFormat", "emscriptenWebGLGetTexPixelData", "emscriptenWebGLGetUniform", "webglGetProgramUniformLocation", "webglGetUniformLocation", "webglPrepareUniformLocationsBeforeFirstUse", "webglGetLeftBracePos", "emscriptenWebGLGetVertexAttrib", "__glGetActiveAttribOrUniform", "emscriptenWebGLGetBufferBinding", "emscriptenWebGLValidateMapBufferTarget", "AL", "GLUT", "EGL", "GLEW", "IDBStore", "waitAsyncPolyfilled", "emscriptenWebGLGetIndexed", "webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance", "webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance", "print", "printErr", "jstoi_s", "PThread", "terminateWorker", "cleanupThread", "registerTLSInit", "spawnThread", "exitOnMainThread", "proxyToMainThread", "proxiedJSCallArgs", "invokeEntryPoint", "checkMailbox" ];
 
 unexportedSymbols.forEach(unexportedRuntimeSymbol);
 
@@ -43188,7 +43328,7 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  387592: $0 => {
+  387704: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -43196,7 +43336,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  387807: () => {
+  387919: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -43204,7 +43344,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  387954: () => {
+  388066: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -43212,7 +43352,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  388188: $0 => {
+  388300: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -43236,11 +43376,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  388740: () => {
+  388852: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  388808: ($0, $1, $2, $3) => {
+  388920: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -43282,7 +43422,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  390501: ($0, $1, $2, $3) => {
+  390613: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -43314,7 +43454,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  391676: ($0, $1) => {
+  391788: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -43333,7 +43473,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  392281: ($0, $1) => {
+  392393: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -43347,7 +43487,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  392770: $0 => {
+  392882: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -43381,10 +43521,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  393776: $0 => {
+  393888: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  393816: ($0, $1, $2) => {
+  393928: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -43455,7 +43595,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  395282: ($0, $1, $2, $3, $4) => {
+  395394: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -43492,18 +43632,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  396270: $0 => {
+  396382: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  396353: () => {
+  396465: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  396422: () => window.innerWidth,
-  396452: () => window.innerHeight
+  396534: () => window.innerWidth,
+  396564: () => window.innerHeight
 };
 
 // Imports from the Wasm binary.
@@ -43530,6 +43670,8 @@ var _emscripten_stack_get_base = makeInvalidEarlyAccess("_emscripten_stack_get_b
 var _emscripten_stack_get_end = makeInvalidEarlyAccess("_emscripten_stack_get_end");
 
 var __emscripten_run_callback_on_thread = makeInvalidEarlyAccess("__emscripten_run_callback_on_thread");
+
+var __emscripten_set_offscreencanvas_size_on_thread = makeInvalidEarlyAccess("__emscripten_set_offscreencanvas_size_on_thread");
 
 var _memcpy = makeInvalidEarlyAccess("_memcpy");
 
@@ -43592,6 +43734,7 @@ function assignWasmExports(wasmExports) {
   assert(typeof wasmExports["emscripten_stack_get_base"] != "undefined", "missing Wasm export: emscripten_stack_get_base");
   assert(typeof wasmExports["emscripten_stack_get_end"] != "undefined", "missing Wasm export: emscripten_stack_get_end");
   assert(typeof wasmExports["_emscripten_run_callback_on_thread"] != "undefined", "missing Wasm export: _emscripten_run_callback_on_thread");
+  assert(typeof wasmExports["_emscripten_set_offscreencanvas_size_on_thread"] != "undefined", "missing Wasm export: _emscripten_set_offscreencanvas_size_on_thread");
   assert(typeof wasmExports["memcpy"] != "undefined", "missing Wasm export: memcpy");
   assert(typeof wasmExports["_emscripten_thread_init"] != "undefined", "missing Wasm export: _emscripten_thread_init");
   assert(typeof wasmExports["__set_thread_state"] != "undefined", "missing Wasm export: __set_thread_state");
@@ -43627,6 +43770,7 @@ function assignWasmExports(wasmExports) {
   _emscripten_stack_get_base = wasmExports["emscripten_stack_get_base"];
   _emscripten_stack_get_end = wasmExports["emscripten_stack_get_end"];
   __emscripten_run_callback_on_thread = createExportWrapper("_emscripten_run_callback_on_thread", wasmExports["_emscripten_run_callback_on_thread"], 6);
+  __emscripten_set_offscreencanvas_size_on_thread = createExportWrapper("_emscripten_set_offscreencanvas_size_on_thread", wasmExports["_emscripten_set_offscreencanvas_size_on_thread"], 4);
   _memcpy = createExportWrapper("memcpy", wasmExports["memcpy"], 3);
   __emscripten_thread_init = createExportWrapper("_emscripten_thread_init", wasmExports["_emscripten_thread_init"], 6);
   ___set_thread_state = createExportWrapper("__set_thread_state", wasmExports["__set_thread_state"], 4);
