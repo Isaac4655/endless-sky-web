@@ -113,7 +113,6 @@
         };
     </script>
     <script src="coi-serviceworker.js"></script>
-    <script src="data-reassembler.js"></script>
 
     <script>
         if (WebAssembly.instantiateStreaming) {
@@ -127,8 +126,140 @@
             };
         }
 
+        // ------------------------------------------------------------------
+        // Resource streaming
+        //
+        // The Emscripten preload package (endless-sky.data) now holds only a few
+        // tiny root files (credits, keys, license, ...). Everything else is fetched
+        // here one file at a time from resources/<category>/... and written straight
+        // into the virtual filesystem. Each downloaded buffer is dropped as soon as
+        // it has been copied in, so the page never holds a full-size package blob.
+        // Categories are streamed in the order listed, so the small, boot-critical
+        // ones (data, shaders) arrive first and a problem with them shows up early.
+        //
+        // resources/manifest.json is produced by make-manifest.py:
+        //   { "data": [["human/ships.txt", 1234], ...], "shaders": [ ... ],
+        //     "images": [ ... ], "sounds": [ ... ] }
+        // Paths are relative to resources/<category>/. Sizes are only used for
+        // the progress display.
+        // ------------------------------------------------------------------
+        const RESOURCE_BASE = "resources/";
+        const STREAM_CATEGORIES = ["data", "shaders", "images", "sounds"];  // each maps to /<category> in the game FS
+        const FETCH_CONCURRENCY = 6;
+        const FETCH_RETRIES = 3;
+
+        function formatMB(bytes) { return (bytes / 1048576).toFixed(1) + " MB"; }
+
+        async function fetchWithRetry(url) {
+            let lastError;
+            for (let attempt = 1; attempt <= FETCH_RETRIES; ++attempt) {
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok)
+                        throw new Error("HTTP " + response.status);
+                    return new Uint8Array(await response.arrayBuffer());
+                } catch (error) {
+                    lastError = error;
+                    await new Promise(r => setTimeout(r, 250 * attempt));
+                }
+            }
+            throw new Error("Failed to fetch " + url + ": " + lastError);
+        }
+
+        // Make every parent directory of a path exist in the game filesystem.
+        const createdDirs = new Set();
+        function ensureDir(fsRoot, relativeDir) {
+            if (!relativeDir || createdDirs.has(fsRoot + "/" + relativeDir))
+                return;
+            Module.FS_createPath("/", fsRoot + "/" + relativeDir, true, true);
+            createdDirs.add(fsRoot + "/" + relativeDir);
+        }
+
+        async function streamResources() {
+            const manifestResponse = await fetch(RESOURCE_BASE + "manifest.json", { cache: "no-cache" });
+            if (!manifestResponse.ok)
+                throw new Error("Could not load " + RESOURCE_BASE + "manifest.json (HTTP " + manifestResponse.status + ")");
+            const manifest = await manifestResponse.json();
+
+            // Flatten into one work list.
+            const jobs = [];
+            let totalBytes = 0;
+            for (const category of STREAM_CATEGORIES) {
+                const entries = manifest[category] || [];
+                // Starting the game with an empty data/ or shaders/ only produces confusing
+                // errors much later, so refuse to continue if any category is empty.
+                if (!entries.length)
+                    throw new Error("manifest.json lists no files for '" + category
+                        + "'. Re-run make-manifest.py and check resources/" + category + "/.");
+                for (const [relativePath, size] of entries) {
+                    jobs.push({ category, relativePath, size: size || 0 });
+                    totalBytes += size || 0;
+                }
+            }
+
+            console.log("[Resources] " + jobs.length + " files, " + formatMB(totalBytes) + " to stream");
+            for (const category of STREAM_CATEGORIES)
+                Module.FS_createPath("/", category, true, true);
+
+            let nextJob = 0;
+            let doneBytes = 0;
+            let doneFiles = 0;
+            let lastStatusUpdate = 0;
+
+            async function worker() {
+                while (true) {
+                    const index = nextJob++;
+                    if (index >= jobs.length)
+                        return;
+                    const job = jobs[index];
+                    const slash = job.relativePath.lastIndexOf("/");
+                    const dir = slash < 0 ? "" : job.relativePath.slice(0, slash);
+                    const name = slash < 0 ? job.relativePath : job.relativePath.slice(slash + 1);
+
+                    // Encode each path segment so names with spaces, '#', '%' or '@' survive.
+                    const url = RESOURCE_BASE + job.category + "/"
+                        + job.relativePath.split("/").map(encodeURIComponent).join("/");
+                    const bytes = await fetchWithRetry(url);
+
+                    ensureDir(job.category, dir);
+                    // canRead=true, canWrite=false. The Uint8Array is copied into the FS, after
+                    // which `bytes` goes out of scope and can be garbage collected.
+                    Module.FS_createDataFile("/" + job.category + (dir ? "/" + dir : ""),
+                        name, bytes, true, false, true);
+
+                    doneBytes += bytes.length;
+                    ++doneFiles;
+                    const now = performance.now();
+                    if (now - lastStatusUpdate > 150) {
+                        lastStatusUpdate = now;
+                        Module.setStatus("Loading resources... " + doneFiles + "/" + jobs.length
+                            + " (" + formatMB(doneBytes) + " / " + formatMB(totalBytes) + ")");
+                    }
+                }
+            }
+
+            await Promise.all(Array.from({ length: FETCH_CONCURRENCY }, worker));
+            console.log("[Resources] Done: " + doneFiles + " files, " + formatMB(doneBytes));
+        }
+
         var Module = {
             canvas: document.getElementById("canvas"),
+
+            // Runs on the main thread before main(). The run dependency keeps the
+            // program from starting until every streamed file is in the filesystem.
+            preRun: [function () {
+                const dependency = "stream_resources";
+                Module.addRunDependency(dependency);
+                streamResources().then(function () {
+                    Module.removeRunDependency(dependency);
+                }).catch(function (error) {
+                    console.error("[Resources] " + (error && error.stack ? error.stack : error));
+                    Module.setStatus("Failed to load game resources. See the log above.");
+                    // Deliberately do NOT remove the run dependency: starting the game with
+                    // missing images and sounds would only produce confusing errors later.
+                });
+            }],
+
             setStatus: function(text) {
                 var statusEl = document.getElementById("status");
                 if (statusEl) {
