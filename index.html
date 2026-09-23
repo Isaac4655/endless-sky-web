@@ -114,6 +114,110 @@
     </script>
     <script src="coi-serviceworker.js"></script>
 
+    <script>
+        if (WebAssembly.instantiateStreaming) {
+            const originalInstantiateStreaming = WebAssembly.instantiateStreaming;
+            WebAssembly.instantiateStreaming = function(response, imports) {
+                if (imports && imports.env && imports.env.pthread_create) {
+                    console.warn("[Hack] Intercepting imports.env.pthread_create (streaming)");
+                    imports.env.pthread_create = function() { return 0; };
+                }
+                return originalInstantiateStreaming(response, imports);
+            };
+        }
+
+        // ------------------------------------------------------------------
+        // Lazy resource filesystem
+        //
+        // The manifest lists every resource path, but the resource contents are
+        // NOT downloaded here. Instead, every path is registered as an Emscripten
+        // lazy file. Endless Sky can therefore discover the normal filesystem
+        // layout immediately, while the file contents are fetched only when the
+        // native code actually opens/reads that file.
+        //
+        // This matches Endless Sky's normal Files::RecursiveList()/Files::Read()
+        // model instead of eagerly copying the entire resource tree into MEMFS.
+        // Emscripten's lazy-file implementation uses synchronous XHR, so the
+        // generated build must access these files from a worker thread for modern
+        // browsers. Endless Sky already performs its data/image/audio loading
+        // through worker queues/threads in the normal build.
+        // ------------------------------------------------------------------
+        const RESOURCE_BASE = "resources/";
+        const LAZY_CATEGORIES = ["data", "shaders", "images", "sounds"];
+
+        function formatMB(bytes) { return (bytes / 1048576).toFixed(1) + " MB"; }
+
+        const createdDirs = new Set();
+        function ensureDir(fsRoot, relativeDir) {
+            const key = fsRoot + "/" + relativeDir;
+            if (!relativeDir || createdDirs.has(key))
+                return;
+            Module.FS_createPath("/", key, true, true);
+            createdDirs.add(key);
+        }
+
+        function getLazyFileCreator() {
+            if (typeof FS !== "undefined" && typeof FS.createLazyFile === "function")
+                return FS.createLazyFile.bind(FS);
+            if (typeof Module !== "undefined" && typeof Module.FS_createLazyFile === "function")
+                return Module.FS_createLazyFile.bind(Module);
+            throw new Error(
+                "Emscripten FS.createLazyFile is not available. " +
+                "Rebuild with the File System API exported, including createLazyFile."
+            );
+        }
+
+        async function installLazyResources() {
+            const manifestResponse = await fetch(RESOURCE_BASE + "manifest.json", { cache: "no-cache" });
+            if (!manifestResponse.ok)
+                throw new Error(
+                    "Could not load " + RESOURCE_BASE + "manifest.json (HTTP " +
+                    manifestResponse.status + ")"
+                );
+
+            const manifest = await manifestResponse.json();
+            const createLazyFile = getLazyFileCreator();
+            let fileCount = 0;
+            let totalBytes = 0;
+
+            for (const category of LAZY_CATEGORIES) {
+                const entries = manifest[category] || [];
+                if (!entries.length)
+                    throw new Error(
+                        "manifest.json lists no files for '" + category +
+                        "'. Re-run make-manifest.py and check resources/" + category + "/."
+                    );
+
+                Module.FS_createPath("/", category, true, true);
+                createdDirs.add(category);
+
+                for (const [relativePath, size] of entries) {
+                    const slash = relativePath.lastIndexOf("/");
+                    const dir = slash < 0 ? "" : relativePath.slice(0, slash);
+                    const name = slash < 0 ? relativePath : relativePath.slice(slash + 1);
+
+                    ensureDir(category, dir);
+
+                    const url = RESOURCE_BASE + category + "/" +
+                        relativePath.split("/").map(encodeURIComponent).join("/");
+                    const parent = "/" + category + (dir ? "/" + dir : "");
+
+                    // Register the path only. The actual HTTP request happens on
+                    // first file access, not during startup.
+                    createLazyFile(parent, name, url, true, false);
+
+                    ++fileCount;
+                    totalBytes += size || 0;
+                }
+            }
+
+            console.log(
+                "[Resources] Installed " + fileCount +
+                " lazy files (" + formatMB(totalBytes) + " available on demand)"
+            );
+            Module.setStatus("Starting Endless Sky...");
+        }
+
         var Module = {
             canvas: document.getElementById("canvas"),
 
@@ -149,8 +253,10 @@
             }
             gameScriptStarted = true;
 
-            // The generated engine installs the resource manifest itself from
-            // the application pthread. This page only starts the engine runtime.
+            // The generated Emscripten main JS already contains the preload
+            // runtime and will request endless-sky.data itself. Do NOT load
+            // endless-sky.data.js separately, or the data preload run dependency
+            // is registered twice and Emscripten aborts with an assertion.
             console.log("Cross-origin isolation confirmed. Injecting main engine...");
 
             var script = document.createElement("script");
