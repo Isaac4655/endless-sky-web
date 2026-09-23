@@ -114,7 +114,11 @@
     </script>
     <script src="coi-serviceworker.js"></script>
 
+    <script>
         var Module = {
+            // Explicitly tell Emscripten where the generated JS lives. This is
+            // also used when the pthread worker is created.
+            mainScriptUrlOrBlob: new URL("endless-sky.js", document.baseURI).href,
             canvas: document.getElementById("canvas"),
 
 
