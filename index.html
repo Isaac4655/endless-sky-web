@@ -116,9 +116,9 @@
 
     <script>
         var Module = {
-            // Explicitly tell Emscripten where the generated JS lives. This is
-            // also used when the pthread worker is created.
-            mainScriptUrlOrBlob: new URL("endless-sky.js", document.baseURI).href,
+            // The engine script is loaded from a normal URL below. Emscripten can
+            // determine its own main script URL for pthread workers, so no
+            // mainScriptUrlOrBlob override is needed here.
             canvas: document.getElementById("canvas"),
 
 
