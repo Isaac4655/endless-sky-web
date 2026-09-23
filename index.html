@@ -115,17 +115,6 @@
     <script src="coi-serviceworker.js"></script>
 
     <script>
-        if (WebAssembly.instantiateStreaming) {
-            const originalInstantiateStreaming = WebAssembly.instantiateStreaming;
-            WebAssembly.instantiateStreaming = function(response, imports) {
-                if (imports && imports.env && imports.env.pthread_create) {
-                    console.warn("[Hack] Intercepting imports.env.pthread_create (streaming)");
-                    imports.env.pthread_create = function() { return 0; };
-                }
-                return originalInstantiateStreaming(response, imports);
-            };
-        }
-
         // ------------------------------------------------------------------
         // Lazy resource filesystem
         //
@@ -268,10 +257,9 @@
             }
             gameScriptStarted = true;
 
-            // The generated Emscripten main JS already contains the preload
-            // runtime and will request endless-sky.data itself. Do NOT load
-            // endless-sky.data.js separately, or the data preload run dependency
-            // is registered twice and Emscripten aborts with an assertion.
+            // Load only the generated engine runtime. Resources are installed as
+            // lazy filesystem entries above, so there is no monolithic .data
+            // package that should be fetched by this page.
             console.log("Cross-origin isolation confirmed. Injecting main engine...");
 
             var script = document.createElement("script");
