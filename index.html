@@ -127,136 +127,113 @@
         }
 
         // ------------------------------------------------------------------
-        // Resource streaming
+        // Lazy resource filesystem
         //
-        // The Emscripten preload package (endless-sky.data) now holds only a few
-        // tiny root files (credits, keys, license, ...). Everything else is fetched
-        // here one file at a time from resources/<category>/... and written straight
-        // into the virtual filesystem. Each downloaded buffer is dropped as soon as
-        // it has been copied in, so the page never holds a full-size package blob.
-        // Categories are streamed in the order listed, so the small, boot-critical
-        // ones (data, shaders) arrive first and a problem with them shows up early.
+        // The manifest lists every resource path, but the resource contents are
+        // NOT downloaded here. Instead, every path is registered as an Emscripten
+        // lazy file. Endless Sky can therefore discover the normal filesystem
+        // layout immediately, while the file contents are fetched only when the
+        // native code actually opens/reads that file.
         //
-        // resources/manifest.json is produced by make-manifest.py:
-        //   { "data": [["human/ships.txt", 1234], ...], "shaders": [ ... ],
-        //     "images": [ ... ], "sounds": [ ... ] }
-        // Paths are relative to resources/<category>/. Sizes are only used for
-        // the progress display.
+        // This matches Endless Sky's normal Files::RecursiveList()/Files::Read()
+        // model instead of eagerly copying the entire resource tree into MEMFS.
+        // Emscripten's lazy-file implementation uses synchronous XHR, so the
+        // generated build must access these files from a worker thread for modern
+        // browsers. Endless Sky already performs its data/image/audio loading
+        // through worker queues/threads in the normal build.
         // ------------------------------------------------------------------
         const RESOURCE_BASE = "resources/";
-        const STREAM_CATEGORIES = ["data", "shaders", "images", "sounds"];  // each maps to /<category> in the game FS
-        const FETCH_CONCURRENCY = 6;
-        const FETCH_RETRIES = 3;
+        const LAZY_CATEGORIES = ["data", "shaders", "images", "sounds"];
 
         function formatMB(bytes) { return (bytes / 1048576).toFixed(1) + " MB"; }
 
-        async function fetchWithRetry(url) {
-            let lastError;
-            for (let attempt = 1; attempt <= FETCH_RETRIES; ++attempt) {
-                try {
-                    const response = await fetch(url);
-                    if (!response.ok)
-                        throw new Error("HTTP " + response.status);
-                    return new Uint8Array(await response.arrayBuffer());
-                } catch (error) {
-                    lastError = error;
-                    await new Promise(r => setTimeout(r, 250 * attempt));
-                }
-            }
-            throw new Error("Failed to fetch " + url + ": " + lastError);
-        }
-
-        // Make every parent directory of a path exist in the game filesystem.
         const createdDirs = new Set();
         function ensureDir(fsRoot, relativeDir) {
-            if (!relativeDir || createdDirs.has(fsRoot + "/" + relativeDir))
+            const key = fsRoot + "/" + relativeDir;
+            if (!relativeDir || createdDirs.has(key))
                 return;
-            Module.FS_createPath("/", fsRoot + "/" + relativeDir, true, true);
-            createdDirs.add(fsRoot + "/" + relativeDir);
+            Module.FS_createPath("/", key, true, true);
+            createdDirs.add(key);
         }
 
-        async function streamResources() {
+        function getLazyFileCreator() {
+            if (typeof FS !== "undefined" && typeof FS.createLazyFile === "function")
+                return FS.createLazyFile.bind(FS);
+            if (typeof Module !== "undefined" && typeof Module.FS_createLazyFile === "function")
+                return Module.FS_createLazyFile.bind(Module);
+            throw new Error(
+                "Emscripten FS.createLazyFile is not available. " +
+                "Rebuild with the File System API exported, including createLazyFile."
+            );
+        }
+
+        async function installLazyResources() {
             const manifestResponse = await fetch(RESOURCE_BASE + "manifest.json", { cache: "no-cache" });
             if (!manifestResponse.ok)
-                throw new Error("Could not load " + RESOURCE_BASE + "manifest.json (HTTP " + manifestResponse.status + ")");
-            const manifest = await manifestResponse.json();
+                throw new Error(
+                    "Could not load " + RESOURCE_BASE + "manifest.json (HTTP " +
+                    manifestResponse.status + ")"
+                );
 
-            // Flatten into one work list.
-            const jobs = [];
+            const manifest = await manifestResponse.json();
+            const createLazyFile = getLazyFileCreator();
+            let fileCount = 0;
             let totalBytes = 0;
-            for (const category of STREAM_CATEGORIES) {
+
+            for (const category of LAZY_CATEGORIES) {
                 const entries = manifest[category] || [];
-                // Starting the game with an empty data/ or shaders/ only produces confusing
-                // errors much later, so refuse to continue if any category is empty.
                 if (!entries.length)
-                    throw new Error("manifest.json lists no files for '" + category
-                        + "'. Re-run make-manifest.py and check resources/" + category + "/.");
+                    throw new Error(
+                        "manifest.json lists no files for '" + category +
+                        "'. Re-run make-manifest.py and check resources/" + category + "/."
+                    );
+
+                Module.FS_createPath("/", category, true, true);
+                createdDirs.add(category);
+
                 for (const [relativePath, size] of entries) {
-                    jobs.push({ category, relativePath, size: size || 0 });
+                    const slash = relativePath.lastIndexOf("/");
+                    const dir = slash < 0 ? "" : relativePath.slice(0, slash);
+                    const name = slash < 0 ? relativePath : relativePath.slice(slash + 1);
+
+                    ensureDir(category, dir);
+
+                    const url = RESOURCE_BASE + category + "/" +
+                        relativePath.split("/").map(encodeURIComponent).join("/");
+                    const parent = "/" + category + (dir ? "/" + dir : "");
+
+                    // Register the path only. The actual HTTP request happens on
+                    // first file access, not during startup.
+                    createLazyFile(parent, name, url, true, false);
+
+                    ++fileCount;
                     totalBytes += size || 0;
                 }
             }
 
-            console.log("[Resources] " + jobs.length + " files, " + formatMB(totalBytes) + " to stream");
-            for (const category of STREAM_CATEGORIES)
-                Module.FS_createPath("/", category, true, true);
-
-            let nextJob = 0;
-            let doneBytes = 0;
-            let doneFiles = 0;
-            let lastStatusUpdate = 0;
-
-            async function worker() {
-                while (true) {
-                    const index = nextJob++;
-                    if (index >= jobs.length)
-                        return;
-                    const job = jobs[index];
-                    const slash = job.relativePath.lastIndexOf("/");
-                    const dir = slash < 0 ? "" : job.relativePath.slice(0, slash);
-                    const name = slash < 0 ? job.relativePath : job.relativePath.slice(slash + 1);
-
-                    // Encode each path segment so names with spaces, '#', '%' or '@' survive.
-                    const url = RESOURCE_BASE + job.category + "/"
-                        + job.relativePath.split("/").map(encodeURIComponent).join("/");
-                    const bytes = await fetchWithRetry(url);
-
-                    ensureDir(job.category, dir);
-                    // canRead=true, canWrite=false. The Uint8Array is copied into the FS, after
-                    // which `bytes` goes out of scope and can be garbage collected.
-                    Module.FS_createDataFile("/" + job.category + (dir ? "/" + dir : ""),
-                        name, bytes, true, false, true);
-
-                    doneBytes += bytes.length;
-                    ++doneFiles;
-                    const now = performance.now();
-                    if (now - lastStatusUpdate > 150) {
-                        lastStatusUpdate = now;
-                        Module.setStatus("Loading resources... " + doneFiles + "/" + jobs.length
-                            + " (" + formatMB(doneBytes) + " / " + formatMB(totalBytes) + ")");
-                    }
-                }
-            }
-
-            await Promise.all(Array.from({ length: FETCH_CONCURRENCY }, worker));
-            console.log("[Resources] Done: " + doneFiles + " files, " + formatMB(doneBytes));
+            console.log(
+                "[Resources] Installed " + fileCount +
+                " lazy files (" + formatMB(totalBytes) + " available on demand)"
+            );
+            Module.setStatus("Starting Endless Sky...");
         }
 
         var Module = {
             canvas: document.getElementById("canvas"),
 
-            // Runs on the main thread before main(). The run dependency keeps the
-            // program from starting until every streamed file is in the filesystem.
+            // Runs before main(). We only need to download the manifest and create
+            // lazy filesystem entries here. Resource contents are fetched when the
+            // native code actually opens them.
             preRun: [function () {
-                const dependency = "stream_resources";
+                const dependency = "install_lazy_resources";
                 Module.addRunDependency(dependency);
-                streamResources().then(function () {
+                installLazyResources().then(function () {
                     Module.removeRunDependency(dependency);
                 }).catch(function (error) {
                     console.error("[Resources] " + (error && error.stack ? error.stack : error));
-                    Module.setStatus("Failed to load game resources. See the log above.");
-                    // Deliberately do NOT remove the run dependency: starting the game with
-                    // missing images and sounds would only produce confusing errors later.
+                    Module.setStatus("Failed to install lazy resources. See the log above.");
+                    // Keep the dependency until the error is fixed so the engine does
+                    // not start with a broken virtual filesystem.
                 });
             }],
 
