@@ -89,7 +89,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: C:\Users\Isaac\AppData\Local\Temp\tmp5jrfy287.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmp5oio8kqe.js
 if (!Module["expectedDataFileDownloads"]) Module["expectedDataFileDownloads"] = 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -228,23 +228,23 @@ Module["expectedDataFileDownloads"]++;
   });
 })();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmp5jrfy287.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpx7w4d3t0.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmp5oio8kqe.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpuf2m1hkv.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if ((typeof ENVIRONMENT_IS_WASM_WORKER != "undefined" && ENVIRONMENT_IS_WASM_WORKER) || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD) || (typeof ENVIRONMENT_IS_AUDIO_WORKLET != "undefined" && ENVIRONMENT_IS_AUDIO_WORKLET)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpx7w4d3t0.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmps_isno6k.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpuf2m1hkv.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpv7re88gm.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmps_isno6k.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpv7re88gm.js
 var programArgs = [];
 
 var thisProgram = "./this.program";
@@ -13566,8 +13566,8 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  390308: () => (growMemViews(), HEAPU8).length,
-  390334: $0 => {
+  390951: () => (growMemViews(), HEAPU8).length,
+  390977: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13575,7 +13575,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  390549: () => {
+  391192: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13583,7 +13583,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  390696: () => {
+  391339: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13591,7 +13591,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  390930: $0 => {
+  391573: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13615,11 +13615,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  391482: () => {
+  392125: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  391550: ($0, $1, $2, $3) => {
+  392193: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13661,7 +13661,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  393243: ($0, $1, $2, $3) => {
+  393886: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13693,7 +13693,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  394418: ($0, $1) => {
+  395061: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13712,7 +13712,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  395023: ($0, $1) => {
+  395666: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13726,7 +13726,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  395512: $0 => {
+  396155: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13760,10 +13760,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  396518: $0 => {
+  397161: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  396558: ($0, $1, $2) => {
+  397201: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13834,7 +13834,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  398024: ($0, $1, $2, $3, $4) => {
+  398667: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13871,19 +13871,61 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  399012: $0 => {
+  399655: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  399095: () => {
+  399738: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  399164: () => window.innerWidth,
-  399194: () => window.innerHeight
+  399807: () => window.innerWidth,
+  399837: () => window.innerHeight
 };
+
+function WebResourceList(directory, mode) {
+  try {
+    if (typeof FS === "undefined" || typeof FS.readdir !== "function") return 0;
+    const root = UTF8ToString(directory);
+    const result = [];
+    function visit(dir, recursive, wantDirectories) {
+      let entries;
+      try {
+        entries = FS.readdir(dir);
+      } catch (error) {
+        return;
+      }
+      for (const name of entries) {
+        if (name === "." || name === "..") continue;
+        const child = dir.endsWith("/") ? dir + name : dir + "/" + name;
+        let node;
+        try {
+          node = FS.lookupPath(child).node;
+        } catch (error) {
+          continue;
+        }
+        const isDirectory = !!node && FS.isDir(node.mode);
+        if (isDirectory) {
+          if (wantDirectories) result.push(child);
+          if (recursive) visit(child, true, false);
+        } else if (!wantDirectories) {
+          result.push(child);
+        }
+      }
+    }
+    if (mode === 0) visit(root, false, false); else if (mode === 1) visit(root, false, true); else visit(root, true, false);
+    result.sort();
+    const text = result.join("\n");
+    const bytes = lengthBytesUTF8(text) + 1;
+    const ptr = _malloc(bytes);
+    stringToUTF8(text, ptr, bytes);
+    return ptr;
+  } catch (error) {
+    return 0;
+  }
+}
 
 function InitializeWebLazyResources() {
   try {
@@ -13896,10 +13938,7 @@ function InitializeWebLazyResources() {
     xhr.send(null);
     if (!((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)) throw new Error("Could not load " + manifestUrl + " (HTTP " + xhr.status + ")");
     const manifest = JSON.parse(xhr.responseText);
-    self.__endlessSkyWebResourceBase = baseUrl;
-    self.__endlessSkyWebManifest = manifest;
     const categories = [ "data", "shaders", "images", "sounds" ];
-    const resourceIndex = [];
     let fileCount = 0;
     for (const category of categories) {
       const entries = manifest[category] || [];
@@ -13914,16 +13953,11 @@ function InitializeWebLazyResources() {
         if (relativeDir) FS.createPath("/", virtualDir.slice(1), true, true);
         const encodedPath = parts.concat([ name ]).map(segment => encodeURIComponent(segment)).join("/");
         const url = baseUrl + encodeURIComponent(category) + "/" + encodedPath;
-        resourceIndex.push(category + "/" + relativePath);
         FS.createLazyFile(virtualDir, name, url, true, false);
         ++fileCount;
       }
     }
-    FS.writeFile("/__endless_sky_web_resource_index", resourceIndex.join("\n") + "\n", {
-      encoding: "utf8"
-    });
     console.log("[Resources] Installed " + fileCount + " lazy files");
-    console.log("[Resources] Wrote filesystem index with " + resourceIndex.length + " entries");
     return 1;
   } catch (error) {
     console.error("[Resources] Failed to install lazy resources:", error && error.stack ? error.stack : error);
@@ -14082,6 +14116,7 @@ var wasmImports;
 function assignWasmImports() {
   wasmImports = {
     /** @export */ InitializeWebLazyResources,
+    /** @export */ WebResourceList,
     /** @export */ __assert_fail: ___assert_fail,
     /** @export */ __call_sighandler: ___call_sighandler,
     /** @export */ __cxa_begin_catch: ___cxa_begin_catch,
