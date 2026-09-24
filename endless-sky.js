@@ -89,7 +89,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: C:\Users\Isaac\AppData\Local\Temp\tmp_ck966hg.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmp6ogoyjvs.js
 if (!Module["expectedDataFileDownloads"]) Module["expectedDataFileDownloads"] = 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -228,23 +228,23 @@ Module["expectedDataFileDownloads"]++;
   });
 })();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmp_ck966hg.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpy9x0pexd.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmp6ogoyjvs.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpbfwzef5c.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if ((typeof ENVIRONMENT_IS_WASM_WORKER != "undefined" && ENVIRONMENT_IS_WASM_WORKER) || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD) || (typeof ENVIRONMENT_IS_AUDIO_WORKLET != "undefined" && ENVIRONMENT_IS_AUDIO_WORKLET)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpy9x0pexd.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmplkodwi3n.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpbfwzef5c.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpwqee_0l3.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmplkodwi3n.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpwqee_0l3.js
 var programArgs = [];
 
 var thisProgram = "./this.program";
@@ -13673,8 +13673,8 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  389423: () => (growMemViews(), HEAPU8).length,
-  389449: $0 => {
+  389693: () => (growMemViews(), HEAPU8).length,
+  389719: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13682,7 +13682,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  389664: () => {
+  389934: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13690,7 +13690,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  389811: () => {
+  390081: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13698,7 +13698,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  390045: $0 => {
+  390315: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13722,11 +13722,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  390597: () => {
+  390867: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  390665: ($0, $1, $2, $3) => {
+  390935: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13768,7 +13768,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  392358: ($0, $1, $2, $3) => {
+  392628: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13800,7 +13800,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  393533: ($0, $1) => {
+  393803: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13819,7 +13819,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  394138: ($0, $1) => {
+  394408: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13833,7 +13833,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  394627: $0 => {
+  394897: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13867,10 +13867,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  395633: $0 => {
+  395903: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  395673: ($0, $1, $2) => {
+  395943: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13941,7 +13941,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  397139: ($0, $1, $2, $3, $4) => {
+  397409: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13978,24 +13978,25 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  398127: $0 => {
+  398397: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  398210: () => {
+  398480: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  398279: () => window.innerWidth,
-  398309: () => window.innerHeight
+  398549: () => window.innerWidth,
+  398579: () => window.innerHeight
 };
 
 function InitializeWebLazyResources() {
   try {
     if (typeof FS === "undefined" || typeof FS.createLazyFile !== "function") throw new Error("Emscripten FS.createLazyFile() is unavailable.");
-    const baseUrl = new URL("resources/", self.location.href).href;
+    const scriptUrl = (typeof Module !== "undefined" && typeof Module.mainScriptUrlOrBlob === "string") ? Module.mainScriptUrlOrBlob : self.location.href;
+    const baseUrl = new URL("resources/", scriptUrl).href;
     const manifestUrl = new URL("manifest.json", baseUrl).href;
     const xhr = new XMLHttpRequest;
     xhr.open("GET", manifestUrl, false);
