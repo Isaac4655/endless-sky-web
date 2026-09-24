@@ -1,0 +1,19 @@
+system Ge-73
+	belt 1758 6
+	belt 1846 9
+	asteroids "small metal" 1 1.584
+	minables copper 3 1.851
+	fleet "Small Avgi Merchants" 4200
+	fleet "Large Avgi Merchants" 8400
+	fleet "Dissonance Miners" 12000
+	fleet "Small Dissonance Merchants" 4200
+	fleet "Large Dissonance Merchants" 8400
+	fleet "Dissonance Miners" 12000
+	fleet "Small Dissonance Pirates" 36000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 2700
+	fleet "Avgi Strike Group" 9000
+	fleet "Avgi Twilight Guard Logistics" 7200
+	fleet "Small Aberrant" 4200
+	fleet "Large Aberrant" 8400
+	hazard "Predecessors Base Spatial Decay" 1800

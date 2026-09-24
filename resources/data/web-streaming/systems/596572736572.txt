@@ -1,0 +1,10 @@
+system Yerser
+	belt 1478
+	asteroids "small rock" 4 2.6
+	asteroids "large rock" 7 3
+	asteroids "small metal" 9 3
+	asteroids "medium metal" 9 4.13
+	asteroids "large metal" 2 4.27
+	minables aluminum 1 5.75
+	minables copper 3 6.19
+	fleet "Small Scin" 4600

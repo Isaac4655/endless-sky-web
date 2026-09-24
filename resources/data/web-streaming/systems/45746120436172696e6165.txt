@@ -1,0 +1,4 @@
+system "Eta Carinae"
+	asteroids "small rock" 1 4.65
+	asteroids "large rock" 1 4.237
+	asteroids "large metal" 1 2.55

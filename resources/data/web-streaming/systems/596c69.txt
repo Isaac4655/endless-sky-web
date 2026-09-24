@@ -1,0 +1,12 @@
+system Yli
+	belt 1529
+	asteroids "large rock" 1 3.87
+	asteroids "small metal" 7 2.95
+	asteroids "medium metal" 172 4.23
+	asteroids "large metal" 1 3.36
+	minables neodymium 6 6.6
+	minables silicon 1 5.1
+	fleet "Small Vi" 1000
+	fleet "Large Vi" 1700
+	fleet "Vi Transport" 2300
+	fleet "Vi Cargo" 2000

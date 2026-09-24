@@ -1,0 +1,22 @@
+system "Wah Ki"
+	raid "Unfettered Hai Space Raid" 20
+	belt 1585
+	asteroids "small rock" 39 5.9598
+	asteroids "medium rock" 1 5.4978
+	asteroids "large rock" 24 2.4024
+	asteroids "small metal" 17 4.7586
+	asteroids "large metal" 22 2.772
+	minables iron 4 7.24347
+	minables lead 2 6.42551
+	minables titanium 2 5.26511
+	fleet "Small Hai" 1200
+	fleet "Large Hai" 500
+	fleet "Large Plundering Unfettered" 550
+	fleet "Small Hai Merchant" 4800
+	fleet "Large Hai Merchant" 2000
+	fleet "Small Hai Merchant (Sympathizers)" 1200
+	fleet "Large Hai Merchant (Sympathizers)" 500
+	fleet "Small Hai Merchant (Human)" 9000
+	fleet "Large Hai Merchant (Human)" 14000
+	fleet "Small Human Merchants (Hai)" 18000
+	fleet "Large Human Merchants (Hai)" 28000

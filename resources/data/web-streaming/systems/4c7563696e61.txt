@@ -1,0 +1,14 @@
+system Lucina
+	belt 1466
+	asteroids "small rock" 1 4.59
+	asteroids "medium rock" 9 4.7175
+	asteroids "large rock" 1 3.06
+	asteroids "small metal" 1 5.1425
+	asteroids "medium metal" 2 5.525
+	asteroids "large metal" 1 2.125
+	minables aluminum 1 7.35341
+	minables lead 1 6.63722
+	fleet "Korath Ember Waste Raid" 20000
+	fleet "Korath Rescue" 60000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

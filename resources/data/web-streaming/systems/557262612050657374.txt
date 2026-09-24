@@ -1,0 +1,9 @@
+system "Urba Pest"
+	belt 1500
+	asteroids "small rock" 11 10.36
+	asteroids "medium rock" 4 7
+	asteroids "large rock" 24 9.59
+	asteroids "small metal" 1 8.4
+	asteroids "large metal" 1 3.71
+	fleet "Bunrodea Megasa Freight" 1000
+	fleet "Bunrodea Defense" 1000

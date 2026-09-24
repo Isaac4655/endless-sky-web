@@ -1,0 +1,12 @@
+system "Aik Kamgatake"
+	belt 1920
+	asteroids "small rock" 28 1.9
+	asteroids "medium rock" 23 2
+	asteroids "large rock" 27 1.72
+	asteroids "small metal" 8 1.74
+	asteroids "medium metal" 20 1.79
+	asteroids "large metal" 39 1.43
+	minables yottrite 1 2.6
+	minables lead 20 2.1
+	minables iron 34 2.5
+	minables copper 32 3.06

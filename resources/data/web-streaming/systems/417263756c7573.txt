@@ -1,0 +1,12 @@
+system Arculus
+	belt 1536
+	asteroids "medium rock" 2 0.60666
+	asteroids "large metal" 1 1.34167
+	fleet "Large Remnant" 3000
+	fleet "Small Remnant" 2200
+	fleet "Remnant Transport" 2200
+	fleet "Remnant Home Guard" 2000
+	fleet "Korath Ember Waste Raid" 40000
+	fleet "Korath Rescue" 90000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 25000

@@ -1,0 +1,18 @@
+system Shaula
+	belt 1814
+	asteroids "small rock" 1 3.2016
+	asteroids "medium rock" 2 3.5496
+	asteroids "large rock" 2 3.8628
+	asteroids "small metal" 47 4.9764
+	asteroids "medium metal" 208 4.002
+	asteroids "large metal" 45 4.4196
+	minables platinum 9 4.50188
+	minables silver 18 4.95626
+	fleet "Small Southern Pirates" 500
+	fleet "Large Southern Pirates" 800
+	fleet "Small Core Pirates" 4000
+	fleet "Large Core Pirates" 7000
+	fleet "Small Northern Pirates" 5000
+	fleet "Large Northern Pirates" 9000
+	fleet "Large Militia" 9000
+	fleet "Old Southern Pirates" 7000

@@ -1,0 +1,19 @@
+system "Al Dhanab"
+	belt 1432
+	asteroids "small rock" 65 3.45
+	asteroids "medium rock" 24 1.6008
+	asteroids "large rock" 6 1.6008
+	asteroids "small metal" 94 2.7324
+	asteroids "medium metal" 36 4.14
+	asteroids "large metal" 116 3.2016
+	minables iron 32 3.202
+	minables silicon 56 3.98107
+	minables tungsten 37 3.66333
+	fleet "Small Core Merchants" 400
+	fleet "Large Core Merchants" 400
+	fleet "Small Syndicate" 1000
+	fleet "Large Syndicate" 800
+	fleet "Republic Logistics" 5300
+	fleet "Small Core Pirates" 2000
+	fleet "Large Core Pirates" 3000
+	fleet "Human Miners" 2000

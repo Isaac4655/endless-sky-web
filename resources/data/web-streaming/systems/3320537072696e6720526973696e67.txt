@@ -1,0 +1,20 @@
+system "3 Spring Rising"
+	belt 1613
+	asteroids "small rock" 66 4.9761
+	asteroids "medium rock" 6 4.3092
+	asteroids "large rock" 92 7.695
+	asteroids "small metal" 4 5.5917
+	asteroids "medium metal" 12 5.0787
+	asteroids "large metal" 29 3.591
+	minables aluminum 26 3.84109
+	minables silicon 2 4.9047
+	fleet "Small Arach" 3000
+	fleet "Large Arach" 8000
+	fleet "Small Kimek" 600
+	fleet "Large Kimek" 1400
+	fleet "Small Saryd" 1500
+	fleet "Large Saryd" 6000
+	fleet "Arach Miners" 12000
+	fleet "Kimek Miners" 3000
+	fleet "Saryd Miners" 9000
+	fleet Heliarch 800

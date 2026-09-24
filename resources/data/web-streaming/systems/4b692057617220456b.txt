@@ -1,0 +1,17 @@
+system "Ki War Ek"
+	belt 1777
+	asteroids "small rock" 12 2.349
+	asteroids "medium rock" 11 2.523
+	asteroids "large rock" 22 4.1325
+	asteroids "small metal" 2 2.262
+	asteroids "medium metal" 8 3.045
+	asteroids "large metal" 2 5.6115
+	minables lead 2 3.47294
+	minables silicon 10 6.26357
+	fleet "Small Arach" 600
+	fleet "Large Arach" 900
+	fleet "Small Kimek" 500
+	fleet "Large Kimek" 700
+	fleet "Small Saryd" 800
+	fleet "Large Saryd" 1500
+	fleet Heliarch 150

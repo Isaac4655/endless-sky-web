@@ -1,0 +1,21 @@
+system "Silver String"
+	belt 1986
+	asteroids "small rock" 4 1.209
+	asteroids "medium rock" 44 1.131
+	asteroids "large rock" 2 0.819
+	asteroids "small metal" 23 1.04
+	asteroids "medium metal" 25 1.729
+	asteroids "large metal" 3 0.663
+	minables aluminum 1 2.47607
+	minables silver 1 2.06763
+	minables uranium 10 1.57759
+	fleet "Small Arach" 900
+	fleet "Large Arach" 2000
+	fleet "Small Kimek" 900
+	fleet "Large Kimek" 2400
+	fleet "Small Saryd" 700
+	fleet "Large Saryd" 1500
+	fleet "Arach Miners" 8000
+	fleet "Kimek Miners" 9000
+	fleet "Saryd Miners" 3500
+	fleet Heliarch 500

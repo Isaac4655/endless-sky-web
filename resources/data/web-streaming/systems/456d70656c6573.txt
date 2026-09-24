@@ -1,0 +1,11 @@
+system Empeles
+	belt 1416
+	asteroids "small rock" 5 5.6
+	asteroids "medium rock" 9 4.29
+	asteroids "large rock" 3 4.42
+	asteroids "small metal" 92 5.33
+	asteroids "medium metal" 61 5.79
+	asteroids "large metal" 13 3.84
+	minables aluminum 4 7.29
+	minables iron 10 8.68
+	fleet "Small Vi" 5600

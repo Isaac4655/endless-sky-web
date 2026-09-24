@@ -1,0 +1,13 @@
+system Kiluit
+	belt 1258
+	asteroids "medium rock" 8 2.63
+	asteroids "large rock" 8 2
+	asteroids "small metal" 53 3.2
+	asteroids "medium metal" 1 2.73
+	asteroids "large metal" 9 2.45
+	minables tungsten 1 5.46
+	minables lead 9 3.13
+	fleet "Small Vi" 1300
+	fleet "Vi Cargo" 800
+	fleet "Vi Transport" 1100
+	fleet "Small Vi II" 2200

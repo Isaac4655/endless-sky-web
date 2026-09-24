@@ -1,0 +1,15 @@
+system Delia
+	belt 1500
+	asteroids "large metal" 10 9
+	asteroids "large rock" 11 5
+	asteroids "medium metal" 6 5
+	asteroids "medium rock" 31 6
+	asteroids "small metal" 7 8
+	asteroids "small rock" 76 6
+	minables copper 1 7
+	minables lead 3 12
+	minables tungsten 3 11
+	fleet Ka'het 3400
+	fleet "Ka'het Aggressive" 10300
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

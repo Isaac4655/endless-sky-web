@@ -1,0 +1,21 @@
+system Eblumab
+	belt 1804
+	asteroids "small rock" 10 7.8364
+	asteroids "medium rock" 39 4.1756
+	asteroids "large rock" 2 8.294
+	asteroids "small metal" 20 3.7752
+	asteroids "medium metal" 2 4.0612
+	asteroids "large metal" 33 4.5188
+	minables copper 8 6.10344
+	minables iron 6 5.39134
+	minables lead 17 4.069
+	fleet "Small Arach" 600
+	fleet "Large Arach" 1200
+	fleet "Small Kimek" 1500
+	fleet "Large Kimek" 4000
+	fleet "Small Saryd" 1500
+	fleet "Large Saryd" 5000
+	fleet "Arach Miners" 3000
+	fleet "Kimek Miners" 6000
+	fleet "Saryd Miners" 8000
+	fleet Heliarch 1000

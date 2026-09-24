@@ -1,0 +1,13 @@
+system Iinjma
+	belt 1861
+	asteroids "medium rock" 11 5.1
+	asteroids "large rock" 1 3.27
+	asteroids "small metal" 51 4.9
+	asteroids "medium metal" 4 5.4
+	asteroids "large metal" 55 4.8
+	minables iron 11 4.91
+	minables lead 9 3.6
+	minables neodymium 4 2.39
+	fleet "Small Scin" 3500
+	fleet "Scin Transport" 6000
+	fleet "Gegno Miners" 7000

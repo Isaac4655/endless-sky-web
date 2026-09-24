@@ -1,0 +1,18 @@
+system Symphony
+	belt 1997 7
+	belt 2468 5
+	asteroids "small rock" 2 5.25
+	asteroids "medium rock" 6 5.18
+	asteroids "small metal" 2 5.39
+	asteroids "medium metal" 3 4.2
+	minables aluminum 5 9.3
+	fleet "Avgi Orbital Defense" 2400
+	fleet "Avgi Core Defense" 3600
+	fleet "Avgi Patrol" 6000
+	fleet "Avgi Fleetgroup" 3600
+	fleet "Avgi Twilight Guard Logistics" 4200
+	fleet "Small Avgi Merchants" 3000
+	fleet "Large Avgi Merchants" 2700
+	fleet "Avgi Miners" 6000
+	fleet "Small Aberrant" 42000
+	fleet "Large Aberrant" 36000

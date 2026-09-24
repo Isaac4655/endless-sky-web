@@ -1,0 +1,20 @@
+system "3 Pole"
+	belt 1617
+	asteroids "small rock" 1 1.7864
+	asteroids "medium rock" 1 4.5584
+	asteroids "large rock" 18 2.31
+	asteroids "small metal" 100 3.1416
+	asteroids "medium metal" 16 1.7864
+	asteroids "large metal" 19 4.466
+	minables lead 2 4.80948
+	minables silicon 42 4.08343
+	fleet "Small Arach" 900
+	fleet "Large Arach" 2200
+	fleet "Small Kimek" 300
+	fleet "Large Kimek" 400
+	fleet "Small Saryd" 1000
+	fleet "Large Saryd" 2000
+	fleet "Arach Miners" 4500
+	fleet "Kimek Miners" 2500
+	fleet "Saryd Miners" 4500
+	fleet Heliarch 600

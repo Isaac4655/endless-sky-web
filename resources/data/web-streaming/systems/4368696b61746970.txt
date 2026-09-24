@@ -1,0 +1,13 @@
+system Chikatip
+	belt 1929
+	asteroids "small rock" 112 4.4965
+	asteroids "medium rock" 59 2.8152
+	asteroids "large rock" 5 2.8934
+	asteroids "small metal" 18 2.5415
+	asteroids "medium metal" 89 2.6979
+	asteroids "large metal" 22 4.0664
+	minables lead 2 5.34146
+	minables silicon 1 4.86922
+	minables silver 15 5.05151
+	fleet "Large Quarg (Kor Efret)" 2000
+	fleet "Kor Efret Miners" 10800

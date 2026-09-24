@@ -1,0 +1,22 @@
+system S-32
+	belt 1131
+	asteroids "small rock" 3 2.05
+	asteroids "medium rock" 1 2.184
+	asteroids "large rock" 2 2.923
+	asteroids "small metal" 3 2.52
+	asteroids "large metal" 2 1.848
+	minables iron 1 3.05
+	fleet "Small Avgi Merchants" 7200
+	fleet "Large Avgi Merchants" 12000
+	fleet "Small Dissonance Merchants" 9000
+	fleet "Large Dissonance Merchants" 12000
+	fleet "Small Dissonance Merchants" 7200
+	fleet "Large Dissonance Merchants" 12000
+	fleet "Small Dissonance Pirates" 36000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 4200
+	fleet "Avgi Strike Group" 18000
+	fleet "Avgi Twilight Guard Logistics" 7200
+	fleet "Small Aberrant" 4200
+	fleet "Large Aberrant" 9000
+	hazard "Predecessors Base Spatial Decay" 1800

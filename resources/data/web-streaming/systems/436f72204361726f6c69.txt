@@ -1,0 +1,17 @@
+system "Cor Caroli"
+	belt 1474
+	asteroids "small rock" 24 3.2472
+	asteroids "medium rock" 20 1.4784
+	asteroids "large rock" 5 2.7456
+	asteroids "small metal" 6 2.376
+	asteroids "medium metal" 1 1.5576
+	asteroids "large metal" 8 1.3992
+	minables aluminum 2 2.98979
+	minables platinum 2 3.79511
+	minables uranium 4 2.87365
+	fleet "Small Southern Merchants" 700
+	fleet "Large Southern Merchants" 1300
+	fleet "Small Southern Pirates" 2000
+	fleet "Small Republic" 10000
+	fleet "Small Militia" 7000
+	fleet "Human Miners" 3000

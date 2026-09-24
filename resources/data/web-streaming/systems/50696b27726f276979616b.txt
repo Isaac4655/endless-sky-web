@@ -1,0 +1,6 @@
+system Pik'ro'iyak
+	belt 1279
+	asteroids "large metal" 1 3.7488
+	fleet "Wanderer Freight" 500
+	fleet "Wanderer Drones" 3000
+	fleet "Wanderer Defense" 4000

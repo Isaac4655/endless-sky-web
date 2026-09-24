@@ -1,0 +1,8 @@
+system Huud
+	belt 1319
+	asteroids "medium rock" 24 2.2
+	asteroids "large rock" 3 4
+	asteroids "medium metal" 1 3.78
+	asteroids "large metal" 1 2.55
+	minables aluminum 1 3.6
+	fleet "Small Vi" 4700

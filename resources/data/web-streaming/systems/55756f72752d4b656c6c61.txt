@@ -1,0 +1,12 @@
+system Uuoru-Kella
+	belt 1631
+	asteroids "small metal" 14 4.805
+	asteroids "medium metal" 146 4.93
+	asteroids "large metal" 1 6.178
+	minables titanium 4 8.02
+	minables iron 39 9.789
+	fleet "Light Successor Freight" 500
+	fleet "Medium Successor Freight" 1000
+	fleet "Small Old Houses" 1000
+	fleet "Large Old Houses" 2000
+	fleet "Old Houses Surveillance" 1000

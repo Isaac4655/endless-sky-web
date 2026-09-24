@@ -1,0 +1,14 @@
+system Rastaban
+	belt 1041
+	asteroids "small rock" 2 3.8766
+	asteroids "medium rock" 60 7.6986
+	asteroids "large rock" 3 6.9888
+	asteroids "medium metal" 6 4.095
+	asteroids "large metal" 2 7.371
+	minables copper 8 9.86407
+	minables lead 8 12.0926
+	minables titanium 1 8.61575
+	fleet "Small Southern Merchants" 800
+	fleet "Large Southern Merchants" 1600
+	fleet "Small Southern Pirates" 3000
+	fleet "Large Southern Pirates" 5000

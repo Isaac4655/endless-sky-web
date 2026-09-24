@@ -1,0 +1,12 @@
+system "Kor Zena'i"
+	belt 1866
+	asteroids "small rock" 5 6.2205
+	asteroids "large rock" 2 4.7415
+	asteroids "large metal" 1 4.4805
+	fleet "Korath Raid" 1850
+	fleet "Korath Home" 1170
+	fleet "Korath Defense" 1660
+	fleet "Korath Large Raid" 16000
+	fleet "Korath Surveillance" 31000
+	fleet "Korath Civilian Large" 845
+	fleet "Korsmanath A'awojs" 5000

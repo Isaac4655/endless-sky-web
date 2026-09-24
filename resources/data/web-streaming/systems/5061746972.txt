@@ -1,0 +1,22 @@
+system Patir
+	belt 1500
+	asteroids "large metal" 5 2
+	asteroids "large rock" 4 3
+	asteroids "medium rock" 7 4
+	asteroids "small rock" 21 2
+	minables lead 151 15
+	minables iron 83 6
+	minables titanium 74 10
+	minables aluminum 68 13
+	minables copper 39 8
+	fleet Ka'sei 300
+	hazard "Patir Black Hole Event Horizon" 1
+	hazard "Ember Waste Base Heat" 100
+		to spawn
+			not "ka'het: beyond Patir"
+	hazard "Ember Waste Base Storm" 9000
+		to spawn
+			not "ka'het: beyond Patir"
+	hazard "Beyond Patir Shield Eraser" 1
+		to spawn
+			has "ka'het: beyond Patir"

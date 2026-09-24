@@ -1,0 +1,6 @@
+system Vasa-Oorua
+	asteroids "small rock" 2 5
+	asteroids "small metal" 1 5.5
+	minables tungsten 3 6.5
+	hazard "Predecessors Base Spatial Decay" 400
+	hazard "Predecessors Spatial Rift Weak" 10000

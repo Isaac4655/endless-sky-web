@@ -1,0 +1,13 @@
+system Seginus
+	belt 1906
+	asteroids "small rock" 11 5.5188
+	asteroids "medium rock" 3 6.2748
+	asteroids "large rock" 1 4.6116
+	asteroids "large metal" 1 8.7696
+	minables lead 2 10.5813
+	minables silver 4 6.19901
+	minables titanium 2 6.63633
+	fleet "Small Southern Merchants" 900
+	fleet "Large Southern Merchants" 2000
+	fleet "Small Militia" 3000
+	fleet "Small Southern Pirates" 5000

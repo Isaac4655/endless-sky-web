@@ -1,0 +1,17 @@
+system Peacock
+	belt 1870
+	asteroids "small rock" 18 3.06
+	asteroids "medium rock" 79 3.312
+	asteroids "large rock" 29 5.4
+	asteroids "small metal" 101 5.004
+	asteroids "medium metal" 72 5.328
+	asteroids "large metal" 2 2.772
+	minables lead 37 6.75228
+	minables silicon 17 6.12779
+	minables silver 3 6.88108
+	fleet "Small Southern Merchants" 2000
+	fleet "Large Southern Merchants" 5000
+	fleet "Small Militia" 8000
+	fleet "Small Southern Pirates" 4000
+	fleet "Large Southern Pirates" 10000
+	fleet "Human Miners" 3000

@@ -1,0 +1,14 @@
+system Perfica
+	belt 1160
+	asteroids "small rock" 1 0.35466
+	asteroids "small metal" 5 0.44333
+	asteroids "medium metal" 9 0.55733
+	asteroids "large metal" 11 0.836
+	minables iron 6 0.84737
+	fleet "Large Remnant" 10000
+	fleet "Small Remnant" 7500
+	fleet "Remnant Transport" 7500
+	fleet "Korath Ember Waste Raid" 30000
+	fleet "Korath Rescue" 45000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

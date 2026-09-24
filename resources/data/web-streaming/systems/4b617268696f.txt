@@ -1,0 +1,11 @@
+system Karhio
+	belt 1163
+	asteroids "small rock" 6 5.2
+	asteroids "medium rock" 8 6.6
+	asteroids "large rock" 13 4.2
+	asteroids "small metal" 9 5.2
+	asteroids "medium metal" 10 6.2
+	asteroids "large metal" 15 3.8
+	minables aluminum 1 7.1
+	minables tungsten 12 6.8
+	minables uranium 1 9.7

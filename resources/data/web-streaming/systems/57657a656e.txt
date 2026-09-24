@@ -1,0 +1,17 @@
+system Wezen
+	belt 1913
+	asteroids "small rock" 6 2.6418
+	asteroids "medium rock" 68 2.2372
+	asteroids "large rock" 22 1.3328
+	asteroids "small metal" 3 2.5228
+	asteroids "medium metal" 6 1.9992
+	asteroids "large metal" 4 2.7132
+	minables silicon 2 3.02054
+	minables titanium 19 2.21947
+	fleet "Small Northern Merchants" 2000
+	fleet "Large Northern Merchants" 4000
+	fleet "Small Deep Security" 5000
+	fleet "Small Deep Merchants" 1600
+	fleet "Large Deep Security" 10000
+	fleet "Large Deep Merchants" 5000
+	fleet "Small Northern Pirates" 8000

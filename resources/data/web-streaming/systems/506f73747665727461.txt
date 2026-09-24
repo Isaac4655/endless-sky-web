@@ -1,0 +1,8 @@
+system Postverta
+	belt 1500
+	asteroids "medium rock" 4 2
+	asteroids "large rock" 4 3
+	asteroids "medium metal" 52 1
+	asteroids "large metal" 9 3
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

@@ -1,0 +1,10 @@
+system Tectum
+	belt 1350 7
+	belt 2133 1
+	asteroids "small rock" 20 2.036
+	asteroids "medium rock" 86 2.176
+	asteroids "large rock" 14 1.591
+	asteroids "large metal" 1 1.638
+	minables gold 4 2.485
+	minables aluminum 3 3.003
+	minables iron 6 2.125

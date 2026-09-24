@@ -1,0 +1,11 @@
+system "Paru Paru"
+	belt 1500
+	asteroids "small rock" 59 3.3852
+	asteroids "medium rock" 4 2.184
+	asteroids "large rock" 30 3.5308
+	asteroids "small metal" 8 3.6764
+	asteroids "medium metal" 10 3.4216
+	asteroids "large metal" 11 5.1688
+	fleet "Bunrodea Erabu Freight" 900
+	fleet "Bunrodea Defense" 2000
+	hazard "Neutron Star Magnetic Field" 1

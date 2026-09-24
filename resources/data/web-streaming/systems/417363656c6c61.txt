@@ -1,0 +1,16 @@
+system Ascella
+	belt 1971
+	asteroids "small rock" 3 1.3328
+	asteroids "medium rock" 258 1.5708
+	asteroids "large rock" 6 1.547
+	asteroids "small metal" 5 2.023
+	asteroids "medium metal" 84 1.19
+	asteroids "large metal" 6 2.6894
+	minables silicon 33 1.74588
+	minables titanium 34 2.91332
+	minables uranium 23 2.68467
+	fleet "Small Southern Merchants" 600
+	fleet "Large Southern Merchants" 1000
+	fleet "Small Militia" 4000
+	fleet "Small Southern Pirates" 3000
+	fleet "Human Miners" 1600

@@ -1,0 +1,8 @@
+system Postlude
+	belt 1814
+	asteroids "medium metal" 13 5.468
+	asteroids "large metal" 1 6.634
+	minables lead 1 8.654
+	hazard "Predecessors Base Spatial Decay" 600
+	hazard "Predecessors Spatial Rift Weak" 12000
+	hazard "Predecessors Spatial Rift Intense" 24000

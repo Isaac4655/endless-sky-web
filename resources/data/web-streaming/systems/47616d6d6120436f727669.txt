@@ -1,0 +1,16 @@
+system "Gamma Corvi"
+	belt 1556
+	asteroids "small rock" 20 1.5168
+	asteroids "medium rock" 59 2.8608
+	asteroids "large rock" 17 2.1696
+	asteroids "small metal" 29 1.3248
+	asteroids "medium metal" 48 1.9968
+	asteroids "large metal" 36 1.6704
+	minables lead 49 2.14521
+	minables neodymium 1 2.38531
+	fleet "Small Southern Merchants" 800
+	fleet "Large Southern Merchants" 1500
+	fleet "Small Militia" 1000
+	fleet "Large Militia" 2000
+	fleet "Small Southern Pirates" 10000
+	fleet "Human Miners" 5000

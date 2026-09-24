@@ -1,0 +1,12 @@
+system Solifar
+	belt 1517
+	asteroids "small rock" 7 7.772
+	asteroids "medium rock" 21 4.176
+	asteroids "large rock" 5 3.654
+	asteroids "small metal" 2 7.134
+	asteroids "medium metal" 80 7.946
+	asteroids "large metal" 26 7.076
+	minables aluminum 30 12.5935
+	minables iron 6 10.1283
+	minables lead 20 11.4764
+	fleet "Large Quarg (Kor Efret)" 4000

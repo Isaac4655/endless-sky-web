@@ -1,0 +1,9 @@
+system Tap
+	belt 1482 4
+	belt 1983 1
+	asteroids "small metal" 9 1.86
+	asteroids "medium metal" 2 1.36
+	asteroids "large metal" 6 1.22
+	minables titanium 9 2.712
+	minables gold 6 1.872
+	hazard "Neutron Star Magnetic Field" 1

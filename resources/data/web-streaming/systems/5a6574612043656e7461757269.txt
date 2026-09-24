@@ -1,0 +1,11 @@
+system "Zeta Centauri"
+	belt 1488
+	asteroids "large rock" 1 1.13
+	asteroids "large metal" 5 0.66
+	minables silicon 1 0.81764
+	fleet "Small Southern Merchants" 800
+	fleet "Large Southern Merchants" 2000
+	fleet "Small Militia" 1500
+	fleet "Large Militia" 2500
+	fleet "Small Southern Pirates" 3000
+	fleet "Large Southern Pirates" 5000

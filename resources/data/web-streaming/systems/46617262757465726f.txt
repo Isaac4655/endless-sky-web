@@ -1,0 +1,12 @@
+system Farbutero
+	belt 1175
+	asteroids "small rock" 2 4.7357
+	asteroids "medium rock" 9 9.1379
+	asteroids "large rock" 16 8.8044
+	asteroids "small metal" 2 4.4689
+	asteroids "medium metal" 1 6.7367
+	asteroids "large metal" 1 6.8701
+	minables silicon 1 13.3339
+	fleet "Large Quarg (Kor Efret)" 2000
+	fleet "Small Kor Mereti" 9400
+	fleet "Large Kor Mereti" 5000

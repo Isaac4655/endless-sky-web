@@ -1,0 +1,18 @@
+system "Yed Prior"
+	belt 1837
+	asteroids "small rock" 12 5.0784
+	asteroids "medium rock" 1 2.9072
+	asteroids "large rock" 5 3.7904
+	asteroids "small metal" 2 5.1888
+	asteroids "medium metal" 55 1.84
+	asteroids "large metal" 6 5.0416
+	minables silver 8 4.49935
+	minables titanium 20 4.2915
+	minables tungsten 8 5.10857
+	fleet "Small Southern Merchants" 800
+	fleet "Large Southern Merchants" 1600
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 3000
+	fleet "Small Militia" 3000
+	fleet "Large Militia" 5000
+	fleet "Human Miners" 1600

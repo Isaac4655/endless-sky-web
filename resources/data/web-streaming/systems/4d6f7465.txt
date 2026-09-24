@@ -1,0 +1,7 @@
+system Mote
+	belt 1416 5
+	belt 1829 6
+	asteroids "small metal" 3 6.479
+	fleet "Avgi Scouts" 24000
+	fleet "Small Aberrant" 3600
+	fleet "Large Aberrant" 5400

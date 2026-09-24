@@ -1,0 +1,7 @@
+system Sevrelect
+	belt 1763
+	asteroids "large metal" 1 2.97
+	fleet "Quarg (Kor Efret)" 1000
+	fleet "Large Quarg (Kor Efret)" 3000
+	fleet "Kor Efret Home" 500
+	fleet "Kor Efret Miners" 3600

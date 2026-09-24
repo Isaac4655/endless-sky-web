@@ -1,0 +1,11 @@
+system Trio
+	belt 1813 4
+	belt 2160 10
+	asteroids "medium metal" 15 1.246
+	asteroids "large metal" 5 1.898
+	minables copper 8 1.321
+	minables titanium 10 1.421
+	fleet "Small Aberrant" 1500
+	fleet "Large Aberrant" 3000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 25000

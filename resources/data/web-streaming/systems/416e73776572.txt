@@ -1,0 +1,17 @@
+system Answer
+	belt 1636
+	asteroids "medium rock" 2 6.279
+	asteroids "large rock" 3 6.578
+	asteroids "small metal" 16 6.8172
+	asteroids "medium metal" 32 6.8172
+	asteroids "large metal" 24 8.5514
+	minables copper 7 3.583
+	minables neodymium 6 5.23127
+	minables tungsten 18 5.44324
+	fleet "Small Arach" 1000
+	fleet "Large Arach" 3000
+	fleet "Small Kimek" 400
+	fleet "Large Kimek" 800
+	fleet "Small Saryd" 600
+	fleet "Large Saryd" 1200
+	fleet Heliarch 1400

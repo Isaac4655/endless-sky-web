@@ -1,0 +1,20 @@
+system Hunter
+	belt 1498
+	asteroids "small rock" 10 2.7189
+	asteroids "medium rock" 2 3.7449
+	asteroids "large rock" 7 4.8222
+	asteroids "small metal" 3 6.669
+	asteroids "medium metal" 1 4.9248
+	asteroids "large metal" 10 7.0794
+	minables silicon 10 3.11503
+	minables tungsten 6 4.18967
+	fleet "Small Arach" 800
+	fleet "Large Arach" 2000
+	fleet "Small Kimek" 1000
+	fleet "Large Kimek" 2400
+	fleet "Small Saryd" 600
+	fleet "Large Saryd" 1200
+	fleet "Arach Miners" 5000
+	fleet "Kimek Miners" 6000
+	fleet "Saryd Miners" 3500
+	fleet Heliarch 900

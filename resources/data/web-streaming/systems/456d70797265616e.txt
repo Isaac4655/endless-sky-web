@@ -1,0 +1,11 @@
+system Empyrean
+	belt 1027
+	asteroids "small rock" 1 3.208
+	asteroids "medium rock" 9 2.77
+	asteroids "large rock" 1 3.353
+	asteroids "large metal" 2 3.985
+	fleet "Avgi Scouts" 6000
+	fleet "Avgi Patrol" 2300
+	fleet "Avgi Strike Group" 9800
+	fleet "Small Aberrant" 5600
+	fleet "Large Aberrant" 9400

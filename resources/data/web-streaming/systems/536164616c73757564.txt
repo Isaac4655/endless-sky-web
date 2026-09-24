@@ -1,0 +1,8 @@
+system Sadalsuud
+	belt 1859
+	asteroids "small rock" 1 4.116
+	asteroids "large rock" 3 1.5876
+	asteroids "large metal" 1 3.1458
+	fleet "Small Southern Merchants" 900
+	fleet "Large Southern Merchants" 1500
+	fleet Quarg 1000

@@ -1,0 +1,7 @@
+system M-1188
+	belt 1676
+	asteroids "large metal" 2 2.54
+	minables uranium 1 3.66
+	fleet "Iije (Uninterested)" 1300
+	fleet "Iije (Swarming)" 1400
+	fleet "Iije (Surveillance)" 1500

@@ -1,0 +1,15 @@
+system Similisti
+	belt 1349
+	asteroids "small rock" 3 3.015
+	asteroids "medium rock" 2 6.345
+	asteroids "large rock" 21 4.23
+	asteroids "small metal" 20 2.79
+	asteroids "medium metal" 25 3.105
+	asteroids "large metal" 40 4.005
+	minables iron 15 5.36391
+	minables lead 34 6.86864
+	minables silicon 22 6.31894
+	fleet "Large Kor Mereti" 1600
+	fleet "Small Kor Mereti" 600
+	fleet "Large Kor Sestor" 5400
+	fleet "Kor Mereti Miners" 1600

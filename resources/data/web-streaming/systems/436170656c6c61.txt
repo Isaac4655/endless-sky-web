@@ -1,0 +1,17 @@
+system Capella
+	belt 1722
+	asteroids "small rock" 175 2.1204
+	asteroids "medium rock" 62 1.482
+	asteroids "large rock" 8 2.3712
+	asteroids "small metal" 10 1.8696
+	asteroids "medium metal" 3 2.9412
+	asteroids "large metal" 15 1.2996
+	minables iron 40 2.63132
+	minables lead 23 2.64595
+	minables silver 4 3.04495
+	fleet "Small Northern Merchants" 500
+	fleet "Large Northern Merchants" 800
+	fleet "Paradise Merchants" 700
+	fleet "Small Republic" 800
+	fleet "Large Republic" 1400
+	fleet "Human Miners" 2000

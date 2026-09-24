@@ -1,0 +1,13 @@
+system Nnaug
+	belt 1901
+	asteroids "small rock" 1 1.1
+	asteroids "medium rock" 1 1.4
+	asteroids "large rock" 6 1.2
+	asteroids "medium metal" 2 1.8
+	asteroids "large metal" 3 1.2
+	fleet "Small Vi" 1100
+	fleet "Large Vi" 2100
+	fleet "Vi Transport" 800
+	fleet "Vi Cargo" 1000
+	fleet "Gegno Basic" 3400
+	fleet "Gegno Cargo" 4600

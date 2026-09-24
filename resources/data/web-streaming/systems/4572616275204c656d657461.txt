@@ -1,0 +1,11 @@
+system "Erabu Lemeta"
+	belt 1500
+	asteroids "small rock" 1 5.382
+	asteroids "medium rock" 16 3.042
+	asteroids "large rock" 60 5.226
+	asteroids "medium metal" 11 5.733
+	asteroids "large metal" 1 2.379
+	fleet "Bunrodea Erabu Freight" 500
+	fleet "Bunrodea Defense" 1000
+	fleet "Bunrodea Royalty" 2000
+	fleet "Bunrodea Royal Guard" 1000

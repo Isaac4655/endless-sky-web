@@ -1,0 +1,12 @@
+system Sadalmelik
+	belt 1273
+	asteroids "small rock" 1 3.38
+	asteroids "medium rock" 220 3.0082
+	asteroids "large rock" 1 2.9744
+	asteroids "medium metal" 3 3.4138
+	asteroids "large metal" 1 5.07
+	minables iron 19 3.67645
+	minables tungsten 3 4.93502
+	fleet "Small Southern Merchants" 800
+	fleet "Large Southern Merchants" 1200
+	fleet Quarg 2000

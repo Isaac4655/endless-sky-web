@@ -1,0 +1,5 @@
+system G-6183
+	belt 1187
+	minables neodymium 1 3.87
+	hazard "Small Black Hole Event Horizon" 1
+	hazard "Small Black Hole Gravity" 1

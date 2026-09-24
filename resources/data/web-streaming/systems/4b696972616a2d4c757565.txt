@@ -1,0 +1,4 @@
+system Kiiraj-Luue
+	hazard "Predecessors Base Spatial Decay" 200
+	hazard "Predecessors Spatial Rift Weak" 10000
+	hazard "Predecessors Spatial Rift Intense" 20000

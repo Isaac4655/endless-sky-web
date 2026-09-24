@@ -1,0 +1,17 @@
+system Ekuarik
+	belt 1711
+	asteroids "small rock" 2 4.5954
+	asteroids "medium rock" 3 9.1908
+	asteroids "large rock" 2 5.5269
+	asteroids "small metal" 131 5.4648
+	asteroids "medium metal" 50 7.8867
+	asteroids "large metal" 23 9.1287
+	minables iron 39 9.39516
+	minables silicon 2 6.84215
+	fleet "Small Arach" 500
+	fleet "Large Arach" 800
+	fleet "Small Kimek" 600
+	fleet "Large Kimek" 1000
+	fleet "Small Saryd" 800
+	fleet "Large Saryd" 1600
+	fleet Heliarch 200

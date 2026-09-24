@@ -1,0 +1,13 @@
+system Alnitak
+	belt 1907
+	asteroids "small rock" 1 5.4375
+	asteroids "medium rock" 24 4.6875
+	asteroids "large rock" 14 9.25
+	asteroids "small metal" 34 6.5
+	asteroids "medium metal" 42 6.75
+	asteroids "large metal" 12 4
+	fleet "Small Northern Pirates" 3000
+	fleet "Large Northern Pirates" 5000
+	fleet "Small Republic" 3000
+	fleet "Large Republic" 4000
+	fleet "Republic Logistics" 6000

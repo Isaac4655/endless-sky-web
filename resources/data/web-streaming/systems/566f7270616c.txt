@@ -1,0 +1,6 @@
+system Vorpal
+	belt 2108
+	asteroids "large metal" 1 3.234
+	minables platinum 17 3.234
+	minables gold 6 2.138
+	hazard "Neutron Star Magnetic Field" 1

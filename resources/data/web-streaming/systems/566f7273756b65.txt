@@ -1,0 +1,10 @@
+system Vorsuke
+	belt 1177
+	asteroids "small rock" 13 4.23
+	asteroids "medium rock" 1 2.87
+	asteroids "large rock" 7 3.78
+	asteroids "small metal" 2 4.88
+	asteroids "medium metal" 6 4.3
+	asteroids "large metal" 22 4.3
+	minables silver 1 5.6
+	minables lead 2 8.1

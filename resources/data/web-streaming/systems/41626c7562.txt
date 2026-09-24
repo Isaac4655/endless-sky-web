@@ -1,0 +1,20 @@
+system Ablub
+	belt 1641
+	asteroids "medium rock" 9 2.3868
+	asteroids "large rock" 3 2.4786
+	asteroids "small metal" 2 3.3354
+	asteroids "medium metal" 2 2.8458
+	asteroids "large metal" 3 2.7234
+	minables aluminum 2 4.40525
+	minables iron 2 4.60941
+	minables lead 3 4.33078
+	fleet "Small Arach" 600
+	fleet "Large Arach" 1800
+	fleet "Small Kimek" 2000
+	fleet "Large Kimek" 8000
+	fleet "Small Saryd" 1600
+	fleet "Large Saryd" 8000
+	fleet "Arach Miners" 4000
+	fleet "Kimek Miners" 12000
+	fleet "Saryd Miners" 12000
+	fleet Heliarch 200

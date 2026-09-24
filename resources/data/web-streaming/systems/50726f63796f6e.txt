@@ -1,0 +1,16 @@
+system Procyon
+	belt 1763
+	asteroids "small rock" 9 4.4226
+	asteroids "medium rock" 16 2.7594
+	asteroids "large rock" 157 4.4604
+	asteroids "small metal" 11 2.9862
+	asteroids "medium metal" 126 2.6838
+	asteroids "large metal" 5 4.347
+	minables iron 1 5.11549
+	minables silicon 84 4.13794
+	fleet "Small Northern Merchants" 700
+	fleet "Large Northern Merchants" 1200
+	fleet "Paradise Merchants" 900
+	fleet "Small Republic" 1500
+	fleet "Large Republic" 3000
+	fleet "Republic Logistics" 1500

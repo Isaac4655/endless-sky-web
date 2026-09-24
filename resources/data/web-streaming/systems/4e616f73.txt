@@ -1,0 +1,15 @@
+system Naos
+	belt 1045
+	asteroids "medium rock" 167 3.8976
+	asteroids "large rock" 1 6.3168
+	asteroids "large metal" 1 6.1824
+	minables copper 21 5.05288
+	minables silicon 12 6.77871
+	minables titanium 35 4.05452
+	fleet "Small Northern Merchants" 600
+	fleet "Large Northern Merchants" 1500
+	fleet "Small Deep Security" 2400
+	fleet "Small Deep Merchants" 1200
+	fleet "Large Deep Security" 5000
+	fleet "Large Deep Merchants" 2800
+	fleet "Human Miners" 2000

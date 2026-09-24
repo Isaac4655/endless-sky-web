@@ -1,0 +1,16 @@
+system Alnair
+	belt 1969
+	asteroids "small rock" 20 6.825
+	asteroids "medium rock" 242 4.355
+	asteroids "large rock" 19 8.32
+	asteroids "medium metal" 34 6.695
+	asteroids "large metal" 28 5.72
+	minables aluminum 11 8.95654
+	minables lead 74 6.44632
+	minables platinum 6 9.6188
+	fleet "Small Core Merchants" 2000
+	fleet "Small Core Pirates" 3000
+	fleet "Large Core Pirates" 4000
+	fleet "Small Syndicate" 4000
+	fleet "Large Syndicate" 6000
+	fleet "Human Miners" 2000

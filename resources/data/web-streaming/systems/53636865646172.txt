@@ -1,0 +1,15 @@
+system Schedar
+	belt 1903
+	asteroids "small rock" 10 1.736
+	asteroids "medium rock" 2 0.896
+	asteroids "large rock" 3 1.148
+	asteroids "small metal" 5 1.96
+	asteroids "medium metal" 1 0.966
+	asteroids "large metal" 12 1.12
+	minables lead 2 2.57011
+	fleet "Small Core Merchants" 900
+	fleet "Large Core Merchants" 1000
+	fleet "Small Syndicate" 3000
+	fleet "Large Syndicate" 4000
+	fleet "Small Core Pirates" 2000
+	fleet "Large Core Pirates" 3000

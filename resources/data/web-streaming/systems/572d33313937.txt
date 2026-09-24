@@ -1,0 +1,10 @@
+system W-3197
+	belt 1887
+	asteroids "small rock" 3 1
+	asteroids "medium rock" 5 0.91
+	asteroids "large rock" 2 1.71
+	minables titanium 6 3.4
+	minables neodymium 1 4.76
+	fleet "Iije (Uninterested)" 2000
+	fleet "Iije (Swarming)" 4000
+	fleet "Iije (Surveillance)" 2000

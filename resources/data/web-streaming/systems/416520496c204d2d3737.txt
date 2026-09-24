@@ -1,0 +1,11 @@
+system "Ae Il M-77"
+	belt 1979 3
+	belt 2108 1
+	belt 2658 2
+	asteroids "small rock" 76 5.73
+	asteroids "medium rock" 37 5.957
+	asteroids "large rock" 94 7.314
+	asteroids "small metal" 1 6.56
+	asteroids "medium metal" 1 5.052
+	asteroids "large metal" 2 4.524
+	minables unknown 1 2.4

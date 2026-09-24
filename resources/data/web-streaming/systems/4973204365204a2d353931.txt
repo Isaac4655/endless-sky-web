@@ -1,0 +1,12 @@
+system "Is Ce J-591"
+	belt 1648 8
+	belt 2277 6
+	asteroids "small rock" 2 2.72
+	asteroids "medium rock" 1 2.432
+	asteroids "large rock" 31 1.6
+	asteroids "small metal" 5 1.92
+	asteroids "medium metal" 67 2.912
+	asteroids "large metal" 3 1.664
+	minables silicon 8 3.635
+	fleet "Vyrmeid (Plankton)" 450
+	fleet Astral 60000

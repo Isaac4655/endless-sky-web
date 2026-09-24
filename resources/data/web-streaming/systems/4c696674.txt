@@ -1,0 +1,13 @@
+system Lift
+	belt 1192
+	asteroids "small rock" 33 1.755
+	asteroids "medium rock" 70 1.217
+	asteroids "large rock" 70 1.357
+	asteroids "small metal" 175 1.755
+	asteroids "medium metal" 23 2.106
+	asteroids "large metal" 8 2.246
+	minables neodymium 12 3.029
+	minables iron 11 2.79
+	fleet "Avgi Scouts" 18000
+	fleet "Small Aberrant" 3600
+	fleet "Large Aberrant" 5400

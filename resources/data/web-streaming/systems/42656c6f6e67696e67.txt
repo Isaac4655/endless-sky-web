@@ -1,0 +1,11 @@
+system Belonging
+	belt 1407
+	asteroids "medium metal" 2 3.4848
+	asteroids "large metal" 1 4.1472
+	fleet "Small Arach" 800
+	fleet "Large Arach" 1300
+	fleet "Small Kimek" 1000
+	fleet "Large Kimek" 1600
+	fleet "Small Saryd" 400
+	fleet "Large Saryd" 800
+	fleet Heliarch 700

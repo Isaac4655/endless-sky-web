@@ -1,0 +1,21 @@
+system Arche
+	belt 1808 2
+	belt 2396 8
+	asteroids "small rock" 3 5.94
+	asteroids "medium rock" 6 3.66
+	asteroids "large rock" 5 3.48
+	asteroids "small metal" 1 6
+	asteroids "medium metal" 3 4.86
+	asteroids "large metal" 1 5.46
+	minables silver 6 3.606
+	minables gold 6 8.493
+	minables platinum 6 6.303
+	fleet "Small Avgi Merchants" 12000
+	fleet "Large Avgi Merchants" 18000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 2700
+	fleet "Avgi Strike Group" 4200
+	fleet "Avgi Fleetgroup" 9000
+	fleet "Avgi Twilight Guard Logistics" 4200
+	fleet "Small Aberrant" 2400
+	fleet "Large Aberrant" 3600

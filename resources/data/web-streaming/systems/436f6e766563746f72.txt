@@ -1,0 +1,10 @@
+system Convector
+	belt 2111
+	asteroids "small rock" 7 1.805
+	asteroids "medium rock" 15 1.32367
+	asteroids "large rock" 3 1.32367
+	asteroids "medium metal" 1 1.805
+	minables iron 2 2.42901
+	minables silicon 2 1.8316
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

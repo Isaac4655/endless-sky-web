@@ -1,0 +1,20 @@
+system "14 Pole"
+	belt 1881
+	asteroids "small rock" 44 3.904
+	asteroids "medium rock" 6 4.48
+	asteroids "large rock" 8 3.84
+	asteroids "medium metal" 122 3.872
+	asteroids "large metal" 1 4.672
+	minables silicon 6 4.99492
+	minables tungsten 13 4.66751
+	minables uranium 11 5.28952
+	fleet "Small Arach" 3000
+	fleet "Large Arach" 9000
+	fleet "Small Kimek" 800
+	fleet "Large Kimek" 3000
+	fleet "Small Saryd" 1600
+	fleet "Large Saryd" 9000
+	fleet "Arach Miners" 12000
+	fleet "Kimek Miners" 4000
+	fleet "Saryd Miners" 12000
+	fleet Heliarch 1200

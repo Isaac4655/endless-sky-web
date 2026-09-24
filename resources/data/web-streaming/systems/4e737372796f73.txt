@@ -1,0 +1,14 @@
+system Nssryos
+	belt 1175
+	asteroids "small rock" 26 3.9
+	asteroids "medium rock" 39 2.6
+	asteroids "large rock" 4 3.42
+	asteroids "small metal" 4 4.5
+	asteroids "medium metal" 16 2.8
+	asteroids "large metal" 12 4
+	minables titanium 4 4.27
+	minables silver 6 5.13
+	fleet "Small Vi" 1400
+	fleet "Large Vi" 2600
+	fleet "Vi Transport" 1600
+	fleet "Vi Cargo" 4000

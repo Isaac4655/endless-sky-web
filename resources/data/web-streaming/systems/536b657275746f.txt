@@ -1,0 +1,4 @@
+system Skeruto
+	belt 1198
+	asteroids "large metal" 1 1.5554
+	fleet "Large Quarg (Kor Efret)" 2000

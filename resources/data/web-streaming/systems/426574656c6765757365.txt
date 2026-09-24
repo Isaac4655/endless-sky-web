@@ -1,0 +1,17 @@
+system Betelgeuse
+	belt 2141
+	asteroids "medium rock" 21 1.86
+	asteroids "large rock" 7 1.65
+	asteroids "small metal" 78 2.7
+	asteroids "medium metal" 19 3.18
+	asteroids "large metal" 56 4.38
+	minables lead 43 6.0536
+	minables silicon 25 4.05481
+	minables silver 4 3.65891
+	fleet "Small Northern Merchants" 2000
+	fleet "Large Northern Merchants" 800
+	fleet "Small Republic" 2500
+	fleet "Large Republic" 3500
+	fleet "Republic Logistics" 6000
+	fleet "Large Northern Pirates" 4000
+	fleet "Human Miners" 3000

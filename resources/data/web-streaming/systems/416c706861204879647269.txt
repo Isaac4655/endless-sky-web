@@ -1,0 +1,12 @@
+system "Alpha Hydri"
+	belt 1839
+	asteroids "medium rock" 1 7.467
+	asteroids "large rock" 1 7.125
+	asteroids "large metal" 1 7.752
+	fleet "Small Core Merchants" 900
+	fleet "Large Core Merchants" 3000
+	fleet "Small Core Pirates" 2000
+	fleet "Large Core Pirates" 6000
+	fleet "Small Syndicate" 4000
+	fleet "Large Syndicate" 9000
+	fleet "Korath Large Raid" 40000

@@ -1,0 +1,10 @@
+system Whirlwind
+	belt 1653 6
+	belt 2177 7
+	belt 2285 9
+	asteroids "small rock" 1 3.168
+	asteroids "large rock" 1 3.168
+	asteroids "medium metal" 2 3.456
+	asteroids "large metal" 1 4.368
+	fleet "Small Aberrant" 12000
+	fleet "Large Aberrant" 18000

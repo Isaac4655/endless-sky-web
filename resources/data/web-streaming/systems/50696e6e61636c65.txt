@@ -1,0 +1,11 @@
+system Pinnacle
+	belt 1764
+	asteroids "small rock" 2 4.455
+	asteroids "medium rock" 15 5.333
+	asteroids "large rock" 3 5.805
+	asteroids "small metal" 2 3.442
+	asteroids "medium metal" 3 5.535
+	asteroids "large metal" 1 3.645
+	fleet "Avgi Scouts" 48000
+	fleet "Small Aberrant" 2400
+	fleet "Large Aberrant" 6800

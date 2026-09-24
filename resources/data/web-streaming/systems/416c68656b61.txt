@@ -1,0 +1,18 @@
+system Alheka
+	belt 1380
+	asteroids "small rock" 3 6.24
+	asteroids "medium rock" 11 9.906
+	asteroids "large rock" 5 8.892
+	asteroids "small metal" 14 8.19
+	asteroids "medium metal" 47 11.466
+	asteroids "large metal" 11 7.566
+	minables lead 16 13.7996
+	minables tungsten 10 13.3676
+	fleet "Small Northern Merchants" 1000
+	fleet "Large Northern Merchants" 3000
+	fleet "Small Republic" 1500
+	fleet "Large Republic" 4400
+	fleet "Republic Logistics" 4600
+	fleet "Small Northern Pirates" 2000
+	fleet "Large Northern Pirates" 2000
+	fleet "Human Miners" 3000

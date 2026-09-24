@@ -1,0 +1,4 @@
+system Kasii-Cavaasa
+	asteroids "small rock" 1 1
+	asteroids "small metal" 3 1
+	hazard "Predecessors Base Spatial Decay" 400

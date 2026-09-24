@@ -1,0 +1,8 @@
+system Glide
+	belt 1057
+	asteroids "medium rock" 3 3.422
+	asteroids "large rock" 9 3.571
+	asteroids "large metal" 1 2.195
+	fleet "Avgi Scouts" 12000
+	fleet "Small Aberrant" 4100
+	fleet "Large Aberrant" 5800

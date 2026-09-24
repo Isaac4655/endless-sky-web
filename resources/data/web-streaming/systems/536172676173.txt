@@ -1,0 +1,9 @@
+system Sargas
+	belt 1642
+	asteroids "large metal" 1 2.6656
+	fleet "Small Southern Merchants" 700
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 4000
+	fleet "Small Militia" 4000
+	fleet "Large Militia" 7000

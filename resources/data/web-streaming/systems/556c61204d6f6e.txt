@@ -1,0 +1,21 @@
+system "Ula Mon"
+	belt 1574
+	asteroids "small rock" 1 3.2319
+	asteroids "medium rock" 12 2.793
+	asteroids "large rock" 14 5.3865
+	asteroids "small metal" 1 3.2319
+	asteroids "medium metal" 5 3.99
+	asteroids "large metal" 2 2.793
+	minables silicon 9 5.62634
+	minables titanium 2 4.55496
+	fleet "Small Hai" 800
+	fleet "Large Hai" 1800
+	fleet "Small Hai Merchant" 400
+	fleet "Large Hai Merchant" 900
+	fleet "Small Hai Merchant (Sympathizers)" 1600
+	fleet "Large Hai Merchant (Sympathizers)" 3600
+	fleet "Small Hai Merchant (Human)" 3000
+	fleet "Large Hai Merchant (Human)" 4500
+	fleet "Small Human Merchants (Hai)" 6000
+	fleet "Large Human Merchants (Hai)" 9000
+	fleet "Hai Surveillance" 3000

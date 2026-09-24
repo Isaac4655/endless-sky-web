@@ -1,0 +1,10 @@
+system "Mego Inito"
+	belt 1500
+	asteroids "small rock" 2 5.481
+	asteroids "medium rock" 1 5.8058
+	asteroids "large rock" 3 4.1006
+	asteroids "small metal" 5 2.7202
+	asteroids "medium metal" 35 2.8014
+	asteroids "large metal" 91 6.0088
+	fleet "Bunrodea Megasa Freight" 1200
+	fleet "Bunrodea Defense" 1500

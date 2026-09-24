@@ -1,0 +1,9 @@
+system Chornifath
+	belt 1434
+	asteroids "small rock" 2 6.9776
+	asteroids "medium rock" 11 7.448
+	asteroids "large rock" 1 7.9968
+	asteroids "small metal" 5 6.0368
+	asteroids "medium metal" 2 9.4864
+	asteroids "large metal" 4 5.0176
+	fleet "Large Quarg (Kor Efret)" 1000

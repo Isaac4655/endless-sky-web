@@ -1,0 +1,8 @@
+system Vilacira
+	belt 1157
+	asteroids "small rock" 2 2.73
+	asteroids "medium rock" 8 3.6
+	asteroids "large rock" 2 4.2
+	asteroids "medium metal" 2 3.3
+	asteroids "large metal" 8 3
+	minables lead 5 3.34

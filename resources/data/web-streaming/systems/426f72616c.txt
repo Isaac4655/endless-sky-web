@@ -1,0 +1,15 @@
+system Boral
+	belt 1867
+	asteroids "small rock" 7 2.4752
+	asteroids "medium rock" 126 4.42
+	asteroids "large rock" 8 4.9946
+	asteroids "small metal" 97 2.3868
+	asteroids "medium metal" 4 5.2156
+	asteroids "large metal" 11 4.5968
+	minables aluminum 6 4.01149
+	minables titanium 30 6.89282
+	fleet "Small Southern Merchants" 3000
+	fleet "Small Southern Pirates" 1500
+	fleet "Small Militia" 10000
+	fleet "Human Miners" 2000
+	fleet "Derelict Southern" 10000

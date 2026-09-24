@@ -1,0 +1,10 @@
+system "Kifrana Terberah"
+	belt 1500
+	asteroids "small rock" 5 3.6432
+	asteroids "medium rock" 13 4.6
+	asteroids "large rock" 5 2.5024
+	asteroids "small metal" 10 5.0048
+	asteroids "medium metal" 1 5.0784
+	asteroids "large metal" 27 2.3552
+	fleet "Bunrodea Megasa Freight" 1200
+	fleet "Bunrodea Defense" 1500

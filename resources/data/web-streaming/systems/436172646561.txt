@@ -1,0 +1,12 @@
+system Cardea
+	belt 1775
+	asteroids "small rock" 2 1.071
+	asteroids "medium rock" 34 1.2138
+	asteroids "large rock" 26 0.7497
+	asteroids "small metal" 9 1.6422
+	asteroids "medium metal" 18 1.071
+	asteroids "large metal" 4 1.7493
+	minables silicon 14 1.35096
+	minables titanium 14 2.06963
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

@@ -1,0 +1,11 @@
+system Hui'uc
+	belt 1246
+	asteroids "small rock" 17 1.859
+	asteroids "medium rock" 92 1.1726
+	asteroids "large rock" 16 1.9162
+	asteroids "small metal" 4 1.9734
+	asteroids "medium metal" 70 0.9438
+	asteroids "large metal" 6 0.9867
+	minables aluminum 10 2.29532
+	minables lead 11 1.44159
+	minables neodymium 23 1.22571

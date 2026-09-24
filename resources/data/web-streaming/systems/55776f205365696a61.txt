@@ -1,0 +1,9 @@
+system "Uwo Seija"
+	belt 1222
+	asteroids "small rock" 85 2.1
+	asteroids "medium rock" 8 2.3
+	asteroids "large rock" 14 1.65
+	asteroids "small metal" 50 1.69
+	asteroids "medium metal" 9 2.64
+	asteroids "large metal" 39 1.62
+	minables tungsten 18 2.9

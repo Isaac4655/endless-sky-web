@@ -1,0 +1,4 @@
+system "Ae Il H-24"
+	belt 1252
+	asteroids "small metal" 7 1.573
+	asteroids "large metal" 1 1.892

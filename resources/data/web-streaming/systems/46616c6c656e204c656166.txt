@@ -1,0 +1,10 @@
+system "Fallen Leaf"
+	belt 1327
+	asteroids "large metal" 1 7.748
+	fleet "Small Arach" 1200
+	fleet "Large Arach" 5000
+	fleet "Small Kimek" 1500
+	fleet "Large Kimek" 7000
+	fleet "Small Saryd" 600
+	fleet "Large Saryd" 1600
+	fleet Heliarch 1800

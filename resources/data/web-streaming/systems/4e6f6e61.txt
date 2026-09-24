@@ -1,0 +1,10 @@
+system Nona
+	belt 1500
+	asteroids "large metal" 1 3
+	asteroids "medium metal" 3 7
+	asteroids "small metal" 5 8
+	minables lead 4 10
+	fleet Ka'het 3700
+	fleet "Ka'het Aggressive" 11400
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

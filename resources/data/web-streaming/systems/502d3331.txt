@@ -1,0 +1,14 @@
+system P-31
+	belt 1352
+	asteroids "medium metal" 6 3.29
+	fleet "Small Avgi Merchants" 36000
+	fleet "Large Avgi Merchants" 42000
+	fleet "Small Dissonance Merchants" 24000
+	fleet "Large Dissonance Merchants" 36000
+	fleet "Avgi Scouts" 12000
+	fleet "Avgi Patrol" 9000
+	fleet "Avgi Strike Group" 24000
+	fleet "Avgi Twilight Guard Logistics" 45000
+	fleet "Small Aberrant" 12000
+	fleet "Large Aberrant" 18000
+	hazard "Predecessors Base Spatial Decay" 2700

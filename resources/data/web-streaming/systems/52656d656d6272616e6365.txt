@@ -1,0 +1,20 @@
+system Remembrance
+	belt 1536
+	asteroids "small rock" 12 1.716
+	asteroids "medium rock" 27 1.2
+	asteroids "large rock" 1 0.876
+	asteroids "small metal" 6 0.684
+	asteroids "medium metal" 14 0.744
+	asteroids "large metal" 1 0.624
+	minables aluminum 13 2.0911
+	minables iron 9 1.93958
+	fleet "Small Arach" 1400
+	fleet "Large Arach" 4000
+	fleet "Small Kimek" 1400
+	fleet "Large Kimek" 5000
+	fleet "Small Saryd" 700
+	fleet "Large Saryd" 3000
+	fleet "Arach Miners" 9000
+	fleet "Kimek Miners" 9000
+	fleet "Saryd Miners" 4000
+	fleet Heliarch 1200

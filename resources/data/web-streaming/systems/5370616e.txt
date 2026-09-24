@@ -1,0 +1,12 @@
+system Span
+	belt 1754 10
+	belt 2266 9
+	asteroids "small rock" 2 2.8
+	asteroids "medium rock" 11 1.764
+	asteroids "large rock" 1 2.072
+	asteroids "small metal" 5 2.436
+	asteroids "medium metal" 2 2.744
+	asteroids "large metal" 1 2.184
+	fleet "Avgi Scouts" 36000
+	fleet "Small Aberrant" 2100
+	fleet "Large Aberrant" 4500

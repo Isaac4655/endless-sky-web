@@ -1,0 +1,20 @@
+system Rigel
+	belt 1882
+	asteroids "small rock" 12 11.076
+	asteroids "medium rock" 42 3.9
+	asteroids "large rock" 37 10.53
+	asteroids "small metal" 88 5.382
+	asteroids "medium metal" 28 6.63
+	asteroids "large metal" 32 11.7
+	minables copper 6 10.5446
+	minables neodymium 17 11.7377
+	minables tungsten 5 13.3277
+	fleet "Small Northern Merchants" 2000
+	fleet "Large Northern Merchants" 4000
+	fleet "Small Republic" 3500
+	fleet "Large Republic" 7000
+	fleet "Republic Logistics" 7000
+	fleet "Small Northern Pirates" 3000
+	fleet "Large Northern Pirates" 5000
+	fleet "Human Miners" 2000
+	fleet "Derelict Northern" 30000

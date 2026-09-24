@@ -1,0 +1,15 @@
+system Alnilam
+	belt 1099
+	asteroids "small rock" 1 2.166
+	asteroids "medium rock" 30 1.6245
+	asteroids "large rock" 1 3.192
+	asteroids "small metal" 42 1.5675
+	asteroids "medium metal" 15 3.3345
+	asteroids "large metal" 11 3.363
+	minables aluminum 13 2.6002
+	minables iron 4 2.28631
+	minables silicon 15 2.97138
+	fleet "Small Northern Pirates" 500
+	fleet "Large Northern Pirates" 700
+	fleet "Old Northern Pirates" 5000
+	fleet "Large Republic" 10000

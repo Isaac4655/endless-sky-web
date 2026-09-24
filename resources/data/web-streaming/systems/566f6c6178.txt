@@ -1,0 +1,10 @@
+system Volax
+	belt 1424
+	asteroids "large metal" 1 1.7688
+	fleet "Small Northern Merchants" 1500
+	fleet "Large Northern Merchants" 3000
+	fleet "Small Northern Pirates" 1000
+	fleet "Large Northern Pirates" 3000
+	fleet "Small Republic" 5000
+	fleet "Large Republic" 9000
+	fleet "Derelict Northern" 30000

@@ -1,0 +1,11 @@
+system Ghhil
+	belt 1760
+	asteroids "small rock" 4 2.17
+	asteroids "medium rock" 7 2.5
+	asteroids "large rock" 5 3.12
+	asteroids "small metal" 7 3.34
+	asteroids "medium metal" 30 3.64
+	asteroids "large metal" 4 1.95
+	minables silicon 2 6.3
+	minables copper 7 3.31
+	fleet "Quarg (Gegno)" 2000

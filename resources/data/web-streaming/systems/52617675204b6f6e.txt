@@ -1,0 +1,11 @@
+system "Ravu Kon"
+	belt 1500
+	asteroids "small rock" 41 1.314
+	asteroids "medium rock" 36 2.484
+	asteroids "large rock" 14 1.098
+	asteroids "small metal" 19 1.332
+	asteroids "medium metal" 46 2.502
+	asteroids "large metal" 7 1.152
+	fleet "Bunrodea Megasa Freight" 800
+	fleet "Bunrodea Erabu Freight" 800
+	fleet "Bunrodea Defense" 1200

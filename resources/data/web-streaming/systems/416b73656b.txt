@@ -1,0 +1,9 @@
+system Aksek
+	belt 1795
+	asteroids "small rock" 25 0.67
+	asteroids "medium rock" 54 0.84
+	asteroids "large rock" 15 0.61
+	asteroids "small metal" 5 0.64
+	asteroids "medium metal" 3 1.04
+	asteroids "large metal" 4 0.99
+	minables aluminum 25 0.95

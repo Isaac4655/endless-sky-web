@@ -1,0 +1,15 @@
+system Vindemiatrix
+	belt 1957
+	asteroids "small rock" 150 4.446
+	asteroids "medium rock" 90 4.0716
+	asteroids "large rock" 2 6.6456
+	asteroids "small metal" 8 3.1356
+	asteroids "medium metal" 1 5.4288
+	asteroids "large metal" 2 6.2712
+	minables aluminum 13 5.95585
+	minables iron 2 7.3644
+	minables lead 3 7.31755
+	fleet "Small Southern Merchants" 600
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 4000

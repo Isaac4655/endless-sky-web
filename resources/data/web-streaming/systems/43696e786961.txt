@@ -1,0 +1,9 @@
+system Cinxia
+	belt 1788
+	fleet "Large Remnant" 2400
+	fleet "Small Remnant" 1800
+	fleet "Remnant Transport" 1800
+	fleet "Remnant Home Guard" 1600
+	fleet "Korath Ember Waste Raid" 30000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 25000

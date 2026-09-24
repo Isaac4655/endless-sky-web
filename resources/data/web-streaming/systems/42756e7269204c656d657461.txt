@@ -1,0 +1,12 @@
+system "Bunri Lemeta"
+	belt 1500
+	asteroids "small rock" 2 0.8788
+	asteroids "medium rock" 25 1.69
+	asteroids "large rock" 8 1.8928
+	asteroids "small metal" 22 1.5717
+	asteroids "medium metal" 26 0.9295
+	asteroids "large metal" 14 0.9633
+	fleet "Bunrodea Erabu Freight" 3000
+	fleet "Bunrodea Defense" 2000
+	fleet "Bunrodea Royalty" 3000
+	fleet "Bunrodea Royal Guard" 2000

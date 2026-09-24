@@ -1,0 +1,10 @@
+system Kasikfar
+	belt 1539
+	asteroids "small rock" 4 3.8019
+	asteroids "medium rock" 3 4.4689
+	asteroids "large rock" 1 4.002
+	asteroids "small metal" 3 6.7367
+	asteroids "medium metal" 47 4.1354
+	asteroids "large metal" 3 5.0025
+	minables aluminum 1 4.40452
+	minables yottrite 3 4.7768

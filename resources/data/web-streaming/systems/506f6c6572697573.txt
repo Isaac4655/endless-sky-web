@@ -1,0 +1,14 @@
+system Polerius
+	belt 1500
+	asteroids "small rock" 2 4
+	asteroids "medium rock" 8 5
+	asteroids "large rock" 4 3
+	asteroids "small metal" 13 4
+	asteroids "medium metal" 22 2
+	asteroids "large metal" 6 4
+	minables gold 1 3
+	minables lead 2 3
+	fleet Ka'het 2900
+	fleet "Ka'het Aggressive" 9400
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

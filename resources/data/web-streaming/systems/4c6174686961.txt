@@ -1,0 +1,4 @@
+system Lathia
+	belt 1815
+	fleet "Magic Asteroid" 250
+	hazard "Beyond Patir Shield Eraser" 1

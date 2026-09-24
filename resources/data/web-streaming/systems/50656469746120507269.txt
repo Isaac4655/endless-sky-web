@@ -1,0 +1,10 @@
+system "Pedita Pri"
+	belt 1909
+	asteroids "small rock" 1 2.58
+	asteroids "medium rock" 7 2.64
+	asteroids "large rock" 27 2.94
+	asteroids "small metal" 5 1.8
+	asteroids "medium metal" 4 2.55
+	asteroids "large metal" 6 2.67
+	minables iron 15 3.025
+	minables yottrite 2 7

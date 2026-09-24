@@ -1,0 +1,14 @@
+system Lesath
+	belt 1865
+	asteroids "medium rock" 9 4.8384
+	asteroids "large rock" 21 7.2
+	asteroids "medium metal" 8 4.3776
+	asteroids "large metal" 1 5.4144
+	minables silicon 3 10.2616
+	minables titanium 2 10.8766
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 2000
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 4000
+	fleet "Small Militia" 5000
+	fleet "Derelict Southern" 30000

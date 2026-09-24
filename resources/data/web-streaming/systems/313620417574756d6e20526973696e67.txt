@@ -1,0 +1,18 @@
+system "16 Autumn Rising"
+	belt 1424
+	asteroids "medium rock" 6 3.4138
+	asteroids "large rock" 8 2.2984
+	asteroids "small metal" 1 4.6644
+	asteroids "medium metal" 15 4.4616
+	asteroids "large metal" 3 2.3322
+	minables silicon 2 4.30865
+	fleet "Small Arach" 1400
+	fleet "Large Arach" 7000
+	fleet "Small Kimek" 500
+	fleet "Large Kimek" 1200
+	fleet "Small Saryd" 1100
+	fleet "Large Saryd" 4000
+	fleet "Arach Miners" 12000
+	fleet "Kimek Miners" 6000
+	fleet "Saryd Miners" 9000
+	fleet Heliarch 500

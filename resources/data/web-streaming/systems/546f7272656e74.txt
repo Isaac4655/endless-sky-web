@@ -1,0 +1,14 @@
+system Torrent
+	belt 1483 5
+	belt 2387 4
+	asteroids "small rock" 51 1.377
+	asteroids "medium rock" 3 0.935
+	asteroids "large rock" 63 1.377
+	asteroids "small metal" 3 1.037
+	asteroids "medium metal" 25 1.241
+	asteroids "large metal" 24 1.615
+	minables copper 2 2.608
+	minables iron 14 2.67
+	fleet "Avgi Scouts" 24000
+	fleet "Small Aberrant" 7300
+	fleet "Large Aberrant" 9500

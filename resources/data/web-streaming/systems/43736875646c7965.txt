@@ -1,0 +1,11 @@
+system Cshudlye
+	belt 1675
+	asteroids "medium rock" 124 5
+	asteroids "large rock" 2 4.4
+	asteroids "small metal" 149 4.2
+	asteroids "medium metal" 50 7
+	asteroids "large metal" 33 6.13
+	minables titanium 10 9.7
+	minables lead 20 6.64
+	minables tungsten 16 9.25
+	fleet "Small Vi" 6500

@@ -1,0 +1,11 @@
+system Stercutus
+	belt 1492
+	asteroids "large rock" 1 0.77203
+	fleet "Korath Ember Waste Raid" 20000
+	fleet "Korath Rescue" 60000
+	fleet "Small Remnant" 20000
+	fleet "Large Remnant" 20000
+	fleet "Remnant Transport" 40000
+	fleet Embershades 8000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

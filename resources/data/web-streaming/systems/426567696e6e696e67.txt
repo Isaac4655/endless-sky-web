@@ -1,0 +1,19 @@
+system Beginning
+	belt 1833
+	asteroids "small rock" 9 6.9888
+	asteroids "medium rock" 12 5.2962
+	asteroids "large rock" 47 4.8048
+	asteroids "small metal" 2 5.0778
+	asteroids "medium metal" 7 7.098
+	asteroids "large metal" 19 5.0232
+	minables lead 1 4.49564
+	fleet "Small Arach" 1000
+	fleet "Large Arach" 3000
+	fleet "Small Kimek" 1300
+	fleet "Large Kimek" 6000
+	fleet "Small Saryd" 500
+	fleet "Large Saryd" 1200
+	fleet "Arach Miners" 12000
+	fleet "Kimek Miners" 12000
+	fleet "Saryd Miners" 10000
+	fleet Heliarch 1500

@@ -1,0 +1,12 @@
+system "Ae Il A-3"
+	belt 1031 5
+	belt 1674 6
+	asteroids "small rock" 3 4.185
+	asteroids "medium rock" 8 6.82
+	asteroids "large rock" 12 5.58
+	asteroids "medium metal" 1 6.2
+	asteroids "large metal" 1 7.208
+	minables iron 11 4.735
+	minables silver 37 3.069
+	fleet "Vyrmeid (Plankton)" 950
+	fleet "Vyrmeid (Cephalopod)" 140

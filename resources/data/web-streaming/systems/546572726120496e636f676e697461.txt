@@ -1,0 +1,8 @@
+system "Terra Incognita"
+	belt 1500
+	asteroids "small rock" 8 1.8432
+	asteroids "medium rock" 1 1.8144
+	asteroids "large rock" 31 3.2544
+	asteroids "small metal" 1 4.1472
+	asteroids "medium metal" 24 3.9744
+	asteroids "large metal" 11 4.2624

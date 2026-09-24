@@ -1,0 +1,14 @@
+system Uhebe
+	belt 1771
+	asteroids "small rock" 3 1.2
+	asteroids "medium rock" 12 1.91
+	asteroids "large rock" 3 1.489
+	asteroids "small metal" 2 1.36
+	asteroids "medium metal" 16 2
+	asteroids "large metal" 5 1.9
+	minables aluminum 9 8.8
+	minables neodymium 6 3.28
+	minables tungsten 3 2.11
+	fleet "Small Vi" 4000
+	fleet "Vi Transport" 6000
+	fleet "Vi Warfleet" 4200

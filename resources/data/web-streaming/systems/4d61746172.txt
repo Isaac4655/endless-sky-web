@@ -1,0 +1,9 @@
+system Matar
+	belt 1308
+	asteroids "large metal" 1 3.0888
+	fleet "Small Core Merchants" 2000
+	fleet "Large Core Merchants" 2500
+	fleet "Small Core Pirates" 2000
+	fleet "Large Core Pirates" 4000
+	fleet "Small Syndicate" 3000
+	fleet "Large Syndicate" 6000

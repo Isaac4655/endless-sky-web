@@ -1,0 +1,4 @@
+system Aescolanus
+	belt 1323
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

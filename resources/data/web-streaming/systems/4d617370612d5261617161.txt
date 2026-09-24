@@ -1,0 +1,11 @@
+system Maspa-Raaqa
+	asteroids "small rock" 12 8
+	asteroids "large metal" 13 3
+	asteroids "small metal" 54 3
+	minables aluminum 12 5
+	minables iron 8 4
+	fleet "Successor Miners" 5000
+	fleet "Successor Miners (Well-Defended)" 3000
+	fleet "People's Houses" 2000
+	fleet "People's Houses Raiders" 4000
+	fleet "Small New Houses" 10000

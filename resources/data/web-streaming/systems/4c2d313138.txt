@@ -1,0 +1,10 @@
+system L-118
+	belt 1724
+	asteroids "small rock" 12 3.3
+	asteroids "medium rock" 6 2.4
+	asteroids "large rock" 4 2.3
+	asteroids "small metal" 2 3.2
+	asteroids "medium metal" 2 2.2
+	asteroids "large metal" 1 2.8
+	minables aluminum 2 4.17
+	minables iron 3 5.3

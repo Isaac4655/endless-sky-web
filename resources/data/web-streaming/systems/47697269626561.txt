@@ -1,0 +1,16 @@
+system Giribea
+	belt 1500
+	asteroids "large metal" 29 4
+	asteroids "large rock" 2 1
+	asteroids "medium metal" 50 3
+	asteroids "medium rock" 10 2
+	asteroids "small metal" 17 3
+	asteroids "small rock" 1 2
+	minables lead 40 1
+	minables tungsten 11 1
+	minables titanium 9 2
+	minables uranium 24 1
+	fleet "Ka'het Core" 2850
+	fleet "Builders Drone" 2100
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

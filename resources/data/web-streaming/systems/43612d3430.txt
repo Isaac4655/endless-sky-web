@@ -1,0 +1,18 @@
+system Ca-40
+	belt 1137
+	asteroids "small rock" 2 4.644
+	asteroids "large rock" 8 3.51
+	asteroids "small metal" 3 3.564
+	asteroids "large metal" 1 3.672
+	minables titanium 2 5.388
+	minables copper 8 4.361
+	fleet "Small Avgi Merchants" 36000
+	fleet "Large Avgi Merchants" 42000
+	fleet "Small Dissonance Pirates" 36000
+	fleet "Avgi Scouts" 12000
+	fleet "Avgi Patrol" 9000
+	fleet "Avgi Strike Group" 24000
+	fleet "Avgi Twilight Guard Logistics" 48000
+	fleet "Small Aberrant" 12000
+	fleet "Large Aberrant" 18000
+	hazard "Predecessors Base Spatial Decay" 2700

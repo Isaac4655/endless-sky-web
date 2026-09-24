@@ -1,0 +1,13 @@
+system Cusp
+	belt 1825
+	asteroids "small rock" 8 1.9
+	asteroids "medium rock" 2 3.002
+	asteroids "large rock" 1 2.242
+	asteroids "medium metal" 2 2.85
+	asteroids "large metal" 3 2.622
+	minables aluminum 3 3.956
+	minables silver 3 3.245
+	minables uranium 3 3.734
+	fleet "Avgi Scouts" 48000
+	fleet "Small Aberrant" 3600
+	fleet "Large Aberrant" 7200

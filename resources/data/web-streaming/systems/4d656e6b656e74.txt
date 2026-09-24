@@ -1,0 +1,15 @@
+system Menkent
+	belt 1728
+	asteroids "small rock" 33 2.9328
+	asteroids "medium rock" 44 1.4144
+	asteroids "large rock" 32 1.04
+	asteroids "small metal" 5 1.2688
+	asteroids "medium metal" 3 2.4128
+	asteroids "large metal" 10 2.2256
+	minables aluminum 4 1.98441
+	minables copper 4 2.84453
+	minables tungsten 31 2.94008
+	fleet "Small Southern Merchants" 500
+	fleet "Large Southern Merchants" 1500
+	fleet "Small Republic" 3000
+	fleet "Human Miners" 2000

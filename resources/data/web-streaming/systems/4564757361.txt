@@ -1,0 +1,14 @@
+system Edusa
+	belt 1167
+	asteroids "small rock" 2 0.74013
+	asteroids "medium rock" 1 1.55307
+	asteroids "large rock" 4 1.274
+	asteroids "large metal" 1 0.7644
+	minables silicon 2 1.59549
+	fleet "Large Remnant" 3200
+	fleet "Small Remnant" 2400
+	fleet "Remnant Transport" 2400
+	fleet "Korath Ember Waste Raid" 40000
+	fleet "Korath Rescue" 90000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

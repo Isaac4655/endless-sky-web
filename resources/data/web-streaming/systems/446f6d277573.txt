@@ -1,0 +1,11 @@
+system Dom'us
+	belt 1259
+	asteroids "small rock" 1 6.9552
+	asteroids "medium rock" 21 7.7004
+	asteroids "large rock" 18 4.0986
+	minables copper 4 4.5
+	minables iron 2 5.3
+	minables silicon 5 3.2
+	fleet "Hicemus Standard Surveilance" 2400
+	fleet "Incipias Standard Trade" 1500
+	fleet "Incipias Standard Mining" 900

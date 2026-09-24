@@ -1,0 +1,20 @@
+system Flugbu
+	belt 1843
+	asteroids "small rock" 92 4.0848
+	asteroids "medium rock" 4 2.9808
+	asteroids "large rock" 7 4.416
+	asteroids "medium metal" 2 7.5072
+	asteroids "large metal" 4 2.9256
+	minables silicon 3 4.90651
+	minables tungsten 16 5.61572
+	minables uranium 21 6.19184
+	fleet "Small Arach" 700
+	fleet "Large Arach" 1200
+	fleet "Small Kimek" 1000
+	fleet "Large Kimek" 2400
+	fleet "Small Saryd" 1000
+	fleet "Large Saryd" 3000
+	fleet "Arach Miners" 3000
+	fleet "Kimek Miners" 4500
+	fleet "Saryd Miners" 6000
+	fleet Heliarch 500

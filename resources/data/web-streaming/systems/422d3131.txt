@@ -1,0 +1,18 @@
+system B-11
+	belt 1448
+	asteroids "small rock" 3 3.139
+	asteroids "small metal" 3 2.713
+	fleet "Small Avgi Merchants" 7200
+	fleet "Large Avgi Merchants" 12000
+	fleet "Small Dissonance Merchants" 4200
+	fleet "Large Dissonance Merchants" 8400
+	fleet "Small Dissonance Pirates" 36000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 4200
+	fleet "Avgi Strike Group" 18000
+	fleet "Avgi Twilight Guard Logistics" 9000
+	fleet "Small Aberrant" 4200
+	fleet "Large Aberrant" 9000
+	hazard "Predecessors Base Spatial Decay" 900
+	hazard "Predecessors Spatial Rift Weak" 15000
+	hazard "Predecessors Spatial Rift Intense" 42000

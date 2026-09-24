@@ -1,0 +1,12 @@
+system Sayaiban
+	belt 1803
+	asteroids "small rock" 13 2.106
+	asteroids "medium rock" 61 1.836
+	asteroids "large rock" 39 2.754
+	asteroids "small metal" 1 2.754
+	asteroids "medium metal" 175 1.377
+	asteroids "large metal" 1 1.62
+	minables iron 1 2.82578
+	minables titanium 6 2.18207
+	minables tungsten 27 2.9604
+	fleet Nanobots 100

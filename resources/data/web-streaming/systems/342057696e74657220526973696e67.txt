@@ -1,0 +1,20 @@
+system "4 Winter Rising"
+	belt 1345
+	asteroids "medium rock" 6 2.2022
+	asteroids "large rock" 1 0.9464
+	asteroids "small metal" 71 2.2932
+	asteroids "medium metal" 30 2.548
+	asteroids "large metal" 5 1.7472
+	minables aluminum 1 3.8266
+	minables copper 3 3.79162
+	minables lead 9 3.97823
+	fleet "Small Arach" 800
+	fleet "Large Arach" 1400
+	fleet "Small Kimek" 300
+	fleet "Large Kimek" 400
+	fleet "Small Saryd" 1000
+	fleet "Large Saryd" 2000
+	fleet "Arach Miners" 4000
+	fleet "Kimek Miners" 3000
+	fleet "Saryd Miners" 5000
+	fleet Heliarch 400

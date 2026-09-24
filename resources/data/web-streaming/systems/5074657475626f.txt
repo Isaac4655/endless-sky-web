@@ -1,0 +1,16 @@
+system Ptetubo
+	belt 1478
+	asteroids "small rock" 1 1.13
+	asteroids "medium rock" 5 1.3
+	asteroids "large rock" 10 1.2
+	asteroids "small metal" 4 1.4
+	asteroids "medium metal" 11 1.26
+	asteroids "large metal" 3 1.1
+	minables copper 44 3.12
+	minables uranium 2 0.9
+	minables titanium 3 2.3
+	fleet "Small Vi" 4200
+	fleet "Large Vi" 2100
+	fleet "Vi Transport" 1300
+	fleet "Vi Cargo" 1100
+	fleet "Gegno Miners" 3600

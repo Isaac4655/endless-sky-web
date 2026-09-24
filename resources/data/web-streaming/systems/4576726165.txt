@@ -1,0 +1,14 @@
+system Evrae
+	belt 1985
+	asteroids "small rock" 1 5.7
+	asteroids "large rock" 3 5.67
+	asteroids "small metal" 1 7.4
+	asteroids "medium metal" 12 5.2
+	asteroids "large metal" 2 5.4
+	minables neodymium 11 6.8
+	minables silicon 25 5.11
+	minables uranium 7 4.7
+	fleet "Small Scin" 800
+	fleet "Large Scin" 1600
+	fleet "Scin Cargo" 2700
+	fleet "Scin Warfleet" 3000

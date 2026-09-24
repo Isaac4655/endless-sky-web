@@ -1,0 +1,13 @@
+system Peak
+	belt 1833
+	asteroids "small rock" 12 1.84
+	asteroids "medium rock" 72 1.361
+	asteroids "large rock" 27 1.714
+	asteroids "small metal" 10 1.462
+	asteroids "medium metal" 5 1.94
+	asteroids "large metal" 11 2.495
+	minables iron 2 3.017
+	minables aluminum 22 3.106
+	minables silicon 11 3.601
+	fleet "Small Aberrant" 2200
+	fleet "Large Aberrant" 4600

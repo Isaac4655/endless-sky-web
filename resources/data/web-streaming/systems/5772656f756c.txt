@@ -1,0 +1,12 @@
+system Wreoul
+	belt 1409
+	asteroids "small rock" 3 3.36
+	asteroids "medium rock" 1 2.46
+	asteroids "large rock" 4 2.24
+	asteroids "large metal" 2 3.71
+	fleet "Small Vi" 3600
+	fleet "Large Vi" 4400
+	fleet "Vi Transport" 4400
+	fleet "Vi Cargo" 5600
+	fleet "Small Vi II" 5600
+	fleet "Vi Warfleet" 4000

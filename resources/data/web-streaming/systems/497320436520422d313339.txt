@@ -1,0 +1,9 @@
+system "Is Ce B-139"
+	asteroids "small rock" 4 6.076
+	asteroids "medium rock" 10 6.014
+	asteroids "large rock" 8 3.596
+	asteroids "small metal" 8 6.2
+	asteroids "medium metal" 5 3.41
+	asteroids "large metal" 2 4.402
+	fleet "Vyrmeid (Plankton)" 300
+	fleet Astral 55000

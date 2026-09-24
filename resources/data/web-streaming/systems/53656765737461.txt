@@ -1,0 +1,17 @@
+system Segesta
+	belt 1120
+	asteroids "small rock" 6 1.9116
+	asteroids "medium rock" 6 1.4094
+	asteroids "large rock" 2 1.6686
+	asteroids "small metal" 4 0.9882
+	asteroids "medium metal" 1 1.1664
+	asteroids "large metal" 4 1.0044
+	minables aluminum 4 2.76923
+	minables gold 2 2.69091
+	fleet "Small Remnant" 40000
+	fleet "Large Remnant" 40000
+	fleet "Korath Ember Waste Raid" 40000
+	fleet "Korath Rescue" 90000
+	fleet Embershades 15000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

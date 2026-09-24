@@ -1,0 +1,18 @@
+system Ar-40
+	belt 1023
+	asteroids "medium rock" 1 1.608
+	asteroids "large rock" 2 1.464
+	asteroids "small metal" 1 1.344
+	asteroids "medium metal" 7 1.416
+	asteroids "large metal" 3 2.28
+	minables silver 3 2.759
+	fleet "Small Avgi Merchants" 24000
+	fleet "Large Avgi Merchants" 42000
+	fleet "Avgi Miners" 14400
+	fleet "Avgi Scouts" 12000
+	fleet "Avgi Patrol" 18000
+	fleet "Avgi Strike Group" 36000
+	fleet "Avgi Twilight Guard Logistics" 12000
+	fleet "Small Aberrant" 9000
+	fleet "Large Aberrant" 12000
+	hazard "Predecessors Base Spatial Decay" 2400

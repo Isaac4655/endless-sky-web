@@ -1,0 +1,11 @@
+system Egeria
+	belt 1500
+	asteroids "small rock" 1 8
+	asteroids "medium rock" 20 5
+	asteroids "large rock" 9 7
+	asteroids "medium metal" 86 3
+	asteroids "large metal" 5 4
+	minables iron 20 4
+	minables lead 28 5
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

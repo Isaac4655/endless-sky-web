@@ -1,0 +1,13 @@
+system Dokdobaru
+	belt 1935
+	asteroids "small rock" 4 5.6295
+	asteroids "medium rock" 1 5.751
+	asteroids "large rock" 2 2.349
+	asteroids "small metal" 1 4.05
+	asteroids "medium metal" 2 4.05
+	asteroids "large metal" 3 2.0655
+	minables lead 3 5.25735
+	minables silicon 3 5.59881
+	fleet "Quarg (Kor Efret)" 600
+	fleet "Large Quarg (Kor Efret)" 800
+	fleet "Kor Efret Home" 750

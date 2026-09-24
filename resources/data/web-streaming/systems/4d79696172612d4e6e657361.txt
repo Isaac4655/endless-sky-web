@@ -1,0 +1,10 @@
+system Myiara-Nnesa
+	belt 1179
+	asteroids "large metal" 10 3.062
+	minables iron 8 1.5
+	fleet "Small New Houses" 1500
+	fleet "Large New Houses" 2000
+	fleet "New Houses Surveillance" 2500
+	fleet "Medium Successor Freight" 1000
+	fleet "Successor Miners" 6000
+	fleet "Seineq Home" 1000

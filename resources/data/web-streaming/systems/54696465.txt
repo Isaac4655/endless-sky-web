@@ -1,0 +1,11 @@
+system Tide
+	belt 1927
+	asteroids "small rock" 28 3.211
+	asteroids "medium rock" 13 1.825
+	asteroids "large rock" 14 1.927
+	asteroids "small metal" 39 1.893
+	asteroids "medium metal" 30 2.535
+	asteroids "large metal" 13 2.332
+	fleet "Avgi Scouts" 42000
+	fleet "Small Aberrant" 2300
+	fleet "Large Aberrant" 4500

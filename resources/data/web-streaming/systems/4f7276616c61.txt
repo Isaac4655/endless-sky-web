@@ -1,0 +1,13 @@
+system Orvala
+	belt 1431
+	asteroids "small rock" 27 1.44
+	asteroids "medium rock" 2 2.6304
+	asteroids "large rock" 146 1.7088
+	asteroids "small metal" 139 1.44
+	asteroids "large metal" 27 0.9792
+	minables copper 4 2.00322
+	minables lead 13 1.96636
+	fleet "Small Southern Merchants" 3000
+	fleet "Small Southern Pirates" 1000
+	fleet "Large Southern Pirates" 3000
+	fleet "Derelict Southern" 10000

@@ -1,0 +1,13 @@
+system Ensemble
+	belt 1401
+	asteroids "large metal" 1 6.84
+	fleet "Avgi Orbital Defense" 1200
+	fleet "Avgi Patrol" 2400
+	fleet "Avgi Core Defense" 6000
+	fleet "Avgi Fleetgroup" 12000
+	fleet "Avgi Twilight Guard Logistics" 3600
+	fleet "Small Avgi Merchants" 2400
+	fleet "Large Avgi Merchants" 4200
+	fleet "Small Dissonance Merchants" 4200
+	fleet "Large Dissonance Merchants" 12000
+	hazard "Predecessors Base Spatial Decay" 1800

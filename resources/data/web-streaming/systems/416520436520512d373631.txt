@@ -1,0 +1,12 @@
+system "Ae Ce Q-761"
+	belt 1002
+	asteroids "small rock" 37 1.247
+	asteroids "medium rock" 74 2.31
+	asteroids "large rock" 4 1.686
+	asteroids "medium metal" 4 1.987
+	asteroids "large metal" 2 1.363
+	minables aluminum 8 3.506
+	minables copper 8 3.793
+	minables tungsten 17 2.26
+	minables unknown 4 1.9
+	fleet "Vyrmeid (Boomerang)" 900

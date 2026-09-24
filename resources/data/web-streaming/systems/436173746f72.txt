@@ -1,0 +1,17 @@
+system Castor
+	belt 1675
+	asteroids "small rock" 3 3.5154
+	asteroids "medium rock" 9 4.8762
+	asteroids "large rock" 10 7.7679
+	asteroids "small metal" 5 7.6545
+	asteroids "medium metal" 27 6.5205
+	asteroids "large metal" 1 6.4638
+	minables aluminum 1 7.59239
+	minables lead 1 12.7895
+	minables silicon 6 11.0644
+	fleet "Small Northern Merchants" 600
+	fleet "Large Northern Merchants" 800
+	fleet "Paradise Merchants" 800
+	fleet "Small Republic" 1000
+	fleet "Large Republic" 500
+	fleet "Republic Logistics" 2000

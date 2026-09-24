@@ -1,0 +1,19 @@
+system "4 Summer Rising"
+	belt 1860
+	asteroids "small rock" 7 3.1694
+	asteroids "medium rock" 4 8.8504
+	asteroids "large rock" 1 8.6112
+	asteroids "small metal" 1 7.475
+	asteroids "medium metal" 19 8.8504
+	asteroids "large metal" 1 5.6212
+	minables silicon 3 4.6527
+	fleet "Small Arach" 1200
+	fleet "Large Arach" 2400
+	fleet "Small Kimek" 400
+	fleet "Large Kimek" 900
+	fleet "Small Saryd" 1200
+	fleet "Large Saryd" 3000
+	fleet "Arach Miners" 8000
+	fleet "Kimek Miners" 5000
+	fleet "Saryd Miners" 10000
+	fleet Heliarch 900

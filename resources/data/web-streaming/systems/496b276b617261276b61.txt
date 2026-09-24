@@ -1,0 +1,13 @@
+system Ik'kara'ka
+	belt 1497
+	asteroids "small rock" 1 7.3138
+	asteroids "medium rock" 1 5.3534
+	asteroids "large rock" 1 6.5598
+	asteroids "small metal" 4 4.7502
+	asteroids "medium metal" 64 7.3138
+	asteroids "large metal" 130 3.8454
+	minables lead 21 6.73688
+	minables titanium 25 9.19994
+	fleet "Wanderer Freight" 600
+	fleet "Wanderer Drones" 700
+	fleet "Wanderer Defense" 600

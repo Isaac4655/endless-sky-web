@@ -1,0 +1,20 @@
+system Zosma
+	belt 1436
+	asteroids "small rock" 17 3.2175
+	asteroids "medium rock" 1 3.77
+	asteroids "large rock" 39 3.445
+	asteroids "small metal" 5 4.0625
+	asteroids "medium metal" 14 3.8025
+	asteroids "large metal" 9 3.2175
+	minables iron 4 5.44731
+	fleet "Small Northern Merchants" 800
+	fleet "Large Northern Merchants" 1200
+	fleet "Paradise Merchants" 2500
+	fleet "Small Deep Security" 1000
+	fleet "Small Deep Merchants" 4000
+	fleet "Large Deep Security" 2000
+	fleet "Large Deep Merchants" 8000
+	fleet "Small Republic" 4000
+	fleet "Republic Logistics" 4000
+	fleet "Small Northern Pirates" 5000
+	fleet "Large Northern Pirates" 9000

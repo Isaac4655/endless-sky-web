@@ -1,0 +1,21 @@
+system "Sol Arach"
+	belt 1147
+	asteroids "small rock" 5 4.5864
+	asteroids "medium rock" 9 4.6872
+	asteroids "large rock" 4 6.8544
+	asteroids "small metal" 16 6.1488
+	asteroids "medium metal" 12 6.5016
+	asteroids "large metal" 81 2.8728
+	minables iron 6 4.61643
+	minables silicon 25 4.59101
+	minables titanium 3 5.6753
+	fleet "Small Arach" 300
+	fleet "Large Arach" 500
+	fleet "Small Kimek" 1000
+	fleet "Large Kimek" 1800
+	fleet "Small Saryd" 1000
+	fleet "Large Saryd" 2000
+	fleet "Arach Miners" 2500
+	fleet "Kimek Miners" 5500
+	fleet "Saryd Miners" 5500
+	fleet Heliarch 500

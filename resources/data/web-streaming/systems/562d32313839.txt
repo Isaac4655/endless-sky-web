@@ -1,0 +1,7 @@
+system V-2189
+	belt 1985
+	asteroids "small rock" 1 5.74
+	asteroids "small metal" 6 7.4
+	asteroids "medium metal" 1 5.21
+	asteroids "large metal" 2 5.44
+	minables platinum 2 6.86

@@ -1,0 +1,18 @@
+system Phact
+	belt 1704
+	asteroids "small rock" 1 1.0816
+	asteroids "medium rock" 71 2.3153
+	asteroids "large rock" 2 1.8421
+	asteroids "small metal" 8 1.1999
+	asteroids "medium metal" 56 0.8619
+	asteroids "large metal" 17 1.6393
+	minables silicon 6 3.177
+	minables titanium 15 2.18441
+	fleet "Small Northern Merchants" 2000
+	fleet "Large Northern Merchants" 2000
+	fleet "Small Republic" 6000
+	fleet "Large Republic" 9000
+	fleet "Republic Logistics" 6000
+	fleet "Small Northern Pirates" 3000
+	fleet "Large Northern Pirates" 5000
+	fleet "Human Miners" 5000

@@ -1,0 +1,12 @@
+system Chimitarp
+	belt 1932
+	asteroids "small rock" 3 2.717
+	asteroids "medium rock" 103 4.0546
+	asteroids "large rock" 7 4.7234
+	asteroids "small metal" 5 5.9356
+	asteroids "medium metal" 64 5.7684
+	asteroids "large metal" 17 3.1768
+	minables silicon 45 7.62429
+	fleet "Small Kor Mereti" 1000
+	fleet "Large Kor Mereti" 3600
+	fleet "Kor Mereti Miners" 2000

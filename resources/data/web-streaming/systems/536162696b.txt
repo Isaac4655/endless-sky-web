@@ -1,0 +1,14 @@
+system Sabik
+	belt 1609
+	asteroids "small rock" 2 5.684
+	asteroids "medium rock" 1 4.669
+	asteroids "large rock" 5 5.5622
+	asteroids "small metal" 7 5.0344
+	asteroids "medium metal" 29 5.481
+	asteroids "large metal" 2 2.233
+	minables aluminum 4 9.1736
+	minables iron 2 7.04854
+	fleet "Small Southern Merchants" 400
+	fleet "Large Southern Merchants" 900
+	fleet "Small Militia" 1200
+	fleet "Large Militia" 2000

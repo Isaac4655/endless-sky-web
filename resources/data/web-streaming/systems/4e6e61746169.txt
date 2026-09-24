@@ -1,0 +1,9 @@
+system Nnatai
+	belt 1478
+	asteroids "small rock" 4 2.6
+	asteroids "large rock" 7 3
+	asteroids "small metal" 9 3
+	asteroids "medium metal" 9 4.1
+	asteroids "large metal" 2 4.2
+	minables aluminum 1 5.75
+	minables lead 7 6.19

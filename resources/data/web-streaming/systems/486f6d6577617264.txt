@@ -1,0 +1,21 @@
+system Homeward
+	belt 1499
+	asteroids "small rock" 20 6.1248
+	asteroids "medium rock" 46 6.3162
+	asteroids "large rock" 33 6.2524
+	asteroids "small metal" 3 6.1248
+	asteroids "medium metal" 7 3.19
+	asteroids "large metal" 28 4.4022
+	minables platinum 3 7.98007
+	minables silicon 6 4.93079
+	minables uranium 4 6.18515
+	fleet "Small Arach" 700
+	fleet "Large Arach" 1400
+	fleet "Small Kimek" 700
+	fleet "Large Kimek" 1000
+	fleet "Small Saryd" 600
+	fleet "Large Saryd" 1200
+	fleet "Arach Miners" 6000
+	fleet "Kimek Miners" 5000
+	fleet "Saryd Miners" 4000
+	fleet Heliarch 200

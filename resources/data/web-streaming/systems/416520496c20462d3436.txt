@@ -1,0 +1,8 @@
+system "Ae Il F-46"
+	belt 1244
+	asteroids "small rock" 47 4.108
+	asteroids "medium rock" 18 3.365
+	asteroids "large rock" 7 2.404
+	asteroids "small metal" 12 3.452
+	asteroids "large metal" 10 2.972
+	minables lead 17 2.248

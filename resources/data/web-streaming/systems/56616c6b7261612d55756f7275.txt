@@ -1,0 +1,6 @@
+system Valkraa-Uuoru
+	fleet "Large Old Houses" 1600
+	fleet "Old Houses Surveillance" 2000
+	fleet "Medium Successor Freight" 1400
+	fleet "Small Successor Transport" 2000
+	fleet "Chydiyi Home" 800

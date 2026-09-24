@@ -1,0 +1,6 @@
+system Algenib
+	belt 1330
+	asteroids "large metal" 1 6.7392
+	fleet "Small Core Pirates" 300
+	fleet "Large Core Pirates" 500
+	fleet "Large Syndicate" 800

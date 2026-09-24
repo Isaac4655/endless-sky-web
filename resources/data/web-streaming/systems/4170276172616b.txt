@@ -1,0 +1,10 @@
+system Ap'arak
+	belt 1385
+	asteroids "medium rock" 6 7.383
+	asteroids "large rock" 2 4.485
+	asteroids "medium metal" 1 7.797
+	asteroids "large metal" 3 5.382
+	minables silicon 2 9.55668
+	fleet "Wanderer Freight" 500
+	fleet "Wanderer Drones" 2000
+	fleet "Wanderer Defense" 3000

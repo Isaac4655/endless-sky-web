@@ -1,0 +1,11 @@
+system Yranjiu
+	belt 1478
+	asteroids "small rock" 4 2.6
+	asteroids "large rock" 7 3
+	asteroids "large rock" 7 3
+	asteroids "small metal" 9 3
+	asteroids "medium metal" 9 4.13
+	asteroids "large metal" 2 4.2
+	hazard "Small Black Hole Accretion Disk" 1
+	hazard "Small Black Hole Event Horizon" 1
+	hazard "Small Black Hole Gravity" 1

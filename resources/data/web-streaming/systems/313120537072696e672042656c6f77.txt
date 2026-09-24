@@ -1,0 +1,20 @@
+system "11 Spring Below"
+	belt 1932
+	asteroids "small rock" 36 3.808
+	asteroids "medium rock" 86 4.004
+	asteroids "large rock" 25 2.8
+	asteroids "small metal" 21 1.96
+	asteroids "medium metal" 41 3.696
+	asteroids "large metal" 13 2.128
+	minables silicon 5 3.88994
+	minables tungsten 32 4.67204
+	fleet "Small Arach" 1800
+	fleet "Large Arach" 3000
+	fleet "Small Kimek" 400
+	fleet "Large Kimek" 900
+	fleet "Small Saryd" 1200
+	fleet "Large Saryd" 3000
+	fleet "Arach Miners" 6000
+	fleet "Kimek Miners" 2500
+	fleet "Saryd Miners" 5000
+	fleet Heliarch 500

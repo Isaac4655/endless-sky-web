@@ -1,0 +1,14 @@
+system Relifer
+	belt 1500
+	asteroids "large metal" 2 3
+	asteroids "large rock" 1 2
+	asteroids "medium metal" 1 3
+	asteroids "medium rock" 11 1
+	asteroids "small metal" 20 3
+	asteroids "small rock" 1 2
+	minables lead 6 4
+	minables silver 13 4
+	fleet Ka'het 2750
+	fleet "Ka'het Aggressive" 8900
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

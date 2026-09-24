@@ -1,0 +1,12 @@
+system Hesselpost
+	belt 1327
+	asteroids "small rock" 34 1.4872
+	asteroids "medium rock" 6 1.859
+	asteroids "large rock" 2 1.5548
+	asteroids "small metal" 83 2.366
+	asteroids "medium metal" 93 1.0985
+	asteroids "large metal" 89 1.7407
+	minables iron 12 2.20485
+	minables silicon 4 2.41516
+	fleet "Large Quarg (Kor Efret)" 1000
+	fleet "Kor Efret Miners" 7200

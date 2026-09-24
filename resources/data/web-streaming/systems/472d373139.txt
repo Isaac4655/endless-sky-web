@@ -1,0 +1,6 @@
+system G-719
+	belt 1870
+	asteroids "large metal" 1 2.22
+	fleet "Iije (Uninterested)" 2100
+	fleet "Iije (Swarming)" 3900
+	fleet "Iije (Surveillance)" 2400

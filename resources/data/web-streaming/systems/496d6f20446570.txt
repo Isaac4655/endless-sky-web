@@ -1,0 +1,26 @@
+system "Imo Dep"
+	raid "Unfettered Hai Space Raid" 20
+	belt 1416
+	asteroids "small rock" 11 2.66
+	asteroids "medium rock" 3 4.8944
+	asteroids "large rock" 27 5.0008
+	asteroids "small metal" 98 4.4156
+	asteroids "medium metal" 124 5.9052
+	asteroids "large metal" 4 2.9792
+	minables silicon 18 7.411
+	minables silver 12 6.77561
+	minables titanium 9 8.61292
+	minables tungsten 15 3.154
+	minables uranium 7 2.786
+	fleet "Small Hai" 2000
+	fleet "Large Hai" 4000
+	fleet "Small Hai Merchant" 1000
+	fleet "Large Hai Merchant" 2000
+	fleet "Small Hai Merchant (Sympathizers)" 4000
+	fleet "Large Hai Merchant (Sympathizers)" 8000
+	fleet "Small Hai Merchant (Human)" 5000
+	fleet "Large Hai Merchant (Human)" 7000
+	fleet "Small Human Merchants (Hai)" 10000
+	fleet "Large Human Merchants (Hai)" 14000
+	fleet "Hai Surveillance" 3000
+	fleet "Hai Miners" 8000

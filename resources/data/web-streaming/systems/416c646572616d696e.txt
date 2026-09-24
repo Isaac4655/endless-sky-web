@@ -1,0 +1,14 @@
+system Alderamin
+	belt 1908
+	asteroids "small rock" 1 9.5472
+	asteroids "medium rock" 3 8.5644
+	asteroids "large rock" 1 10.3896
+	asteroids "small metal" 87 9.9684
+	asteroids "medium metal" 31 9.9684
+	asteroids "large metal" 58 7.4412
+	fleet "Small Core Merchants" 2000
+	fleet "Large Core Merchants" 3200
+	fleet "Small Syndicate" 800
+	fleet "Large Syndicate" 800
+	fleet "Small Core Pirates" 1000
+	fleet "Large Core Pirates" 1200

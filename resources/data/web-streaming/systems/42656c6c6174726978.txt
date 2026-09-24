@@ -1,0 +1,14 @@
+system Bellatrix
+	belt 1564
+	asteroids "small rock" 6 4.8438
+	asteroids "medium rock" 4 8.97
+	asteroids "large rock" 4 5.7408
+	asteroids "small metal" 6 3.289
+	asteroids "medium metal" 31 8.372
+	asteroids "large metal" 22 7.8338
+	minables silicon 16 8.64459
+	fleet "Small Core Merchants" 800
+	fleet "Large Core Merchants" 1500
+	fleet "Small Syndicate" 1000
+	fleet "Large Syndicate" 2000
+	fleet "Small Core Pirates" 3000

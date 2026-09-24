@@ -1,0 +1,11 @@
+system Kaliptari
+	belt 1089
+	asteroids "small rock" 8 4.2282
+	asteroids "medium rock" 11 6.9498
+	asteroids "large rock" 25 5.4918
+	asteroids "large metal" 1 3.2562
+	minables silicon 11 10.7447
+	minables tungsten 5 10.9185
+	fleet "Large Quarg (Kor Efret)" 3000
+	fleet "Small Kor Mereti" 10000
+	fleet "Large Kor Mereti" 4800

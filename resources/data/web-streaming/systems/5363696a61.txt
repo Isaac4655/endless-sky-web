@@ -1,0 +1,18 @@
+system Scija
+	belt 1431
+	asteroids "small rock" 38 2.6
+	asteroids "medium rock" 7 2.28
+	asteroids "large rock" 1 2.4
+	asteroids "small metal" 6 3.4
+	asteroids "medium metal" 2 2.4
+	asteroids "large metal" 10 2.7
+	minables iron 19 1.2
+	minables aluminum 6 1.5
+	fleet "Small Vi" 500
+	fleet "Large Vi" 1500
+	fleet "Vi Transport" 600
+	fleet "Vi Cargo" 1200
+	fleet "Vi Warfleet" 3000
+	fleet "Gegno Basic" 3200
+	fleet "Gegno Cargo" 4000
+	fleet "Gegno Miners" 2500

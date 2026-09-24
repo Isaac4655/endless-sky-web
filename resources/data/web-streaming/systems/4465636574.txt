@@ -1,0 +1,5 @@
+system Decet
+	belt 8211
+	minables tungsten 48 6.199
+	hazard "Magnetar Magnetic Field" 1
+	hazard "Magnetar Induction" 1

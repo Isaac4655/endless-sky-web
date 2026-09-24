@@ -1,0 +1,7 @@
+system Sedes
+	belt 1651
+	asteroids "medium rock" 4 3.595
+	asteroids "large rock" 5 3.72
+	asteroids "small metal" 1 3.511
+	asteroids "medium metal" 2 2.424
+	asteroids "large metal" 1 3.929

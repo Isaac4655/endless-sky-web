@@ -1,0 +1,17 @@
+system Na-23
+	belt 1511
+	asteroids "small metal" 10 3.168
+	asteroids "medium metal" 1 4.205
+	asteroids "large metal" 3 4.262
+	fleet "Small Avgi Merchants" 4200
+	fleet "Large Avgi Merchants" 8400
+	fleet "Small Dissonance Merchants" 6000
+	fleet "Large Dissonance Merchants" 9000
+	fleet "Small Dissonance Pirates" 36000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 2700
+	fleet "Avgi Strike Group" 9000
+	fleet "Avgi Twilight Guard Logistics" 7200
+	fleet "Small Aberrant" 3000
+	fleet "Large Aberrant" 6000
+	hazard "Predecessors Base Spatial Decay" 1800

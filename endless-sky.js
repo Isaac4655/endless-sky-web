@@ -89,7 +89,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpcy7rmuha.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmp75vbe71r.js
 if (!Module["expectedDataFileDownloads"]) Module["expectedDataFileDownloads"] = 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -228,23 +228,23 @@ Module["expectedDataFileDownloads"]++;
   });
 })();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpcy7rmuha.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmplrml2z5_.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmp75vbe71r.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpzipwj9xj.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if ((typeof ENVIRONMENT_IS_WASM_WORKER != "undefined" && ENVIRONMENT_IS_WASM_WORKER) || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD) || (typeof ENVIRONMENT_IS_AUDIO_WORKLET != "undefined" && ENVIRONMENT_IS_AUDIO_WORKLET)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmplrml2z5_.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpdrggxbmn.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpzipwj9xj.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpn07d_bv2.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpdrggxbmn.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpn07d_bv2.js
 var programArgs = [];
 
 var thisProgram = "./this.program";
@@ -13528,8 +13528,8 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  391939: () => (growMemViews(), HEAPU8).length,
-  391965: $0 => {
+  390811: () => (growMemViews(), HEAPU8).length,
+  390837: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13537,7 +13537,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  392180: () => {
+  391052: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13545,7 +13545,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  392327: () => {
+  391199: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13553,7 +13553,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  392561: $0 => {
+  391433: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13577,11 +13577,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  393113: () => {
+  391985: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  393181: ($0, $1, $2, $3) => {
+  392053: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13623,7 +13623,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  394874: ($0, $1, $2, $3) => {
+  393746: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13655,7 +13655,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  396049: ($0, $1) => {
+  394921: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13674,7 +13674,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  396654: ($0, $1) => {
+  395526: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13688,7 +13688,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  397143: $0 => {
+  396015: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13722,10 +13722,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  398149: $0 => {
+  397021: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  398189: ($0, $1, $2) => {
+  397061: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13796,7 +13796,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  399655: ($0, $1, $2, $3, $4) => {
+  398527: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13833,18 +13833,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  400643: $0 => {
+  399515: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  400726: () => {
+  399598: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  400795: () => window.innerWidth,
-  400825: () => window.innerHeight
+  399667: () => window.innerWidth,
+  399697: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
@@ -13867,6 +13867,12 @@ function WebResourceCategoryList(category) {
   } catch (error) {
     return 0;
   }
+}
+
+function WebReleaseResourceManifest() {
+  try {
+    self.__endlessSkyWebManifest = null;
+  } catch (error) {}
 }
 
 function WebGetResourceBaseUrl() {
@@ -14110,6 +14116,7 @@ function assignWasmImports() {
     /** @export */ InitializeWebLazyResources,
     /** @export */ WebGetResourceBaseUrl,
     /** @export */ WebReadResource,
+    /** @export */ WebReleaseResourceManifest,
     /** @export */ WebResourceCategoryList,
     /** @export */ __assert_fail: ___assert_fail,
     /** @export */ __call_sighandler: ___call_sighandler,

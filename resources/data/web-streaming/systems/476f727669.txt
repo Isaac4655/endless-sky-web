@@ -1,0 +1,14 @@
+system Gorvi
+	belt 1345
+	asteroids "small rock" 60 1.1781
+	asteroids "medium rock" 3 2.1692
+	asteroids "large rock" 17 2.7302
+	asteroids "medium metal" 8 1.2155
+	asteroids "large metal" 1 1.5895
+	minables iron 7 2.21226
+	minables lead 9 2.73021
+	fleet "Small Northern Pirates" 1000
+	fleet "Large Northern Pirates" 1000
+	fleet "Large Republic" 4000
+	fleet "Small Northern Merchants" 8000
+	fleet "Derelict Pirate" 10000

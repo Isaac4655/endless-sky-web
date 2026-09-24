@@ -1,0 +1,18 @@
+system Be-9
+	belt 1490
+	asteroids "medium rock" 4 5.116
+	asteroids "large rock" 3 4.953
+	minables platinum 18 11.355
+	minables gold 9 9.566
+	fleet "Small Avgi Merchants" 7200
+	fleet "Large Avgi Merchants" 12000
+	fleet "Avgi Miners" 6000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 4200
+	fleet "Avgi Strike Group" 18000
+	fleet "Avgi Twilight Guard Logistics" 9000
+	fleet "Small Aberrant" 4200
+	fleet "Large Aberrant" 9000
+	hazard "Predecessors Base Spatial Decay" 600
+	hazard "Predecessors Spatial Rift Weak" 12000
+	hazard "Predecessors Spatial Rift Intense" 24000

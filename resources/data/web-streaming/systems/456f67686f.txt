@@ -1,0 +1,9 @@
+system Eogho
+	belt 1960
+	asteroids "medium rock" 5 7.12
+	asteroids "large rock" 24 4.1
+	asteroids "small metal" 17 6.26
+	asteroids "medium metal" 9 6.98
+	asteroids "large metal" 46 6.84
+	fleet "Gegno Basic" 2200
+	fleet "Gegno Cargo" 4000

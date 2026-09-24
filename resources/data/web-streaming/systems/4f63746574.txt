@@ -1,0 +1,11 @@
+system Octet
+	belt 1559
+	asteroids "small metal" 3 1.325
+	asteroids "medium metal" 8 1.728
+	asteroids "large metal" 6 2.542
+	minables neodymium 4 1.818
+	minables lead 4 1.206
+	fleet "Small Aberrant" 600
+	fleet "Large Aberrant" 1500
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

@@ -1,0 +1,18 @@
+system Sospi
+	belt 1715
+	asteroids "small rock" 1 2.8336
+	asteroids "large rock" 1 1.9481
+	asteroids "small metal" 6 3.1625
+	asteroids "medium metal" 7 1.5433
+	asteroids "large metal" 6 2.783
+	minables neodymium 1 4.20171
+	minables titanium 3 3.46551
+	minables uranium 5 3.96983
+	fleet "Small Northern Merchants" 1500
+	fleet "Large Northern Merchants" 3000
+	fleet "Small Northern Pirates" 1000
+	fleet "Large Northern Pirates" 2000
+	fleet "Small Republic" 5000
+	fleet "Large Republic" 9000
+	fleet "Human Miners" 5000
+	fleet "Derelict Northern" 10000

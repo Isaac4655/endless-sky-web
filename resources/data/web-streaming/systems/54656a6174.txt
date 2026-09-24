@@ -1,0 +1,16 @@
+system Tejat
+	belt 1447
+	asteroids "small rock" 5 4.5675
+	asteroids "medium rock" 5 3.1755
+	asteroids "large rock" 5 4.959
+	asteroids "small metal" 11 3.741
+	asteroids "medium metal" 49 4.263
+	asteroids "large metal" 22 4.5675
+	minables aluminum 2 6.59341
+	minables iron 9 6.73101
+	minables tungsten 3 7.11041
+	fleet "Small Northern Merchants" 700
+	fleet "Large Northern Merchants" 1500
+	fleet "Paradise Merchants" 1200
+	fleet "Small Republic" 2000
+	fleet "Large Republic" 2000

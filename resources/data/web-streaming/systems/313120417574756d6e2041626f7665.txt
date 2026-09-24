@@ -1,0 +1,21 @@
+system "11 Autumn Above"
+	belt 1099
+	asteroids "small rock" 1 4.1454
+	asteroids "medium rock" 28 3.2928
+	asteroids "large rock" 51 2.058
+	asteroids "small metal" 5 2.8812
+	asteroids "medium metal" 108 1.8816
+	asteroids "large metal" 8 2.793
+	minables gold 17 3.14953
+	minables titanium 46 3.06136
+	minables tungsten 8 3.33616
+	fleet "Small Arach" 800
+	fleet "Large Arach" 1800
+	fleet "Small Kimek" 300
+	fleet "Large Kimek" 500
+	fleet "Small Saryd" 900
+	fleet "Large Saryd" 2000
+	fleet "Arach Miners" 3000
+	fleet "Kimek Miners" 2000
+	fleet "Saryd Miners" 4000
+	fleet Heliarch 400

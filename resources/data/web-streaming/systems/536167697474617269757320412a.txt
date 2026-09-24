@@ -1,0 +1,5 @@
+system "Sagittarius A*"
+	belt 1500
+	hazard "Black Hole Accretion Disk" 1
+	hazard "Black Hole Event Horizon" 1
+	hazard "Black Hole Gravity" 1

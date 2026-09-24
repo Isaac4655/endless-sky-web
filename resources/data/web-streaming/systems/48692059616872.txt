@@ -1,0 +1,15 @@
+system "Hi Yahr"
+	belt 1655
+	asteroids "small rock" 18 5.9136
+	asteroids "medium rock" 65 5.4656
+	asteroids "large rock" 26 3.8976
+	asteroids "small metal" 34 5.6896
+	asteroids "medium metal" 78 4.4352
+	asteroids "large metal" 5 5.6448
+	minables aluminum 3 9.20554
+	minables silicon 19 8.16134
+	fleet "Unfettered Logistics" 450
+	fleet "Small Unfettered" 500
+	fleet "Large Unfettered" 1100
+	fleet "Small Hai Merchant (Sympathizers)" 2400
+	fleet "Large Hai Merchant (Sympathizers)" 4800

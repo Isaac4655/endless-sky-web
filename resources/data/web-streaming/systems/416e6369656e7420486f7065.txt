@@ -1,0 +1,18 @@
+system "Ancient Hope"
+	belt 1439
+	asteroids "small rock" 14 8.1374
+	asteroids "medium rock" 11 5.2693
+	asteroids "large rock" 6 4.9358
+	asteroids "large metal" 3 8.5376
+	minables aluminum 6 4.3536
+	minables uranium 1 6.83108
+	fleet "Small Arach" 1000
+	fleet "Large Arach" 2000
+	fleet "Small Kimek" 1100
+	fleet "Large Kimek" 2400
+	fleet "Small Saryd" 500
+	fleet "Large Saryd" 1400
+	fleet "Arach Miners" 6000
+	fleet "Kimek Miners" 8000
+	fleet "Saryd Miners" 4000
+	fleet Heliarch 1500

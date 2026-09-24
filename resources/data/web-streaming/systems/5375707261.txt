@@ -1,0 +1,10 @@
+system Supra
+	belt 1481
+	asteroids "small rock" 23 2.088
+	asteroids "medium rock" 72 2.064
+	asteroids "large rock" 62 1.752
+	asteroids "small metal" 4 1.608
+	asteroids "medium metal" 174 2.352
+	asteroids "large metal" 8 1.296
+	minables lead 32 3.752
+	minables yottrite 1 3

@@ -1,0 +1,3 @@
+system Uuoru-Sossa
+	hazard "Predecessors Base Spatial Decay" 100
+	hazard "Predecessors Spatial Rift Intense" 8000

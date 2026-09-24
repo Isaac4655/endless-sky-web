@@ -1,0 +1,14 @@
+system Mebsuta
+	belt 2340
+	asteroids "small rock" 1 4.1412
+	asteroids "large rock" 2 3.7961
+	asteroids "small metal" 2 2.8101
+	asteroids "medium metal" 17 2.7115
+	asteroids "large metal" 9 4.6342
+	minables iron 2 5.38543
+	minables titanium 1 4.59937
+	fleet "Small Northern Merchants" 3000
+	fleet "Large Northern Merchants" 5000
+	fleet "Small Northern Pirates" 4000
+	fleet "Large Northern Pirates" 8000
+	fleet "Small Republic" 12000

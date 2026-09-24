@@ -1,0 +1,21 @@
+system Bloptab
+	belt 1061
+	asteroids "small rock" 1 4.41
+	asteroids "medium rock" 12 3.6
+	asteroids "large rock" 8 2.79
+	asteroids "small metal" 55 4.23
+	asteroids "medium metal" 21 3.18
+	asteroids "large metal" 4 3.87
+	minables silicon 14 4.35211
+	minables titanium 10 6.77673
+	minables tungsten 8 4.20103
+	fleet "Small Arach" 500
+	fleet "Large Arach" 1200
+	fleet "Small Kimek" 1600
+	fleet "Large Kimek" 5000
+	fleet "Small Saryd" 1600
+	fleet "Large Saryd" 7000
+	fleet "Arach Miners" 3500
+	fleet "Kimek Miners" 8000
+	fleet "Saryd Miners" 10000
+	fleet Heliarch 1500

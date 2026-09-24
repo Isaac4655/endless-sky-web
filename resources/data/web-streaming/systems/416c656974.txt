@@ -1,0 +1,7 @@
+system Aleit
+	belt 1864
+	fleet "Quarg (Gegno)" 1100
+	fleet "Large Quarg (Gegno)" 1600
+	fleet "Quarg Utility (Gegno)" 7000
+	fleet "Gegno Basic" 1000
+	fleet "Gegno Cargo" 6000

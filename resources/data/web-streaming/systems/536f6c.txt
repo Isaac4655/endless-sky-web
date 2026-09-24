@@ -1,0 +1,15 @@
+system Sol
+	belt 1529
+	asteroids "small rock" 30 2.691
+	asteroids "large rock" 50 5.0508
+	asteroids "medium metal" 4 2.8566
+	asteroids "large metal" 1 2.2356
+	minables iron 8 4.64499
+	fleet "Small Northern Merchants" 300
+	fleet "Large Northern Merchants" 500
+	fleet "Paradise Merchants" 800
+	fleet "Small Republic" 600
+	fleet "Large Republic" 900
+	fleet "Republic Logistics" 2000
+	fleet "Small Core Merchants" 1000
+	fleet "Large Core Merchants" 2000

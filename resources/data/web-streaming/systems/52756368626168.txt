@@ -1,0 +1,15 @@
+system Ruchbah
+	belt 1598
+	asteroids "small rock" 6 4.8412
+	asteroids "medium rock" 17 2.1476
+	asteroids "large rock" 57 4.7684
+	asteroids "small metal" 1 3.6036
+	asteroids "medium metal" 13 2.0384
+	asteroids "large metal" 27 4.914
+	minables tungsten 3 6.27433
+	fleet "Small Core Merchants" 500
+	fleet "Large Core Merchants" 600
+	fleet "Small Syndicate" 1000
+	fleet "Large Syndicate" 2000
+	fleet "Small Core Pirates" 2000
+	fleet "Large Core Pirates" 3000

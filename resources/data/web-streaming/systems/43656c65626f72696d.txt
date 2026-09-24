@@ -1,0 +1,12 @@
+system Celeborim
+	belt 1296
+	asteroids "small rock" 4 3.9
+	asteroids "medium rock" 5 4.4616
+	asteroids "large rock" 6 3.7128
+	asteroids "small metal" 20 4.368
+	asteroids "medium metal" 1 4.5864
+	asteroids "large metal" 21 2.5584
+	minables iron 5 6.03833
+	minables silicon 2 6.62195
+	fleet "Small Kor Sestor" 1200
+	fleet "Large Kor Sestor" 6400

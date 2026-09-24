@@ -1,0 +1,13 @@
+system Diespiter
+	belt 1500
+	asteroids "small rock" 65 3
+	asteroids "medium rock" 14 1
+	asteroids "large rock" 3 1
+	asteroids "small metal" 74 2
+	asteroids "medium metal" 26 4
+	asteroids "large metal" 76 3
+	minables iron 22 3
+	minables silicon 46 3
+	minables tungsten 17 3
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

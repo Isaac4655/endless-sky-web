@@ -1,0 +1,9 @@
+system Sheratan
+	belt 1183
+	asteroids "large rock" 1 1.358
+	asteroids "large metal" 2 1.218
+	fleet "Small Core Merchants" 1500
+	fleet "Large Core Merchants" 1800
+	fleet "Small Core Pirates" 3000
+	fleet "Large Core Pirates" 5000
+	fleet "Korath Large Raid" 60000

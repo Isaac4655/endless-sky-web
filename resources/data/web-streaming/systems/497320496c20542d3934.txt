@@ -1,0 +1,11 @@
+system "Is Il T-94"
+	belt 1556 6
+	belt 1696 5
+	asteroids "small rock" 1 4.306
+	asteroids "large rock" 1 2.761
+	asteroids "small metal" 7 4.025
+	asteroids "medium metal" 137 2.714
+	asteroids "large metal" 17 2.902
+	minables iron 12 5.402
+	minables titanium 10 4.64
+	minables aluminum 16 4.987

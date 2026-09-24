@@ -1,0 +1,10 @@
+system Axiom
+	belt 1744 4
+	belt 1934 3
+	asteroids "small rock" 1 5.375
+	asteroids "large rock" 1 4.312
+	asteroids "small metal" 3 3.438
+	asteroids "medium metal" 1 5.688
+	asteroids "large metal" 4 6.062
+	fleet "Small Aberrant" 4200
+	fleet "Large Aberrant" 6000

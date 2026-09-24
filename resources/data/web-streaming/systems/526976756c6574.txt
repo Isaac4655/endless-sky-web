@@ -1,0 +1,11 @@
+system Rivulet
+	belt 1600 5
+	belt 2227 10
+	belt 2930 10
+	asteroids "small metal" 6 5.023
+	asteroids "large metal" 9 6.042
+	minables aluminum 14 6.651
+	fleet "Avgi Scouts" 12000
+	fleet "Avgi Patrol" 15000
+	fleet "Small Aberrant" 3600
+	fleet "Large Aberrant" 4900

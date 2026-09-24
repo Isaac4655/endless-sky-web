@@ -1,0 +1,22 @@
+system "Fah Soom"
+	belt 1185
+	asteroids "medium rock" 5 3.2648
+	asteroids "large rock" 1 2.9568
+	asteroids "small metal" 14 2.2176
+	asteroids "medium metal" 16 2.2792
+	asteroids "large metal" 13 1.6016
+	minables aluminum 4 4.22938
+	minables lead 1 2.43818
+	minables neodymium 1 3.87433
+	fleet "Small Hai" 1200
+	fleet "Large Hai" 3200
+	fleet "Small Hai Merchant" 600
+	fleet "Large Hai Merchant" 1600
+	fleet "Small Hai Merchant (Sympathizers)" 2400
+	fleet "Large Hai Merchant (Sympathizers)" 6400
+	fleet "Small Hai Merchant (Human)" 3000
+	fleet "Large Hai Merchant (Human)" 4500
+	fleet "Small Human Merchants (Hai)" 6000
+	fleet "Large Human Merchants (Hai)" 9000
+	fleet "Hai Surveillance" 4000
+	fleet "Quarg (Hai)" 1000

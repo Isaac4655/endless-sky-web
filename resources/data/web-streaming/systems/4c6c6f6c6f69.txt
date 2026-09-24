@@ -1,0 +1,8 @@
+system Lloloi
+	belt 1338
+	asteroids "small rock" 6 2.62
+	asteroids "medium rock" 4 2.5
+	asteroids "large rock" 6 2.9
+	asteroids "medium metal" 2 3.3
+	asteroids "large metal" 18 2.5
+	minables copper 9 3.87

@@ -1,0 +1,4 @@
+system Caesura
+	hazard "Black Hole Accretion Disk" 1
+	hazard "Black Hole Event Horizon" 1
+	hazard "Small Black Hole Gravity" 1

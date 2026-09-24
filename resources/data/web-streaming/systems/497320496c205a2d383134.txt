@@ -1,0 +1,13 @@
+system "Is Il Z-814"
+	belt 1862
+	asteroids "small rock" 23 2.05
+	asteroids "medium rock" 2 2.52
+	asteroids "large rock" 7 3.158
+	asteroids "small metal" 5 2.789
+	asteroids "medium metal" 183 3.326
+	asteroids "large metal" 1 2.016
+	minables lead 28 4.115
+	minables iron 35 5.171
+	minables gold 47 3.479
+	minables yottrite 2 5.1
+	fleet "Vyrmeid (Boomerang)" 200

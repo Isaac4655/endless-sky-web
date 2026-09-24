@@ -1,0 +1,14 @@
+system Uelawan
+	belt 1976
+	asteroids "small rock" 3 2.36
+	asteroids "medium rock" 18 1.78
+	asteroids "large rock" 5 1.83
+	asteroids "small metal" 10 1.48
+	asteroids "medium metal" 37 1.99
+	asteroids "large metal" 12 2.19
+	minables aluminum 1 2.41
+	minables lead 3 2.06
+	minables titanium 1 3.02
+	fleet "Gegno Basic" 1800
+	fleet "Small Scin" 2700
+	fleet "Gegno Miners" 2500

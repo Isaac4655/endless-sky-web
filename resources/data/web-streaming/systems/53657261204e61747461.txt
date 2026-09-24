@@ -1,0 +1,9 @@
+system "Sera Natta"
+	belt 1500
+	asteroids "small rock" 81 1.7472
+	asteroids "medium rock" 6 1.5561
+	asteroids "large rock" 7 3.0303
+	asteroids "small metal" 8 2.9757
+	asteroids "medium metal" 35 2.3478
+	asteroids "large metal" 8 1.4196
+	fleet "Bunrodea Defense" 3000

@@ -1,0 +1,26 @@
+system Li-7
+	belt 1565 2
+	belt 2323 10
+	belt 2984 7
+	asteroids "small rock" 29 3.289
+	asteroids "medium rock" 6 4.306
+	asteroids "large rock" 8 5.741
+	asteroids "small metal" 1 4.186
+	asteroids "medium metal" 16 5.382
+	asteroids "large metal" 1 5.681
+	minables aluminum 4 7.173
+	minables silicon 9 6.889
+	fleet "Small Avgi Merchants" 4200
+	fleet "Large Avgi Merchants" 8400
+	fleet "Small Dissonance Merchants" 6000
+	fleet "Large Dissonance Merchants" 9600
+	fleet "Small Dissonance Pirates" 36000
+	fleet "Avgi Miners" 12000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 2700
+	fleet "Avgi Strike Group" 9000
+	fleet "Avgi Twilight Guard Logistics" 6000
+	fleet "Small Aberrant" 3000
+	fleet "Large Aberrant" 6000
+	hazard "Predecessors Base Spatial Decay" 900
+	hazard "Predecessors Spatial Rift Weak" 30000

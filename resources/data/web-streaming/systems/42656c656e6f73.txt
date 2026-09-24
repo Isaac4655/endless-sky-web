@@ -1,0 +1,10 @@
+system Belenos
+	asteroids "small rock" 1 1.188
+	asteroids "large rock" 1 0.977
+	asteroids "small metal" 6 0.977
+	asteroids "medium metal" 6 0.871
+	fleet "Small Southern Pirates" 600
+	fleet "Large Southern Pirates" 2000
+	fleet "Small CCOR" 3800
+	fleet "Large CCOR" 5000
+	fleet "CCOR Logistics" 8000

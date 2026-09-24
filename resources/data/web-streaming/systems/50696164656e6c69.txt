@@ -1,0 +1,8 @@
+system Piadenli
+	belt 1500
+	asteroids "small rock" 12 4.6176
+	asteroids "medium rock" 83 3.3696
+	asteroids "large rock" 6 5.5744
+	asteroids "medium metal" 8 5.7408
+	asteroids "large metal" 4 4.368
+	fleet "Bunrodea Defense" 1000

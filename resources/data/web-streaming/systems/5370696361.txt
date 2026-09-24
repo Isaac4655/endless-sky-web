@@ -1,0 +1,16 @@
+system Spica
+	belt 1940
+	asteroids "medium rock" 28 1.386
+	asteroids "large rock" 4 1.554
+	asteroids "small metal" 7 1.533
+	asteroids "medium metal" 5 3.129
+	asteroids "large metal" 5 1.953
+	minables lead 3 2.02632
+	minables silicon 9 1.95466
+	minables titanium 1 1.97538
+	fleet "Small Southern Merchants" 1600
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Militia" 2000
+	fleet "Large Militia" 4000
+	fleet "Small Southern Pirates" 6000
+	fleet "Large Southern Pirates" 10000

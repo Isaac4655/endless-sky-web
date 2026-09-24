@@ -1,0 +1,9 @@
+system O-3184
+	belt 1119
+	asteroids "medium rock" 7 6.75
+	asteroids "large metal" 1 6.84
+	minables iron 5 2.23
+	minables lead 2 3.43
+	fleet "Iije (Uninterested)" 700
+	fleet "Iije (Swarming)" 900
+	fleet "Iije (Surveillance)" 700

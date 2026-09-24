@@ -1,0 +1,14 @@
+system Prakacha'a
+	belt 1660
+	asteroids "small rock" 32 1.974
+	asteroids "medium rock" 45 1.484
+	asteroids "large rock" 20 1.75
+	asteroids "small metal" 18 1.75
+	asteroids "medium metal" 186 1.638
+	asteroids "large metal" 24 1.092
+	minables iron 104 2.79327
+	minables silicon 50 1.77981
+	fleet "Wanderer Freight" 400
+	fleet "Wanderer Drones" 400
+	fleet "Wanderer Defense" 400
+	fleet "Unfettered Raid" 5000

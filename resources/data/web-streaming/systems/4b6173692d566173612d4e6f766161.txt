@@ -1,0 +1,2 @@
+system Kasi-Vasa-Novaa
+	hazard "Predecessors Base Spatial Decay" 600

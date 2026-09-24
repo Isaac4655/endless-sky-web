@@ -1,0 +1,18 @@
+system "Kor Tar'bei"
+	belt 1614
+	asteroids "small rock" 11 3.576
+	asteroids "medium rock" 16 2.16
+	asteroids "large rock" 73 3.096
+	asteroids "small metal" 16 2.28
+	asteroids "medium metal" 169 1.992
+	asteroids "large metal" 76 3.216
+	minables platinum 35 3.86798
+	minables silicon 100 4.4771
+	fleet "Korath Civilian Miners" 5000
+	fleet "Korath Home" 1000
+	fleet "Korath Civilian Large" 1000
+	fleet "Korath Defense" 2600
+	fleet "Korath Ember Waste Raid" 3050
+	fleet "Korath Surveillance" 50000
+	fleet "Korath Ember Waste Large Raid" 30000
+	fleet "Korsmanath A'awojs" 1800

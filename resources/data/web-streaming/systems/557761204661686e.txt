@@ -1,0 +1,22 @@
+system "Uwa Fahn"
+	belt 1913
+	asteroids "small rock" 26 3.9349
+	asteroids "medium rock" 14 2.2743
+	asteroids "large rock" 6 4.1515
+	asteroids "small metal" 2 3.1046
+	asteroids "medium metal" 3 3.8266
+	asteroids "large metal" 4 3.4656
+	minables gold 1 5.69635
+	minables silicon 5 4.2659
+	minables tungsten 4 5.64685
+	fleet "Small Hai" 1400
+	fleet "Large Hai" 1400
+	fleet "Small Hai Merchant" 700
+	fleet "Large Hai Merchant" 700
+	fleet "Small Hai Merchant (Sympathizers)" 2800
+	fleet "Large Hai Merchant (Sympathizers)" 2800
+	fleet "Small Hai Merchant (Human)" 5500
+	fleet "Large Hai Merchant (Human)" 8000
+	fleet "Small Human Merchants (Hai)" 11000
+	fleet "Large Human Merchants (Hai)" 16000
+	fleet "Hai Surveillance" 3000

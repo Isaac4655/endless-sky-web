@@ -1,0 +1,9 @@
+system Maoni
+	belt 1734
+	asteroids "small rock" 1 1.91
+	asteroids "medium rock" 8 1.78
+	asteroids "large rock" 1 2.57
+	asteroids "small metal" 4 1.81
+	asteroids "medium metal" 58 1.71
+	asteroids "large metal" 33 2.37
+	minables copper 9 3.22

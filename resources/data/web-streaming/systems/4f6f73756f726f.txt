@@ -1,0 +1,10 @@
+system Oosuoro
+	belt 828
+	asteroids "small metal" 1 4.15
+	asteroids "medium metal" 13 3.4
+	asteroids "large metal" 2 2.77
+	minables neodymium 7 1.9
+	minables aluminum 6 2.3
+	fleet "Gegno Basic" 800
+	fleet "Gegno Miners" 2000
+	fleet "Gegno Cargo" 2400

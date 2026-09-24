@@ -1,0 +1,9 @@
+system Persitar
+	belt 1948
+	asteroids "small rock" 72 3.348
+	asteroids "medium rock" 2 4.482
+	asteroids "large rock" 3 4.86
+	asteroids "large metal" 2 7.344
+	minables silicon 2 5.34947
+	minables titanium 4 3.97343
+	minables yottrite 7 4.9647

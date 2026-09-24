@@ -1,0 +1,9 @@
+system "Mego Faro"
+	belt 1500
+	asteroids "medium rock" 4 2.9412
+	asteroids "large rock" 1 2.3028
+	asteroids "small metal" 1 1.5048
+	asteroids "medium metal" 5 2.2116
+	asteroids "large metal" 1 2.7816
+	fleet "Bunrodea Megasa Freight" 1200
+	fleet "Bunrodea Defense" 1500

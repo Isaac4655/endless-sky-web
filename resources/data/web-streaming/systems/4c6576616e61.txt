@@ -1,0 +1,13 @@
+system Levana
+	belt 1202
+	asteroids "medium rock" 3 10.005
+	asteroids "large rock" 1 10.5125
+	asteroids "small metal" 9 8.99
+	asteroids "medium metal" 13 9.57
+	asteroids "large metal" 31 10.15
+	minables lead 2 14.9761
+	minables uranium 8 17.5229
+	fleet "Korath Ember Waste Raid" 10000
+	fleet "Korath Rescue" 30000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

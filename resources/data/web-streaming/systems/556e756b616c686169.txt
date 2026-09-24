@@ -1,0 +1,16 @@
+system Unukalhai
+	belt 1968
+	asteroids "small rock" 9 4.5864
+	asteroids "medium rock" 35 2.9484
+	asteroids "large rock" 23 3.7856
+	asteroids "small metal" 42 1.8564
+	asteroids "medium metal" 190 4.55
+	asteroids "large metal" 25 2.0748
+	minables neodymium 19 5.48915
+	minables silicon 70 6.48089
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 4000
+	fleet "Small Southern Pirates" 3000
+	fleet "Small Militia" 4000
+	fleet "Large Militia" 10000
+	fleet "Human Miners" 3000

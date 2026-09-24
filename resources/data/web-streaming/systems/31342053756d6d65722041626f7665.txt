@@ -1,0 +1,15 @@
+system "14 Summer Above"
+	belt 1093
+	asteroids "small rock" 2 3.016
+	asteroids "medium rock" 1 3.406
+	asteroids "large rock" 4 3.9
+	asteroids "small metal" 4 2.106
+	asteroids "medium metal" 86 2.054
+	asteroids "large metal" 2 2.834
+	fleet "Small Arach" 1000
+	fleet "Large Arach" 4000
+	fleet "Small Kimek" 500
+	fleet "Large Kimek" 1100
+	fleet "Small Saryd" 1300
+	fleet "Large Saryd" 4000
+	fleet Heliarch 1200

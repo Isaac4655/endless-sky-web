@@ -1,0 +1,12 @@
+system Sepetrosk
+	belt 1286
+	asteroids "small rock" 60 1.4
+	asteroids "medium rock" 152 2.744
+	asteroids "large rock" 30 3.164
+	asteroids "small metal" 8 1.596
+	asteroids "medium metal" 15 1.652
+	asteroids "large metal" 56 2.94
+	minables aluminum 31 2.95643
+	fleet "Small Kor Mereti" 1200
+	fleet "Large Kor Mereti" 4800
+	fleet "Kor Mereti Miners" 2000

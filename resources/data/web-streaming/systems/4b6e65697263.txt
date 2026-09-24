@@ -1,0 +1,13 @@
+system Kneirc
+	belt 1163
+	asteroids "small rock" 6 5
+	asteroids "medium rock" 8 6.6
+	asteroids "large rock" 13 4.2
+	asteroids "small metal" 9 5.2
+	asteroids "medium metal" 10 6.2
+	asteroids "large metal" 15 3.8
+	minables aluminum 12 7.04
+	minables iron 7 9.7
+	minables tungsten 26 6.8
+	fleet "Small Vi" 4600
+	fleet "Small Scin" 3400

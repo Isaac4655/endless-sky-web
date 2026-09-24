@@ -1,0 +1,14 @@
+system "Delta Capricorni"
+	belt 1329
+	asteroids "small rock" 4 9.744
+	asteroids "medium rock" 54 12.516
+	asteroids "large rock" 9 10.08
+	asteroids "medium metal" 11 11.76
+	asteroids "large metal" 1 6.636
+	minables iron 34 12.4373
+	minables neodymium 16 13.4172
+	fleet "Small Core Merchants" 700
+	fleet "Large Core Merchants" 800
+	fleet "Small Syndicate" 2000
+	fleet "Small Core Pirates" 4000
+	fleet "Human Miners" 3000

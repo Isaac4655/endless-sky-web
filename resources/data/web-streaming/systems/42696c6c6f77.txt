@@ -1,0 +1,7 @@
+system Billow
+	belt 1921 6
+	belt 2280 2
+	asteroids "large metal" 1 1.911
+	fleet "Avgi Scouts" 42000
+	fleet "Small Aberrant" 2500
+	fleet "Large Aberrant" 4800

@@ -1,0 +1,12 @@
+system Asio
+	belt 1478
+	asteroids "small rock" 4 2.6
+	asteroids "large rock" 7 3
+	asteroids "small metal" 9 3
+	asteroids "medium metal" 9 4.13
+	asteroids "large metal" 2 4.2
+	minables iron 7 1.8
+	minables lead 3 2.26
+	fleet "Gegno Basic" 400
+	fleet "Gegno Cargo" 1000
+	fleet "Gegno Miners" 1200

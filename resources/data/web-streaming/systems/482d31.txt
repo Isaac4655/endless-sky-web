@@ -1,0 +1,21 @@
+system H-1
+	belt 1692
+	asteroids "small rock" 1 1.548
+	asteroids "large rock" 1 1.525
+	asteroids "small metal" 17 2.195
+	asteroids "medium metal" 1 1.317
+	asteroids "large metal" 17 1.779
+	minables iron 7 2.226
+	fleet "Small Avgi Merchants" 4200
+	fleet "Large Avgi Merchants" 8400
+	fleet "Small Dissonance Merchants" 12000
+	fleet "Large Dissonance Merchants" 18000
+	fleet "Avgi Miners" 12000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 2700
+	fleet "Avgi Strike Group" 9000
+	fleet "Avgi Twilight Guard Logistics" 6000
+	fleet "Small Aberrant" 3000
+	fleet "Large Aberrant" 6000
+	hazard "Predecessors Base Spatial Decay" 900
+	hazard "Predecessors Spatial Rift Weak" 24000

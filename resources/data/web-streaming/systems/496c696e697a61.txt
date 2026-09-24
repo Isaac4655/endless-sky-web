@@ -1,0 +1,10 @@
+system Iliniza
+	belt 1624
+	asteroids "large metal" 1 5.1
+	minables iron 46 1.16
+	minables silver 9 2.8
+	fleet "Small Scin" 1000
+	fleet "Large Scin" 2500
+	fleet "Scin Transport" 600
+	fleet "Scin Cargo" 1200
+	fleet "Scin Warfleet" 4000

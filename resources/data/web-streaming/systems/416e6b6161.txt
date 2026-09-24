@@ -1,0 +1,13 @@
+system Ankaa
+	belt 1003
+	asteroids "medium rock" 1 2.016
+	asteroids "large rock" 1 1.664
+	asteroids "small metal" 1 4.352
+	asteroids "medium metal" 7 2.176
+	asteroids "large metal" 1 2.912
+	minables aluminum 1 3.23798
+	minables silicon 1 3.14899
+	fleet "Small Core Merchants" 600
+	fleet "Large Core Merchants" 700
+	fleet "Small Syndicate" 900
+	fleet "Large Core Pirates" 4000

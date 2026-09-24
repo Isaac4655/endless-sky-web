@@ -1,0 +1,13 @@
+system Salipastart
+	belt 1056
+	asteroids "small rock" 2 6.7116
+	asteroids "medium rock" 9 4.3792
+	asteroids "large rock" 9 5.95
+	asteroids "medium metal" 8 4.9504
+	asteroids "large metal" 1 2.4276
+	minables neodymium 23 7.92517
+	minables silicon 13 9.32739
+	fleet "Small Kor Mereti" 800
+	fleet "Large Kor Mereti" 1600
+	fleet "Large Kor Sestor" 3200
+	fleet "Kor Mereti Miners" 3000

@@ -1,0 +1,7 @@
+system Alphecca
+	belt 1101
+	asteroids "large metal" 1 4.3296
+	fleet "Small Southern Merchants" 2000
+	fleet "Large Southern Merchants" 3500
+	fleet "Small Southern Pirates" 3000
+	fleet "Small Militia" 5000

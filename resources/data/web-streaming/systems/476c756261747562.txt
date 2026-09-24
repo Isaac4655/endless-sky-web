@@ -1,0 +1,20 @@
+system Glubatub
+	belt 1093
+	asteroids "small rock" 17 7.6038
+	asteroids "medium rock" 27 5.3998
+	asteroids "large rock" 30 5.0141
+	asteroids "small metal" 5 3.4713
+	asteroids "medium metal" 43 5.7304
+	asteroids "large metal" 12 6.1161
+	minables aluminum 9 4.60233
+	minables lead 14 5.73445
+	fleet "Small Arach" 400
+	fleet "Large Arach" 800
+	fleet "Small Kimek" 1500
+	fleet "Large Kimek" 4500
+	fleet "Small Saryd" 1400
+	fleet "Large Saryd" 4000
+	fleet "Arach Miners" 4000
+	fleet "Kimek Miners" 9000
+	fleet "Saryd Miners" 7000
+	fleet Heliarch 500

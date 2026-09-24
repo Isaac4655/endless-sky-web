@@ -1,0 +1,6 @@
+system Maspa-Mavra
+	asteroids "small metal" 1 1
+	asteroids "large metal" 1 1
+	minables gold 1 1
+	fleet "Small New Houses" 10000
+	fleet "Successor Miners" 5000

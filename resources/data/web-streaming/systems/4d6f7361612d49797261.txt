@@ -1,0 +1,12 @@
+system Mosaa-Iyra
+	belt 2240
+	asteroids "small rock" 22 4
+	asteroids "large rock" 12 3
+	asteroids "small metal" 18 5
+	minables silicon 11 9
+	minables lead 18 4
+	minables gold 2 8
+	fleet "Successor Miners" 3000
+	fleet "Small Successor Transport" 1500
+	fleet "Light Successor Freight" 1500
+	fleet "Small Old Houses" 2000

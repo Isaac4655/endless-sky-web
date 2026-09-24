@@ -1,0 +1,16 @@
+system Mirach
+	belt 1980
+	asteroids "small rock" 84 3.4884
+	asteroids "medium rock" 64 3.1518
+	asteroids "large rock" 6 4.0698
+	asteroids "small metal" 2 4.0392
+	asteroids "medium metal" 62 2.2644
+	asteroids "large metal" 7 3.213
+	minables lead 2 4.94454
+	minables titanium 21 4.54986
+	fleet "Small Core Merchants" 1000
+	fleet "Large Core Merchants" 1200
+	fleet "Small Core Pirates" 4000
+	fleet "Small Syndicate" 3000
+	fleet "Large Syndicate" 5000
+	fleet "Human Miners" 3000

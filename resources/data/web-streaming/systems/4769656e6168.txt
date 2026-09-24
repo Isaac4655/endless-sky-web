@@ -1,0 +1,14 @@
+system Gienah
+	belt 1965
+	asteroids "small rock" 1 2.574
+	asteroids "medium rock" 4 2.448
+	asteroids "large rock" 16 2.16
+	asteroids "small metal" 29 1.89
+	asteroids "medium metal" 203 0.972
+	asteroids "large metal" 37 2.304
+	minables aluminum 1 1.81803
+	minables copper 12 1.48149
+	minables silver 59 2.13643
+	fleet "Small Core Pirates" 500
+	fleet "Large Core Pirates" 800
+	fleet "Large Syndicate" 5000

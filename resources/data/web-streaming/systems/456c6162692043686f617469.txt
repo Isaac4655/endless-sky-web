@@ -1,0 +1,10 @@
+system "Elabi Choati"
+	belt 1500
+	asteroids "small rock" 9 8.7808
+	asteroids "medium rock" 32 9.3296
+	asteroids "large rock" 4 10.4272
+	asteroids "small metal" 2 6.9776
+	asteroids "medium metal" 14 11.4464
+	asteroids "large metal" 20 11.76
+	fleet "Bunrodea Erabu Freight" 2000
+	fleet "Bunrodea Defense" 1000

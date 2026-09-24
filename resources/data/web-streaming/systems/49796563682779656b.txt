@@ -1,0 +1,13 @@
+system Iyech'yek
+	belt 1613
+	asteroids "small rock" 20 2.208
+	asteroids "medium rock" 5 2.048
+	asteroids "large rock" 21 2.304
+	asteroids "small metal" 6 1.152
+	asteroids "medium metal" 3 2.256
+	asteroids "large metal" 6 2.256
+	minables aluminum 12 2.50625
+	minables iron 9 2.96422
+	fleet "Wanderer Freight" 600
+	fleet "Wanderer Drones" 2000
+	fleet "Wanderer Defense" 5000

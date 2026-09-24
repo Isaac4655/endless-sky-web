@@ -1,0 +1,7 @@
+system Kochab
+	belt 1912
+	asteroids "large metal" 1 6.9552
+	fleet "Small Southern Merchants" 2000
+	fleet "Large Southern Merchants" 6000
+	fleet "Small Southern Pirates" 5000
+	fleet "Small Militia" 6000

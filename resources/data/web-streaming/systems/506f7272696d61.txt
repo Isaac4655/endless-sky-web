@@ -1,0 +1,17 @@
+system Porrima
+	belt 1636
+	asteroids "small rock" 20 4.7334
+	asteroids "medium rock" 35 3.0429
+	asteroids "large rock" 5 2.5116
+	asteroids "small metal" 1 5.9892
+	asteroids "medium metal" 14 3.4776
+	asteroids "large metal" 6 6.1341
+	minables aluminum 4 6.34101
+	minables titanium 5 4.95139
+	minables tungsten 5 4.48244
+	fleet "Small Northern Merchants" 2000
+	fleet "Large Northern Merchants" 6000
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Republic" 8000
+	fleet "Small Southern Pirates" 6000

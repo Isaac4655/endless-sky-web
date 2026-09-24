@@ -1,0 +1,9 @@
+system Sextet
+	belt 1934 6
+	belt 2313 6
+	asteroids "small metal" 8 1.312
+	asteroids "medium metal" 6 1.516
+	minables copper 12 1.344
+	fleet "Small Aberrant" 2100
+	fleet "Large Aberrant" 3900
+	hazard "Ember Waste Base Heat" 100

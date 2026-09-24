@@ -1,0 +1,15 @@
+system Hatysa
+	belt 1163
+	asteroids "small rock" 19 0.858
+	asteroids "large rock" 3 1.0296
+	asteroids "small metal" 13 1.0153
+	asteroids "medium metal" 102 1.3585
+	asteroids "large metal" 14 1.9448
+	minables copper 27 2.2074
+	minables iron 4 2.54657
+	minables neodymium 9 2.45903
+	fleet "Small Northern Pirates" 600
+	fleet "Large Northern Pirates" 1000
+	fleet "Large Republic" 15000
+	fleet "Old Northern Pirates" 6000
+	fleet "Derelict Pirate" 30000

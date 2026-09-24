@@ -1,0 +1,9 @@
+system Zubenelhakrabi
+	belt 1669
+	asteroids "medium rock" 7 1.5946
+	asteroids "large rock" 1 1.5946
+	asteroids "medium metal" 12 2.8798
+	asteroids "large metal" 2 3.1654
+	minables uranium 6 4.40134
+	minables platinum 3 4.48669
+	minables tungsten 3 3.76004

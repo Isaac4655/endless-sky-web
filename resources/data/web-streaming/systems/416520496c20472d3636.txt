@@ -1,0 +1,4 @@
+system "Ae Il G-66"
+	belt 1622 2
+	belt 2344 2
+	asteroids "large metal" 1 2.804

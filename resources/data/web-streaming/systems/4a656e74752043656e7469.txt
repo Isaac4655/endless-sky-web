@@ -1,0 +1,9 @@
+system "Jentu Centi"
+	belt 1500
+	asteroids "small rock" 7 9.6432
+	asteroids "large rock" 31 9.7216
+	asteroids "small metal" 24 11.6032
+	asteroids "medium metal" 34 4.2336
+	asteroids "large metal" 5 11.5248
+	fleet "Bunrodea Megasa Freight" 2000
+	fleet "Bunrodea Defense" 1000

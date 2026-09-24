@@ -1,0 +1,13 @@
+system Deneb
+	belt 1890
+	asteroids "small rock" 4 4.62
+	asteroids "medium rock" 192 8.82
+	asteroids "large rock" 42 10.332
+	asteroids "small metal" 74 11.088
+	asteroids "medium metal" 2 4.536
+	asteroids "large metal" 11 6.972
+	minables aluminum 7 15.5891
+	minables silicon 12 13.0697
+	minables titanium 51 14.5121
+	fleet "Small Pug" 400
+	fleet "Large Pug" 1000

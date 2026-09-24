@@ -1,0 +1,9 @@
+system H-8188
+	belt 1254
+	asteroids "small rock" 1 1.32
+	asteroids "large rock" 1 1.44
+	asteroids "medium metal" 3 1.3
+	asteroids "large metal" 2 0.81
+	fleet "Iije (Uninterested)" 3400
+	fleet "Iije (Swarming)" 6000
+	fleet "Iije (Surveillance)" 3000

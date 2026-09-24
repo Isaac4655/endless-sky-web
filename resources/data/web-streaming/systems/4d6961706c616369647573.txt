@@ -1,0 +1,14 @@
+system Miaplacidus
+	belt 1236
+	asteroids "small rock" 25 6.902
+	asteroids "medium rock" 8 3.2844
+	asteroids "large rock" 52 2.38
+	asteroids "small metal" 1 5.5692
+	asteroids "medium metal" 19 5.3788
+	asteroids "large metal" 10 3.8556
+	minables iron 19 4.58238
+	fleet "Small Northern Merchants" 600
+	fleet "Large Northern Merchants" 900
+	fleet "Paradise Merchants" 900
+	fleet "Small Republic" 1500
+	fleet "Large Republic" 3000

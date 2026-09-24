@@ -1,0 +1,18 @@
+system Pbelnep
+	belt 1803
+	asteroids "small rock" 13 2.89
+	asteroids "medium rock" 56 2.81
+	asteroids "large rock" 6 3.72
+	asteroids "small metal" 7 2.89
+	asteroids "medium metal" 9 3.14
+	asteroids "large metal" 31 3.64
+	minables copper 9 3.34
+	minables silicon 38 1.6
+	minables titanium 3 5.75
+	fleet "Small Scin" 1100
+	fleet "Large Scin" 2100
+	fleet "Scin Transport" 1500
+	fleet "Scin Cargo" 1300
+	fleet "Gegno Miners" 2600
+	fleet "Gegno Basic" 2800
+	fleet "Gegno Cargo" 3600

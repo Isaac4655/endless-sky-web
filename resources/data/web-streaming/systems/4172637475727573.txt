@@ -1,0 +1,15 @@
+system Arcturus
+	belt 1422
+	asteroids "small rock" 4 2.86
+	asteroids "medium rock" 3 2.508
+	asteroids "large rock" 5 2.288
+	asteroids "small metal" 4 3.234
+	asteroids "medium metal" 5 1.848
+	asteroids "large metal" 4 1.892
+	minables copper 2 3.64174
+	minables lead 5 4.19488
+	minables silicon 3 2.62083
+	fleet "Small Southern Merchants" 700
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Militia" 10000
+	fleet "Human Miners" 5000

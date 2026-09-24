@@ -1,0 +1,14 @@
+system Diphda
+	belt 1559
+	asteroids "small rock" 22 4.536
+	asteroids "medium rock" 23 7.7112
+	asteroids "large rock" 29 6.0264
+	asteroids "small metal" 34 5.3136
+	asteroids "medium metal" 25 8.2296
+	asteroids "large metal" 38 4.7304
+	minables aluminum 2 10.8416
+	minables copper 9 10.6942
+	minables uranium 4 6.68388
+	fleet "Small Core Merchants" 2000
+	fleet "Large Core Merchants" 600
+	fleet "Small Syndicate" 3000

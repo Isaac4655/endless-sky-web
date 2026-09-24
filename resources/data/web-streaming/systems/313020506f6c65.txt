@@ -1,0 +1,19 @@
+system "10 Pole"
+	belt 1765
+	asteroids "small rock" 30 10.7996
+	asteroids "medium rock" 42 8.4448
+	asteroids "large rock" 2 8.12
+	asteroids "medium metal" 9 11.368
+	asteroids "large metal" 2 4.7096
+	minables neodymium 9 6.5036
+	minables silicon 17 4.2422
+	fleet "Small Arach" 1800
+	fleet "Large Arach" 8000
+	fleet "Small Kimek" 600
+	fleet "Large Kimek" 1600
+	fleet "Small Saryd" 1200
+	fleet "Large Saryd" 5000
+	fleet "Arach Miners" 12000
+	fleet "Kimek Miners" 2500
+	fleet "Saryd Miners" 7000
+	fleet Heliarch 700

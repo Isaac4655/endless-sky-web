@@ -1,0 +1,6 @@
+system Thepa
+	belt 1793
+	hazard "Beyond Patir Shield Eraser" 1
+	hazard "Beyond Patir Black Hole Event Horizon" 1
+	hazard "Thepa and Ghila Black Hole Accretion Disk" 1
+	hazard "Small Black Hole Gravity" 1

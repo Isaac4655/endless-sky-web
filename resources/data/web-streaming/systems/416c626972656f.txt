@@ -1,0 +1,14 @@
+system Albireo
+	belt 1030
+	asteroids "small rock" 2 3.57
+	asteroids "medium rock" 4 2.5466
+	asteroids "large rock" 4 3.1654
+	asteroids "medium metal" 52 1.9992
+	asteroids "large metal" 9 3.5224
+	fleet "Small Southern Merchants" 800
+	fleet "Large Southern Merchants" 1200
+	fleet "Small Southern Pirates" 1000
+	fleet "Large Southern Pirates" 1400
+	fleet "Small Militia" 1800
+	fleet "Large Militia" 3000
+	fleet Quarg 2000

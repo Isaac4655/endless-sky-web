@@ -1,0 +1,8 @@
+system Alpherg
+	asteroids "medium rock" 3 2.97
+	asteroids "small metal" 3 3.195
+	fleet "Small Southern Pirates" 1000
+	fleet "Large Southern Pirates" 2000
+	fleet "Small CCOR" 3800
+	fleet "Large CCOR" 6000
+	fleet "CCOR Logistics" 9000

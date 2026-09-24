@@ -1,0 +1,22 @@
+system Demilude
+	belt 1885 3
+	belt 2084 8
+	asteroids "large rock" 1 2.296
+	asteroids "small metal" 6 1.624
+	asteroids "large metal" 3 2.8
+	minables silver 7 3.762
+	minables copper 3 2.311
+	minables neodymium 5 5.232
+	fleet "Small Dissonance Merchants" 1800
+	fleet "Large Dissonance Merchants" 4200
+	fleet "Small Dissonance Pirates" 12000
+	fleet "Large Dissonance Pirates" 30000
+	fleet "Dissonance Miners" 3600
+	fleet "Small Avgi Merchants" 9000
+	fleet "Large Avgi Merchants" 18000
+	fleet "Avgi Patrol" 42000
+	fleet "Avgi Scouts" 9000
+	fleet "Small Aberrant" 12000
+	fleet "Large Aberrant" 24000
+	hazard "Predecessors Base Spatial Decay" 1200
+	hazard "Predecessors Spatial Rift Weak" 36000

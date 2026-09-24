@@ -1,0 +1,12 @@
+system Chy'chra
+	belt 1120
+	asteroids "small rock" 5 3.8019
+	asteroids "medium rock" 6 5.0141
+	asteroids "large rock" 2 3.0305
+	asteroids "medium metal" 9 6.8875
+	asteroids "large metal" 11 5.1794
+	minables tungsten 2 7.05176
+	fleet "Wanderer Freight" 1500
+	fleet "Wanderer Drones" 1000
+	fleet "Wanderer Defense" 300
+	fleet "Unfettered Raid" 5000

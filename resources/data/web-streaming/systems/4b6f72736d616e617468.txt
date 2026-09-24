@@ -1,0 +1,8 @@
+system Korsmanath
+	belt 1775
+	asteroids "small rock" 2 2.4123
+	asteroids "medium rock" 1 2.5993
+	asteroids "large rock" 4 1.3277
+	asteroids "large metal" 2 1.6456
+	fleet "Large Quarg (Kor Efret)" 3000
+	fleet "Small Kor Mereti" 8000

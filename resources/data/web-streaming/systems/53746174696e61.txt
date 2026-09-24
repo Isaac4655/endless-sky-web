@@ -1,0 +1,11 @@
+system Statina
+	belt 1500
+	asteroids "large rock" 1 4
+	asteroids "small metal" 39 3
+	asteroids "medium metal" 72 3
+	asteroids "large metal" 3 5
+	minables iron 5 6
+	minables silicon 11 5
+	minables titanium 10 4
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

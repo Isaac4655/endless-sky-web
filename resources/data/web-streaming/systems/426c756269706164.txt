@@ -1,0 +1,18 @@
+system Blubipad
+	belt 1567
+	asteroids "small rock" 5 4
+	asteroids "medium rock" 17 5.55
+	asteroids "large rock" 5 5
+	asteroids "medium metal" 7 6.35
+	asteroids "large metal" 9 6.1
+	minables silver 7 5.80748
+	fleet "Small Arach" 400
+	fleet "Large Arach" 800
+	fleet "Small Kimek" 1400
+	fleet "Large Kimek" 4000
+	fleet "Small Saryd" 1300
+	fleet "Large Saryd" 3000
+	fleet "Arach Miners" 4000
+	fleet "Kimek Miners" 8000
+	fleet "Saryd Miners" 7000
+	fleet Heliarch 300

@@ -1,0 +1,9 @@
+system "Eneva Katta"
+	belt 1500
+	asteroids "small rock" 1 2.431
+	asteroids "medium rock" 5 2.244
+	asteroids "large rock" 8 1.666
+	asteroids "small metal" 17 1.819
+	asteroids "medium metal" 128 2.278
+	asteroids "large metal" 10 0.935
+	fleet "Bunrodea Defense" 5000

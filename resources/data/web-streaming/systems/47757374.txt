@@ -1,0 +1,13 @@
+system Gust
+	belt 1116
+	asteroids "small rock" 64 6.12
+	asteroids "medium rock" 48 3.32
+	asteroids "large rock" 24 0.88
+	asteroids "medium metal" 32 12.302
+	asteroids "large metal" 16 9.074
+	minables iron 18 2.192
+	minables lead 24 1.661
+	minables aluminum 21 1.742
+	fleet "Avgi Scouts" 24000
+	fleet "Small Aberrant" 6300
+	fleet "Large Aberrant" 12000

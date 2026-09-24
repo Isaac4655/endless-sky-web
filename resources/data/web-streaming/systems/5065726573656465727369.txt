@@ -1,0 +1,11 @@
+system Peresedersi
+	belt 1065
+	asteroids "small rock" 49 1.403
+	asteroids "medium rock" 5 2.185
+	asteroids "large rock" 11 1.541
+	asteroids "small metal" 39 2.438
+	asteroids "medium metal" 4 3.197
+	asteroids "large metal" 5 3.22
+	minables aluminum 5 2.45602
+	minables iron 2 2.26908
+	minables yottrite 2 4.5863

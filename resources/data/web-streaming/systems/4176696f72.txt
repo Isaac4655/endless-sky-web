@@ -1,0 +1,15 @@
+system Avior
+	belt 1097
+	asteroids "medium rock" 10 7.0875
+	asteroids "large rock" 1 5.7834
+	asteroids "medium metal" 1 5.8968
+	asteroids "large metal" 1 7.4844
+	minables neodymium 1 10.1458
+	minables titanium 1 9.74859
+	minables tungsten 1 10.6785
+	fleet "Small Northern Merchants" 900
+	fleet "Large Northern Merchants" 3000
+	fleet "Small Deep Security" 2800
+	fleet "Small Deep Merchants" 1500
+	fleet "Large Deep Security" 10000
+	fleet "Large Deep Merchants" 4000

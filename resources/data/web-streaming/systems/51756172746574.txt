@@ -1,0 +1,11 @@
+system Quartet
+	belt 1217 8
+	belt 1952 10
+	asteroids "small metal" 11 1.8
+	asteroids "medium metal" 4 1.56
+	asteroids "large metal" 3 1.64
+	minables gold 14 1.015
+	fleet "Small Aberrant" 900
+	fleet "Large Aberrant" 1500
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

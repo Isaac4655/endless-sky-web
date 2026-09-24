@@ -1,0 +1,11 @@
+system Dabih
+	belt 1088
+	asteroids "small rock" 1 3.456
+	asteroids "medium rock" 9 2.976
+	asteroids "large rock" 1 2.784
+	asteroids "large metal" 4 1.848
+	fleet "Small Southern Merchants" 500
+	fleet "Large Southern Merchants" 800
+	fleet Quarg 4000
+	fleet "Small Militia" 6000
+	fleet "Large Southern Pirates" 10000

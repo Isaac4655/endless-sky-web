@@ -1,0 +1,16 @@
+system Hassaleh
+	belt 1924
+	asteroids "small rock" 6 1.9305
+	asteroids "medium rock" 75 4.4928
+	asteroids "large rock" 14 2.8782
+	asteroids "small metal" 9 2.457
+	asteroids "medium metal" 9 5.1597
+	asteroids "large metal" 28 3.5802
+	minables copper 23 7.2985
+	minables gold 10 4.45585
+	minables silicon 21 7.82544
+	fleet "Small Northern Merchants" 9000
+	fleet "Small Northern Pirates" 6000
+	fleet "Large Northern Pirates" 20000
+	fleet "Large Republic" 20000
+	fleet "Human Miners" 2000

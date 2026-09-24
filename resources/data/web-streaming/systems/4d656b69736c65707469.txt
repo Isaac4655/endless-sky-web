@@ -1,0 +1,14 @@
+system Mekislepti
+	belt 1673
+	asteroids "small rock" 63 1.3552
+	asteroids "medium rock" 126 1.2826
+	asteroids "large rock" 19 1.3068
+	asteroids "small metal" 5 3.0976
+	asteroids "medium metal" 23 3.63
+	asteroids "large metal" 5 3.2186
+	minables iron 44 1.6058
+	minables silicon 88 1.91661
+	fleet "Small Kor Mereti" 1000
+	fleet "Large Kor Mereti" 3000
+	fleet "Large Kor Sestor" 8000
+	fleet "Kor Mereti Miners" 2000

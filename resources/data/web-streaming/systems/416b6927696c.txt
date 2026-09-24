@@ -1,0 +1,8 @@
+system Aki'il
+	belt 1500
+	asteroids "large metal" 47 5
+	asteroids "large rock" 2 10
+	asteroids "medium metal" 100 8
+	asteroids "medium rock" 4 5
+	asteroids "small metal" 48 6
+	asteroids "small rock" 4 8

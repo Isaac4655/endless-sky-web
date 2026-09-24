@@ -1,0 +1,16 @@
+system Lolami
+	belt 1072
+	asteroids "small rock" 68 1.6926
+	asteroids "medium rock" 55 1.6653
+	asteroids "large rock" 180 3.003
+	asteroids "small metal" 6 2.5662
+	asteroids "medium metal" 30 3.7674
+	asteroids "large metal" 2 3.4398
+	minables silicon 40 3.12005
+	minables titanium 17 3.27761
+	fleet "Small Northern Merchants" 2000
+	fleet "Small Republic" 5000
+	fleet "Small Northern Pirates" 2000
+	fleet "Large Northern Pirates" 4000
+	fleet "Human Miners" 3000
+	fleet "Derelict Northern" 10000

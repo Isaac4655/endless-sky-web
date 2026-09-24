@@ -1,0 +1,15 @@
+system Iigen
+	belt 1699
+	asteroids "small rock" 46 3.92
+	asteroids "medium rock" 57 5.2
+	asteroids "large rock" 7 6.86
+	asteroids "small metal" 33 5.42
+	asteroids "medium metal" 21 5.8
+	asteroids "large metal" 45 3.84
+	minables gold 4 5.8
+	minables iron 22 1.47
+	minables platinum 1 2.15
+	fleet "Gegno Basic" 1100
+	fleet "Gegno Cargo" 2800
+	fleet "Gegno Miners" 2400
+	fleet "Quarg (Gegno)" 3400

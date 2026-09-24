@@ -1,0 +1,12 @@
+system Vivace
+	belt 1074 5
+	belt 2129 4
+	asteroids "small rock" 6 2.777
+	asteroids "medium rock" 4 1.622
+	asteroids "large rock" 1 2.028
+	asteroids "medium metal" 13 2.059
+	asteroids "large metal" 3 2.652
+	minables titanium 3 2.362
+	minables copper 3 2.311
+	minables gold 9 4.131
+	hazard "Neutron Star Magnetic Field" 1

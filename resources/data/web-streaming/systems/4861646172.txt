@@ -1,0 +1,14 @@
+system Hadar
+	belt 1520
+	asteroids "small rock" 37 3.5226
+	asteroids "medium rock" 22 3.9672
+	asteroids "large rock" 7 4.9248
+	asteroids "medium metal" 25 4.5144
+	asteroids "large metal" 12 2.1204
+	minables tungsten 4 7.5751
+	fleet "Small Southern Merchants" 400
+	fleet "Large Southern Merchants" 1000
+	fleet "Small Militia" 800
+	fleet "Large Militia" 1500
+	fleet "Small Southern Pirates" 4000
+	fleet "Large Southern Pirates" 9000

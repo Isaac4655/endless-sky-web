@@ -1,0 +1,6 @@
+system Sich'ka'ara
+	belt 1744
+	asteroids "large metal" 1 2.3738
+	fleet "Wanderer Freight" 600
+	fleet "Wanderer Drones" 3000
+	fleet "Wanderer Defense" 2000

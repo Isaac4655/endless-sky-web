@@ -1,0 +1,16 @@
+system Dubhe
+	belt 1120
+	asteroids "medium rock" 12 3.5496
+	asteroids "large rock" 1 3.48
+	asteroids "small metal" 1 3.9672
+	asteroids "medium metal" 45 1.8792
+	asteroids "large metal" 2 5.0112
+	minables silicon 14 3.5667
+	fleet "Small Northern Merchants" 1200
+	fleet "Large Northern Merchants" 4000
+	fleet "Small Deep Security" 2000
+	fleet "Small Deep Merchants" 3000
+	fleet "Large Deep Security" 7000
+	fleet "Large Deep Merchants" 7000
+	fleet "Small Northern Pirates" 12000
+	fleet "Large Northern Pirates" 8000

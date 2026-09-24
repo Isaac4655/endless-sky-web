@@ -1,0 +1,20 @@
+system "Rati Cal"
+	belt 1538
+	asteroids "small rock" 2 2.967
+	asteroids "large rock" 1 1.587
+	asteroids "small metal" 28 2.438
+	asteroids "medium metal" 1 3.266
+	asteroids "large metal" 23 3.105
+	minables titanium 2 2.87921
+	minables tungsten 3 3.30683
+	fleet "Small Hai" 1800
+	fleet "Large Hai" 3400
+	fleet "Small Hai Merchant" 900
+	fleet "Large Hai Merchant" 1700
+	fleet "Small Hai Merchant (Sympathizers)" 3600
+	fleet "Large Hai Merchant (Sympathizers)" 6800
+	fleet "Small Hai Merchant (Human)" 4000
+	fleet "Large Hai Merchant (Human)" 5500
+	fleet "Small Human Merchants (Hai)" 8000
+	fleet "Large Human Merchants (Hai)" 11000
+	fleet "Hai Surveillance" 5000

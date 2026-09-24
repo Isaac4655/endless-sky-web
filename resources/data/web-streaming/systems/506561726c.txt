@@ -1,0 +1,12 @@
+system Pearl
+	belt 1454
+	asteroids "small rock" 35 6.248
+	asteroids "medium rock" 3 3.861
+	asteroids "large rock" 78 6.809
+	asteroids "medium metal" 11 4.423
+	asteroids "large metal" 6 3.65
+	minables tungsten 3 6.793
+	minables iron 6 7.093
+	fleet "Avgi Scouts" 30000
+	fleet "Small Aberrant" 4200
+	fleet "Large Aberrant" 6000

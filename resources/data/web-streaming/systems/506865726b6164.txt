@@ -1,0 +1,9 @@
+system Pherkad
+	belt 1924
+	asteroids "large metal" 1 2.6884
+	fleet "Small Southern Merchants" 500
+	fleet "Large Southern Merchants" 1000
+	fleet "Small Militia" 700
+	fleet "Large Militia" 1200
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 3000

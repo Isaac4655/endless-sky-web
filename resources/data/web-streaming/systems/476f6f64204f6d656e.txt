@@ -1,0 +1,14 @@
+system "Good Omen"
+	belt 1598
+	asteroids "small rock" 1 2.5536
+	asteroids "medium rock" 1 3.99
+	asteroids "large rock" 1 3.4048
+	asteroids "medium metal" 2 3.5378
+	asteroids "large metal" 1 2.8462
+	fleet "Small Arach" 1500
+	fleet "Large Arach" 7000
+	fleet "Small Kimek" 1600
+	fleet "Large Kimek" 8000
+	fleet "Small Saryd" 700
+	fleet "Large Saryd" 2400
+	fleet Heliarch 2000

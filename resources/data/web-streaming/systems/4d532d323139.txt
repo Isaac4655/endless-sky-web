@@ -1,0 +1,6 @@
+system MS-219
+	belt 1404
+	asteroids "large metal" 1 4.22
+	fleet "Iije (Uninterested)" 400
+	fleet "Iije (Swarming)" 700
+	fleet "Iije (Surveillance)" 500

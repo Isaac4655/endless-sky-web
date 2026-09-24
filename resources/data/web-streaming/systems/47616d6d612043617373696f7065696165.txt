@@ -1,0 +1,16 @@
+system "Gamma Cassiopeiae"
+	belt 1779
+	asteroids "small rock" 17 7.4936
+	asteroids "medium rock" 64 2.8101
+	asteroids "large rock" 3 5.0692
+	asteroids "small metal" 5 2.9203
+	asteroids "medium metal" 6 6.9977
+	asteroids "large metal" 42 3.4713
+	minables aluminum 2 6.56317
+	minables titanium 28 4.09147
+	minables tungsten 6 7.59246
+	fleet "Small Core Pirates" 1000
+	fleet "Large Core Pirates" 2000
+	fleet "Large Syndicate" 5000
+	fleet "Human Miners" 2000
+	fleet "Derelict Core" 10000

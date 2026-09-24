@@ -1,0 +1,13 @@
+system Pollux
+	belt 1161
+	asteroids "small rock" 2 8.94
+	asteroids "medium rock" 8 3.48
+	asteroids "large rock" 1 6.48
+	asteroids "medium metal" 2 8.1
+	asteroids "large metal" 1 7.56
+	fleet "Small Northern Merchants" 500
+	fleet "Large Northern Merchants" 800
+	fleet "Paradise Merchants" 600
+	fleet "Small Republic" 1500
+	fleet "Large Republic" 4500
+	fleet "Republic Logistics" 4500

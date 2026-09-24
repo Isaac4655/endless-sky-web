@@ -1,0 +1,19 @@
+system "Lone Cloud"
+	belt 1730
+	asteroids "medium rock" 119 4.732
+	asteroids "large rock" 30 7.1344
+	asteroids "small metal" 4 9.2456
+	asteroids "medium metal" 95 10.1192
+	asteroids "large metal" 9 8.5904
+	minables aluminum 11 4.83953
+	minables silicon 27 5.0224
+	fleet "Small Arach" 2000
+	fleet "Large Arach" 8000
+	fleet "Small Kimek" 1800
+	fleet "Large Kimek" 9000
+	fleet "Small Saryd" 800
+	fleet "Large Saryd" 2500
+	fleet "Arach Miners" 12000
+	fleet "Kimek Miners" 12000
+	fleet "Saryd Miners" 4000
+	fleet Heliarch 3000

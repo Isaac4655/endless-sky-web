@@ -1,0 +1,7 @@
+system Mohuwo
+	belt 1213
+	asteroids "small metal" 1 6.78
+	asteroids "medium metal" 1 5.53
+	asteroids "large metal" 2 5.53
+	fleet "Small Scin" 2000
+	fleet "Scin Transport" 4000

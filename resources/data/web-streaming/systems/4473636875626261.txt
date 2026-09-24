@@ -1,0 +1,18 @@
+system Dschubba
+	belt 1429
+	asteroids "small rock" 20 1.85
+	asteroids "medium rock" 66 2.85
+	asteroids "large rock" 11 2.375
+	asteroids "small metal" 57 2.075
+	asteroids "medium metal" 51 2.3
+	asteroids "large metal" 68 3.5
+	minables aluminum 37 3.17333
+	minables iron 34 4.26089
+	minables silicon 59 3.44288
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 4000
+	fleet "Small Militia" 3000
+	fleet "Large Militia" 5000
+	fleet "Human Miners" 2000

@@ -1,0 +1,13 @@
+system Actannka
+	belt 1228
+	asteroids "small rock" 10 2.35
+	asteroids "medium rock" 31 2.44
+	asteroids "large rock" 1 3.8
+	asteroids "small metal" 5 4
+	asteroids "medium metal" 23 3.74
+	asteroids "large metal" 45 3.3
+	minables iron 11 3.6
+	minables silver 6 5.36
+	minables titanium 4 5.45
+	fleet "Large Quarg (Gegno)" 1400
+	fleet "Quarg (Gegno)" 1400

@@ -1,0 +1,11 @@
+system "Eragaru Le"
+	belt 1500
+	asteroids "small rock" 6 3.9672
+	asteroids "medium rock" 2 2.8044
+	asteroids "large rock" 1 3.0438
+	asteroids "small metal" 2 3.249
+	asteroids "medium metal" 1 4.4118
+	asteroids "large metal" 4 3.8646
+	fleet "Bunrodea Erabu Freight" 1200
+	fleet "Bunrodea Defense" 2000
+	fleet "Bunrodea Royal Guard" 2000

@@ -1,0 +1,9 @@
+system Khosa-Kaska
+	asteroids "small metal" 8 1.5
+	asteroids "small rock" 9 1.8
+	asteroids "large metal" 1 1.2
+	minables lead 3 2.2
+	fleet "Small Old Houses" 2500
+	fleet "Successor Miners" 2000
+	fleet "Medium Successor Freight" 4000
+	fleet "Small Successor Transport" 2000

@@ -1,0 +1,6 @@
+system Queri
+	belt 1500
+	fleet Ka'het 4000
+	fleet "Ka'het Aggressive" 11000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

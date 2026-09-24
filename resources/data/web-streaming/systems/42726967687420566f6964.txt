@@ -1,0 +1,15 @@
+system "Bright Void"
+	belt 1385
+	asteroids "small rock" 7 2.5992
+	asteroids "medium rock" 8 3.9672
+	asteroids "large rock" 6 5.7
+	asteroids "small metal" 2 5.4264
+	asteroids "medium metal" 12 5.472
+	asteroids "large metal" 1 4.0584
+	fleet "Small Arach" 700
+	fleet "Large Arach" 1200
+	fleet "Small Kimek" 900
+	fleet "Large Kimek" 1400
+	fleet "Small Saryd" 500
+	fleet "Large Saryd" 800
+	fleet Heliarch 500

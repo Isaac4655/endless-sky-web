@@ -1,0 +1,8 @@
+system Limen
+	belt 1463
+	asteroids "large metal" 1 2.7552
+	fleet "Small Southern Merchants" 4000
+	fleet "Small Southern Pirates" 1000
+	fleet "Large Southern Pirates" 2000
+	fleet "Human Miners" 1000
+	fleet "Derelict Northern" 10000

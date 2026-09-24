@@ -1,0 +1,8 @@
+system "Genta Bo"
+	belt 1500
+	asteroids "medium rock" 7 11.76
+	asteroids "large rock" 1 11.424
+	asteroids "small metal" 6 10.836
+	asteroids "medium metal" 11 7.728
+	asteroids "large metal" 12 9.912
+	fleet "Bunrodea Defense" 3500

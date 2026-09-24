@@ -1,0 +1,11 @@
+system Mnashyu
+	belt 1163
+	asteroids "small rock" 6 5.08
+	asteroids "medium rock" 8 6.6
+	asteroids "large rock" 13 4.2
+	asteroids "small metal" 9 5.28
+	asteroids "medium metal" 10 6.27
+	asteroids "large metal" 15 3.89
+	minables aluminum 1 7.04
+	minables titanium 8 4.75
+	minables tungsten 22 6.8

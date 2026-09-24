@@ -1,0 +1,14 @@
+system Kiro'ku
+	belt 1308
+	asteroids "small rock" 32 4.9572
+	asteroids "medium rock" 25 5.4675
+	asteroids "large rock" 14 6.1965
+	asteroids "small metal" 25 10.1331
+	asteroids "medium metal" 29 6.1965
+	asteroids "large metal" 20 6.7797
+	minables aluminum 6 10.449
+	minables iron 16 9.30928
+	minables lead 17 7.13731
+	fleet "Wanderer Freight" 800
+	fleet "Wanderer Drones" 3000
+	fleet "Wanderer Defense" 7000

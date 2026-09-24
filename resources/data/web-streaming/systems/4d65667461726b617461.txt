@@ -1,0 +1,10 @@
+system Meftarkata
+	belt 1232
+	asteroids "small rock" 6 1.8096
+	asteroids "medium rock" 4 1.716
+	asteroids "large rock" 14 0.8892
+	asteroids "medium metal" 4 1.5288
+	asteroids "large metal" 1 1.9344
+	minables aluminum 3 2.02893
+	fleet "Large Quarg (Kor Efret)" 1000
+	fleet "Kor Efret Miners" 7200

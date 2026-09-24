@@ -1,0 +1,21 @@
+system "Four Pillars"
+	belt 1061
+	asteroids "small rock" 9 4.851
+	asteroids "medium rock" 2 2.937
+	asteroids "large rock" 21 4.158
+	asteroids "small metal" 5 4.488
+	asteroids "medium metal" 9 3.267
+	asteroids "large metal" 9 4.521
+	minables iron 2 5.83209
+	minables lead 1 7.66489
+	minables silicon 1 6.78678
+	fleet "Small Arach" 1800
+	fleet "Large Arach" 6000
+	fleet "Small Kimek" 1500
+	fleet "Large Kimek" 7000
+	fleet "Small Saryd" 700
+	fleet "Large Saryd" 2000
+	fleet "Arach Miners" 12000
+	fleet "Kimek Miners" 12000
+	fleet "Saryd Miners" 5000
+	fleet Heliarch 2400

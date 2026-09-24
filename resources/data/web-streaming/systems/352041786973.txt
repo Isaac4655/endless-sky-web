@@ -1,0 +1,20 @@
+system "5 Axis"
+	belt 1775
+	asteroids "small rock" 6 3.3264
+	asteroids "medium rock" 86 5.4648
+	asteroids "large rock" 2 7.5438
+	asteroids "small metal" 34 6.831
+	asteroids "medium metal" 38 8.91
+	asteroids "large metal" 31 7.0092
+	minables copper 36 5.56345
+	minables iron 23 4.8681
+	fleet "Small Arach" 900
+	fleet "Large Arach" 1300
+	fleet "Small Kimek" 400
+	fleet "Large Kimek" 600
+	fleet "Small Saryd" 1000
+	fleet "Large Saryd" 1800
+	fleet "Arach Miners" 3500
+	fleet "Kimek Miners" 3000
+	fleet "Saryd Miners" 4000
+	fleet Heliarch 300

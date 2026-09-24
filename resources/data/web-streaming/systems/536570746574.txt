@@ -1,0 +1,12 @@
+system Septet
+	belt 2640
+	asteroids "small metal" 1 1.027
+	asteroids "medium metal" 20 0.741
+	asteroids "large metal" 1 0.858
+	minables silver 18 1.041
+	minables uranium 8 1.055
+	minables iron 23 3.31
+	fleet "Small Aberrant" 200
+	fleet "Large Aberrant" 500
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

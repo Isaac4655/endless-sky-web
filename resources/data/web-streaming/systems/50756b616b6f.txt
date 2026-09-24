@@ -1,0 +1,8 @@
+system Pukako
+	belt 1154
+	asteroids "small rock" 21 0.53
+	asteroids "medium rock" 154 0.61
+	asteroids "large rock" 5 0.58
+	asteroids "large metal" 1 0.65
+	minables lead 5 1.095
+	minables neodymium 1 0.76

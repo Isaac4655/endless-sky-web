@@ -1,0 +1,11 @@
+system Fasitopfar
+	belt 1670
+	asteroids "small rock" 24 7.722
+	asteroids "medium rock" 58 6.75
+	asteroids "large rock" 25 3.348
+	asteroids "small metal" 50 6.264
+	asteroids "medium metal" 67 7.236
+	asteroids "large metal" 83 4.968
+	minables silver 44 10.8343
+	minables tungsten 113 12.1378
+	minables yottrite 1 4.3241

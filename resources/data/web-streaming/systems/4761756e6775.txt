@@ -1,0 +1,10 @@
+system Gaungu
+	belt 1072
+	asteroids "small rock" 13 4.35
+	asteroids "medium rock" 19 3.9
+	asteroids "large rock" 32 3.6
+	asteroids "small metal" 94 3.9
+	asteroids "medium metal" 22 3.69
+	asteroids "large metal" 17 4.63
+	minables iron 2 6.47
+	minables silver 19 4.22

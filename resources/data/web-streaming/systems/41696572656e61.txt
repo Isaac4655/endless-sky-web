@@ -1,0 +1,7 @@
+system Aierena
+	belt 1856
+	asteroids "small metal" 2 1.92
+	asteroids "medium metal" 5 1.7
+	asteroids "large metal" 2 1.9
+	minables titanium 1 1.88
+	minables lead 2 3.27

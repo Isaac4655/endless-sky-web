@@ -1,0 +1,20 @@
+system Companion
+	belt 1786
+	asteroids "small rock" 18 8.265
+	asteroids "medium rock" 3 8.845
+	asteroids "large rock" 6 8.845
+	asteroids "small metal" 6 9.715
+	asteroids "medium metal" 30 3.915
+	asteroids "large metal" 2 4.1325
+	minables aluminum 2 5.36691
+	minables silicon 7 4.9209
+	fleet "Small Arach" 1200
+	fleet "Large Arach" 3000
+	fleet "Small Kimek" 1000
+	fleet "Large Kimek" 1800
+	fleet "Small Saryd" 400
+	fleet "Large Saryd" 1200
+	fleet "Arach Miners" 6000
+	fleet "Kimek Miners" 5000
+	fleet "Saryd Miners" 3000
+	fleet Heliarch 1200

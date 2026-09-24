@@ -1,0 +1,10 @@
+system Fearis
+	belt 1500
+	asteroids "large metal" 2 1.34234
+	asteroids "large rock" 2 2.242
+	asteroids "medium rock" 7 2.3423
+	asteroids "small rock" 1 0.2312
+	fleet Ka'het 2900
+	fleet "Ka'het Aggressive" 9100
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

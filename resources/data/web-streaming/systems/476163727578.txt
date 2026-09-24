@@ -1,0 +1,14 @@
+system Gacrux
+	belt 1188
+	asteroids "medium rock" 20 1.8354
+	asteroids "large rock" 1 2.2862
+	asteroids "small metal" 7 2.8336
+	asteroids "medium metal" 143 3.5742
+	asteroids "large metal" 30 4.7656
+	minables silicon 29 3.91092
+	fleet "Small Southern Merchants" 2000
+	fleet "Large Southern Merchants" 5000
+	fleet "Small Southern Pirates" 1000
+	fleet "Large Southern Pirates" 3000
+	fleet "Small Republic" 15000
+	fleet "Derelict Northern" 30000

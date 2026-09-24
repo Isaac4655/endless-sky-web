@@ -1,0 +1,18 @@
+system Eteron
+	belt 1479
+	asteroids "small rock" 30 2.688
+	asteroids "medium rock" 4 6
+	asteroids "large rock" 48 3.216
+	asteroids "small metal" 35 5.136
+	asteroids "medium metal" 34 6.72
+	asteroids "large metal" 4 6.96
+	minables aluminum 29 8.87071
+	minables copper 27 6.83551
+	minables iron 27 5.29693
+	fleet "Small Northern Merchants" 1000
+	fleet "Large Northern Merchants" 1500
+	fleet "Small Republic" 2000
+	fleet "Large Republic" 4000
+	fleet "Small Northern Pirates" 1000
+	fleet "Human Miners" 2000
+	fleet "Derelict Northern" 30000

@@ -1,0 +1,5 @@
+system Ptobeh
+	belt 1440
+	asteroids "large metal" 1 1.7
+	fleet "Small Vi" 2400
+	fleet "Large Vi" 3400

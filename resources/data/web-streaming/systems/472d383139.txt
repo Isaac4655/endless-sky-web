@@ -1,0 +1,9 @@
+system G-819
+	belt 1333
+	asteroids "small rock" 5 1.53
+	asteroids "large rock" 1 2.04
+	asteroids "large metal" 2 3
+	minables iron 2 2.4
+	fleet "Iije (Uninterested)" 3000
+	fleet "Iije (Swarming)" 6000
+	fleet "Iije (Surveillance)" 3500

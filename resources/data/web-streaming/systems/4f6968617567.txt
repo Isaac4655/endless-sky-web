@@ -1,0 +1,15 @@
+system Oihaug
+	belt 1756
+	asteroids "small rock" 1 1.55
+	asteroids "medium rock" 6 1.49
+	asteroids "large rock" 10 1.99
+	asteroids "small metal" 5 1.32
+	asteroids "medium metal" 74 1.91
+	asteroids "large metal" 9 1.86
+	minables aluminum 6 3.68
+	minables copper 22 3.51
+	minables tungsten 11 2.56
+	fleet "Gegno Basic" 3700
+	fleet "Gegno Cargo" 4700
+	fleet "Small Vi" 2500
+	fleet "Vi Transport" 3200

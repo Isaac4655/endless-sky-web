@@ -1,0 +1,12 @@
+system "Erba Yle"
+	belt 1204
+	asteroids "small rock" 7 2.5
+	asteroids "medium rock" 29 2.07
+	asteroids "large rock" 15 3.27
+	asteroids "small metal" 13 2.07
+	asteroids "medium metal" 3 2.8
+	asteroids "large metal" 15 3.3
+	minables copper 11 3.7
+	fleet "Small Scin" 1300
+	fleet "Scin Cargo" 800
+	fleet "Scin Transport" 1100

@@ -1,0 +1,15 @@
+system Elnath
+	belt 1462
+	asteroids "medium rock" 8 4.998
+	asteroids "large rock" 1 4.6452
+	asteroids "small metal" 9 7.2912
+	asteroids "medium metal" 11 4.7628
+	asteroids "large metal" 2 4.2924
+	minables iron 2 7.79782
+	fleet "Small Northern Merchants" 4000
+	fleet "Large Northern Merchants" 9000
+	fleet "Paradise Merchants" 8000
+	fleet "Small Republic" 7000
+	fleet "Large Republic" 20000
+	fleet "Small Northern Pirates" 5000
+	fleet "Large Northern Pirates" 18000

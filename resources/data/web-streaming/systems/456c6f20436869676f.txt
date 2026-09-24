@@ -1,0 +1,8 @@
+system "Elo Chigo"
+	belt 1500
+	asteroids "medium rock" 28 2.6163
+	asteroids "large rock" 1 4.5144
+	asteroids "small metal" 3 6.3612
+	asteroids "large metal" 2 4.7709
+	fleet "Bunrodea Erabu Freight" 2000
+	fleet "Bunrodea Defense" 1000

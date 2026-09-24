@@ -1,0 +1,11 @@
+system Altair
+	belt 1830
+	asteroids "large metal" 1 4.6748
+	fleet "Small Core Merchants" 400
+	fleet "Large Core Merchants" 600
+	fleet "Small Northern Merchants" 1000
+	fleet "Large Northern Merchants" 3000
+	fleet "Small Republic" 3000
+	fleet "Large Republic" 6000
+	fleet "Republic Logistics" 6000
+	fleet "Small Syndicate" 9000

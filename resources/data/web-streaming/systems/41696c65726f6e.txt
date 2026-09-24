@@ -1,0 +1,12 @@
+system Aileron
+	belt 1094 6
+	belt 1907 7
+	asteroids "small rock" 3 3.363
+	asteroids "medium rock" 21 2.854
+	asteroids "large rock" 5 3.91
+	asteroids "medium metal" 144 2.268
+	asteroids "large metal" 20 3.871
+	minables neodymium 8 4.138
+	fleet "Avgi Scouts" 12000
+	fleet "Small Aberrant" 2900
+	fleet "Large Aberrant" 5600

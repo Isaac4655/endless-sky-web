@@ -1,0 +1,16 @@
+system Vega
+	belt 1744
+	asteroids "small rock" 2 5.7596
+	asteroids "medium rock" 1 6.4736
+	asteroids "large rock" 1 6.5688
+	asteroids "small metal" 3 3.332
+	asteroids "medium metal" 51 6.8068
+	asteroids "large metal" 3 6.426
+	minables copper 8 8.28628
+	minables lead 4 7.71321
+	minables titanium 4 10.0815
+	fleet "Small Northern Merchants" 800
+	fleet "Large Northern Merchants" 3000
+	fleet "Small Republic" 1600
+	fleet "Large Republic" 5000
+	fleet "Human Miners" 5000

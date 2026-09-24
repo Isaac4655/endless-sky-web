@@ -1,0 +1,10 @@
+system Esix
+	belt 1500
+	asteroids "large metal" 3 1.4318
+	asteroids "large rock" 2 2.2565
+	asteroids "small metal" 3 2.2
+	minables lead 13 3.213
+	fleet Ka'het 3600
+	fleet "Ka'het Aggressive" 10500
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

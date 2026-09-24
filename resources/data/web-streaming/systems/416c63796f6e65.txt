@@ -1,0 +1,12 @@
+system Alcyone
+	belt 1438
+	asteroids "small rock" 4 1.62
+	asteroids "medium rock" 16 1.3176
+	asteroids "large rock" 16 1.08
+	asteroids "medium metal" 11 2.5272
+	asteroids "large metal" 2 2.0736
+	minables copper 5 2.95151
+	fleet "Small Core Pirates" 400
+	fleet "Large Core Pirates" 600
+	fleet "Large Syndicate" 1200
+	fleet "Korath Large Raid" 50000

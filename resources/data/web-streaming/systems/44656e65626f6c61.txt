@@ -1,0 +1,14 @@
+system Denebola
+	belt 1050
+	asteroids "small rock" 23 8.91
+	asteroids "medium rock" 13 5.1084
+	asteroids "large rock" 15 4.6926
+	asteroids "medium metal" 13 6.831
+	asteroids "large metal" 1 8.019
+	minables copper 3 8.29669
+	minables lead 3 11.4823
+	minables silicon 3 7.30806
+	fleet "Small Northern Merchants" 800
+	fleet "Large Northern Merchants" 2000
+	fleet "Small Republic" 1000
+	fleet "Large Republic" 2000

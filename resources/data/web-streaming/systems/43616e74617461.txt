@@ -1,0 +1,19 @@
+system Cantata
+	belt 1853
+	asteroids "small rock" 21 1.228
+	asteroids "medium rock" 3 0.766
+	asteroids "large rock" 22 0.858
+	asteroids "small metal" 13 0.95
+	asteroids "medium metal" 5 0.845
+	asteroids "large metal" 5 1.32
+	minables titanium 1 1.596
+	fleet "Small Avgi Merchants" 4200
+	fleet "Large Avgi Merchants" 8400
+	fleet "Dissonance Miners" 12000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 2400
+	fleet "Avgi Strike Group" 6000
+	fleet "Avgi Fleetgroup" 12000
+	fleet "Avgi Twilight Guard Logistics" 7200
+	fleet "Small Aberrant" 24000
+	fleet "Large Aberrant" 30000

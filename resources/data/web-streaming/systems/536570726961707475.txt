@@ -1,0 +1,11 @@
+system Sepriaptu
+	belt 1120
+	asteroids "small rock" 127 4.34
+	asteroids "medium rock" 23 4.41
+	asteroids "large rock" 63 4.13
+	asteroids "small metal" 4 10.5
+	asteroids "medium metal" 53 6.23
+	asteroids "large metal" 1 9.24
+	minables aluminum 13 5.16891
+	minables lead 4 5.12023
+	fleet "Large Quarg (Kor Efret)" 4000

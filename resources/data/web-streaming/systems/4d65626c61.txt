@@ -1,0 +1,16 @@
+system Mebla
+	belt 1114
+	asteroids "medium metal" 16 2.175
+	asteroids "large metal" 1 4.725
+	minables gold 3 3.12889
+	minables iron 4 2.33201
+	fleet "Small Arach" 500
+	fleet "Large Arach" 700
+	fleet "Small Kimek" 1000
+	fleet "Large Kimek" 1800
+	fleet "Small Saryd" 1000
+	fleet "Large Saryd" 2400
+	fleet "Arach Miners" 4000
+	fleet "Kimek Miners" 8000
+	fleet "Saryd Miners" 9000
+	fleet Heliarch 350

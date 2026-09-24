@@ -1,0 +1,18 @@
+system "Kor Fel'tar"
+	belt 1444
+	asteroids "small rock" 2 2.079
+	asteroids "medium rock" 18 2.5872
+	asteroids "large rock" 7 1.6632
+	asteroids "small metal" 38 2.6334
+	asteroids "medium metal" 155 2.2407
+	asteroids "large metal" 5 1.9173
+	minables iron 48 2.87932
+	minables titanium 16 2.87553
+	minables uranium 13 3.05224
+	fleet "Korath Raid" 2050
+	fleet "Korath Home" 1200
+	fleet "Korath Defense" 2400
+	fleet "Korath Civilian Miners" 5000
+	fleet "Korath Civilian Large" 1600
+	fleet "Korath Surveillance" 24000
+	fleet "Korsmanath A'awojs" 1800

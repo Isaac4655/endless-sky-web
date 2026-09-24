@@ -1,0 +1,17 @@
+system Pelaa-Muora
+	belt 1841 4
+	belt 1916 3
+	asteroids "small rock" 9 5.325
+	asteroids "medium rock" 83 4.2
+	asteroids "large rock" 7 6.825
+	asteroids "small metal" 9 6.375
+	asteroids "medium metal" 3 5.25
+	asteroids "large metal" 2 5.775
+	minables neodymium 7 6.338
+	minables copper 12 7.083
+	minables gold 4 4
+	minables silver 8 5.1
+	fleet "Small Successor Transport" 1200
+	fleet "Light Successor Freight" 1200
+	fleet "Successor Miners" 600
+	fleet "Small New Houses" 1400

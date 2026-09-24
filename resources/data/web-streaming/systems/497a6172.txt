@@ -1,0 +1,14 @@
+system Izar
+	belt 1449
+	asteroids "small rock" 7 3.822
+	asteroids "medium rock" 37 5.343
+	asteroids "large rock" 19 4.719
+	asteroids "small metal" 35 3.822
+	asteroids "medium metal" 97 4.875
+	asteroids "large metal" 27 2.145
+	minables gold 2 5.24464
+	minables lead 12 6.26729
+	fleet "Small Southern Merchants" 700
+	fleet "Large Southern Merchants" 1800
+	fleet "Small Militia" 800
+	fleet "Large Militia" 1200

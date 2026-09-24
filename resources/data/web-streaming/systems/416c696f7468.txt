@@ -1,0 +1,11 @@
+system Alioth
+	belt 1889
+	asteroids "small metal" 5 4.0832
+	asteroids "medium metal" 2 4.048
+	asteroids "large metal" 4 3.7664
+	minables copper 1 4.44449
+	fleet "Small Southern Merchants" 400
+	fleet "Large Southern Merchants" 600
+	fleet "Small Militia" 900
+	fleet "Small Southern Pirates" 1200
+	fleet "Large Southern Pirates" 2400

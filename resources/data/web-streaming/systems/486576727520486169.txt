@@ -1,0 +1,14 @@
+system "Hevru Hai"
+	belt 1245
+	fleet "Small Hai" 2000
+	fleet "Large Hai" 5000
+	fleet "Small Hai Merchant" 1000
+	fleet "Large Hai Merchant" 2500
+	fleet "Small Hai Merchant (Sympathizers)" 4000
+	fleet "Large Hai Merchant (Sympathizers)" 10000
+	fleet "Small Hai Merchant (Human)" 4500
+	fleet "Large Hai Merchant (Human)" 7500
+	fleet "Small Human Merchants (Hai)" 9000
+	fleet "Large Human Merchants (Hai)" 15000
+	fleet "Quarg (Hai)" 600
+	fleet "Quarg Utility (Hai)" 8000

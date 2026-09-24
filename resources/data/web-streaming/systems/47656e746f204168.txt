@@ -1,0 +1,9 @@
+system "Gento Ah"
+	belt 1500
+	asteroids "medium rock" 29 1.4144
+	asteroids "large rock" 3 2.1488
+	asteroids "small metal" 28 3.5632
+	asteroids "medium metal" 29 3.9712
+	asteroids "large metal" 17 3.2912
+	fleet "Bunrodea Megasa Freight" 2000
+	fleet "Bunrodea Defense" 1500

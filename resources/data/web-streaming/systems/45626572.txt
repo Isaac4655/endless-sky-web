@@ -1,0 +1,17 @@
+system Eber
+	belt 1350
+	asteroids "small rock" 18 1.4868
+	asteroids "medium rock" 3 3.5532
+	asteroids "large rock" 13 1.8648
+	asteroids "small metal" 13 3.0744
+	asteroids "medium metal" 1 2.0916
+	asteroids "large metal" 19 2.3436
+	minables aluminum 1 3.67652
+	minables platinum 2 3.43245
+	minables uranium 4 2.53236
+	fleet "Small Southern Merchants" 1600
+	fleet "Large Southern Merchants" 2500
+	fleet "Small Militia" 4000
+	fleet "Large Militia" 5000
+	fleet "Small Southern Pirates" 2000
+	fleet "Derelict Southern" 10000

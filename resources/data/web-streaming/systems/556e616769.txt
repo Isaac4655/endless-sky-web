@@ -1,0 +1,11 @@
+system Unagi
+	belt 1960
+	asteroids "large rock" 1 3.102
+	asteroids "small metal" 2 2.772
+	asteroids "medium metal" 1 3.267
+	asteroids "large metal" 1 2.805
+	minables gold 4 5.8391
+	minables tungsten 1 3.91882
+	fleet "Small Northern Pirates" 1500
+	fleet "Large Northern Pirates" 3000
+	fleet "Derelict Pirate" 10000

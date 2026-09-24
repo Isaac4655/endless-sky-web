@@ -1,0 +1,9 @@
+system Regor
+	belt 1305
+	asteroids "large metal" 1 2.2968
+	fleet "Small Northern Merchants" 2000
+	fleet "Large Northern Merchants" 6000
+	fleet "Small Deep Security" 3600
+	fleet "Small Deep Merchants" 2400
+	fleet "Large Deep Security" 8000
+	fleet "Large Deep Merchants" 5000

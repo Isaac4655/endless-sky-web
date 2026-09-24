@@ -1,0 +1,13 @@
+system Ek'kek'ru
+	belt 1517
+	asteroids "small rock" 54 1.683
+	asteroids "medium rock" 12 1.1385
+	asteroids "large rock" 50 1.5015
+	asteroids "small metal" 15 2.0625
+	asteroids "large metal" 10 1.0725
+	minables aluminum 13 2.30409
+	minables copper 9 1.92341
+	minables silicon 13 2.58663
+	fleet "Wanderer Freight" 500
+	fleet "Wanderer Drones" 400
+	fleet "Wanderer Defense" 6000

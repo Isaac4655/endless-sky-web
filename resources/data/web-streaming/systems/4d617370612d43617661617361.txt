@@ -1,0 +1,8 @@
+system Maspa-Cavaasa
+	asteroids "large metal" 12 1.5
+	minables lead 8 1.5
+	minables silicon 4 2
+	minables tungsten 9 1
+	fleet "Small Successor Transport" 3000
+	fleet "Successor Miners" 4000
+	fleet "Small New Houses" 8000

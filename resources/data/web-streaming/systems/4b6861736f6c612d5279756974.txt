@@ -1,0 +1,4 @@
+system Khasola-Ryuit
+	asteroids "small metal" 2 1.5
+	asteroids "large metal" 1 1.3
+	hazard "Predecessors Base Spatial Decay" 600

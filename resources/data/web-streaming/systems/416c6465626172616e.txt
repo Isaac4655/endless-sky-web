@@ -1,0 +1,8 @@
+system Aldebaran
+	belt 1296
+	asteroids "large metal" 1 2.8322
+	fleet "Small Northern Merchants" 600
+	fleet "Large Northern Merchants" 600
+	fleet "Paradise Merchants" 1000
+	fleet "Small Republic" 800
+	fleet "Large Republic" 400

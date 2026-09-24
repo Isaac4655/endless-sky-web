@@ -1,0 +1,13 @@
+system Muphrid
+	belt 1759
+	asteroids "small rock" 10 4.7348
+	asteroids "medium rock" 7 3.192
+	asteroids "large rock" 8 3.4048
+	asteroids "small metal" 1 7.182
+	asteroids "large metal" 1 5.1072
+	minables tungsten 3 4.9859
+	fleet "Small Southern Merchants" 800
+	fleet "Large Southern Merchants" 3500
+	fleet "Small Southern Pirates" 6000
+	fleet "Small Republic" 5000
+	fleet "Derelict Northern" 30000

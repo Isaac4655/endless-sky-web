@@ -1,0 +1,6 @@
+system "Ae Ce L-332"
+	belt 1307
+	asteroids "large metal" 1 2.1
+	asteroids "medium rock" 11 3.6
+	minables unknown 1 2.7
+	fleet Astral 50000

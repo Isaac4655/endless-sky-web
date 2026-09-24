@@ -1,0 +1,13 @@
+system Parca
+	belt 1315
+	asteroids "small rock" 41 4.408
+	asteroids "medium rock" 19 5.5216
+	asteroids "large rock" 1 2.9232
+	asteroids "medium metal" 3 3.1088
+	asteroids "large metal" 3 4.64
+	minables copper 5 5.37985
+	minables lead 3 5.71958
+	fleet "Korath Ember Waste Raid" 10000
+	fleet "Korath Rescue" 30000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

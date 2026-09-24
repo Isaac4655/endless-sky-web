@@ -1,0 +1,17 @@
+system Suhail
+	belt 2715
+	asteroids "small rock" 2 2.8224
+	asteroids "medium rock" 1 4.48
+	asteroids "large rock" 1 2.5088
+	asteroids "small metal" 5 5.7344
+	asteroids "medium metal" 3 3.4944
+	asteroids "large metal" 17 4.5696
+	minables iron 4 6.56789
+	minables silicon 2 8.63888
+	minables silver 2 4.52128
+	fleet "Small Northern Merchants" 4000
+	fleet "Large Northern Merchants" 9000
+	fleet "Small Deep Security" 10000
+	fleet "Small Deep Merchants" 3000
+	fleet "Large Deep Merchants" 7000
+	fleet "Large Northern Pirates" 9000

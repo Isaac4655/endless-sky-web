@@ -1,0 +1,15 @@
+system Twirl
+	belt 1877 9
+	belt 2445 6
+	asteroids "small rock" 1 2.047
+	asteroids "medium rock" 5 2.178
+	asteroids "large rock" 2 1.69
+	asteroids "small metal" 2 2.99
+	asteroids "medium metal" 5 2.178
+	asteroids "large metal" 1 1.625
+	minables uranium 3 4.255
+	minables gold 6 1.872
+	fleet "Avgi Scouts" 18000
+	hazard "Predecessors Base Spatial Decay" 3000
+	hazard "Predecessors Spatial Rift Weak" 36000
+	hazard "Neutron Star Magnetic Field" 1

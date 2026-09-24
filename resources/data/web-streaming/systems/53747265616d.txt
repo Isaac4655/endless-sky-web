@@ -1,0 +1,15 @@
+system Stream
+	belt 1004 8
+	belt 1501 5
+	asteroids "small rock" 24 2.157
+	asteroids "medium rock" 12 2.222
+	asteroids "large rock" 8 1.707
+	asteroids "small metal" 3 1.642
+	asteroids "medium metal" 10 2.995
+	asteroids "large metal" 13 1.803
+	minables gold 2 3.502
+	minables lead 14 3.024
+	fleet "Avgi Scouts" 12000
+	fleet "Avgi Patrol" 24000
+	fleet "Small Aberrant" 2700
+	fleet "Large Aberrant" 5900

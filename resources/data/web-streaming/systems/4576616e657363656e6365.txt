@@ -1,0 +1,17 @@
+system Evanescence
+	belt 1990 7
+	belt 2362 9
+	asteroids "small rock" 46 3.848
+	asteroids "medium rock" 2 6.413
+	asteroids "large rock" 8 5.13
+	asteroids "small metal" 3 5.94
+	asteroids "medium metal" 1 3.578
+	asteroids "large metal" 1 4.59
+	minables silver 3 4.716
+	minables lead 3 4.669
+	minables aluminum 6 5.28
+	fleet "Avgi Scouts" 5100
+	fleet "Avgi Patrol" 2500
+	fleet "Avgi Strike Group" 6200
+	fleet "Small Aberrant" 2100
+	fleet "Large Aberrant" 3600

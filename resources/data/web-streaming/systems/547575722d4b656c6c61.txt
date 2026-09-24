@@ -1,0 +1,8 @@
+system Tuur-Kella
+	asteroids "small metal" 85 8
+	asteroids "large metal" 64 7
+	minables tungsten 16 9
+	fleet "Small Old Houses" 1000
+	fleet "Large Old Houses" 1400
+	fleet "Old Houses Surveillance" 2000
+	fleet "Chydiyi Home" 2500

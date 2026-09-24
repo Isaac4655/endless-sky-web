@@ -1,0 +1,9 @@
+system "Is Il T-127"
+	belt 1313 1
+	belt 2263 5
+	asteroids "small rock" 1 1.74
+	asteroids "medium rock" 4 3.236
+	asteroids "large rock" 3 2.61
+	asteroids "large metal" 1 2.54
+	minables titanium 1 5.05
+	fleet "Vyrmeid (Plankton)" 350

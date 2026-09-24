@@ -1,0 +1,16 @@
+system Acrux
+	belt 1407
+	asteroids "small rock" 82 6.7183
+	asteroids "medium rock" 91 3.4385
+	asteroids "large rock" 17 4.8139
+	asteroids "medium metal" 44 4.3378
+	asteroids "large metal" 19 4.8139
+	minables lead 34 5.87828
+	minables titanium 6 9.19767
+	fleet "Small Southern Merchants" 600
+	fleet "Large Southern Merchants" 1000
+	fleet "Small Militia" 800
+	fleet "Large Militia" 1200
+	fleet "Small Southern Pirates" 1000
+	fleet "Large Southern Pirates" 2400
+	fleet "Human Miners" 5000

@@ -1,0 +1,7 @@
+system MC-42
+	belt 1290
+	minables platinum 1 4.2
+	minables copper 6 7.91
+	fleet "Iije (Uninterested)" 2900
+	fleet "Iije (Swarming)" 2000
+	fleet "Iije (Surveillance)" 2400

@@ -1,0 +1,9 @@
+system "Xutluno Rees"
+	belt 1500
+	asteroids "small rock" 2 2.464
+	asteroids "medium rock" 45 3.724
+	asteroids "large rock" 2 3.108
+	asteroids "small metal" 6 3.64
+	asteroids "medium metal" 1 2.548
+	asteroids "large metal" 1 1.988
+	fleet "Bunrodea Defense" 3500

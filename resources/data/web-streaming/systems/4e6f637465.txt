@@ -1,0 +1,17 @@
+system Nocte
+	belt 1304
+	asteroids "small rock" 121 1.9558
+	asteroids "medium rock" 14 1.9096
+	asteroids "large rock" 28 1.4784
+	asteroids "small metal" 8 1.8326
+	asteroids "medium metal" 77 2.2946
+	asteroids "large metal" 19 1.7094
+	minables copper 46 2.98163
+	minables iron 18 3.78094
+	minables titanium 4 2.67322
+	fleet "Small Northern Merchants" 1500
+	fleet "Small Republic" 3000
+	fleet "Large Republic" 7000
+	fleet "Small Northern Pirates" 2500
+	fleet "Human Miners" 1600
+	fleet "Derelict Northern" 10000

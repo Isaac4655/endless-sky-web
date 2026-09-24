@@ -1,0 +1,13 @@
+system Thread
+	belt 2100
+	asteroids "small rock" 42 1.8
+	asteroids "medium rock" 1 1.416
+	asteroids "large rock" 24 1.224
+	asteroids "medium metal" 14 1.824
+	asteroids "large metal" 22 1.848
+	minables lead 11 2.077
+	minables tungsten 12 1.312
+	minables iron 14 2.332
+	fleet "Avgi Scouts" 9000
+	fleet "Small Aberrant" 2200
+	fleet "Large Aberrant" 4700

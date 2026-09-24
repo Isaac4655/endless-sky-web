@@ -1,0 +1,20 @@
+system "Dark Hills"
+	belt 1367
+	asteroids "small rock" 16 3.4944
+	asteroids "medium rock" 2 4.8384
+	asteroids "large rock" 10 4.9536
+	asteroids "small metal" 7 2.8416
+	asteroids "medium metal" 8 1.92
+	asteroids "large metal" 12 4.1472
+	minables gold 2 5.3967
+	minables iron 4 4.82272
+	fleet "Small Arach" 1200
+	fleet "Large Arach" 4000
+	fleet "Small Kimek" 1200
+	fleet "Large Kimek" 4000
+	fleet "Small Saryd" 600
+	fleet "Large Saryd" 1400
+	fleet "Arach Miners" 8000
+	fleet "Kimek Miners" 8000
+	fleet "Saryd Miners" 3500
+	fleet Heliarch 1000

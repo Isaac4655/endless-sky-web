@@ -1,0 +1,12 @@
+system Aya'k'k
+	belt 1586
+	asteroids "small rock" 6 1.9152
+	asteroids "medium rock" 121 1.9404
+	asteroids "large rock" 8 1.3608
+	asteroids "small metal" 4 2.016
+	asteroids "medium metal" 89 3.78
+	asteroids "large metal" 96 1.5624
+	minables iron 19 3.26734
+	fleet "Wanderer Freight" 900
+	fleet "Wanderer Drones" 2000
+	fleet "Wanderer Defense" 800

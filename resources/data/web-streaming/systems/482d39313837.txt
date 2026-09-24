@@ -1,0 +1,6 @@
+system H-9187
+	belt 1102
+	asteroids "large metal" 1 4.9
+	fleet "Iije (Uninterested)" 3000
+	fleet "Iije (Swarming)" 4000
+	fleet "Iije (Surveillance)" 4000

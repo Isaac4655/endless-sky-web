@@ -1,0 +1,15 @@
+system Kraz
+	belt 1056
+	asteroids "small rock" 1 7.2072
+	asteroids "medium rock" 38 6.7536
+	asteroids "large rock" 4 4.6872
+	asteroids "small metal" 6 4.1328
+	asteroids "medium metal" 57 3.3264
+	asteroids "large metal" 7 2.9232
+	minables lead 1 5.88229
+	minables silicon 3 7.06939
+	minables tungsten 4 9.05696
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 2000
+	fleet "Small Militia" 800
+	fleet "Large Militia" 1200

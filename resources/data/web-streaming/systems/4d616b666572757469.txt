@@ -1,0 +1,11 @@
+system Makferuti
+	belt 1782
+	asteroids "small rock" 18 5.2706
+	asteroids "medium rock" 250 3.3212
+	asteroids "large rock" 32 2.5631
+	asteroids "large metal" 1 4.5847
+	minables aluminum 1 6.08605
+	minables iron 2 3.44188
+	minables silicon 1 5.39135
+	fleet "Small Kor Sestor" 1200
+	fleet "Large Kor Sestor" 5000

@@ -1,0 +1,15 @@
+system Eltanin
+	belt 1859
+	asteroids "small rock" 34 1.904
+	asteroids "medium rock" 12 4.896
+	asteroids "large rock" 6 3.298
+	asteroids "medium metal" 7 3.094
+	asteroids "large metal" 2 4.658
+	minables iron 7 3.63992
+	minables silicon 1 5.00673
+	minables titanium 1 4.77008
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Southern Pirates" 4000
+	fleet "Derelict Southern" 30000
+	fleet Quarg 10000

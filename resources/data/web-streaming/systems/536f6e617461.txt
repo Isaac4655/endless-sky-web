@@ -1,0 +1,17 @@
+system Sonata
+	belt 1543 1
+	belt 1949 4
+	asteroids "large rock" 1 2.201
+	asteroids "small metal" 7 1.736
+	asteroids "medium metal" 12 3.069
+	asteroids "large metal" 2 3.007
+	fleet "Small Avgi Merchants" 9000
+	fleet "Large Avgi Merchants" 18000
+	fleet "Small Dissonance Merchants" 9000
+	fleet "Large Dissonance Merchants" 18000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 4200
+	fleet "Avgi Strike Group" 18000
+	fleet "Avgi Twilight Guard Logistics" 12000
+	fleet "Small Aberrant" 24000
+	fleet "Large Aberrant" 30000

@@ -1,0 +1,14 @@
+system Citadelle
+	asteroids "small rock" 28 1.404
+	asteroids "medium rock" 7 1.24
+	asteroids "large rock" 15 2.059
+	asteroids "small metal" 1 1.287
+	asteroids "medium metal" 27 1.217
+	asteroids "large metal" 3 1.661
+	minables iron 6 1.7
+	minables lead 7 2.9
+	fleet "Small Southern Pirates" 1000
+	fleet "Large Southern Pirates" 2500
+	fleet "Small CCOR" 3800
+	fleet "Large CCOR" 4500
+	fleet "CCOR Logistics" 6000

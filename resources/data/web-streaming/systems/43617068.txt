@@ -1,0 +1,15 @@
+system Caph
+	belt 1173
+	asteroids "small rock" 19 4.14
+	asteroids "medium rock" 15 2.925
+	asteroids "large rock" 104 3.6
+	asteroids "small metal" 12 6.03
+	asteroids "medium metal" 49 3.465
+	asteroids "large metal" 72 6.345
+	minables lead 21 7.55696
+	minables tungsten 63 6.62784
+	minables uranium 6 7.47177
+	fleet "Small Core Merchants" 500
+	fleet "Large Core Merchants" 600
+	fleet "Small Syndicate" 1600
+	fleet "Human Miners" 2000

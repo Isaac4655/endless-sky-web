@@ -1,0 +1,6 @@
+system Muhlifain
+	belt 1265
+	asteroids "large metal" 1 2.1186
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 3500
+	fleet "Small Southern Pirates" 6000

@@ -1,0 +1,13 @@
+system Umbral
+	belt 1375
+	asteroids "small rock" 4 7.1925
+	asteroids "medium rock" 21 4.2525
+	asteroids "large rock" 42 7.5075
+	asteroids "medium metal" 13 3.2025
+	asteroids "large metal" 1 6.8775
+	minables copper 1 7.12297
+	minables lead 5 8.07356
+	minables neodymium 1 10.103
+	fleet "Small Southern Merchants" 4000
+	fleet Quarg 15000
+	fleet "Large Southern Pirates" 6000

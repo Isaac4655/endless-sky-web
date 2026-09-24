@@ -1,0 +1,15 @@
+system Rutilicus
+	belt 1771
+	asteroids "small rock" 1 1.9188
+	asteroids "medium rock" 10 1.9656
+	asteroids "large rock" 1 2.0358
+	asteroids "small metal" 13 1.4742
+	asteroids "medium metal" 50 1.2168
+	asteroids "large metal" 1 2.2932
+	minables copper 7 2.11726
+	minables lead 14 2.22127
+	minables titanium 9 1.47159
+	fleet "Small Southern Merchants" 600
+	fleet "Large Southern Merchants" 2000
+	fleet "Small Militia" 6000
+	fleet "Human Miners" 3000

@@ -1,0 +1,21 @@
+system Torbab
+	belt 1727
+	asteroids "small rock" 12 3.094
+	asteroids "medium rock" 5 2.3296
+	asteroids "large rock" 1 2.0384
+	asteroids "small metal" 3 4.2952
+	asteroids "medium metal" 30 3.3852
+	asteroids "large metal" 1 4.2588
+	minables aluminum 2 4.79729
+	minables silicon 6 3.34977
+	minables uranium 8 5.5571
+	fleet "Small Arach" 400
+	fleet "Large Arach" 600
+	fleet "Small Kimek" 800
+	fleet "Large Kimek" 1400
+	fleet "Small Saryd" 800
+	fleet "Large Saryd" 2000
+	fleet "Arach Miners" 4000
+	fleet "Kimek Miners" 6000
+	fleet "Saryd Miners" 6500
+	fleet Heliarch 250

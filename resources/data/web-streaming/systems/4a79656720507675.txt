@@ -1,0 +1,8 @@
+system "Jyeg Pvu"
+	belt 1522
+	asteroids "small rock" 13 4.2
+	asteroids "medium rock" 6 2.9
+	asteroids "large rock" 21 2.9
+	asteroids "medium metal" 1 4
+	asteroids "large metal" 2 2.26
+	minables silver 1 2.73

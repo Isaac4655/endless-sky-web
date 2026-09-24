@@ -1,0 +1,7 @@
+system "Xutluno Fali"
+	belt 1500
+	asteroids "large rock" 1 3.84
+	asteroids "small metal" 1 4.8
+	asteroids "medium metal" 9 4.2
+	asteroids "large metal" 10 4.26
+	fleet "Bunrodea Defense" 2500

@@ -1,0 +1,10 @@
+system Prosa
+	belt 1500
+	asteroids "medium metal" 11 2
+	asteroids "large metal" 2 2
+	asteroids "small rock" 4 1
+	asteroids "medium rock" 16 1
+	asteroids "large rock" 16 1
+	minables copper 5 2
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

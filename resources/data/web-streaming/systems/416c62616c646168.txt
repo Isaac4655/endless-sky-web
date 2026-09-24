@@ -1,0 +1,18 @@
+system Albaldah
+	belt 1622
+	asteroids "small rock" 1 8.82
+	asteroids "medium rock" 20 5.4
+	asteroids "large rock" 9 7.02
+	asteroids "medium metal" 86 3.18
+	asteroids "large metal" 5 4.2
+	minables iron 20 4.32166
+	minables lead 28 5.26814
+	minables titanium 21 7.37733
+	fleet "Small Southern Merchants" 600
+	fleet "Large Southern Merchants" 1000
+	fleet "Small Southern Pirates" 800
+	fleet "Large Southern Pirates" 1200
+	fleet "Small Militia" 1400
+	fleet "Large Militia" 2400
+	fleet Quarg 3000
+	fleet "Human Miners" 3000

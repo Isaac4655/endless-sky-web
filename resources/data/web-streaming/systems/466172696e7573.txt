@@ -1,0 +1,11 @@
+system Farinus
+	belt 1225
+	asteroids "large rock" 6 0.8316
+	asteroids "small metal" 1 0.6633
+	fleet "Large Remnant" 14000
+	fleet "Small Remnant" 10000
+	fleet "Remnant Transport" 10000
+	fleet "Korath Ember Waste Raid" 40000
+	fleet "Korath Rescue" 60000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

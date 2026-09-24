@@ -1,0 +1,12 @@
+system Girtab
+	belt 1387
+	asteroids "large rock" 1 7.695
+	asteroids "small metal" 9 3.648
+	asteroids "medium metal" 1 5.7
+	asteroids "large metal" 5 3.876
+	minables copper 2 6.75977
+	minables silicon 2 6.67254
+	fleet "Small Southern Merchants" 700
+	fleet "Large Southern Merchants" 1700
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 3000

@@ -1,0 +1,13 @@
+system Elifennka
+	belt 1533
+	asteroids "small rock" 54 6.29
+	asteroids "medium rock" 66 5.21
+	asteroids "large rock" 21 8.9
+	asteroids "small metal" 51 4.58
+	asteroids "medium metal" 105 8.54
+	asteroids "large metal" 27 4.49
+	minables lead 6 5.68
+	minables neodymium 11 6.33
+	minables titanium 21 7.59
+	fleet "Gegno Miners" 10000
+	fleet "Quarg (Gegno)" 4000

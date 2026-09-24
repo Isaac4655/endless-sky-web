@@ -1,0 +1,17 @@
+system Markeb
+	belt 1556
+	asteroids "small rock" 23 5.0895
+	asteroids "medium rock" 4 2.2815
+	asteroids "large rock" 35 3.9312
+	asteroids "small metal" 29 3.159
+	asteroids "medium metal" 10 5.1948
+	asteroids "large metal" 20 4.6332
+	minables silicon 11 7.8218
+	minables tungsten 5 4.20964
+	fleet "Small Northern Merchants" 1000
+	fleet "Large Northern Merchants" 2500
+	fleet "Small Deep Security" 4000
+	fleet "Small Deep Merchants" 2000
+	fleet "Large Deep Security" 8000
+	fleet "Large Deep Merchants" 4000
+	fleet "Large Northern Pirates" 5000

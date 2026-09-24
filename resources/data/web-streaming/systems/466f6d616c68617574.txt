@@ -1,0 +1,15 @@
+system Fomalhaut
+	belt 1854
+	asteroids "small rock" 3 7.1415
+	asteroids "medium rock" 2 9.2529
+	asteroids "large rock" 1 4.2228
+	asteroids "small metal" 16 4.7817
+	asteroids "medium metal" 19 7.0173
+	asteroids "large metal" 2 6.4584
+	minables aluminum 2 7.99634
+	minables titanium 2 8.50151
+	fleet "Small Core Merchants" 1000
+	fleet "Large Core Merchants" 1200
+	fleet "Small Syndicate" 5000
+	fleet "Large Syndicate" 10000
+	fleet "Republic Logistics" 3300

@@ -1,0 +1,11 @@
+system Vanguwo
+	belt 1964
+	asteroids "small rock" 6 1.4
+	asteroids "medium rock" 8 1.2
+	asteroids "large rock" 236 1.8
+	asteroids "small metal" 1 1.4
+	asteroids "medium metal" 109 1.49
+	asteroids "large metal" 1 2.3
+	minables uranium 14 1.89
+	minables copper 10 3.4
+	minables silver 26 2.1

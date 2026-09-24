@@ -1,0 +1,18 @@
+system Moktar
+	belt 1888
+	asteroids "small rock" 2 4.945
+	asteroids "medium rock" 7 8.395
+	asteroids "large rock" 3 4.83
+	asteroids "small metal" 2 4.485
+	asteroids "medium metal" 1 2.875
+	asteroids "large metal" 1 6.9575
+	minables aluminum 4 7.32905
+	minables lead 2 12.5577
+	minables silicon 2 12.0685
+	fleet "Small Core Merchants" 1000
+	fleet "Large Core Merchants" 2000
+	fleet "Small Syndicate" 3000
+	fleet "Large Syndicate" 4000
+	fleet "Small Core Pirates" 2000
+	fleet "Small Northern Pirates" 3000
+	fleet "Derelict Core" 30000

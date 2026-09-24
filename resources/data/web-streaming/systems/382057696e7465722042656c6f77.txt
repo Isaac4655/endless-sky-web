@@ -1,0 +1,20 @@
+system "8 Winter Below"
+	belt 1285
+	asteroids "small rock" 25 1.4256
+	asteroids "medium rock" 54 2.2968
+	asteroids "large rock" 69 3.5376
+	asteroids "medium metal" 31 2.112
+	asteroids "large metal" 4 2.3496
+	minables aluminum 12 2.86905
+	minables titanium 2 4.18618
+	minables uranium 11 4.2075
+	fleet "Small Arach" 800
+	fleet "Large Arach" 1400
+	fleet "Small Kimek" 300
+	fleet "Large Kimek" 400
+	fleet "Small Saryd" 1200
+	fleet "Large Saryd" 2000
+	fleet "Arach Miners" 5000
+	fleet "Kimek Miners" 4000
+	fleet "Saryd Miners" 6000
+	fleet Heliarch 250

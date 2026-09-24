@@ -1,0 +1,21 @@
+system Miblulub
+	belt 1757
+	asteroids "small rock" 74 1.0335
+	asteroids "medium rock" 169 1.716
+	asteroids "large rock" 33 1.9695
+	asteroids "small metal" 4 2.145
+	asteroids "medium metal" 60 1.365
+	asteroids "large metal" 1 2.4765
+	minables lead 78 2.83043
+	minables silicon 12 2.95657
+	minables titanium 21 1.61849
+	fleet "Small Arach" 500
+	fleet "Large Arach" 1200
+	fleet "Small Kimek" 1600
+	fleet "Large Kimek" 5000
+	fleet "Small Saryd" 1500
+	fleet "Large Saryd" 5000
+	fleet "Arach Miners" 2500
+	fleet "Kimek Miners" 8000
+	fleet "Saryd Miners" 8000
+	fleet Heliarch 300

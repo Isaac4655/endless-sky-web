@@ -1,0 +1,14 @@
+system Tailwind
+	belt 1973 5
+	belt 2047 7
+	asteroids "small rock" 37 2.633
+	asteroids "medium rock" 49 1.463
+	asteroids "large rock" 1 1.569
+	asteroids "small metal" 2 2.367
+	asteroids "medium metal" 62 1.942
+	asteroids "large metal" 12 1.596
+	minables lead 5 2.717
+	minables tungsten 15 3.546
+	fleet "Avgi Scouts" 13000
+	fleet "Small Aberrant" 2100
+	fleet "Large Aberrant" 3900

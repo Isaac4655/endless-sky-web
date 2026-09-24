@@ -1,0 +1,23 @@
+system "Fah Root"
+	belt 1057
+	asteroids "small rock" 15 2.1735
+	asteroids "medium rock" 38 3.3465
+	asteroids "large rock" 14 2.898
+	asteroids "small metal" 115 4.002
+	asteroids "medium metal" 22 3.036
+	asteroids "large metal" 18 2.3115
+	minables copper 4 6.40626
+	minables iron 9 4.25952
+	minables lead 22 4.29651
+	fleet "Small Hai" 4000
+	fleet "Large Hai" 8000
+	fleet "Small Hai Merchant" 2000
+	fleet "Large Hai Merchant" 4000
+	fleet "Small Hai Merchant (Sympathizers)" 8000
+	fleet "Large Hai Merchant (Sympathizers)" 16000
+	fleet "Small Hai Merchant (Human)" 7500
+	fleet "Large Hai Merchant (Human)" 12500
+	fleet "Small Human Merchants (Hai)" 15000
+	fleet "Large Human Merchants (Hai)" 25000
+	fleet "Hai Surveillance" 3000
+	fleet "Quarg (Hai)" 2000

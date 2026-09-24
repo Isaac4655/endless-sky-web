@@ -1,0 +1,11 @@
+system Acnanjo
+	belt 1944
+	asteroids "medium rock" 6 1.48
+	asteroids "large rock" 4 1.18
+	asteroids "large metal" 3 0.96
+	minables aluminum 12 3.216
+	minables silicon 24 6.41
+	minables silver 11 4.1
+	fleet "Small Vi" 1600
+	fleet "Gegno Basic" 7600
+	fleet "Gegno Miners" 2800

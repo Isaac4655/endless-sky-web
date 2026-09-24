@@ -1,0 +1,8 @@
+system "Era Natta"
+	belt 1500
+	asteroids "small rock" 5 4.1952
+	asteroids "medium rock" 9 4.9128
+	asteroids "large rock" 3 6.0168
+	asteroids "medium metal" 3 5.0784
+	asteroids "large metal" 1 2.9808
+	fleet "Bunrodea Defense" 4000

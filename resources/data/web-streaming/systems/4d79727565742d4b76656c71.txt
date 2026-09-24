@@ -1,0 +1,5 @@
+system Myruet-Kvelq
+	asteroids "small rock" 27 4.785
+	asteroids "medium rock" 67 3.924
+	asteroids "large rock" 4 2.233
+	asteroids "large metal" 20 3.222

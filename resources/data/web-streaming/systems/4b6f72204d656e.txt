@@ -1,0 +1,18 @@
+system "Kor Men"
+	belt 1260
+	asteroids "small rock" 3 1.7442
+	asteroids "large rock" 1 1.7784
+	asteroids "small metal" 13 3.249
+	asteroids "medium metal" 6 4.275
+	asteroids "large metal" 4 4.1724
+	minables copper 1 4.28861
+	minables silicon 4 4.29042
+	minables titanium 6 3.43513
+	fleet "Korath Home" 800
+	fleet "Korath Raid" 2040
+	fleet "Korath Defense" 2900
+	fleet "Korath Large Raid" 21000
+	fleet "Korath Surveillance" 46000
+	fleet "Korath Civilian Large" 1500
+	fleet "Korath Civilian Miners" 8000
+	fleet "Korsmanath A'awojs" 5616

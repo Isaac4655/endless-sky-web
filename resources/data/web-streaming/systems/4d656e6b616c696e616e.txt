@@ -1,0 +1,16 @@
+system Menkalinan
+	belt 1424
+	asteroids "small rock" 17 2.7216
+	asteroids "medium rock" 19 4.9086
+	asteroids "large rock" 1 2.8674
+	asteroids "small metal" 33 2.43
+	asteroids "medium metal" 63 2.7216
+	asteroids "large metal" 3 3.2076
+	minables lead 8 5.07694
+	minables neodymium 8 4.05165
+	minables silicon 8 3.41901
+	fleet "Small Northern Merchants" 500
+	fleet "Large Northern Merchants" 800
+	fleet "Small Republic" 800
+	fleet "Large Republic" 2000
+	fleet "Republic Logistics" 2000

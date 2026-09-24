@@ -1,0 +1,17 @@
+system Speloog
+	belt 1159
+	asteroids "medium metal" 7 2.975
+	asteroids "large metal" 1 4.515
+	minables aluminum 1 5.5696
+	minables neodymium 2 4.87245
+	minables silver 1 5.29231
+	fleet "Small Arach" 500
+	fleet "Large Arach" 700
+	fleet "Small Kimek" 700
+	fleet "Large Kimek" 1200
+	fleet "Small Saryd" 800
+	fleet "Large Saryd" 1800
+	fleet "Arach Miners" 5000
+	fleet "Kimek Miners" 10000
+	fleet "Saryd Miners" 10000
+	fleet Heliarch 200

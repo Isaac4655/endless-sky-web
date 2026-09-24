@@ -1,0 +1,12 @@
+system Vaticanus
+	belt 1500
+	asteroids "small rock" 3 6
+	asteroids "medium rock" 11 9
+	asteroids "large rock" 5 8
+	asteroids "small metal" 14 8
+	asteroids "medium metal" 47 11
+	asteroids "large metal" 11 7
+	minables lead 16 13
+	minables tungsten 10 13
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

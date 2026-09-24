@@ -1,0 +1,7 @@
+system Saquergen
+	belt 1435
+	asteroids "small rock" 3 3.9105
+	asteroids "medium rock" 1 4.3255
+	asteroids "small metal" 2 6.7143
+	minables gold 2 3.04353
+	minables yottrite 4 4.69542

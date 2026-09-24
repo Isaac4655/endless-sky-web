@@ -1,0 +1,15 @@
+system Lurata
+	belt 1151
+	asteroids "medium rock" 2 4.225
+	asteroids "large rock" 1 8.125
+	asteroids "small metal" 4 6.76
+	asteroids "medium metal" 6 5.33
+	asteroids "large metal" 2 8.71
+	minables aluminum 2 11.6169
+	minables lead 3 8.61211
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 3000
+	fleet Quarg 7000
+	fleet "Small Militia" 9000
+	fleet "Large Southern Pirates" 4000
+	fleet "Derelict Southern" 30000

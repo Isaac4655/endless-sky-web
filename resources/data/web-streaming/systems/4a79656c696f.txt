@@ -1,0 +1,8 @@
+system Jyelio
+	belt 1779
+	minables copper 2 6.62
+	minables tungsten 1 4.15
+	fleet "Vi Warfleet" 2400
+	fleet "Scin Warfleet" 2800
+	fleet "Small Vi II" 3600
+	fleet "Small Scin" 3200

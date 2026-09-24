@@ -1,0 +1,16 @@
+system Mintaka
+	belt 1753
+	asteroids "small rock" 34 6.935
+	asteroids "medium rock" 1 4.6075
+	asteroids "large rock" 23 5.985
+	asteroids "small metal" 46 6.6025
+	asteroids "large metal" 5 3.61
+	minables aluminum 11 9.8728
+	minables titanium 3 11.7992
+	minables uranium 9 6.96883
+	fleet "Small Northern Pirates" 2000
+	fleet "Large Northern Pirates" 2000
+	fleet "Large Republic" 5000
+	fleet "Small Northern Merchants" 4000
+	fleet "Human Miners" 2000
+	fleet "Derelict Pirate" 30000

@@ -1,0 +1,10 @@
+system E-4183
+	belt 1542
+	asteroids "large rock" 3 1.32
+	asteroids "small metal" 5 1.076
+	asteroids "medium metal" 9 1.232
+	minables silver 1 8.3
+	minables aluminum 1 9.0285
+	fleet "Iije (Uninterested)" 1500
+	fleet "Iije (Swarming)" 900
+	fleet "Iije (Surveillance)" 900

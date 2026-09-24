@@ -1,0 +1,13 @@
+system "Is Il V-263"
+	belt 1434 2
+	belt 2085 7
+	asteroids "small rock" 11 3.162
+	asteroids "medium rock" 46 2.697
+	asteroids "large rock" 5 4.418
+	asteroids "medium metal" 1 3.581
+	asteroids "large metal" 1 4.557
+	minables iron 4 3.442
+	minables titanium 3 5.731
+	fleet "Vyrmeid (Plankton)" 500
+	fleet "Vyrmeid (Boomerang)" 700
+	fleet Astral 56000

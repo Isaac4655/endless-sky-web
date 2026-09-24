@@ -1,0 +1,13 @@
+system Anbrim
+	belt 1101
+	asteroids "small rock" 2 3.5
+	asteroids "medium rock" 67 2.6
+	asteroids "large rock" 27 3.9
+	asteroids "small metal" 1 2.6
+	asteroids "medium metal" 39 3.4
+	asteroids "large metal" 9 2.6
+	minables silicon 2 6.2
+	minables uranium 2 5.5
+	minables yottrite 3 6.7
+	fleet "Small Scin" 7900
+	fleet "Small Vi" 7900

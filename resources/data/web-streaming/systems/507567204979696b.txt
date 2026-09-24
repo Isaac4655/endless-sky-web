@@ -1,0 +1,11 @@
+system "Pug Iyik"
+	belt 1286
+	asteroids "small rock" 35 7.6356
+	asteroids "medium rock" 5 6.9552
+	asteroids "large rock" 28 6.5016
+	asteroids "small metal" 8 7.7112
+	asteroids "medium metal" 179 8.5428
+	asteroids "large metal" 34 10.962
+	minables lead 7 14.3837
+	fleet "Small Pug (Wanderer)" 600
+	fleet "Large Pug (Wanderer)" 1200

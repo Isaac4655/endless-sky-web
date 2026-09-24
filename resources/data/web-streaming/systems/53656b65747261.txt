@@ -1,0 +1,4 @@
+system Seketra
+	belt 1465
+	asteroids "large metal" 1 1.7556
+	fleet "Large Quarg (Kor Efret)" 3000

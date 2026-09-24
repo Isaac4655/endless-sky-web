@@ -1,0 +1,13 @@
+system Hintar
+	belt 1725
+	asteroids "small rock" 34 2.016
+	asteroids "medium rock" 7 3.168
+	asteroids "large rock" 4 1.584
+	asteroids "small metal" 37 3.192
+	asteroids "medium metal" 23 1.344
+	asteroids "large metal" 16 1.632
+	minables tungsten 10 3.44444
+	fleet "Small Southern Merchants" 1000
+	fleet "Small Militia" 5000
+	fleet "Small Southern Pirates" 2000
+	fleet "Derelict Southern" 10000

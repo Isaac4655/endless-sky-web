@@ -1,0 +1,14 @@
+system "Tania Australis"
+	belt 1738
+	asteroids "medium rock" 4 4.6656
+	asteroids "large rock" 13 5.2704
+	asteroids "medium metal" 1 2.5488
+	asteroids "large metal" 7 5.9616
+	minables aluminum 5 7.2906
+	minables silicon 3 8.93934
+	minables uranium 2 5.86496
+	fleet "Small Northern Merchants" 1000
+	fleet "Large Northern Merchants" 2000
+	fleet "Small Republic" 3000
+	fleet "Small Northern Pirates" 4000
+	fleet "Large Northern Pirates" 9000

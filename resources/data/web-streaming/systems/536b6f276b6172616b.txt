@@ -1,0 +1,9 @@
+system Sko'karak
+	belt 1805
+	asteroids "medium rock" 8 2.4495
+	asteroids "large rock" 2 1.9665
+	asteroids "small metal" 40 5.175
+	asteroids "medium metal" 59 2.4495
+	asteroids "large metal" 12 5.1405
+	minables titanium 12 5.39802
+	fleet "Wanderer Defense" 4000

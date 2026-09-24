@@ -1,0 +1,7 @@
+system Sarin
+	belt 1752
+	asteroids "large metal" 1 1.74
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 6000

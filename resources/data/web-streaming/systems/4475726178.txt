@@ -1,0 +1,17 @@
+system Durax
+	belt 1287
+	asteroids "small rock" 16 8.1744
+	asteroids "medium rock" 4 5.304
+	asteroids "large rock" 6 6.6768
+	asteroids "small metal" 1 9.1728
+	asteroids "medium metal" 11 7.8624
+	asteroids "large metal" 1 8.6736
+	minables platinum 13 6.9774
+	minables uranium 11 5.907
+	minables tungsten 8 5.105
+	fleet "Small Core Pirates" 600
+	fleet "Large Core Pirates" 900
+	fleet "Large Syndicate" 2500
+	fleet "Korath Raid" 35000
+	fleet "Korath Miners" 45000
+	fleet "Derelict Pirate" 30000

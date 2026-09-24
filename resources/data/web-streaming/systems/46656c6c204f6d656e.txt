@@ -1,0 +1,19 @@
+system "Fell Omen"
+	belt 1240
+	asteroids "small rock" 30 6.3
+	asteroids "medium rock" 91 4.1832
+	asteroids "large rock" 34 5.3424
+	asteroids "medium metal" 5 6.6024
+	asteroids "large metal" 1 4.3344
+	minables silicon 71 5.14237
+	minables tungsten 32 8.52992
+	fleet "Small Arach" 1000
+	fleet "Large Arach" 3000
+	fleet "Small Kimek" 900
+	fleet "Large Kimek" 2500
+	fleet "Small Saryd" 800
+	fleet "Large Saryd" 1800
+	fleet "Arach Miners" 8000
+	fleet "Kimek Miners" 6000
+	fleet "Saryd Miners" 4000
+	fleet Heliarch 400

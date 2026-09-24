@@ -1,0 +1,10 @@
+system "Ultima Thule"
+	belt 1635
+	asteroids "small rock" 2 2.4966
+	asteroids "medium rock" 22 1.9836
+	asteroids "large rock" 6 2.7018
+	asteroids "small metal" 63 4.788
+	asteroids "medium metal" 15 4.2066
+	asteroids "large metal" 1 4.2408
+	minables iron 16 6.44991
+	minables neodymium 5 4.94979

@@ -1,0 +1,20 @@
+system "Silver Bell"
+	belt 1406
+	asteroids "small rock" 2 6.9498
+	asteroids "medium rock" 5 2.43
+	asteroids "large rock" 13 6.7068
+	asteroids "small metal" 2 2.6244
+	asteroids "medium metal" 7 4.3254
+	asteroids "large metal" 8 7.2414
+	minables lead 2 10.4732
+	minables tungsten 3 4.0673
+	fleet "Small Arach" 600
+	fleet "Large Arach" 1000
+	fleet "Small Kimek" 800
+	fleet "Large Kimek" 1200
+	fleet "Small Saryd" 500
+	fleet "Large Saryd" 1000
+	fleet "Arach Miners" 10000
+	fleet "Kimek Miners" 10000
+	fleet "Saryd Miners" 5000
+	fleet Heliarch 300

@@ -1,0 +1,16 @@
+system Turais
+	belt 1471
+	asteroids "small rock" 16 3.075
+	asteroids "medium rock" 37 4.2
+	asteroids "large rock" 7 4.35
+	asteroids "small metal" 1 2.775
+	asteroids "medium metal" 25 4.65
+	asteroids "large metal" 6 3.4125
+	minables lead 10 6.91427
+	minables silver 12 7.75611
+	minables titanium 13 8.10341
+	fleet "Small Southern Merchants" 2000
+	fleet "Large Southern Merchants" 6000
+	fleet "Small Southern Pirates" 3000
+	fleet "Large Southern Pirates" 7000
+	fleet "Human Miners" 2000

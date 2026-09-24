@@ -1,0 +1,10 @@
+system Lire
+	belt 1500
+	asteroids "large metal" 9 3
+	asteroids "small metal" 14 6
+	minables iron 3 6
+	minables titanium 21 8
+	fleet Ka'het 2850
+	fleet "Ka'het Aggressive" 9300
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

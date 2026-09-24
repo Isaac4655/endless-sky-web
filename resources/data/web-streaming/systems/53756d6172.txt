@@ -1,0 +1,6 @@
+system Sumar
+	belt 1778
+	asteroids "large metal" 1 2.2176
+	fleet "Small Northern Pirates" 2000
+	fleet "Large Northern Pirates" 6000
+	fleet "Large Republic" 30000

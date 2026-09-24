@@ -1,0 +1,20 @@
+system "9 Spring Above"
+	belt 1397
+	asteroids "medium rock" 37 4.07
+	asteroids "large rock" 3 3.245
+	asteroids "small metal" 102 1.375
+	asteroids "medium metal" 6 2.97
+	asteroids "large metal" 63 3.3
+	minables silicon 50 3.91149
+	minables silver 19 3.36587
+	minables uranium 24 2.56933
+	fleet "Small Arach" 900
+	fleet "Large Arach" 2000
+	fleet "Small Kimek" 400
+	fleet "Large Kimek" 800
+	fleet "Small Saryd" 900
+	fleet "Large Saryd" 2400
+	fleet "Arach Miners" 4500
+	fleet "Kimek Miners" 3500
+	fleet "Saryd Miners" 5000
+	fleet Heliarch 700

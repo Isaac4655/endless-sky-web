@@ -1,0 +1,4 @@
+system Kasii-Sola
+	asteroids "small rock" 1 1.005
+	asteroids "small metal" 1 1.17
+	hazard "Predecessors Base Spatial Decay" 600

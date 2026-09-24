@@ -1,0 +1,13 @@
+system Wave
+	belt 1402 7
+	belt 1954 5
+	asteroids "small rock" 50 3.758
+	asteroids "medium rock" 59 5.975
+	asteroids "large rock" 37 4.558
+	asteroids "small metal" 1 5.174
+	asteroids "medium metal" 81 5.852
+	asteroids "large metal" 7 5.852
+	minables silver 2 8.327
+	fleet "Avgi Scouts" 12000
+	fleet "Small Aberrant" 3100
+	fleet "Large Aberrant" 4900

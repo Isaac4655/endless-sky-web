@@ -1,0 +1,20 @@
+system Ballad
+	belt 1550
+	asteroids "medium rock" 4 2.523
+	asteroids "large rock" 5 2.558
+	asteroids "small metal" 2 3.069
+	asteroids "medium metal" 49 1.773
+	asteroids "large metal" 25 2.046
+	minables silver 1 3.744
+	minables copper 1 3.919
+	fleet "Small Avgi Merchants" 4200
+	fleet "Large Avgi Merchants" 8400
+	fleet "Small Dissonance Merchants" 4200
+	fleet "Large Dissonance Merchants" 8400
+	fleet "Dissonance Miners" 12000
+	fleet "Avgi Scouts" 9000
+	fleet "Avgi Patrol" 2700
+	fleet "Avgi Strike Group" 9000
+	fleet "Avgi Twilight Guard Logistics" 6000
+	fleet "Small Aberrant" 14400
+	fleet "Large Aberrant" 21000

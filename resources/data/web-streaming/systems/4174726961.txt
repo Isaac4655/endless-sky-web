@@ -1,0 +1,17 @@
+system Atria
+	belt 1340
+	asteroids "small rock" 18 2.376
+	asteroids "medium rock" 16 2.781
+	asteroids "large rock" 37 3.888
+	asteroids "small metal" 1 3.429
+	asteroids "medium metal" 26 2.7
+	asteroids "large metal" 2 1.431
+	minables aluminum 11 5.63475
+	minables iron 17 5.95487
+	minables silicon 16 4.85513
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Southern Pirates" 3000
+	fleet "Large Southern Pirates" 5000
+	fleet "Small Militia" 8000
+	fleet "Human Miners" 2000

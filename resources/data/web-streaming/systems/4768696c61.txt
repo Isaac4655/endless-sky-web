@@ -1,0 +1,7 @@
+system Ghila
+	belt 1165
+	fleet "Magic Asteroid" 900
+	hazard "Beyond Patir Shield Eraser" 1
+	hazard "Ghila Black Hole Event Horizon" 1
+	hazard "Thepa and Ghila Black Hole Accretion Disk" 1
+	hazard "Small Black Hole Gravity" 1

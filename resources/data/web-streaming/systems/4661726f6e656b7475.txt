@@ -1,0 +1,14 @@
+system Faronektu
+	belt 1630
+	asteroids "small rock" 32 2.244
+	asteroids "medium rock" 53 2.754
+	asteroids "large rock" 15 1.9125
+	asteroids "small metal" 116 2.448
+	asteroids "medium metal" 132 3.366
+	asteroids "large metal" 13 2.295
+	minables iron 13 5.13054
+	minables silicon 41 3.26981
+	fleet "Small Kor Mereti" 1200
+	fleet "Large Kor Mereti" 2000
+	fleet "Large Kor Sestor" 3000
+	fleet "Kor Mereti Miners" 2000

@@ -1,0 +1,8 @@
+system "Over the Rainbow"
+	belt 1500
+	asteroids "small rock" 1 3.3098
+	asteroids "medium rock" 8 3.3345
+	asteroids "large rock" 2 2.1242
+	asteroids "small metal" 5 2.9887
+	asteroids "medium metal" 11 3.6556
+	asteroids "large metal" 7 2.0007

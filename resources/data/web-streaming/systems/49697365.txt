@@ -1,0 +1,9 @@
+system Iise
+	belt 1734
+	asteroids "small rock" 1 1.9
+	asteroids "medium rock" 8 1.78
+	asteroids "large rock" 1 2.57
+	asteroids "small metal" 4 1.8
+	asteroids "medium metal" 58 1.7
+	asteroids "large metal" 33 2.3
+	minables copper 14 3.2

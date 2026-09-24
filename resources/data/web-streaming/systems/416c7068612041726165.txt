@@ -1,0 +1,16 @@
+system "Alpha Arae"
+	belt 1405
+	asteroids "small rock" 1 1.302
+	asteroids "medium rock" 26 3.129
+	asteroids "large rock" 28 1.974
+	asteroids "small metal" 33 2.058
+	asteroids "medium metal" 18 1.68
+	asteroids "large metal" 9 1.932
+	minables silicon 10 3.80746
+	fleet "Small Southern Merchants" 1800
+	fleet "Large Southern Merchants" 6000
+	fleet "Small Militia" 4000
+	fleet "Large Militia" 9000
+	fleet "Small Southern Pirates" 4000
+	fleet "Large Southern Pirates" 9000
+	fleet "Derelict Southern" 30000

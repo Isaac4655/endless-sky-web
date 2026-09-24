@@ -1,0 +1,12 @@
+system Equus
+	belt 1157 6
+	belt 2400 5
+	asteroids "small rock" 5 3.249
+	asteroids "medium rock" 64 2.804
+	asteroids "large rock" 12 2.668
+	asteroids "small metal" 9 2.291
+	asteroids "medium metal" 36 3.386
+	asteroids "large metal" 73 2.599
+	minables silicon 9 4.092
+	minables aluminum 28 3.354
+	hazard "Neutron Star Magnetic Field" 1

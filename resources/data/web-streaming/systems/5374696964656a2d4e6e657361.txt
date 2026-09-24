@@ -1,0 +1,12 @@
+system Stiidej-Nnesa
+	asteroids "small rock" 32 16
+	asteroids "large rock" 28 17
+	asteroids "small metal" 44 18
+	asteroids "large metal" 18 20
+	minables lead 15 18
+	minables neodymium 12 21
+	fleet "Small Old Houses" 1200
+	fleet "Large Old Houses" 2400
+	fleet "Old Houses Surveillance" 4000
+	fleet "Successor Miners" 1000
+	fleet "Medium Successor Freight" 1000

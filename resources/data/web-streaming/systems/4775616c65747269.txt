@@ -1,0 +1,6 @@
+system Gualetri
+	belt 1734
+	asteroids "large metal" 1 2.8
+	fleet "Gegno Basic" 4400
+	fleet "Gegno Cargo" 6000
+	fleet "Small Scin" 2100

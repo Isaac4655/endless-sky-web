@@ -1,0 +1,3 @@
+system Avasaa-Novaa
+	hazard "Predecessors Base Spatial Decay" 400
+	hazard "Predecessors Spatial Rift Weak" 10000

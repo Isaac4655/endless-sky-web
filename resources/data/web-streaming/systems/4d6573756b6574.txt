@@ -1,0 +1,5 @@
+system Mesuket
+	belt 1215
+	asteroids "large metal" 1 1.6758
+	fleet "Large Kor Mereti" 600
+	fleet "Large Kor Sestor" 600

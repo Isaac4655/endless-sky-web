@@ -1,0 +1,14 @@
+system Si'yak'ku
+	belt 1985
+	asteroids "small rock" 19 3.78
+	asteroids "medium rock" 27 5.256
+	asteroids "large rock" 51 2.412
+	asteroids "small metal" 23 3.708
+	asteroids "medium metal" 24 4.356
+	asteroids "large metal" 1 4.968
+	minables neodymium 4 5.63144
+	minables silicon 21 4.97907
+	minables titanium 30 6.90932
+	fleet "Wanderer Freight" 1300
+	fleet "Wanderer Drones" 700
+	fleet "Wanderer Defense" 9000

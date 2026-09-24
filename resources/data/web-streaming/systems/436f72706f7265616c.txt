@@ -1,0 +1,15 @@
+system Corporeal
+	belt 1263 4
+	belt 1635 3
+	asteroids "medium rock" 7 2.08
+	asteroids "large rock" 3 2.002
+	asteroids "small metal" 8 2.522
+	asteroids "medium metal" 17 2.106
+	asteroids "large metal" 1 1.534
+	minables titanium 8 2.229
+	minables lead 11 4.235
+	fleet "Avgi Scouts" 9300
+	fleet "Avgi Patrol" 4200
+	fleet "Avgi Strike Group" 12000
+	fleet "Small Aberrant" 7400
+	fleet "Large Aberrant" 12600

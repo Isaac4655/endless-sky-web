@@ -1,0 +1,10 @@
+system "Far Horizon"
+	belt 1242
+	asteroids "large metal" 1 2.1945
+	fleet "Small Arach" 1600
+	fleet "Large Arach" 4000
+	fleet "Small Kimek" 1400
+	fleet "Large Kimek" 3000
+	fleet "Small Saryd" 600
+	fleet "Large Saryd" 1600
+	fleet Heliarch 1800

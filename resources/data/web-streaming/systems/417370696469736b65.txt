@@ -1,0 +1,8 @@
+system Aspidiske
+	belt 2385
+	asteroids "large metal" 1 3.7422
+	fleet "Small Northern Merchants" 800
+	fleet "Large Northern Merchants" 2000
+	fleet "Small Deep Security" 2000
+	fleet "Small Deep Merchants" 1400
+	fleet "Large Deep Merchants" 3000

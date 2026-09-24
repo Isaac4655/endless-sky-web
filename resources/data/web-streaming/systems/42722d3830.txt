@@ -1,0 +1,20 @@
+system Br-80
+	belt 1989
+	asteroids "small rock" 1 1.61
+	asteroids "large rock" 6 2.383
+	asteroids "small metal" 6 2.19
+	asteroids "large metal" 2 2.93
+	minables gold 4 5.315
+	fleet "Small Avgi Merchants" 36000
+	fleet "Large Avgi Merchants" 42000
+	fleet "Avgi Miners" 9000
+	fleet "Small Dissonance Merchants" 36000
+	fleet "Large Dissonance Merchants" 42000
+	fleet "Dissonance Miners" 9000
+	fleet "Avgi Scouts" 12000
+	fleet "Avgi Patrol" 9000
+	fleet "Avgi Strike Group" 24000
+	fleet "Avgi Twilight Guard Logistics" 48000
+	fleet "Small Aberrant" 12000
+	fleet "Large Aberrant" 18000
+	hazard "Predecessors Base Spatial Decay" 2400

@@ -1,0 +1,15 @@
+system Rasalhague
+	belt 1282
+	asteroids "small rock" 2 1.9
+	asteroids "medium rock" 32 2.546
+	asteroids "large rock" 1 1.292
+	asteroids "small metal" 10 2.204
+	asteroids "medium metal" 8 2.698
+	asteroids "large metal" 2 2.489
+	minables aluminum 7 4.62949
+	minables iron 5 2.98954
+	minables silicon 10 3.19852
+	fleet "Small Southern Merchants" 1500
+	fleet "Large Southern Merchants" 2000
+	fleet "Small Southern Pirates" 4000
+	fleet "Large Southern Pirates" 8000

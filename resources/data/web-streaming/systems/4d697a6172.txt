@@ -1,0 +1,7 @@
+system Mizar
+	belt 1876
+	asteroids "large metal" 1 2.6304
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 3500
+	fleet "Small Southern Pirates" 6000
+	fleet "Derelict Northern" 30000

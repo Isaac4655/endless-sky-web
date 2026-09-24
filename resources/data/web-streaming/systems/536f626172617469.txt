@@ -1,0 +1,5 @@
+system Sobarati
+	belt 1314
+	asteroids "large metal" 1 3.705
+	fleet "Small Kor Sestor" 800
+	fleet "Large Kor Sestor" 4000

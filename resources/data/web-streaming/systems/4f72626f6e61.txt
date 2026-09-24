@@ -1,0 +1,15 @@
+system Orbona
+	belt 1507
+	asteroids "small rock" 22 3.99
+	asteroids "medium rock" 34 3.57
+	asteroids "large rock" 2 4.08
+	asteroids "small metal" 26 4.26
+	asteroids "medium metal" 45 1.92
+	asteroids "large metal" 4 4.35
+	minables platinum 19 4.40315
+	minables tungsten 36 5.42935
+	minables gold 28 4.7943
+	fleet "Small Southern Pirates" 1200
+	fleet "Large Southern Pirates" 3200
+	fleet "Human Miners" 1500
+	fleet "Derelict Northern" 10000

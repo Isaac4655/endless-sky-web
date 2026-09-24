@@ -1,0 +1,12 @@
+system Kella-Uoasa
+	asteroids "large metal" 58 4.5
+	asteroids "small rock" 32 3.317
+	asteroids "medium rock" 18 3.445
+	asteroids "large rock" 12 3.156
+	minables iron 14 4.5
+	minables silver 1 8
+	fleet "People's Houses" 800
+	fleet "Light Successor Freight" 9000
+	fleet "Small Successor Transport" 9000
+	fleet "People's Houses Raiders" 3000
+	fleet "Small New Houses" 15000

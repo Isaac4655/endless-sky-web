@@ -1,0 +1,8 @@
+system Headwind
+	belt 1856 6
+	belt 2092 7
+	asteroids "large metal" 1 1.04
+	fleet "Small Aberrant" 1900
+	fleet "Large Aberrant" 3900
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 25000

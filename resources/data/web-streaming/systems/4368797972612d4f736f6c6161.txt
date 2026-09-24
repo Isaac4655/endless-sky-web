@@ -1,0 +1,10 @@
+system Chyyra-Osolaa
+	asteroids "large rock" 8 1
+	asteroids "small rock" 4 1
+	fleet "Small New Houses" 3000
+	fleet "Large New Houses" 4000
+	fleet "Medium Successor Freight" 800
+	fleet "Small Successor Transport" 1600
+	fleet "People's Houses" 8000
+	fleet "People's Houses Raiders" 12000
+	fleet "Aqrabe Home" 1200

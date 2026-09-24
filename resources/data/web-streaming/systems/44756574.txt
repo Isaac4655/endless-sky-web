@@ -1,0 +1,7 @@
+system Duet
+	belt 1869 10
+	belt 2347 6
+	fleet "Small Aberrant" 1800
+	fleet "Large Aberrant" 3600
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 25000

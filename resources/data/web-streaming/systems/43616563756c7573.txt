@@ -1,0 +1,16 @@
+system Caeculus
+	belt 1797
+	asteroids "small rock" 3 0.5704
+	asteroids "medium rock" 6 0.828
+	asteroids "large rock" 1 0.7176
+	asteroids "small metal" 23 1.288
+	asteroids "medium metal" 14 0.8556
+	asteroids "large metal" 37 0.6072
+	minables silicon 19 1.02332
+	fleet "Korath Ember Waste Raid" 20000
+	fleet "Korath Rescue" 60000
+	fleet "Small Remnant" 30000
+	fleet "Large Remnant" 30000
+	fleet Embershades 12000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

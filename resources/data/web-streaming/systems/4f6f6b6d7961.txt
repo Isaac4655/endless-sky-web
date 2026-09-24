@@ -1,0 +1,13 @@
+system Ookmya
+	belt 1144
+	asteroids "large rock" 17 5.7
+	asteroids "small metal" 136 6
+	asteroids "medium metal" 55 4
+	asteroids "large metal" 4 7.69
+	minables lead 5 1.2
+	fleet "Small Vi" 900
+	fleet "Large Vi" 1600
+	fleet "Vi Transport" 1000
+	fleet "Vi Cargo" 1600
+	fleet "Gegno Miners" 2600
+	fleet "Gegno Basic" 4600

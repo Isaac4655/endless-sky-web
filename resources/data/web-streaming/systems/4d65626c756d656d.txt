@@ -1,0 +1,10 @@
+system Meblumem
+	belt 1794
+	asteroids "large metal" 1 2.376
+	fleet "Small Arach" 400
+	fleet "Large Arach" 600
+	fleet "Small Kimek" 1200
+	fleet "Large Kimek" 2400
+	fleet "Small Saryd" 1200
+	fleet "Large Saryd" 2800
+	fleet Heliarch 400

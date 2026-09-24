@@ -1,0 +1,9 @@
+system Opera
+	belt 1589 7
+	belt 1614 9
+	asteroids "medium rock" 1 4.185
+	asteroids "large rock" 3 4.253
+	asteroids "small metal" 11 4.388
+	asteroids "medium metal" 51 4.05
+	asteroids "large metal" 37 6.615
+	minables iron 3 5.641

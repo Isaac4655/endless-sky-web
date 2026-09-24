@@ -1,0 +1,22 @@
+system "Heia Due"
+	belt 1079
+	asteroids "small rock" 28 8.9775
+	asteroids "medium rock" 10 7.3575
+	asteroids "large rock" 12 9.99
+	asteroids "small metal" 5 4.86
+	asteroids "medium metal" 51 3.9825
+	asteroids "large metal" 104 5.4675
+	minables copper 32 6.53713
+	minables lead 1 10.1532
+	minables silver 6 9.57567
+	fleet "Small Hai" 1200
+	fleet "Large Hai" 4000
+	fleet "Small Hai Merchant" 600
+	fleet "Large Hai Merchant" 2000
+	fleet "Small Hai Merchant (Sympathizers)" 2400
+	fleet "Large Hai Merchant (Sympathizers)" 8000
+	fleet "Small Hai Merchant (Human)" 1000
+	fleet "Large Hai Merchant (Human)" 2500
+	fleet "Small Human Merchants (Hai)" 2000
+	fleet "Large Human Merchants (Hai)" 5000
+	fleet "Hai Surveillance" 2000

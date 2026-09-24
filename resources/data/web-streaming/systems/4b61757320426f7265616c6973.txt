@@ -1,0 +1,11 @@
+system "Kaus Borealis"
+	belt 1074
+	asteroids "small rock" 1 4.2504
+	asteroids "medium rock" 10 4.1888
+	asteroids "large rock" 4 3.388
+	asteroids "small metal" 2 8.2544
+	asteroids "large metal" 4 4.7432
+	fleet "Small Southern Merchants" 600
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Militia" 8000
+	fleet "Small Southern Pirates" 5000

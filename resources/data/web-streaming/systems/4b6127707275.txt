@@ -1,0 +1,13 @@
+system Ka'pru
+	belt 1808
+	asteroids "medium rock" 2 2.7573
+	asteroids "large rock" 1 2.7573
+	asteroids "small metal" 14 2.184
+	asteroids "medium metal" 1 3.6855
+	asteroids "large metal" 3 2.1294
+	minables iron 4 3.37835
+	minables titanium 2 3.67707
+	minables tungsten 2 4.32691
+	fleet "Wanderer Freight" 1500
+	fleet "Wanderer Drones" 800
+	fleet "Wanderer Defense" 5000

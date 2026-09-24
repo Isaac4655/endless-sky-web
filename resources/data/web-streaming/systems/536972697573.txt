@@ -1,0 +1,17 @@
+system Sirius
+	belt 1407
+	asteroids "small rock" 1 5.225
+	asteroids "medium rock" 6 4.565
+	asteroids "large rock" 6 7.645
+	asteroids "small metal" 34 8.085
+	asteroids "medium metal" 3 4.565
+	asteroids "large metal" 51 7.535
+	minables aluminum 2 14.6138
+	minables copper 2 9.02906
+	minables iron 2 10.911
+	fleet "Small Northern Merchants" 500
+	fleet "Large Northern Merchants" 700
+	fleet "Paradise Merchants" 800
+	fleet "Small Republic" 1000
+	fleet "Large Republic" 2500
+	fleet "Republic Logistics" 2500

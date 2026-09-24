@@ -1,0 +1,14 @@
+system Kiru'kichi
+	belt 1465
+	asteroids "small rock" 11 5.032
+	asteroids "medium rock" 107 4.454
+	asteroids "large rock" 23 3.774
+	asteroids "small metal" 43 2.38
+	asteroids "medium metal" 138 3.774
+	asteroids "large metal" 19 4.114
+	minables aluminum 1 6.59917
+	minables copper 1 4.1075
+	minables lead 3 5.96881
+	fleet "Wanderer Freight" 800
+	fleet "Wanderer Drones" 300
+	fleet "Wanderer Defense" 2000

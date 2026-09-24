@@ -1,0 +1,15 @@
+system Fingol
+	belt 1976
+	asteroids "small rock" 3 2.992
+	asteroids "medium rock" 8 3.74
+	asteroids "large rock" 3 1.87
+	asteroids "medium metal" 25 3.468
+	asteroids "large metal" 1 4.828
+	minables iron 6 5.99599
+	minables tungsten 9 6.24826
+	fleet "Small Northern Merchants" 1200
+	fleet "Small Republic" 2000
+	fleet "Large Republic" 3000
+	fleet "Small Northern Pirates" 2000
+	fleet "Human Miners" 3000
+	fleet "Derelict Northern" 10000

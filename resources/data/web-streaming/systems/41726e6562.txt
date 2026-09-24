@@ -1,0 +1,10 @@
+system Arneb
+	belt 1947
+	asteroids "large rock" 1 5.3055
+	asteroids "small metal" 2 5.2245
+	asteroids "medium metal" 9 4.7385
+	asteroids "large metal" 1 6.0345
+	fleet "Small Northern Pirates" 400
+	fleet "Large Northern Pirates" 500
+	fleet "Old Northern Pirates" 6000
+	fleet "Large Republic" 15000

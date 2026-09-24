@@ -1,0 +1,23 @@
+system Prelude
+	belt 1664
+	asteroids "small rock" 3 4.111
+	asteroids "medium rock" 5 3.953
+	asteroids "large rock" 1 4.585
+	asteroids "small metal" 2 2.899
+	asteroids "medium metal" 2 4.005
+	asteroids "large metal" 1 4.005
+	minables iron 12 7.462
+	minables gold 4 6.375
+	minables lead 5 7.644
+	minables titanium 12 3.517
+	minables platinum 8 18.241
+	minables uranium 3 20.512
+	fleet "Small Dissonance Merchants" 1800
+	fleet "Large Dissonance Merchants" 4200
+	fleet "Small Dissonance Pirates" 15000
+	fleet "Large Dissonance Pirates" 36000
+	fleet "Dissonance Miners" 3600
+	fleet "Small Avgi Merchants" 9000
+	fleet "Large Avgi Merchants" 18000
+	fleet "Avgi Patrol" 42000
+	hazard "Predecessors Base Spatial Decay" 2400

@@ -1,0 +1,15 @@
+system Firmament
+	belt 1176 5
+	belt 1701 6
+	asteroids "small rock" 2 2.037
+	asteroids "medium rock" 4 2.079
+	asteroids "medium metal" 6 1.386
+	asteroids "small metal" 11 1.68
+	asteroids "large metal" 6 1.743
+	minables aluminum 3 3.056
+	minables platinum 3 2.083
+	fleet "Avgi Scouts" 6000
+	fleet "Avgi Patrol" 3100
+	fleet "Avgi Strike Group" 12000
+	fleet "Small Aberrant" 8400
+	fleet "Large Aberrant" 9600

@@ -1,0 +1,16 @@
+system "Delta Sagittarii"
+	belt 1414
+	asteroids "small rock" 35 4.914
+	asteroids "medium rock" 14 4.4577
+	asteroids "large rock" 8 2.5623
+	asteroids "small metal" 43 5.1597
+	asteroids "medium metal" 45 2.1762
+	asteroids "large metal" 16 4.0716
+	minables aluminum 32 4.42482
+	minables iron 9 4.88567
+	minables silicon 1 4.38847
+	fleet "Small Southern Merchants" 900
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Southern Pirates" 3000
+	fleet "Small Militia" 7000
+	fleet "Human Miners" 3000

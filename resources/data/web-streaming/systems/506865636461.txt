@@ -1,0 +1,17 @@
+system Phecda
+	belt 1375
+	asteroids "small rock" 182 3.2
+	asteroids "medium rock" 57 6.95
+	asteroids "large rock" 40 3.75
+	asteroids "small metal" 17 6.85
+	asteroids "medium metal" 40 2.7
+	asteroids "large metal" 5 5.55
+	minables lead 41 5.68365
+	minables silicon 72 4.34737
+	minables titanium 39 5.28035
+	fleet "Small Northern Merchants" 700
+	fleet "Large Northern Merchants" 1000
+	fleet "Small Southern Merchants" 700
+	fleet "Large Southern Merchants" 1000
+	fleet "Small Republic" 5000
+	fleet "Human Miners" 2000

@@ -1,0 +1,11 @@
+system Antevorta
+	belt 1994
+	asteroids "small rock" 1 1.6272
+	asteroids "medium rock" 14 1.2816
+	asteroids "large rock" 1 1.1088
+	asteroids "small metal" 1 1.1664
+	asteroids "medium metal" 6 1.4544
+	asteroids "large metal" 1 1.3248
+	minables silicon 4 2.09623
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

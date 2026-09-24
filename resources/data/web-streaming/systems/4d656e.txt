@@ -1,0 +1,14 @@
+system Men
+	belt 1580
+	asteroids "small rock" 9 3.504
+	asteroids "medium rock" 2 5.376
+	asteroids "large rock" 5 5.952
+	asteroids "small metal" 8 3.648
+	asteroids "medium metal" 7 4.992
+	asteroids "large metal" 27 3.072
+	minables lead 9 4.54626
+	minables silver 10 5.20399
+	fleet "Small Southern Pirates" 400
+	fleet "Large Southern Pirates" 600
+	fleet "Small Northern Pirates" 2000
+	fleet "Large Northern Pirates" 4000

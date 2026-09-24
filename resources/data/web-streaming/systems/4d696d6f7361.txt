@@ -1,0 +1,14 @@
+system Mimosa
+	belt 1484
+	asteroids "medium rock" 22 3.3698
+	asteroids "large rock" 3 5.4404
+	asteroids "small metal" 2 3.3292
+	asteroids "medium metal" 3 2.7608
+	asteroids "large metal" 1 4.9532
+	minables aluminum 1 4.72132
+	minables neodymium 1 5.33208
+	fleet "Small Southern Merchants" 1600
+	fleet "Large Southern Merchants" 5000
+	fleet "Small Militia" 2500
+	fleet "Large Militia" 6000
+	fleet "Large Southern Pirates" 8000

@@ -1,0 +1,18 @@
+system Misam
+	belt 1091
+	asteroids "small rock" 30 2.4918
+	asteroids "medium rock" 65 2.7068
+	asteroids "large rock" 1 2.561
+	asteroids "small metal" 8 1.2002
+	asteroids "medium metal" 10 2.7702
+	asteroids "large metal" 6 2.2562
+	minables copper 22 2.79651
+	minables silver 18 1.38539
+	minables neodymium 14 1.81077
+	fleet "Small Core Pirates" 750
+	fleet "Large Core Pirates" 2000
+	fleet "Korath Raid" 65000
+	fleet "Korath Large Raid" 40000
+	fleet "Human Miners" 10000
+	fleet "Large Syndicate" 20000
+	fleet "Korath Miners" 70000

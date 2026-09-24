@@ -1,0 +1,22 @@
+system "Io Lowe"
+	belt 1552
+	asteroids "small rock" 16 8.0325
+	asteroids "medium rock" 9 7.425
+	asteroids "large rock" 29 8.235
+	asteroids "small metal" 2 3.7125
+	asteroids "medium metal" 161 6.075
+	asteroids "large metal" 4 8.8425
+	minables iron 42 7.16043
+	minables silicon 42 9.89542
+	fleet "Small Hai" 1200
+	fleet "Large Hai" 2400
+	fleet "Small Hai Merchant" 600
+	fleet "Large Hai Merchant" 1200
+	fleet "Small Hai Merchant (Sympathizers)" 2400
+	fleet "Large Hai Merchant (Sympathizers)" 4800
+	fleet "Small Hai Merchant (Human)" 2000
+	fleet "Large Hai Merchant (Human)" 3500
+	fleet "Small Human Merchants (Hai)" 4000
+	fleet "Large Human Merchants (Hai)" 7000
+	fleet "Hai Surveillance" 5000
+	fleet "Hai Miners" 7000

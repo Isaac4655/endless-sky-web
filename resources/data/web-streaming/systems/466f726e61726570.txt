@@ -1,0 +1,13 @@
+system Fornarep
+	belt 1922
+	asteroids "small rock" 15 2.9904
+	asteroids "medium rock" 4 1.8144
+	asteroids "large rock" 5 3.528
+	asteroids "small metal" 7 2.8224
+	asteroids "medium metal" 11 3.2928
+	asteroids "large metal" 13 4.5024
+	minables lead 2 3.99772
+	minables titanium 7 4.45146
+	fleet "Large Quarg (Kor Efret)" 2000
+	fleet "Small Kor Mereti" 9000
+	fleet "Large Kor Mereti" 5800

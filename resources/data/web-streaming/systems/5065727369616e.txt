@@ -1,0 +1,17 @@
+system Persian
+	belt 1308
+	asteroids "small rock" 6 3.887
+	asteroids "medium rock" 25 8.671
+	asteroids "large rock" 34 4.9634
+	asteroids "small metal" 1 6.4584
+	asteroids "medium metal" 3 6.6976
+	asteroids "large metal" 2 4.1262
+	minables lead 6 12.3487
+	minables silicon 6 8.05034
+	minables tungsten 16 11.086
+	fleet "Small Syndicate" 800
+	fleet "Large Syndicate" 1200
+	fleet "Small Core Pirates" 600
+	fleet "Large Core Pirates" 2000
+	fleet "Human Miners" 3000
+	fleet "Derelict Core" 30000

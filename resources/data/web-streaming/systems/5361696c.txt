@@ -1,0 +1,16 @@
+system Sail
+	belt 1110 3
+	belt 1903 8
+	asteroids "small rock" 3 4.34
+	asteroids "medium rock" 5 5.332
+	asteroids "large rock" 6 4.588
+	asteroids "small metal" 1 6.014
+	asteroids "medium metal" 1 5.084
+	asteroids "large metal" 1 5.518
+	minables platinum 12 4.801
+	minables iron 9 2.899
+	minables aluminum 18 1.231
+	minables uranium 5 3.582
+	fleet "Avgi Scouts" 42000
+	fleet "Small Aberrant" 2400
+	fleet "Large Aberrant" 4200

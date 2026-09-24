@@ -1,0 +1,15 @@
+system "Last Word"
+	belt 1761
+	asteroids "small rock" 167 4.6574
+	asteroids "medium rock" 31 3.828
+	asteroids "large rock" 32 3.5409
+	asteroids "small metal" 32 3.6047
+	asteroids "medium metal" 4 1.6269
+	asteroids "large metal" 5 4.785
+	fleet "Small Arach" 800
+	fleet "Large Arach" 2000
+	fleet "Small Kimek" 800
+	fleet "Large Kimek" 2000
+	fleet "Small Saryd" 700
+	fleet "Large Saryd" 1200
+	fleet Heliarch 200

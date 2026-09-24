@@ -1,0 +1,11 @@
+system "Is Ce G-460"
+	belt 1191
+	asteroids "small rock" 1 5.642
+	asteroids "medium rock" 4 4.755
+	asteroids "large rock" 1 7.818
+	asteroids "medium metal" 19 7.173
+	asteroids "large metal" 8 4.594
+	minables silicon 6 10.214
+	minables unknown 2 2.5
+	fleet "Vyrmeid (Plankton)" 700
+	fleet Astral 65000

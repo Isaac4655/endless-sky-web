@@ -1,0 +1,16 @@
+system Aludra
+	belt 1511
+	asteroids "small rock" 2 3.8394
+	asteroids "large rock" 7 2.4786
+	asteroids "small metal" 2 7.1442
+	asteroids "large metal" 6 3.402
+	minables copper 2 3.7707
+	minables neodymium 2 5.17388
+	minables silicon 2 4.70507
+	fleet "Small Deep Security" 1800
+	fleet "Small Deep Merchants" 500
+	fleet "Large Deep Security" 3000
+	fleet "Large Deep Merchants" 1000
+	fleet "Small Northern Merchants" 500
+	fleet "Large Northern Merchants" 1200
+	fleet "Human Miners" 5000

@@ -1,0 +1,9 @@
+system Chirr'ay'akai
+	belt 1425
+	asteroids "large rock" 1 3.762
+	asteroids "small metal" 2 2.964
+	asteroids "medium metal" 3 5.548
+	asteroids "large metal" 1 3.154
+	fleet "Wanderer Freight" 800
+	fleet "Wanderer Drones" 600
+	fleet "Wanderer Defense" 2000

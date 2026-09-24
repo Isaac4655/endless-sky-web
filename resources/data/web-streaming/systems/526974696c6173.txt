@@ -1,0 +1,13 @@
+system Ritilas
+	belt 1500
+	asteroids "large metal" 4 4
+	asteroids "large rock" 18 2
+	asteroids "medium rock" 125 2
+	asteroids "small rock" 4 3
+	minables aluminum 28 5
+	minables copper 4 5
+	minables iron 1 4
+	fleet Ka'het 2700
+	fleet "Ka'het Aggressive" 9600
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

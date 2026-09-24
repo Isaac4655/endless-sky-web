@@ -1,0 +1,11 @@
+system Eneremprukt
+	belt 1421
+	asteroids "medium rock" 11 3.456
+	asteroids "large rock" 10 7.29
+	asteroids "large metal" 4 7.506
+	minables copper 1 6.64767
+	minables lead 1 11.1355
+	minables silicon 3 9.15088
+	fleet "Large Kor Mereti" 2000
+	fleet "Small Kor Sestor" 1600
+	fleet "Large Kor Sestor" 2400

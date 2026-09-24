@@ -1,0 +1,12 @@
+system Feroteri
+	belt 1419
+	asteroids "medium rock" 1 2.652
+	asteroids "large rock" 1 2.886
+	asteroids "small metal" 3 3.081
+	asteroids "medium metal" 12 5.265
+	asteroids "large metal" 11 4.758
+	minables iron 1 5.55136
+	minables lead 1 8.46976
+	fleet "Large Quarg (Kor Efret)" 3000
+	fleet "Small Kor Mereti" 12000
+	fleet "Large Kor Mereti" 6400

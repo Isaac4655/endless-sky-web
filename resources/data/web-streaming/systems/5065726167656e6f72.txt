@@ -1,0 +1,14 @@
+system Peragenor
+	belt 1920
+	asteroids "medium rock" 1 2.646
+	asteroids "large rock" 4 1.755
+	asteroids "medium metal" 7 2.403
+	asteroids "large metal" 2 2.754
+	fleet "Large Remnant" 10000
+	fleet "Small Remnant" 7000
+	fleet "Remnant Transport" 7000
+	fleet "Korath Ember Waste Raid" 40000
+	fleet "Korath Rescue" 90000
+	fleet Embershades 8000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

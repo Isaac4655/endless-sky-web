@@ -1,0 +1,16 @@
+system Nenia
+	belt 1393
+	asteroids "small rock" 4 1.4352
+	asteroids "medium rock" 10 2.3
+	asteroids "large rock" 3 2.0608
+	asteroids "small metal" 2 2.3
+	asteroids "large metal" 3 1.2328
+	minables aluminum 7 1.96731
+	minables platinum 2 1.43013
+	minables titanium 5 1.78627
+	minables silicon 27 0.74013
+	minables iron 18 1.55307
+	minables silver 4 1.274
+	fleet "Void Sprites" 500
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 25000

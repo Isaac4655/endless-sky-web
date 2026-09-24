@@ -1,0 +1,12 @@
+system Coluber
+	belt 1590
+	asteroids "small rock" 4 2.1021
+	asteroids "medium rock" 21 1.8291
+	asteroids "large rock" 22 4.0131
+	asteroids "small metal" 11 3.7947
+	asteroids "medium metal" 1 2.3751
+	asteroids "large metal" 124 1.7199
+	fleet "Korath Ember Waste Raid" 10000
+	fleet "Korath Rescue" 30000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

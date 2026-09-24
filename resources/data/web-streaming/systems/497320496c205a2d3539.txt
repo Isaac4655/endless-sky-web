@@ -1,0 +1,11 @@
+system "Is Il Z-59"
+	belt 1345
+	asteroids "large rock" 1 4.42
+	asteroids "small metal" 41 2.808
+	asteroids "medium metal" 34 4.212
+	asteroids "large metal" 15 4.784
+	minables aluminum 9 5.165
+	minables iron 14 4.93
+	fleet "Vyrmeid (Plankton)" 500
+	fleet "Vyrmeid (Cephalopod)" 600
+	fleet Astral 75000

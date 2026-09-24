@@ -1,0 +1,14 @@
+system Algorel
+	belt 1993
+	asteroids "small rock" 2 3.094
+	asteroids "medium rock" 5 2.142
+	asteroids "large rock" 2 1.768
+	asteroids "small metal" 7 4.998
+	asteroids "medium metal" 75 3.434
+	asteroids "large metal" 27 3.4
+	fleet "Small Southern Merchants" 600
+	fleet "Large Southern Merchants" 900
+	fleet "Small Militia" 2000
+	fleet "Small Republic" 3000
+	fleet "Small Southern Pirates" 1600
+	fleet "Large Southern Pirates" 5000

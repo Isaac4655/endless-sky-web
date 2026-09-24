@@ -1,0 +1,16 @@
+system Ojstaan-Sola
+	asteroids "small rock" 4 2.215
+	asteroids "medium rock" 32 3.553
+	asteroids "large rock" 29 3.887
+	asteroids "small metal" 10 3.804
+	asteroids "medium metal" 1 5.643
+	asteroids "large metal" 1 2.675
+	minables iron 8 2.5
+	minables silver 5 3
+	minables silicon 16 3.3
+	fleet "Small Old Houses" 1500
+	fleet "Large Old Houses" 3000
+	fleet "Old Houses Surveillance" 2000
+	fleet "Medium Successor Freight" 1200
+	fleet "Small Successor Transport" 1200
+	fleet "Myurej Home" 1000

@@ -1,0 +1,15 @@
+system Yllke
+	belt 1925
+	asteroids "small rock" 3 1.7
+	asteroids "medium rock" 2 1.62
+	asteroids "large rock" 1 1.8
+	asteroids "small metal" 126 1.4
+	asteroids "medium metal" 71 1.5
+	asteroids "large metal" 36 0.99
+	minables aluminum 19 3.1
+	minables iron 7 2.32
+	minables silicon 3 1.94
+	fleet "Gegno Basic" 1300
+	fleet "Gegno Cargo" 4000
+	fleet "Gegno Miners" 3000
+	fleet "Quarg (Gegno)" 3300

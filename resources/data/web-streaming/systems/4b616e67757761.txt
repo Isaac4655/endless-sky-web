@@ -1,0 +1,9 @@
+system Kanguwa
+	belt 1866
+	asteroids "small metal" 12 2.6
+	asteroids "small rock" 2 2.7
+	asteroids "medium rock" 21 2.76
+	asteroids "large rock" 17 1.8
+	asteroids "medium metal" 52 2.6
+	asteroids "large metal" 40 2.7
+	hazard "Neutron Star Magnetic Field" 1

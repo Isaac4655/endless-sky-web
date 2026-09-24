@@ -1,0 +1,15 @@
+system Hamal
+	belt 1241
+	asteroids "small rock" 3 2.7552
+	asteroids "medium rock" 3 3.9648
+	asteroids "large rock" 1 3.9312
+	asteroids "small metal" 1 2.1504
+	asteroids "large metal" 2 3.2928
+	minables neodymium 2 5.99356
+	minables silicon 2 6.40469
+	minables tungsten 2 4.76706
+	fleet "Small Core Merchants" 1000
+	fleet "Large Core Merchants" 1000
+	fleet "Small Core Pirates" 3000
+	fleet "Large Core Pirates" 8000
+	fleet "Small Syndicate" 4000

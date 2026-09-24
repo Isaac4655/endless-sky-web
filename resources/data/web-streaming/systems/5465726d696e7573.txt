@@ -1,0 +1,14 @@
+system Terminus
+	belt 1221
+	asteroids "small rock" 29 4.046
+	asteroids "medium rock" 15 4.726
+	asteroids "large rock" 52 3.944
+	asteroids "small metal" 53 3.128
+	asteroids "medium metal" 91 3.74
+	asteroids "large metal" 31 3.502
+	minables lead 9 5.03787
+	minables titanium 17 5.69095
+	minables tungsten 4 5.80964
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 5000
+	fleet "Derelict Northern" 10000

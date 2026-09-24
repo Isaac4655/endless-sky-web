@@ -1,0 +1,22 @@
+system "Bote Asu"
+	raid "Unfettered Hai Space Raid" 20
+	belt 1753
+	asteroids "small rock" 10 5.4758
+	asteroids "medium rock" 58 4.1382
+	asteroids "large rock" 4 3.6366
+	asteroids "small metal" 62 4.598
+	asteroids "medium metal" 96 2.2572
+	asteroids "large metal" 5 4.0546
+	minables iron 12 7.05904
+	minables titanium 9 4.77203
+	fleet "Small Hai" 1800
+	fleet "Large Hai" 1200
+	fleet "Small Hai Merchant" 900
+	fleet "Large Hai Merchant" 600
+	fleet "Small Hai Merchant (Sympathizers)" 3600
+	fleet "Large Hai Merchant (Sympathizers)" 3600
+	fleet "Small Hai Merchant (Human)" 4000
+	fleet "Large Hai Merchant (Human)" 6000
+	fleet "Small Human Merchants (Hai)" 8000
+	fleet "Large Human Merchants (Hai)" 12000
+	fleet "Hai Surveillance" 3000

@@ -1,0 +1,16 @@
+system Almach
+	belt 1914
+	asteroids "small rock" 105 2.2763
+	asteroids "medium rock" 54 1.5028
+	asteroids "large rock" 47 1.6133
+	asteroids "small metal" 20 1.4365
+	asteroids "medium metal" 4 3.0719
+	asteroids "large metal" 5 1.5249
+	minables iron 2 2.87775
+	minables lead 2 3.17637
+	minables silicon 30 2.47255
+	fleet "Small Core Pirates" 500
+	fleet "Large Core Pirates" 1400
+	fleet "Large Syndicate" 6000
+	fleet "Korath Large Raid" 60000
+	fleet "Korath Miners" 30000

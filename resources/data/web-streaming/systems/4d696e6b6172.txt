@@ -1,0 +1,14 @@
+system Minkar
+	belt 1354
+	asteroids "medium rock" 5 8.97
+	asteroids "large rock" 9 6.63
+	asteroids "small metal" 1 4.42
+	asteroids "medium metal" 40 8.385
+	asteroids "large metal" 10 9.295
+	minables aluminum 2 13.3436
+	minables iron 4 12.6942
+	fleet "Small Southern Merchants" 900
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Militia" 1500
+	fleet "Large Militia" 2000
+	fleet "Large Southern Pirates" 12000

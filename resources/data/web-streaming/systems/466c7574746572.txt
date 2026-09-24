@@ -1,0 +1,7 @@
+system Flutter
+	belt 1874
+	asteroids "small metal" 9 1.976
+	asteroids "medium metal" 6 1.125
+	asteroids "large metal" 3 4.594
+	minables yottrite 3 3.14
+	minables gold 9 2.18

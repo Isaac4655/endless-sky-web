@@ -1,0 +1,14 @@
+system Wake
+	belt 1052 3
+	belt 1608 5
+	belt 2251 10
+	asteroids "small rock" 2 3.226
+	asteroids "medium rock" 8 2.33
+	asteroids "large rock" 3 3.853
+	asteroids "small metal" 29 2.688
+	asteroids "medium metal" 81 2.688
+	asteroids "large metal" 18 2.33
+	fleet "Avgi Scouts" 12000
+	fleet "Avgi Patrol" 24000
+	fleet "Small Aberrant" 2100
+	fleet "Large Aberrant" 3600

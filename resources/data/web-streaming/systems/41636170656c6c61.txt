@@ -1,0 +1,16 @@
+system Acapella
+	belt 1545 7
+	belt 1677 2
+	asteroids "small rock" 6 1.96
+	asteroids "medium rock" 2 1.346
+	asteroids "large rock" 1 1.861
+	asteroids "small metal" 5 1.406
+	asteroids "medium metal" 6 1.901
+	asteroids "large metal" 6 1.921
+	fleet "Avgi Patrol" 4200
+	fleet "Avgi Strike Group" 9000
+	fleet "Avgi Twilight Guard Logistics" 6000
+	fleet "Small Avgi Merchants" 6000
+	fleet "Large Avgi Merchants" 12000
+	fleet "Small Aberrant" 42000
+	fleet "Large Aberrant" 36000

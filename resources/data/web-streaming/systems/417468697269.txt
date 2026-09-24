@@ -1,0 +1,7 @@
+system Athiri
+	belt 1074
+	fleet "Magic Asteroid" 900
+	hazard "Beyond Patir Shield Eraser" 1
+	hazard "Athiri Black Hole Event Horizon" 1
+	hazard "Athiri Black Hole Accretion Disk" 1
+	hazard "Small Black Hole Gravity" 1

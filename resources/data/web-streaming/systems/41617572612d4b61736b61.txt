@@ -1,0 +1,14 @@
+system Aaura-Kaska
+	asteroids "medium rock" 11 3.12
+	asteroids "large rock" 6 3.463
+	asteroids "small metal" 17 4.43
+	asteroids "medium metal" 70 4.181
+	asteroids "large metal" 14 3.775
+	fleet "Medium Successor Freight" 1000
+	fleet "Small Successor Transport" 2000
+	fleet "Small Old Houses" 3000
+	fleet "Small New Houses" 3000
+	fleet "Large Old Houses" 7000
+	fleet "Large New Houses" 7000
+	fleet "Old Houses Surveillance" 6000
+	fleet "New Houses Surveillance" 6000

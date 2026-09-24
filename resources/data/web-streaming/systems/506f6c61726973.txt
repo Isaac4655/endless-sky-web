@@ -1,0 +1,14 @@
+system Polaris
+	belt 1906
+	asteroids "small rock" 1 7.67
+	asteroids "medium rock" 3 7.93
+	asteroids "large rock" 2 4.16
+	asteroids "large metal" 4 3.77
+	minables copper 1 6.73947
+	minables tungsten 1 5.76943
+	fleet "Small Core Merchants" 600
+	fleet "Large Core Merchants" 700
+	fleet "Small Syndicate" 1000
+	fleet "Large Syndicate" 2000
+	fleet "Small Core Pirates" 1500
+	fleet "Korath Large Raid" 50000

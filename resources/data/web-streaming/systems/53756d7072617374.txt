@@ -1,0 +1,14 @@
+system Sumprast
+	belt 1958
+	asteroids "medium rock" 8 1.0608
+	asteroids "large rock" 4 2.6624
+	asteroids "small metal" 3 2.9744
+	asteroids "medium metal" 15 2.4336
+	asteroids "large metal" 7 2.4336
+	minables aluminum 1 4.00508
+	minables lead 8 2.5503
+	minables uranium 1 2.21816
+	fleet "Quarg (Kor Efret)" 1000
+	fleet "Large Quarg (Kor Efret)" 2500
+	fleet "Kor Efret Home" 500
+	fleet "Kor Efret Miners" 3600

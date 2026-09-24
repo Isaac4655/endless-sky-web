@@ -1,0 +1,20 @@
+system Plort
+	belt 1490
+	asteroids "small rock" 7 7.3606
+	asteroids "medium rock" 40 4.5942
+	asteroids "large rock" 17 4.199
+	asteroids "small metal" 19 5.3352
+	asteroids "medium metal" 81 5.0388
+	asteroids "large metal" 2 5.2858
+	minables aluminum 62 6.16545
+	minables uranium 3 5.36309
+	fleet "Small Arach" 400
+	fleet "Large Arach" 1200
+	fleet "Small Kimek" 1200
+	fleet "Large Kimek" 3000
+	fleet "Small Saryd" 1200
+	fleet "Large Saryd" 4000
+	fleet "Arach Miners" 2500
+	fleet "Kimek Miners" 7500
+	fleet "Saryd Miners" 9000
+	fleet Heliarch 800

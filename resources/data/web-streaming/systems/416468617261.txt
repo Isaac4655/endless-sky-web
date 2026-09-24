@@ -1,0 +1,15 @@
+system Adhara
+	belt 1014
+	asteroids "small rock" 5 3.705
+	asteroids "medium rock" 3 5.3675
+	asteroids "large rock" 9 5.3675
+	asteroids "medium metal" 9 7.125
+	asteroids "large metal" 1 4.9875
+	minables silver 1 10.3117
+	fleet "Small Northern Merchants" 600
+	fleet "Large Northern Merchants" 800
+	fleet "Small Deep Security" 900
+	fleet "Small Deep Merchants" 600
+	fleet "Large Deep Security" 2400
+	fleet "Large Deep Merchants" 900
+	fleet "Small Northern Pirates" 2000

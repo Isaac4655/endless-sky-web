@@ -1,0 +1,12 @@
+system Luue-Saqru
+	asteroids "small rock" 32 6
+	asteroids "large rock" 16 2
+	asteroids "small metal" 24 4
+	asteroids "large metal" 32 3
+	minables silicon 8 6
+	minables aluminum 12 3.5
+	fleet "People's Houses" 2000
+	fleet "People's Houses Raiders" 10000
+	fleet "Small New Houses" 3000
+	fleet "Successor Miners" 9000
+	fleet "Successor Miners (Well-Defended)" 6000

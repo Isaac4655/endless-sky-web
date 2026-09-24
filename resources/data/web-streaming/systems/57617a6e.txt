@@ -1,0 +1,13 @@
+system Wazn
+	belt 1414
+	asteroids "small metal" 9 2.6048
+	asteroids "medium metal" 3 4.4704
+	asteroids "large metal" 9 1.9008
+	minables iron 2 4.91227
+	minables silicon 4 2.82661
+	fleet "Small Northern Merchants" 700
+	fleet "Large Northern Merchants" 1500
+	fleet "Paradise Merchants" 1800
+	fleet "Small Republic" 2500
+	fleet "Large Republic" 5000
+	fleet "Republic Logistics" 5000

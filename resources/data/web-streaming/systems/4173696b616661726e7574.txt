@@ -1,0 +1,11 @@
+system Asikafarnut
+	belt 1342
+	asteroids "small rock" 1 4.1328
+	asteroids "medium rock" 3 4.536
+	asteroids "large rock" 3 2.184
+	asteroids "medium metal" 5 1.7472
+	asteroids "large metal" 1 4.5024
+	minables lead 2 4.41407
+	fleet "Large Kor Mereti" 3600
+	fleet "Small Kor Sestor" 600
+	fleet "Large Kor Sestor" 3200

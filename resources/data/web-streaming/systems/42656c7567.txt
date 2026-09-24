@@ -1,0 +1,21 @@
+system Belug
+	belt 1170
+	asteroids "small rock" 1 5.4432
+	asteroids "medium rock" 25 3.8556
+	asteroids "large rock" 4 5.7834
+	asteroids "small metal" 12 8.1648
+	asteroids "medium metal" 108 8.505
+	asteroids "large metal" 1 4.3092
+	minables aluminum 34 4.4021
+	minables titanium 1 5.0326
+	minables uranium 4 6.72
+	fleet "Small Arach" 700
+	fleet "Large Arach" 1200
+	fleet "Small Kimek" 800
+	fleet "Large Kimek" 1500
+	fleet "Small Saryd" 1000
+	fleet "Large Saryd" 2400
+	fleet "Arach Miners" 3500
+	fleet "Kimek Miners" 5000
+	fleet "Saryd Miners" 6500
+	fleet Heliarch 200

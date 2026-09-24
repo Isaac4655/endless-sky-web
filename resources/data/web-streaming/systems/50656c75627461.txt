@@ -1,0 +1,21 @@
+system Pelubta
+	belt 1709
+	asteroids "small rock" 23 4.48
+	asteroids "medium rock" 1 6.496
+	asteroids "large rock" 74 2.5088
+	asteroids "small metal" 7 3.136
+	asteroids "medium metal" 29 5.6
+	asteroids "large metal" 3 4.48
+	minables iron 17 6.81922
+	minables lead 2 3.63334
+	minables uranium 29 4.87538
+	fleet "Small Arach" 500
+	fleet "Large Arach" 700
+	fleet "Small Kimek" 1100
+	fleet "Large Kimek" 2000
+	fleet "Small Saryd" 1100
+	fleet "Large Saryd" 2500
+	fleet "Arach Miners" 3500
+	fleet "Kimek Miners" 6000
+	fleet "Saryd Miners" 7500
+	fleet Heliarch 400

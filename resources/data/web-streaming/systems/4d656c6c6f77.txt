@@ -1,0 +1,11 @@
+system Mellow
+	belt 1521
+	asteroids "small rock" 24 1.23
+	asteroids "large rock" 61 0.801
+	asteroids "small metal" 26 1.115
+	asteroids "medium metal" 18 0.858
+	asteroids "large metal" 22 1.301
+	minables neodymium 9 1.587
+	fleet "Avgi Scouts" 42000
+	fleet "Small Aberrant" 480
+	fleet "Large Aberrant" 900

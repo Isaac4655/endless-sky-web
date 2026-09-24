@@ -1,0 +1,10 @@
+system Auhru
+	belt 1336
+	asteroids "large rock" 1 3.2
+	asteroids "small metal" 32 2.9
+	asteroids "large metal" 17 2.4
+	fleet "Small Scin" 1100
+	fleet "Large Scin" 2500
+	fleet "Scin Transport" 800
+	fleet "Scin Cargo" 1000
+	fleet "Gegno Basic" 2000

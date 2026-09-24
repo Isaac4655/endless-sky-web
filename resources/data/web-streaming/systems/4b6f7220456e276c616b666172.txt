@@ -1,0 +1,19 @@
+system "Kor En'lakfar"
+	belt 1115
+	asteroids "small rock" 7 0.84
+	asteroids "medium rock" 20 1.17
+	asteroids "large rock" 31 1.27
+	asteroids "small metal" 4 0.74
+	asteroids "medium metal" 91 1.12
+	asteroids "large metal" 30 1.07
+	minables aluminum 7 1.29345
+	minables iron 7 2.00873
+	minables silicon 14 1.74239
+	fleet "Korath Raid" 1250
+	fleet "Korath Home" 720
+	fleet "Korath Large Raid" 15000
+	fleet "Korath Surveillance" 32000
+	fleet "Korath Defense" 1775
+	fleet "Korath Civilian Miners" 6000
+	fleet "Korath Civilian Large" 955
+	fleet "Korsmanath A'awojs" 4000

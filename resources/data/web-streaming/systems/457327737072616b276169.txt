@@ -1,0 +1,13 @@
+system Es'sprak'ai
+	belt 1928
+	asteroids "small rock" 3 2.2275
+	asteroids "medium rock" 2 3.9875
+	asteroids "large rock" 4 1.87
+	asteroids "small metal" 2 1.705
+	asteroids "medium metal" 50 3.9875
+	asteroids "large metal" 21 2.0625
+	minables aluminum 17 5.38505
+	minables iron 11 3.31743
+	fleet "Wanderer Freight" 800
+	fleet "Wanderer Drones" 4000
+	fleet "Wanderer Defense" 2000

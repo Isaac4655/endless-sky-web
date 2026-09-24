@@ -1,0 +1,8 @@
+system G-3191
+	belt 1341
+	asteroids "small rock" 2 1.48
+	asteroids "large rock" 1 2.24
+	asteroids "small metal" 1 1.91
+	asteroids "medium metal" 12 2.1
+	asteroids "large metal" 1 1.8
+	hazard "Rulei Gravity Field" 1

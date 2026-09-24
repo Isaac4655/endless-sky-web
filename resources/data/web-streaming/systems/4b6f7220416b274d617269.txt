@@ -1,0 +1,11 @@
+system "Kor Ak'Mari"
+	belt 1606
+	asteroids "small metal" 13 3.024
+	asteroids "medium metal" 99 3.0744
+	asteroids "large metal" 32 1.5624
+	minables aluminum 21 3.3241
+	minables silicon 27 5.223
+	fleet "Korath Raid" 3600
+	fleet "Korath Miners" 7500
+	fleet "Korath Large Raid" 3600
+	fleet "Korath Defense" 3600

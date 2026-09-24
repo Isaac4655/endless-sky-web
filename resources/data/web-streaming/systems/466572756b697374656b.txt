@@ -1,0 +1,14 @@
+system Ferukistek
+	belt 1520
+	asteroids "small rock" 1 1.072
+	asteroids "medium rock" 30 1.024
+	asteroids "large rock" 1 1.616
+	asteroids "small metal" 12 2.144
+	asteroids "medium metal" 114 1.312
+	asteroids "large metal" 81 0.864
+	minables aluminum 4 1.59162
+	minables iron 7 1.79257
+	minables titanium 5 1.86087
+	fleet "Large Kor Mereti" 2400
+	fleet "Small Kor Sestor" 4000
+	fleet "Large Kor Sestor" 6000

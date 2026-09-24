@@ -1,0 +1,12 @@
+system Tscera
+	asteroids "small rock" 4 2.6
+	asteroids "large rock" 7 3.1
+	asteroids "small metal" 9 3.1
+	asteroids "medium metal" 9 4.1
+	asteroids "large metal" 2 4.27
+	minables aluminum 5 5.75
+	minables lead 7 6.19
+	minables titanium 5 5.2
+	fleet "Gegno Basic" 1000
+	fleet "Gegno Cargo" 3000
+	fleet "Quarg (Gegno)" 3800

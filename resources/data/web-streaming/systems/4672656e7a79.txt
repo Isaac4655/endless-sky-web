@@ -1,0 +1,12 @@
+system Frenzy
+	belt 1840 6
+	belt 1892 7
+	asteroids "large rock" 1 2.367
+	asteroids "small metal" 19 1.995
+	asteroids "medium metal" 60 1.702
+	asteroids "large metal" 5 2.66
+	minables lead 9 2.682
+	minables silicon 12 4.621
+	fleet "Avgi Scouts" 12000
+	fleet "Small Aberrant" 2400
+	fleet "Large Aberrant" 3600

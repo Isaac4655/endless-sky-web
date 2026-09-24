@@ -1,0 +1,16 @@
+system Mora
+	belt 1176
+	asteroids "medium rock" 54 1.9305
+	asteroids "large rock" 33 1.9877
+	asteroids "medium metal" 3 1.287
+	asteroids "large metal" 37 1.0439
+	minables iron 25 1.82412
+	minables silicon 11 1.71081
+	minables tungsten 10 2.90508
+	fleet "Small Southern Merchants" 2000
+	fleet "Large Southern Merchants" 4000
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 3000
+	fleet "Small Republic" 20000
+	fleet "Human Miners" 2000
+	fleet "Derelict Northern" 30000

@@ -1,0 +1,15 @@
+system Oblate
+	belt 1954
+	asteroids "small rock" 2 2.1
+	asteroids "medium rock" 7 1.3944
+	asteroids "large rock" 2 1.7976
+	asteroids "small metal" 4 2.2176
+	asteroids "medium metal" 10 2.2176
+	asteroids "large metal" 6 2.3856
+	minables iron 4 3.88695
+	minables lead 1 3.86035
+	minables silicon 3 2.34276
+	fleet "Small Core Pirates" 600
+	fleet "Large Core Pirates" 1000
+	fleet "Large Syndicate" 3000
+	fleet "Derelict Pirate" 30000

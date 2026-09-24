@@ -1,0 +1,15 @@
+system Alniyat
+	belt 1760
+	asteroids "small rock" 19 10.368
+	asteroids "medium rock" 148 6.156
+	asteroids "large rock" 37 4.455
+	asteroids "small metal" 2 9.072
+	asteroids "medium metal" 4 4.941
+	asteroids "large metal" 1 4.455
+	minables aluminum 1 8.00281
+	fleet "Small Southern Merchants" 500
+	fleet "Large Southern Merchants" 700
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 4000
+	fleet "Small Militia" 800
+	fleet "Large Militia" 3000

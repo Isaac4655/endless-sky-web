@@ -1,0 +1,4 @@
+system Msalbit
+	belt 1333
+	minables aluminum 29 4.6
+	minables iron 30 3.4

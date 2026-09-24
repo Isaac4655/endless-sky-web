@@ -1,0 +1,13 @@
+system Fscher
+	belt 1048
+	asteroids "small rock" 7 4.68
+	asteroids "medium rock" 35 3.52
+	asteroids "large rock" 22 2.6
+	asteroids "small metal" 30 4.3
+	asteroids "medium metal" 197 3.78
+	asteroids "large metal" 46 4.18
+	minables copper 12 7.1
+	minables lead 4 6.142
+	minables titanium 7 5.87
+	fleet "Small Vi" 2600
+	fleet "Small Scin" 5100

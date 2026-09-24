@@ -1,0 +1,13 @@
+system Fereti
+	belt 1500
+	asteroids "large metal" 5 2
+	asteroids "large rock" 4 3
+	asteroids "medium rock" 7 4
+	asteroids "small rock" 21 2
+	minables lead 8 1
+	minables iron 10 1
+	minables titanium 12 1
+	fleet "Ka'het Core" 2900
+	fleet "Builders Drone" 2050
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

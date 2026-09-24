@@ -1,0 +1,15 @@
+system Kashikt
+	belt 1013
+	asteroids "small rock" 15 4.1055
+	asteroids "medium rock" 39 6.5688
+	asteroids "large rock" 12 2.9463
+	asteroids "small metal" 22 3.1878
+	asteroids "medium metal" 44 6.0858
+	asteroids "large metal" 13 4.2021
+	minables silicon 35 6.23036
+	minables silver 11 7.76234
+	minables tungsten 13 7.967
+	fleet "Quarg (Kor Efret)" 1000
+	fleet "Large Quarg (Kor Efret)" 2000
+	fleet "Kor Efret Home" 500
+	fleet "Kor Efret Miners" 3600

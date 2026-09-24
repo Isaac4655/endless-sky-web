@@ -1,0 +1,16 @@
+system Merak
+	belt 1769
+	asteroids "small rock" 1 4.1847
+	asteroids "medium rock" 87 5.6173
+	asteroids "large rock" 1 4.9764
+	asteroids "medium metal" 10 4.2224
+	asteroids "large metal" 1 2.639
+	minables copper 2 7.54582
+	minables lead 13 9.10563
+	minables tungsten 5 8.57967
+	fleet "Small Southern Merchants" 600
+	fleet "Small Northern Merchants" 800
+	fleet "Large Southern Merchants" 2000
+	fleet "Large Northern Merchants" 1500
+	fleet "Small Republic" 2000
+	fleet "Large Republic" 4000

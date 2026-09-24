@@ -1,0 +1,24 @@
+system "Bore Fah"
+	raid "Unfettered Hai Space Raid" 20
+	belt 1823
+	asteroids "small rock" 29 3.0912
+	asteroids "medium rock" 108 5.8443
+	asteroids "large rock" 27 4.2021
+	asteroids "small metal" 6 4.5885
+	asteroids "medium metal" 25 4.3953
+	asteroids "large metal" 1 4.8783
+	minables aluminum 12 5.51239
+	minables lead 26 6.01005
+	minables titanium 8 6.5253
+	fleet "Small Hai" 2000
+	fleet "Large Hai" 2000
+	fleet "Small Hai Merchant" 1000
+	fleet "Large Hai Merchant" 1000
+	fleet "Small Hai Merchant (Sympathizers)" 4000
+	fleet "Large Hai Merchant (Sympathizers)" 4000
+	fleet "Small Hai Merchant (Human)" 6000
+	fleet "Large Hai Merchant (Human)" 9000
+	fleet "Small Human Merchants (Hai)" 12000
+	fleet "Large Human Merchants (Hai)" 18000
+	fleet "Hai Surveillance" 5000
+	fleet "Hai Miners" 15000

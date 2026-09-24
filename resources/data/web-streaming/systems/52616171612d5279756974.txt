@@ -1,0 +1,8 @@
+system Raaqa-Ryuit
+	asteroids "small rock" 14 4
+	asteroids "small metal" 8 12
+	fleet "People's Houses" 3000
+	fleet "Medium Successor Freight" 2000
+	fleet "Small Successor Transport" 1100
+	fleet "Large New Houses" 5000
+	fleet "Kaatrij Home" 1500

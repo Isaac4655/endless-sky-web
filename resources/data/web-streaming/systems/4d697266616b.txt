@@ -1,0 +1,15 @@
+system Mirfak
+	belt 1887
+	asteroids "small rock" 3 3.3592
+	asteroids "medium rock" 5 4.6436
+	asteroids "large rock" 5 3.5568
+	asteroids "small metal" 1 3.2604
+	asteroids "medium metal" 9 5.4834
+	asteroids "large metal" 2 6.1256
+	minables copper 1 7.03874
+	minables iron 3 4.97412
+	minables titanium 4 8.24243
+	fleet "Small Core Merchants" 500
+	fleet "Large Core Merchants" 700
+	fleet "Small Syndicate" 1000
+	fleet "Large Syndicate" 1800

@@ -1,0 +1,5 @@
+system Insitor
+	belt 1170
+	asteroids "small rock" 1 2.54427
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

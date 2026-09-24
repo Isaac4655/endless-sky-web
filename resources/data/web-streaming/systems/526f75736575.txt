@@ -1,0 +1,8 @@
+system Rouseu
+	belt 1648
+	asteroids "small rock" 132 1.34
+	asteroids "medium rock" 42 2.32
+	asteroids "large rock" 106 1.75
+	asteroids "large metal" 1 1.51
+	minables aluminum 5 8.66
+	minables gold 2 5.1

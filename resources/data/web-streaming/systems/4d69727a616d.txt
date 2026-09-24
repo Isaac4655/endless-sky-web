@@ -1,0 +1,16 @@
+system Mirzam
+	belt 1025
+	asteroids "small rock" 24 3.402
+	asteroids "medium rock" 42 4.4712
+	asteroids "large rock" 6 1.6848
+	asteroids "small metal" 17 2.8836
+	asteroids "large metal" 14 4.374
+	minables iron 6 4.2336
+	minables silicon 24 7.53697
+	minables tungsten 2 5.97339
+	fleet "Small Northern Merchants" 2000
+	fleet "Large Northern Merchants" 2000
+	fleet "Small Republic" 3000
+	fleet "Large Republic" 4000
+	fleet "Small Northern Pirates" 5000
+	fleet "Large Northern Pirates" 8000

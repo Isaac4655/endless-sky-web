@@ -1,0 +1,14 @@
+system Vesvii
+	belt 976
+	asteroids "small rock" 15 2.8
+	asteroids "medium rock" 19 3.8
+	asteroids "large rock" 2 3.8
+	asteroids "small metal" 15 2.2
+	asteroids "medium metal" 2 3.3
+	asteroids "large metal" 4 2.9
+	minables aluminum 46 4.5
+	minables gold 6 2.4
+	minables iron 17 7.7
+	minables platinum 9 2.1
+	fleet "Vi Warfleet" 1200
+	fleet "Scin Warfleet" 1200

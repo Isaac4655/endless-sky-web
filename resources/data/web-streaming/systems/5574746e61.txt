@@ -1,0 +1,10 @@
+system Uttna
+	belt 1748
+	asteroids "medium rock" 3 4.8
+	asteroids "large rock" 2 3.96
+	asteroids "small metal" 4 2.84
+	asteroids "large metal" 16 3.42
+	minables lead 2 2.2
+	fleet "Gegno Basic" 1600
+	fleet "Gegno Cargo" 3000
+	fleet "Gegno Miners" 4000

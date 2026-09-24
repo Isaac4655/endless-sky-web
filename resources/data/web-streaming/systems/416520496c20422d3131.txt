@@ -1,0 +1,9 @@
+system "Ae Il B-11"
+	belt 1328 10
+	belt 1647 2
+	asteroids "medium rock" 4 5.643
+	asteroids "large rock" 1 5.358
+	asteroids "small metal" 10 5.016
+	asteroids "medium metal" 3 3.363
+	asteroids "large metal" 1 5.472
+	fleet "Vyrmeid (Cephalopod)" 300

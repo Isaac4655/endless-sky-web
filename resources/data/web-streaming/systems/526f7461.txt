@@ -1,0 +1,11 @@
+system Rota
+	belt 1387
+	asteroids "small rock" 3 2.256
+	asteroids "medium rock" 4 2.16
+	asteroids "large rock" 4 1.992
+	asteroids "small metal" 1 2.112
+	asteroids "medium metal" 8 1.728
+	asteroids "large metal" 9 1.392
+	minables copper 4 4.121
+	minables iron 1 3.541
+	minables lead 5 3.398

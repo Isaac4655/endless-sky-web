@@ -1,0 +1,18 @@
+system Fala
+	belt 1264
+	asteroids "small rock" 2 3.0464
+	asteroids "medium rock" 91 2.8672
+	asteroids "large rock" 2 2.0832
+	asteroids "small metal" 6 2.8896
+	asteroids "medium metal" 4 1.1648
+	asteroids "large metal" 16 1.344
+	minables copper 9 3.84288
+	minables lead 7 2.60722
+	minables titanium 22 3.57674
+	fleet "Small Northern Merchants" 1600
+	fleet "Large Northern Merchants" 3000
+	fleet "Small Republic" 4000
+	fleet "Small Northern Pirates" 2000
+	fleet "Large Northern Pirates" 4000
+	fleet "Human Miners" 2000
+	fleet "Derelict Northern" 30000

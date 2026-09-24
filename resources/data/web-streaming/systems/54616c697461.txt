@@ -1,0 +1,18 @@
+system Talita
+	belt 1403
+	asteroids "small rock" 73 2.128
+	asteroids "medium rock" 8 2.94
+	asteroids "large rock" 20 3.388
+	asteroids "small metal" 12 1.624
+	asteroids "medium metal" 65 1.596
+	asteroids "large metal" 33 1.512
+	minables copper 7 3.2624
+	minables iron 4 2.47306
+	minables silicon 6 3.70162
+	fleet "Small Northern Merchants" 600
+	fleet "Large Northern Merchants" 900
+	fleet "Paradise Merchants" 800
+	fleet "Small Republic" 1000
+	fleet "Large Republic" 4000
+	fleet "Republic Logistics" 4000
+	fleet "Human Miners" 3000

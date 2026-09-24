@@ -1,0 +1,16 @@
+system "Ehma Ti"
+	belt 1094
+	asteroids "small rock" 1 3.276
+	asteroids "medium rock" 1 1.7472
+	asteroids "large rock" 3 3.0576
+	asteroids "medium metal" 3 3.9858
+	asteroids "large metal" 1 3.549
+	minables lead 2 4.84357
+	minables silver 2 3.81787
+	minables titanium 1 3.78167
+	fleet "Unfettered Logistics" 600
+	fleet "Small Unfettered" 500
+	fleet "Large Unfettered" 825
+	fleet "Unfettered Raid" 2500
+	fleet "Small Hai Merchant (Sympathizers)" 2400
+	fleet "Large Hai Merchant (Sympathizers)" 4800

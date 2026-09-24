@@ -1,0 +1,4 @@
+system Oublaa-Khora
+	asteroids "small rock" 1 2
+	asteroids "small metal" 2 3
+	hazard "Predecessors Base Spatial Decay" 600

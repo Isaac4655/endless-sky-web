@@ -1,0 +1,11 @@
+system "Ae Il O-96"
+	belt 1627 4
+	belt 1952 4
+	asteroids "small rock" 14 3.666
+	asteroids "medium rock" 2 3.315
+	asteroids "large rock" 10 2.418
+	asteroids "small metal" 6 2.34
+	asteroids "medium metal" 1 3.12
+	asteroids "large metal" 4 3.081
+	minables titanium 3 4.302
+	minables neodymium 9 5.774

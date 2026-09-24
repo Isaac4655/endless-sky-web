@@ -1,0 +1,16 @@
+system Markab
+	belt 1411
+	asteroids "small rock" 11 4.4863
+	asteroids "medium rock" 54 5.2403
+	asteroids "large rock" 8 2.0358
+	asteroids "small metal" 2 3.5815
+	asteroids "medium metal" 4 5.0895
+	asteroids "large metal" 2 3.9962
+	minables copper 15 5.00264
+	minables iron 8 8.07455
+	fleet "Small Core Merchants" 500
+	fleet "Large Core Merchants" 600
+	fleet "Small Syndicate" 600
+	fleet "Large Syndicate" 800
+	fleet "Human Miners" 3000
+	fleet "Republic Logistics" 4000

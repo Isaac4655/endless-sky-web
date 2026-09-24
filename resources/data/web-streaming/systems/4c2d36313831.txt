@@ -1,0 +1,10 @@
+system L-6181
+	belt 1758
+	asteroids "small rock" 1 1.8
+	asteroids "medium metal" 1 1.6
+	asteroids "large metal" 1 1.5
+	minables titanium 2 2.32
+	minables copper 4 3.569
+	fleet "Iije (Uninterested)" 2100
+	fleet "Iije (Swarming)" 2000
+	fleet "Iije (Surveillance)" 1800

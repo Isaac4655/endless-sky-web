@@ -1,0 +1,19 @@
+system Alphard
+	belt 1101
+	asteroids "small rock" 2 7.7896
+	asteroids "medium rock" 33 8.8088
+	asteroids "large rock" 2 7.4984
+	asteroids "small metal" 5 5.3872
+	asteroids "medium metal" 83 10.2648
+	asteroids "large metal" 6 6.9888
+	minables aluminum 22 15.8087
+	minables lead 16 18.6376
+	minables titanium 14 15.6458
+	fleet "Small Northern Merchants" 500
+	fleet "Large Northern Merchants" 900
+	fleet "Paradise Merchants" 1500
+	fleet "Small Deep Merchants" 2000
+	fleet "Small Republic" 3000
+	fleet "Large Republic" 6000
+	fleet "Republic Logistics" 6000
+	fleet "Human Miners" 2000

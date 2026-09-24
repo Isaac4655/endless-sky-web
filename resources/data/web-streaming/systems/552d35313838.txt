@@ -1,0 +1,9 @@
+system U-5188
+	belt 1330
+	asteroids "small rock" 2 2.24
+	asteroids "medium rock" 2 1.91
+	asteroids "large rock" 1 2.87
+	minables iron 3 2.93
+	fleet "Iije (Uninterested)" 1600
+	fleet "Iije (Swarming)" 2000
+	fleet "Iije (Surveillance)" 1400

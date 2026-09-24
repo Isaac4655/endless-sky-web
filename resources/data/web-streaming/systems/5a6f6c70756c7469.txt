@@ -1,0 +1,10 @@
+system Zolpulti
+	belt 1159
+	asteroids "small rock" 4 1.9
+	asteroids "medium rock" 46 2
+	asteroids "large rock" 20 1.3
+	asteroids "small metal" 3 1.89
+	asteroids "medium metal" 105 1.92
+	asteroids "large metal" 21 1.56
+	minables aluminum 13 3.5
+	minables lead 49 2.9

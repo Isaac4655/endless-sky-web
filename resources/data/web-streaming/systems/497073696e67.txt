@@ -1,0 +1,6 @@
+system Ipsing
+	belt 1107
+	asteroids "large metal" 1 1.1424
+	fleet "Small Southern Merchants" 2000
+	fleet "Small Southern Pirates" 3000
+	fleet "Derelict Northern" 10000

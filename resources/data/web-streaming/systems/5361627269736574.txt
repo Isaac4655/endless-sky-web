@@ -1,0 +1,11 @@
+system Sabriset
+	belt 1025
+	asteroids "small rock" 3 3.9285
+	asteroids "medium rock" 6 2.6325
+	asteroids "large rock" 5 4.779
+	asteroids "small metal" 21 4.374
+	asteroids "medium metal" 4 5.1435
+	asteroids "large metal" 7 4.3335
+	minables aluminum 8 7.59557
+	minables tungsten 2 5.97609
+	fleet "Large Quarg (Kor Efret)" 4000

@@ -1,0 +1,16 @@
+system Nunki
+	belt 1930
+	asteroids "small rock" 15 3.3516
+	asteroids "medium rock" 77 1.8144
+	asteroids "large rock" 15 1.9908
+	asteroids "small metal" 6 3.4272
+	asteroids "medium metal" 1 1.8648
+	asteroids "large metal" 1 1.9152
+	minables iron 8 3.70445
+	minables titanium 7 3.31242
+	minables tungsten 23 3.33817
+	fleet "Small Southern Pirates" 1200
+	fleet "Large Southern Pirates" 2000
+	fleet "Small Southern Merchants" 1600
+	fleet "Small Militia" 2000
+	fleet "Old Southern Pirates" 7000

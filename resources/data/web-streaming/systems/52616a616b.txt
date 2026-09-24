@@ -1,0 +1,10 @@
+system Rajak
+	belt 1410
+	asteroids "small rock" 15 2.3232
+	asteroids "medium rock" 51 4.1536
+	asteroids "large rock" 14 4.1536
+	asteroids "medium metal" 2 4.1888
+	asteroids "large metal" 3 1.8304
+	minables silicon 5 4.86566
+	fleet "Small Northern Pirates" 4000
+	fleet "Large Northern Pirates" 10000

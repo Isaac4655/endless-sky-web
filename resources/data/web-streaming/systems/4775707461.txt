@@ -1,0 +1,15 @@
+system Gupta
+	belt 1771
+	asteroids "small rock" 40 8.448
+	asteroids "medium rock" 7 6.006
+	asteroids "large rock" 3 7.062
+	asteroids "small metal" 2 3.762
+	asteroids "medium metal" 6 8.712
+	asteroids "large metal" 6 7.656
+	fleet "Small Arach" 400
+	fleet "Large Arach" 600
+	fleet "Small Kimek" 1200
+	fleet "Large Kimek" 2200
+	fleet "Small Saryd" 1100
+	fleet "Large Saryd" 2500
+	fleet Heliarch 800

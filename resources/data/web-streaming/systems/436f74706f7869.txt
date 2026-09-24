@@ -1,0 +1,10 @@
+system Cotpoxi
+	belt 1607
+	asteroids "small rock" 9 3.4
+	asteroids "medium rock" 8 3.4
+	asteroids "large rock" 3 2.07
+	asteroids "small metal" 5 2.89
+	asteroids "medium metal" 6 2.44
+	asteroids "large metal" 3 2.1
+	minables silver 7 4.35
+	minables copper 8 5.73

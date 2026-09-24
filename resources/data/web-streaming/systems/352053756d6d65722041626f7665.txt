@@ -1,0 +1,21 @@
+system "5 Summer Above"
+	belt 1133
+	asteroids "small rock" 5 4.8608
+	asteroids "medium rock" 17 3.92
+	asteroids "large rock" 1 2.352
+	asteroids "small metal" 13 3.9984
+	asteroids "medium metal" 1 3.1752
+	asteroids "large metal" 6 5.8016
+	minables copper 3 4.63642
+	minables iron 4 4.74904
+	minables silver 8 5.76172
+	fleet "Small Arach" 1200
+	fleet "Large Arach" 5000
+	fleet "Small Kimek" 400
+	fleet "Large Kimek" 900
+	fleet "Small Saryd" 1200
+	fleet "Large Saryd" 3000
+	fleet "Arach Miners" 8000
+	fleet "Kimek Miners" 3500
+	fleet "Saryd Miners" 5000
+	fleet Heliarch 800

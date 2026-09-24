@@ -1,0 +1,10 @@
+system Ianua
+	belt 1472
+	asteroids "small rock" 5 2.736
+	asteroids "medium rock" 20 2.124
+	asteroids "large rock" 2 1.836
+	asteroids "small metal" 2 3.528
+	asteroids "medium metal" 1 1.836
+	asteroids "large metal" 1 3.06
+	minables uranium 4 3.906
+	minables silver 6 2.471

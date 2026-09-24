@@ -1,0 +1,4 @@
+system "Pedita Sec"
+	belt 1554
+	asteroids "large metal" 1 4.638
+	minables yottrite 4 7

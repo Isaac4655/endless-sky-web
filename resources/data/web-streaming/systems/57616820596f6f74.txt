@@ -1,0 +1,15 @@
+system "Wah Yoot"
+	belt 1222
+	asteroids "small rock" 44 2.0592
+	asteroids "medium rock" 26 3.4452
+	asteroids "large rock" 9 2.6532
+	asteroids "small metal" 1 4.4352
+	asteroids "medium metal" 10 2.2968
+	asteroids "large metal" 2 5.6628
+	minables lead 14 3.40165
+	minables silicon 30 4.23582
+	fleet "Unfettered Logistics" 600
+	fleet "Small Unfettered" 1000
+	fleet "Large Unfettered" 550
+	fleet "Small Hai Merchant (Sympathizers)" 1200
+	fleet "Large Hai Merchant (Sympathizers)" 2400

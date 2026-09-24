@@ -1,0 +1,9 @@
+system Quaru
+	belt 1440
+	fleet "Small Arach" 600
+	fleet "Large Arach" 1000
+	fleet "Small Kimek" 600
+	fleet "Large Kimek" 900
+	fleet "Small Saryd" 700
+	fleet "Large Saryd" 1400
+	fleet Heliarch 100

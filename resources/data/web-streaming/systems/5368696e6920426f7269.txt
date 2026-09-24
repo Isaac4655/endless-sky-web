@@ -1,0 +1,10 @@
+system "Shini Bori"
+	belt 1500
+	asteroids "large rock" 2 3.1395
+	asteroids "small metal" 16 1.8837
+	asteroids "medium metal" 12 2.8405
+	asteroids "large metal" 19 3.2292
+	fleet "Bunrodea Erabu Freight" 1500
+	fleet "Bunrodea Defense" 2000
+	fleet "Bunrodea Royalty" 3000
+	fleet "Bunrodea Royal Guard" 2000

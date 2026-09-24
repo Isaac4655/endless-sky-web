@@ -1,0 +1,21 @@
+system Blugtad
+	belt 1841
+	asteroids "small rock" 11 9.477
+	asteroids "medium rock" 52 4.698
+	asteroids "large rock" 9 9.558
+	asteroids "small metal" 11 6.075
+	asteroids "medium metal" 17 11.664
+	asteroids "large metal" 1 7.776
+	minables lead 6 4.60749
+	minables platinum 2 6.9822
+	minables silver 2 5.8763
+	fleet "Small Arach" 400
+	fleet "Large Arach" 600
+	fleet "Small Kimek" 1300
+	fleet "Large Kimek" 2500
+	fleet "Small Saryd" 1200
+	fleet "Large Saryd" 3500
+	fleet "Arach Miners" 4000
+	fleet "Kimek Miners" 7000
+	fleet "Saryd Miners" 9000
+	fleet Heliarch 900

@@ -1,0 +1,14 @@
+system Eebu
+	belt 1384
+	asteroids "small rock" 4 1.42
+	asteroids "medium rock" 1 1.45
+	asteroids "large rock" 2 1.13
+	asteroids "small metal" 4 0.91
+	asteroids "medium metal" 4 1.38
+	asteroids "large metal" 12 0.95
+	minables copper 8 4.7
+	minables neodymium 5 3.5
+	minables titanium 16 6.9
+	fleet "Small Vi" 3600
+	fleet "Small Scin" 3500
+	fleet "Scin Warfleet" 3500

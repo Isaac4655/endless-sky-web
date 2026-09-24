@@ -1,0 +1,18 @@
+system Aldhibain
+	belt 1840
+	asteroids "small rock" 1 2.574
+	asteroids "medium rock" 5 2.0592
+	asteroids "large rock" 1 4.1184
+	asteroids "small metal" 39 3.8412
+	asteroids "medium metal" 72 3.8412
+	asteroids "large metal" 3 5.2668
+	minables iron 5 6.68827
+	minables silicon 11 5.1137
+	minables titanium 10 4.19059
+	fleet "Small Southern Merchants" 400
+	fleet "Large Southern Merchants" 600
+	fleet "Small Militia" 600
+	fleet "Large Militia" 1000
+	fleet "Small Southern Pirates" 800
+	fleet "Large Southern Pirates" 2000
+	fleet "Human Miners" 3000

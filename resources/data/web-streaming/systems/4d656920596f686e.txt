@@ -1,0 +1,18 @@
+system "Mei Yohn"
+	belt 1075
+	asteroids "medium rock" 1 5.1282
+	asteroids "large rock" 1 3.7884
+	asteroids "small metal" 2 4.851
+	asteroids "medium metal" 1 5.9136
+	asteroids "large metal" 8 3.7422
+	fleet "Small Hai" 1200
+	fleet "Large Hai" 2000
+	fleet "Small Hai Merchant" 600
+	fleet "Large Hai Merchant" 1000
+	fleet "Small Hai Merchant (Sympathizers)" 2400
+	fleet "Large Hai Merchant (Sympathizers)" 4000
+	fleet "Small Hai Merchant (Human)" 3500
+	fleet "Large Hai Merchant (Human)" 5000
+	fleet "Small Human Merchants (Hai)" 7000
+	fleet "Large Human Merchants (Hai)" 10000
+	fleet "Hai Surveillance" 5000

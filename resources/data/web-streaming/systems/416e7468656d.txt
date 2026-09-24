@@ -1,0 +1,19 @@
+system Anthem
+	belt 1764
+	asteroids "medium rock" 17 2.387
+	asteroids "large rock" 1 2.114
+	asteroids "small metal" 9 2.319
+	asteroids "medium metal" 15 2.114
+	asteroids "large metal" 11 2.967
+	minables copper 5 2.937
+	fleet "Small Avgi Merchants" 4200
+	fleet "Large Avgi Merchants" 8400
+	fleet "Small Dissonance Merchants" 4200
+	fleet "Large Dissonance Merchants" 8400
+	fleet "Dissonance Miners" 9000
+	fleet "Avgi Scouts" 3000
+	fleet "Avgi Patrol" 2400
+	fleet "Avgi Strike Group" 9000
+	fleet "Avgi Twilight Guard Logistics" 6000
+	fleet "Small Aberrant" 15000
+	fleet "Large Aberrant" 21000

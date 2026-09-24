@@ -1,0 +1,8 @@
+system Canopus
+	belt 1530
+	asteroids "large metal" 1 6.8264
+	fleet "Small Northern Merchants" 900
+	fleet "Large Northern Merchants" 700
+	fleet "Small Republic" 1100
+	fleet "Large Republic" 2500
+	fleet "Republic Logistics" 4500

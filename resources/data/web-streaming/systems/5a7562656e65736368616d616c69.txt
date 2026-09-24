@@ -1,0 +1,18 @@
+system Zubeneschamali
+	belt 1543
+	asteroids "small rock" 9 1.9344
+	asteroids "medium rock" 57 1.7784
+	asteroids "large rock" 33 2.496
+	asteroids "small metal" 29 2.964
+	asteroids "medium metal" 41 3.0576
+	asteroids "large metal" 72 3.7752
+	minables neodymium 25 3.69745
+	minables silicon 28 4.05728
+	minables titanium 31 4.30615
+	fleet "Small Southern Merchants" 500
+	fleet "Large Southern Merchants" 1500
+	fleet "Small Militia" 3000
+	fleet "Large Militia" 5000
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 3000
+	fleet "Human Miners" 2000

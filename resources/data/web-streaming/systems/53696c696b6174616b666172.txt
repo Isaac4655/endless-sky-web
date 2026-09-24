@@ -1,0 +1,9 @@
+system Silikatakfar
+	belt 1641
+	asteroids "small rock" 2 1.9936
+	asteroids "medium rock" 1 1.2544
+	asteroids "large rock" 1 2.128
+	asteroids "large metal" 1 2.128
+	fleet "Large Kor Mereti" 1600
+	fleet "Small Kor Sestor" 1600
+	fleet "Large Kor Sestor" 2400

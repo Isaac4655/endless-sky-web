@@ -1,0 +1,18 @@
+system Anax
+	belt 6000
+	asteroids "small rock" 3 0.694
+	asteroids "large rock" 3 0.592
+	asteroids "small metal" 6 2.933
+	asteroids "medium metal" 3 2.171
+	asteroids "large metal" 3 2.001
+	minables iron 24 4.123
+	minables silicon 24 2.222
+	minables aluminum 18 4.383
+	minables copper 60 6.231
+	minables silver 36 12.312
+	minables titanium 18 6.213
+	minables tungsten 12 8.132
+	minables uranium 15 3.724
+	fleet "Avgi Scouts" 24000
+	fleet "Small Aberrant" 900
+	fleet "Large Aberrant" 3600

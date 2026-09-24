@@ -1,0 +1,15 @@
+system Tumble
+	belt 2632
+	asteroids "small rock" 7 1.404
+	asteroids "medium rock" 3 1.513
+	asteroids "large rock" 4 0.967
+	asteroids "small metal" 8 1.373
+	asteroids "medium metal" 9 1.186
+	asteroids "large metal" 5 1.295
+	minables iron 33 1.873
+	minables uranium 18 2.175
+	minables tungsten 21 1.052
+	minables gold 6 4.787
+	minables neodymium 12 1.877
+	fleet "Small Aberrant" 2000
+	fleet "Large Aberrant" 3700

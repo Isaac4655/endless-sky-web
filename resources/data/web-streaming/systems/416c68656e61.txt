@@ -1,0 +1,15 @@
+system Alhena
+	belt 1078
+	asteroids "small rock" 21 8.7906
+	asteroids "medium rock" 14 5.98
+	asteroids "large rock" 1 6.3986
+	asteroids "medium metal" 6 5.5614
+	asteroids "large metal" 1 6.6976
+	minables iron 2 8.5773
+	minables lead 1 14.4573
+	minables uranium 2 7.51131
+	fleet "Small Northern Merchants" 500
+	fleet "Large Northern Merchants" 700
+	fleet "Small Republic" 1100
+	fleet "Large Republic" 1600
+	fleet "Republic Logistics" 3000

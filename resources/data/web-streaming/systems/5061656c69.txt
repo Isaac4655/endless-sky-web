@@ -1,0 +1,14 @@
+system Paeli
+	belt 1500
+	asteroids "large metal" 1 4
+	asteroids "large rock" 1 2
+	asteroids "medium metal" 1 3
+	asteroids "medium rock" 3 3
+	asteroids "small rock" 9 2
+	minables aluminum 3 4
+	minables lead 3 5
+	minables titanium 2 4
+	fleet Ka'het 3500
+	fleet "Ka'het Aggressive" 9800
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

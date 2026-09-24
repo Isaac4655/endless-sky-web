@@ -1,0 +1,13 @@
+system Ablodab
+	belt 1368
+	asteroids "small rock" 2 1.8837
+	asteroids "large rock" 2 3.8766
+	asteroids "medium metal" 2 3.7401
+	asteroids "large metal" 1 2.8392
+	fleet "Small Arach" 400
+	fleet "Large Arach" 600
+	fleet "Small Kimek" 1100
+	fleet "Large Kimek" 2400
+	fleet "Small Saryd" 1000
+	fleet "Large Saryd" 2400
+	fleet Heliarch 700

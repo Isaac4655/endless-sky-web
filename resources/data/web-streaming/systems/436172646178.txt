@@ -1,0 +1,17 @@
+system Cardax
+	belt 1228
+	asteroids "small rock" 26 5.4366
+	asteroids "medium rock" 14 3.978
+	asteroids "large rock" 32 3.1382
+	asteroids "medium metal" 22 3.978
+	asteroids "large metal" 12 6.4532
+	minables aluminum 4 8.53341
+	minables lead 1 7.70182
+	fleet "Small Northern Merchants" 1200
+	fleet "Large Northern Merchants" 3000
+	fleet "Small Northern Pirates" 1000
+	fleet "Large Northern Pirates" 3000
+	fleet "Small Core Pirates" 3000
+	fleet "Small Republic" 2000
+	fleet "Large Republic" 5000
+	fleet "Derelict Northern" 30000

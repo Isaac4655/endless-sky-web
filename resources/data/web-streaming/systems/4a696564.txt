@@ -1,0 +1,15 @@
+system Jied
+	belt 1377
+	asteroids "small rock" 24 1.2
+	asteroids "medium rock" 23 2.2
+	asteroids "large rock" 20 1.7
+	asteroids "small metal" 1 2
+	asteroids "medium metal" 4 1.5
+	asteroids "large metal" 1 1.25
+	minables tungsten 18 2
+	minables copper 2 2.16
+	fleet "Small Vi" 1800
+	fleet "Large Vi" 2500
+	fleet "Vi Cargo" 2300
+	fleet "Small Vi II" 3600
+	fleet "Gegno Miners" 1700

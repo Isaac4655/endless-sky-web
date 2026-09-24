@@ -1,0 +1,11 @@
+system "Avo Chigo"
+	belt 1500
+	asteroids "small rock" 13 5.46
+	asteroids "medium rock" 11 7.32
+	asteroids "large rock" 3 7.26
+	asteroids "small metal" 34 6
+	asteroids "medium metal" 8 6.24
+	asteroids "large metal" 30 9
+	fleet "Bunrodea Erabu Freight" 1200
+	fleet "Bunrodea Defense" 2000
+	fleet "Bunrodea Royal Guard" 2000

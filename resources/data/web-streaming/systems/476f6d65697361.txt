@@ -1,0 +1,15 @@
+system Gomeisa
+	belt 1616
+	asteroids "small rock" 44 4.956
+	asteroids "medium rock" 13 3.78
+	asteroids "large rock" 1 3.024
+	asteroids "large metal" 3 4.536
+	minables copper 1 7.47319
+	minables silicon 10 6.41048
+	fleet "Small Northern Merchants" 600
+	fleet "Large Northern Merchants" 1300
+	fleet "Small Deep Security" 1800
+	fleet "Small Deep Merchants" 3000
+	fleet "Large Deep Security" 4000
+	fleet "Large Deep Merchants" 5000
+	fleet "Republic Logistics" 5000

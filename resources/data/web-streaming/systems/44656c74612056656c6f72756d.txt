@@ -1,0 +1,17 @@
+system "Delta Velorum"
+	belt 1221
+	asteroids "small rock" 6 2.775
+	asteroids "medium rock" 39 2.8875
+	asteroids "large rock" 6 3.45
+	asteroids "small metal" 11 3.6
+	asteroids "medium metal" 54 5.4375
+	asteroids "large metal" 5 3.8625
+	minables lead 7 4.67725
+	minables neodymium 17 5.3117
+	minables silver 8 8.15115
+	fleet "Small Southern Merchants" 1000
+	fleet "Large Southern Merchants" 3000
+	fleet "Small Southern Pirates" 2000
+	fleet "Large Southern Pirates" 5000
+	fleet "Small Republic" 12000
+	fleet "Human Miners" 2000

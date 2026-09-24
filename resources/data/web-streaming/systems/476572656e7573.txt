@@ -1,0 +1,15 @@
+system Gerenus
+	belt 1500
+	asteroids "large metal" 5 5
+	asteroids "large rock" 5 4
+	asteroids "medium metal" 33 8
+	asteroids "medium rock" 53 12
+	asteroids "small metal" 1 7
+	asteroids "small rock" 12 11
+	minables aluminum 6 11
+	minables copper 14 19
+	minables iron 14 20
+	fleet Ka'het 3400
+	fleet "Ka'het Aggressive" 11000
+	hazard "Ember Waste Base Heat" 100
+	hazard "Ember Waste Base Storm" 9000

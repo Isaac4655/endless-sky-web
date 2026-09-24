@@ -1,0 +1,13 @@
+system Gale
+	belt 1707 5
+	belt 2124 3
+	asteroids "small rock" 1 4.212
+	asteroids "medium rock" 1 4.352
+	asteroids "large rock" 9 3.744
+	asteroids "small metal" 11 2.527
+	asteroids "medium metal" 10 2.48
+	asteroids "large metal" 11 4.493
+	minables titanium 7 6.298
+	fleet "Avgi Scouts" 18000
+	fleet "Small Aberrant" 6000
+	fleet "Large Aberrant" 9000
