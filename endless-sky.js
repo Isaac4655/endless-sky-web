@@ -89,7 +89,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: C:\Users\Isaac\AppData\Local\Temp\tmplxrvydcx.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmplgxkidxj.js
 if (!Module["expectedDataFileDownloads"]) Module["expectedDataFileDownloads"] = 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -228,23 +228,23 @@ Module["expectedDataFileDownloads"]++;
   });
 })();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmplxrvydcx.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmp4ig1hva4.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmplgxkidxj.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmplc_o43kq.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if ((typeof ENVIRONMENT_IS_WASM_WORKER != "undefined" && ENVIRONMENT_IS_WASM_WORKER) || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD) || (typeof ENVIRONMENT_IS_AUDIO_WORKLET != "undefined" && ENVIRONMENT_IS_AUDIO_WORKLET)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmp4ig1hva4.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpf6ns3ddd.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmplc_o43kq.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmp8e3tdsga.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpf6ns3ddd.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmp8e3tdsga.js
 var programArgs = [];
 
 var thisProgram = "./this.program";
@@ -13566,8 +13566,8 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  390566: () => (growMemViews(), HEAPU8).length,
-  390592: $0 => {
+  391540: () => (growMemViews(), HEAPU8).length,
+  391566: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13575,7 +13575,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  390807: () => {
+  391781: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13583,7 +13583,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  390954: () => {
+  391928: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13591,7 +13591,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  391188: $0 => {
+  392162: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13615,11 +13615,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  391740: () => {
+  392714: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  391808: ($0, $1, $2, $3) => {
+  392782: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13661,7 +13661,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  393501: ($0, $1, $2, $3) => {
+  394475: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13693,7 +13693,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  394676: ($0, $1) => {
+  395650: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13712,7 +13712,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  395281: ($0, $1) => {
+  396255: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13726,7 +13726,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  395770: $0 => {
+  396744: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13760,10 +13760,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  396776: $0 => {
+  397750: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  396816: ($0, $1, $2) => {
+  397790: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13834,7 +13834,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  398282: ($0, $1, $2, $3, $4) => {
+  399256: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13871,18 +13871,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  399270: $0 => {
+  400244: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  399353: () => {
+  400327: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  399422: () => window.innerWidth,
-  399452: () => window.innerHeight
+  400396: () => window.innerWidth,
+  400426: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
@@ -13907,9 +13907,65 @@ function WebResourceCategoryList(category) {
   }
 }
 
+function WebGetResourceBaseUrl() {
+  try {
+    const baseUrl = self.__endlessSkyWebResourceBaseUrl;
+    if (typeof baseUrl !== "string" || !baseUrl) return 0;
+    const bytes = lengthBytesUTF8(baseUrl) + 1;
+    const ptr = _malloc(bytes);
+    if (!ptr) return 0;
+    stringToUTF8(baseUrl, ptr, bytes);
+    return ptr;
+  } catch (error) {
+    return 0;
+  }
+}
+
+function WebReadResource(path, resourceBaseUrl) {
+  try {
+    const virtualPath = UTF8ToString(path);
+    const baseUrl = UTF8ToString(resourceBaseUrl);
+    if (!baseUrl) return 0;
+    if (virtualPath.charAt(0) !== "/") return 0;
+    const slash = virtualPath.indexOf("/", 1);
+    if (slash < 0) return 0;
+    const category = virtualPath.substring(1, slash);
+    const relativePath = virtualPath.substring(slash + 1);
+    if (!relativePath) return 0;
+    if (category !== "data" && category !== "shaders" && category !== "images" && category !== "sounds") return 0;
+    const encodedPath = relativePath.split("/").map(segment => encodeURIComponent(segment)).join("/");
+    const url = baseUrl + encodeURIComponent(category) + "/" + encodedPath;
+    const xhr = new XMLHttpRequest;
+    xhr.open("GET", url, false);
+    xhr.responseType = "arraybuffer";
+    xhr.send(null);
+    if (!((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)) {
+      self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
+      if (self.__endlessSkyWebResourceErrors < 12) {
+        console.error("[Resources] Resource request failed:", url, "HTTP", xhr.status);
+        ++self.__endlessSkyWebResourceErrors;
+      }
+      return 0;
+    }
+    const bytes = new Uint8Array(xhr.response || new ArrayBuffer(0));
+    const total = 4 + bytes.byteLength;
+    const ptr = _malloc(total);
+    if (!ptr) return 0;
+    (growMemViews(), HEAPU32)[ptr >>> 2] = bytes.byteLength;
+    (growMemViews(), HEAPU8).set(bytes, ptr + 4);
+    return ptr;
+  } catch (error) {
+    self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
+    if (self.__endlessSkyWebResourceErrors < 12) {
+      console.error("[Resources] Resource request exception:", error);
+      ++self.__endlessSkyWebResourceErrors;
+    }
+    return 0;
+  }
+}
+
 function InitializeWebLazyResources() {
   try {
-    if (typeof FS === "undefined" || typeof FS.createLazyFile !== "function") throw new Error("Emscripten FS.createLazyFile() is unavailable.");
     const scriptUrl = (typeof Module !== "undefined" && typeof Module.mainScriptUrlOrBlob === "string") ? Module.mainScriptUrlOrBlob : self.location.href;
     const baseUrl = new URL("resources/", scriptUrl).href;
     const manifestUrl = new URL("manifest.json", baseUrl).href;
@@ -13919,29 +13975,10 @@ function InitializeWebLazyResources() {
     if (!((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)) throw new Error("Could not load " + manifestUrl + " (HTTP " + xhr.status + ")");
     const manifest = JSON.parse(xhr.responseText);
     self.__endlessSkyWebManifest = manifest;
-    const categories = [ "data", "shaders", "images", "sounds" ];
-    let fileCount = 0;
-    for (const category of categories) {
-      const entries = manifest[category] || [];
-      FS.createPath("/", category, true, true);
-      for (const entry of entries) {
-        const relativePath = entry[0];
-        if (typeof relativePath !== "string" || !relativePath) continue;
-        const parts = relativePath.split("/");
-        const name = parts.pop();
-        const relativeDir = parts.join("/");
-        const virtualDir = "/" + category + (relativeDir ? "/" + relativeDir : "");
-        if (relativeDir) FS.createPath("/", virtualDir.slice(1), true, true);
-        const encodedPath = parts.concat([ name ]).map(segment => encodeURIComponent(segment)).join("/");
-        const url = baseUrl + encodeURIComponent(category) + "/" + encodedPath;
-        FS.createLazyFile(virtualDir, name, url, true, false);
-        ++fileCount;
-      }
-    }
-    console.log("[Resources] Installed " + fileCount + " lazy files");
+    self.__endlessSkyWebResourceBaseUrl = baseUrl;
     return 1;
   } catch (error) {
-    console.error("[Resources] Failed to install lazy resources:", error && error.stack ? error.stack : error);
+    console.error("[Resources] Failed to load resource manifest:", error && error.stack ? error.stack : error);
     return 0;
   }
 }
@@ -14097,6 +14134,8 @@ var wasmImports;
 function assignWasmImports() {
   wasmImports = {
     /** @export */ InitializeWebLazyResources,
+    /** @export */ WebGetResourceBaseUrl,
+    /** @export */ WebReadResource,
     /** @export */ WebResourceCategoryList,
     /** @export */ __assert_fail: ___assert_fail,
     /** @export */ __call_sighandler: ___call_sighandler,
