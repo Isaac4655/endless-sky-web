@@ -28,12 +28,12 @@
     return;
   }
   var currentSafariVersion = userAgent.includes("Safari/") && !userAgent.includes("Chrome/") && userAgent.match(/Version\/(\d+\.?\d*\.?\d*)/) ? humanReadableVersionToPacked(userAgent.match(/Version\/(\d+\.?\d*\.?\d*)/)[1]) : TARGET_NOT_SUPPORTED;
-  if (currentSafariVersion < 17e4) {
-    throw new Error(`This emscripten-generated code requires Safari v${packedVersionToHumanReadable(17e4)} (detected v${currentSafariVersion})`);
+  if (currentSafariVersion < 15e4) {
+    throw new Error(`This emscripten-generated code requires Safari v${packedVersionToHumanReadable(15e4)} (detected v${currentSafariVersion})`);
   }
   var currentFirefoxVersion = userAgent.match(/Firefox\/(\d+(?:\.\d+)?)/) ? parseFloat(userAgent.match(/Firefox\/(\d+(?:\.\d+)?)/)[1]) : TARGET_NOT_SUPPORTED;
-  if (currentFirefoxVersion < 105) {
-    throw new Error(`This emscripten-generated code requires Firefox v105 (detected v${currentFirefoxVersion})`);
+  if (currentFirefoxVersion < 79) {
+    throw new Error(`This emscripten-generated code requires Firefox v79 (detected v${currentFirefoxVersion})`);
   }
   var currentChromeVersion = userAgent.match(/Chrome\/(\d+(?:\.\d+)?)/) ? parseFloat(userAgent.match(/Chrome\/(\d+(?:\.\d+)?)/)[1]) : TARGET_NOT_SUPPORTED;
   if (currentChromeVersion < 85) {
@@ -89,7 +89,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpgcvhyigy.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmp092ngoto.js
 if (!Module["expectedDataFileDownloads"]) Module["expectedDataFileDownloads"] = 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -228,23 +228,23 @@ Module["expectedDataFileDownloads"]++;
   });
 })();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpgcvhyigy.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpwcp_z4nm.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmp092ngoto.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpxx5qbbul.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if ((typeof ENVIRONMENT_IS_WASM_WORKER != "undefined" && ENVIRONMENT_IS_WASM_WORKER) || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD) || (typeof ENVIRONMENT_IS_AUDIO_WORKLET != "undefined" && ENVIRONMENT_IS_AUDIO_WORKLET)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpwcp_z4nm.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpswmlpleg.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpxx5qbbul.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmp4hiyagur.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpswmlpleg.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmp4hiyagur.js
 var programArgs = [];
 
 var thisProgram = "./this.program";
@@ -811,7 +811,6 @@ if (ENVIRONMENT_IS_PTHREAD) {
         establishStackSpace(msgData.pthread_ptr);
         // Pass the thread address to wasm to store it for fast access.
         __emscripten_thread_init(msgData.pthread_ptr, /*is_main=*/ 0, /*is_runtime=*/ 0, /*can_block=*/ 1, 0, 0);
-        PThread.receiveOffscreenCanvases(msgData);
         PThread.threadInitTLS();
         // Await mailbox notifications with `Atomics.waitAsync` so we can start
         // using the fast `Atomics.notify` notification path.
@@ -1243,10 +1242,6 @@ var spawnThread = threadParams => {
     arg: threadParams.arg,
     pthread_ptr: threadParams.pthread_ptr
   };
-  // Note that we do not need to quote these names because they are only used
-  // in this file, and not from the external worker.js.
-  msg.moduleCanvasId = threadParams.moduleCanvasId;
-  msg.offscreenCanvases = threadParams.offscreenCanvases;
   // Ask the worker to start executing its pthread entry point function.
   worker.postMessage(msg, threadParams.transferList);
   return 0;
@@ -1442,15 +1437,6 @@ var PThread = {
     // Finally, free the underlying (and now-unused) pthread structure in
     // linear memory.
     __emscripten_thread_free_data(pthread_ptr);
-  },
-  receiveOffscreenCanvases(data) {
-    if (typeof GL != "undefined") {
-      Object.assign(GL.offscreenCanvases, data.offscreenCanvases);
-      if (!Module["canvas"] && data.moduleCanvasId && GL.offscreenCanvases[data.moduleCanvasId]) {
-        Module["canvas"] = GL.offscreenCanvases[data.moduleCanvasId].offscreenCanvas;
-        Module["canvas"].id = data.moduleCanvasId;
-      }
-    }
   },
   threadInitTLS() {
     // Call thread init functions (these are the _emscripten_tls_init for each
@@ -1947,93 +1933,6 @@ var ___pthread_create_js = (pthread_ptr, attr, startRoutine, arg) => {
   // List of JS objects that will transfer ownership to the Worker hosting the thread
   var transferList = [];
   var error = 0;
-  // Deduce which WebGL canvases (HTMLCanvasElements or OffscreenCanvases) should be passed over to the
-  // Worker that hosts the spawned pthread.
-  // Comma-delimited list of CSS selectors that must identify canvases by IDs: "#canvas1, #canvas2, ..."
-  var transferredCanvasNames = attr ? (growMemViews(), HEAPU32)[(((attr) + (40)) >> 2)] : 0;
-  // Proxied canvases string pointer -1/MAX_PTR is used as a special token to
-  // fetch whatever canvases were passed to build in
-  // -sOFFSCREENCANVASES_TO_PTHREAD= command line.
-  if (transferredCanvasNames == 4294967295) {
-    transferredCanvasNames = "#canvas";
-  } else {
-    transferredCanvasNames = UTF8ToString(transferredCanvasNames).trim();
-  }
-  transferredCanvasNames = transferredCanvasNames ? transferredCanvasNames.split(",") : [];
-  var offscreenCanvases = {};
-  // Dictionary of OffscreenCanvas objects we'll transfer to the created thread to own
-  var moduleCanvasId = Module["canvas"]?.id ?? "";
-  // Note that transferredCanvasNames might be null (so we cannot do a for-of loop).
-  for (var name of transferredCanvasNames) {
-    name = name.trim();
-    var offscreenCanvasInfo;
-    try {
-      if (name == "#canvas") {
-        if (!Module["canvas"]) {
-          err(`pthread_create: could not find canvas with ID "${name}" to transfer to thread!`);
-          error = 28;
-          break;
-        }
-        name = Module["canvas"].id;
-      }
-      assert(typeof GL == "object", "OFFSCREENCANVAS_SUPPORT assumes GL is in use (you can force-include it with '-sDEFAULT_LIBRARY_FUNCS_TO_INCLUDE=$GL')");
-      if (GL.offscreenCanvases[name]) {
-        offscreenCanvasInfo = GL.offscreenCanvases[name];
-        GL.offscreenCanvases[name] = null;
-        // This thread no longer owns this canvas.
-        if (Module["canvas"] instanceof OffscreenCanvas && name === Module["canvas"].id) Module["canvas"] = null;
-      } else if (!ENVIRONMENT_IS_PTHREAD) {
-        var canvas = (Module["canvas"] && Module["canvas"].id === name) ? Module["canvas"] : document.querySelector(name);
-        if (!canvas) {
-          err(`pthread_create: could not find canvas with ID "${name}" to transfer to thread!`);
-          error = 28;
-          break;
-        }
-        if (canvas.controlTransferredOffscreen) {
-          err(`pthread_create: cannot transfer canvas with ID "${name}" to thread, since the current thread does not have control over it!`);
-          error = 63;
-          // Operation not permitted, some other thread is accessing the canvas.
-          break;
-        }
-        if (canvas.transferControlToOffscreen) {
-          // Create a shared information block in heap so that we can control
-          // the canvas size from any thread.
-          if (!canvas.canvasSharedPtr) {
-            canvas.canvasSharedPtr = _malloc(12);
-            (growMemViews(), HEAP32)[((canvas.canvasSharedPtr) >> 2)] = canvas.width;
-            (growMemViews(), HEAP32)[(((canvas.canvasSharedPtr) + (4)) >> 2)] = canvas.height;
-            (growMemViews(), HEAPU32)[(((canvas.canvasSharedPtr) + (8)) >> 2)] = 0;
-          }
-          offscreenCanvasInfo = {
-            offscreenCanvas: canvas.transferControlToOffscreen(),
-            canvasSharedPtr: canvas.canvasSharedPtr,
-            id: canvas.id
-          };
-          // After calling canvas.transferControlToOffscreen(), it is no
-          // longer possible to access certain operations on the canvas, such
-          // as resizing it or obtaining GL contexts via it.
-          // Use this field to remember that we have permanently converted
-          // this Canvas to be controlled via an OffscreenCanvas (there is no
-          // way to undo this in the spec)
-          canvas.controlTransferredOffscreen = true;
-        } else {
-          err(`pthread_create: cannot transfer control of canvas "${name}" to pthread, because current browser does not support OffscreenCanvas!`);
-          // If building with OFFSCREEN_FRAMEBUFFER=1 mode, we don't need to
-          // be able to transfer control to offscreen, but WebGL can be
-          // proxied from worker to main thread.
-          err("pthread_create: Build with -sOFFSCREEN_FRAMEBUFFER to enable fallback proxying of GL commands from pthread to main thread.");
-          return 52;
-        }
-      }
-      if (offscreenCanvasInfo) {
-        transferList.push(offscreenCanvasInfo.offscreenCanvas);
-        offscreenCanvases[offscreenCanvasInfo.id] = offscreenCanvasInfo;
-      }
-    } catch (e) {
-      err(`pthread_create: failed to transfer control of canvas "${name}" to OffscreenCanvas! Error: ${e}`);
-      return 28;
-    }
-  }
   // Synchronously proxy the thread creation to main thread if possible. If we
   // need to transfer ownership of objects, then proxy asynchronously via
   // postMessage.
@@ -2043,18 +1942,10 @@ var ___pthread_create_js = (pthread_ptr, attr, startRoutine, arg) => {
   // If on the main thread, and accessing Canvas/OffscreenCanvas failed, abort
   // with the detected error.
   if (error) return error;
-  // Register for each of the transferred canvases that the new thread now
-  // owns the OffscreenCanvas.
-  for (var canvas of Object.values(offscreenCanvases)) {
-    // pthread ptr to the thread that owns this canvas.
-    (growMemViews(), HEAPU32)[(((canvas.canvasSharedPtr) + (8)) >> 2)] = pthread_ptr;
-  }
   var threadParams = {
     startRoutine,
     pthread_ptr,
     arg,
-    moduleCanvasId,
-    offscreenCanvases,
     transferList
   };
   if (ENVIRONMENT_IS_PTHREAD) {
@@ -7792,7 +7683,7 @@ function _clock_time_get(clk_id, ignored_precision, ptime) {
 }
 
 function getFullscreenElement() {
-  return document.fullscreenElement;
+  return document.fullscreenElement ?? document.webkitFullscreenElement;
 }
 
 /** @param {number=} timeout */ var safeSetTimeout = (func, timeout) => {
@@ -8014,12 +7905,16 @@ var Browser = {
     if (!Browser.fullscreenHandlersInstalled) {
       Browser.fullscreenHandlersInstalled = true;
       document.addEventListener("fullscreenchange", fullscreenChange);
+      document.addEventListener("webkitfullscreenchange", fullscreenChange);
     }
     // create a new parent to ensure the canvas has no siblings. this allows browsers to optimize full screen performance when its parent is the full screen root
     var canvasContainer = document.createElement("div");
     canvas.parentNode.insertBefore(canvasContainer, canvas);
     canvasContainer.appendChild(canvas);
     // use parent of canvas as full screen root to allow aspect ratio correction (Firefox stretches the root to screen size)
+    // Safari didn't support Element.requestFullscreen until 16.4
+    // See: https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen
+    /** @suppress {checkTypes} */ canvasContainer.requestFullscreen ??= (canvasContainer["webkitRequestFullscreen"] ? () => canvasContainer["webkitRequestFullscreen"](Element.ALLOW_KEYBOARD_INPUT) : null) ?? (canvasContainer["webkitRequestFullScreen"] ? () => canvasContainer["webkitRequestFullScreen"](Element.ALLOW_KEYBOARD_INPUT) : null);
     canvasContainer.requestFullscreen();
   },
   exitFullscreen() {
@@ -8029,7 +7924,8 @@ var Browser = {
     if (!Browser.isFullscreen) {
       return false;
     }
-    document.exitFullscreen();
+    var CFS = document.exitFullscreen ?? document["webkitCancelFullScreen"];
+    CFS.apply(document, []);
     return true;
   },
   safeSetTimeout(func, timeout) {
@@ -8568,6 +8464,10 @@ var GL = {
     }
   },
   createContext: (/** @type {HTMLCanvasElement} */ canvas, webGLContextAttributes) => {
+    // In proxied operation mode, rAF()/setTimeout() functions do not delimit
+    // frame boundaries, so can't have WebGL implementation try to detect when
+    // it's ok to discard contents of the rendered backbuffer.
+    if (webGLContextAttributes.renderViaOffscreenBackBuffer) webGLContextAttributes["preserveDrawingBuffer"] = true;
     // BUG: Workaround Safari WebGL issue: After successfully acquiring WebGL
     // context on a canvas, calling .getContext() will always return that
     // context independent of which 'webgl' or 'webgl2'
@@ -8589,6 +8489,178 @@ var GL = {
     if (!ctx) return 0;
     var handle = GL.registerContext(ctx, webGLContextAttributes);
     return handle;
+  },
+  enableOffscreenFramebufferAttributes: webGLContextAttributes => {
+    webGLContextAttributes.renderViaOffscreenBackBuffer = true;
+    webGLContextAttributes.preserveDrawingBuffer = true;
+  },
+  createOffscreenFramebuffer: context => {
+    var gl = context.GLctx;
+    // Create FBO
+    var fbo = gl.createFramebuffer();
+    gl.bindFramebuffer(36160, fbo);
+    context.defaultFbo = fbo;
+    context.defaultFboForbidBlitFramebuffer = false;
+    if (gl.getContextAttributes().antialias) {
+      context.defaultFboForbidBlitFramebuffer = true;
+    }
+    // Create render targets to the FBO
+    context.defaultColorTarget = gl.createTexture();
+    context.defaultDepthTarget = gl.createRenderbuffer();
+    // Size them up correctly (use the same mechanism when resizing on demand)
+    GL.resizeOffscreenFramebuffer(context);
+    gl.bindTexture(3553, context.defaultColorTarget);
+    gl.texParameteri(3553, 10241, 9728);
+    gl.texParameteri(3553, 10240, 9728);
+    gl.texParameteri(3553, 10242, 33071);
+    gl.texParameteri(3553, 10243, 33071);
+    gl.texImage2D(3553, 0, 6408, gl.canvas.width, gl.canvas.height, 0, 6408, 5121, null);
+    gl.framebufferTexture2D(36160, 36064, 3553, context.defaultColorTarget, 0);
+    gl.bindTexture(3553, null);
+    // Create depth render target to the FBO
+    var depthTarget = gl.createRenderbuffer();
+    gl.bindRenderbuffer(36161, context.defaultDepthTarget);
+    gl.renderbufferStorage(36161, 33189, gl.canvas.width, gl.canvas.height);
+    gl.framebufferRenderbuffer(36160, 36096, 36161, context.defaultDepthTarget);
+    gl.bindRenderbuffer(36161, null);
+    // Create blitter
+    var vertices = [ -1, -1, -1, 1, 1, -1, 1, 1 ];
+    var vb = gl.createBuffer();
+    gl.bindBuffer(34962, vb);
+    gl.bufferData(34962, new Float32Array(vertices), 35044);
+    gl.bindBuffer(34962, null);
+    context.blitVB = vb;
+    var vsCode = "attribute vec2 pos;" + "varying lowp vec2 tex;" + "void main() { tex = pos * 0.5 + vec2(0.5,0.5); gl_Position = vec4(pos, 0.0, 1.0); }";
+    var vs = gl.createShader(35633);
+    gl.shaderSource(vs, vsCode);
+    gl.compileShader(vs);
+    var fsCode = "varying lowp vec2 tex;" + "uniform sampler2D sampler;" + "void main() { gl_FragColor = texture2D(sampler, tex); }";
+    var fs = gl.createShader(35632);
+    gl.shaderSource(fs, fsCode);
+    gl.compileShader(fs);
+    var blitProgram = gl.createProgram();
+    gl.attachShader(blitProgram, vs);
+    gl.attachShader(blitProgram, fs);
+    gl.linkProgram(blitProgram);
+    context.blitProgram = blitProgram;
+    context.blitPosLoc = gl.getAttribLocation(blitProgram, "pos");
+    gl.useProgram(blitProgram);
+    gl.uniform1i(gl.getUniformLocation(blitProgram, "sampler"), 0);
+    gl.useProgram(null);
+    if (gl.createVertexArray) {
+      context.defaultVao = gl.createVertexArray();
+      gl.bindVertexArray(context.defaultVao);
+      gl.enableVertexAttribArray(context.blitPosLoc);
+      gl.bindVertexArray(null);
+    }
+  },
+  resizeOffscreenFramebuffer: context => {
+    var gl = context.GLctx;
+    // Resize color buffer
+    if (context.defaultColorTarget) {
+      var prevTextureBinding = gl.getParameter(32873);
+      gl.bindTexture(3553, context.defaultColorTarget);
+      gl.texImage2D(3553, 0, 6408, gl.drawingBufferWidth, gl.drawingBufferHeight, 0, 6408, 5121, null);
+      gl.bindTexture(3553, prevTextureBinding);
+    }
+    // Resize depth buffer
+    if (context.defaultDepthTarget) {
+      var prevRenderBufferBinding = gl.getParameter(36007);
+      gl.bindRenderbuffer(36161, context.defaultDepthTarget);
+      gl.renderbufferStorage(36161, 33189, gl.drawingBufferWidth, gl.drawingBufferHeight);
+      // TODO: Read context creation parameters for what type of depth and stencil to use
+      gl.bindRenderbuffer(36161, prevRenderBufferBinding);
+    }
+  },
+  blitOffscreenFramebuffer: context => {
+    var gl = context.GLctx;
+    var prevScissorTest = gl.getParameter(3089);
+    if (prevScissorTest) gl.disable(3089);
+    var prevFbo = gl.getParameter(36006);
+    if (gl.blitFramebuffer && !context.defaultFboForbidBlitFramebuffer) {
+      gl.bindFramebuffer(36008, context.defaultFbo);
+      gl.bindFramebuffer(36009, null);
+      gl.blitFramebuffer(0, 0, gl.canvas.width, gl.canvas.height, 0, 0, gl.canvas.width, gl.canvas.height, 16384, 9728);
+    } else {
+      gl.bindFramebuffer(36160, null);
+      var prevProgram = gl.getParameter(35725);
+      gl.useProgram(context.blitProgram);
+      // If prevProgram was already marked for deletion, then, since it was
+      // still bound, it was not *actually* deleted. Binding a new program
+      // just now, thus, deleted the old one. This makes it impossible to
+      // restore. Hopefully the application didn't actually need it!
+      if (!gl.isProgram(prevProgram)) prevProgram = null;
+      var prevVB = gl.getParameter(34964);
+      gl.bindBuffer(34962, context.blitVB);
+      var prevActiveTexture = gl.getParameter(34016);
+      gl.activeTexture(33984);
+      var prevTextureBinding = gl.getParameter(32873);
+      gl.bindTexture(3553, context.defaultColorTarget);
+      var prevBlend = gl.getParameter(3042);
+      if (prevBlend) gl.disable(3042);
+      var prevCullFace = gl.getParameter(2884);
+      if (prevCullFace) gl.disable(2884);
+      var prevDepthTest = gl.getParameter(2929);
+      if (prevDepthTest) gl.disable(2929);
+      var prevStencilTest = gl.getParameter(2960);
+      if (prevStencilTest) gl.disable(2960);
+      function draw() {
+        gl.vertexAttribPointer(context.blitPosLoc, 2, 5126, false, 0, 0);
+        gl.drawArrays(5, 0, 4);
+      }
+      if (context.defaultVao) {
+        // WebGL 2 or OES_vertex_array_object
+        var prevVAO = gl.getParameter(34229);
+        gl.bindVertexArray(context.defaultVao);
+        draw();
+        gl.bindVertexArray(prevVAO);
+      } else {
+        var prevVertexAttribPointer = {
+          buffer: gl.getVertexAttrib(context.blitPosLoc, 34975),
+          size: gl.getVertexAttrib(context.blitPosLoc, 34339),
+          stride: gl.getVertexAttrib(context.blitPosLoc, 34340),
+          type: gl.getVertexAttrib(context.blitPosLoc, 34341),
+          normalized: gl.getVertexAttrib(context.blitPosLoc, 34922),
+          pointer: gl.getVertexAttribOffset(context.blitPosLoc, 34373)
+        };
+        var maxVertexAttribs = gl.getParameter(34921);
+        var prevVertexAttribEnables = [];
+        for (var i = 0; i < maxVertexAttribs; ++i) {
+          var prevEnabled = gl.getVertexAttrib(i, 34338);
+          var wantEnabled = i == context.blitPosLoc;
+          if (prevEnabled && !wantEnabled) {
+            gl.disableVertexAttribArray(i);
+          }
+          if (!prevEnabled && wantEnabled) {
+            gl.enableVertexAttribArray(i);
+          }
+          prevVertexAttribEnables[i] = prevEnabled;
+        }
+        draw();
+        for (var i = 0; i < maxVertexAttribs; ++i) {
+          var prevEnabled = prevVertexAttribEnables[i];
+          var nowEnabled = i == context.blitPosLoc;
+          if (prevEnabled && !nowEnabled) {
+            gl.enableVertexAttribArray(i);
+          }
+          if (!prevEnabled && nowEnabled) {
+            gl.disableVertexAttribArray(i);
+          }
+        }
+        gl.bindBuffer(34962, prevVertexAttribPointer.buffer);
+        gl.vertexAttribPointer(context.blitPosLoc, prevVertexAttribPointer.size, prevVertexAttribPointer.type, prevVertexAttribPointer.normalized, prevVertexAttribPointer.stride, prevVertexAttribPointer.offset);
+      }
+      if (prevStencilTest) gl.enable(2960);
+      if (prevDepthTest) gl.enable(2929);
+      if (prevCullFace) gl.enable(2884);
+      if (prevBlend) gl.enable(3042);
+      gl.bindTexture(3553, prevTextureBinding);
+      gl.activeTexture(prevActiveTexture);
+      gl.bindBuffer(34962, prevVB);
+      gl.useProgram(prevProgram);
+    }
+    gl.bindFramebuffer(36160, prevFbo);
+    if (prevScissorTest) gl.enable(3089);
   },
   registerContext: (ctx, webGLContextAttributes) => {
     // with pthreads a context is a location in memory with some synchronized
@@ -8624,6 +8696,7 @@ var GL = {
       };
     }
     GL.generateTempBuffers(false, context);
+    if (webGLContextAttributes.renderViaOffscreenBackBuffer) GL.createOffscreenFramebuffer(context);
     return handle;
   },
   makeContextCurrent: contextHandle => {
@@ -9347,7 +9420,7 @@ var JSEvents = {
     return target?.nodeName ?? "";
   },
   fullscreenEnabled() {
-    return document.fullscreenEnabled;
+    return document.fullscreenEnabled ?? document.webkitFullscreenEnabled;
   }
 };
 
@@ -9355,35 +9428,18 @@ var JSEvents = {
 
 var maybeCStringToJsString = cString => cString > 2 ? UTF8ToString(cString) : cString;
 
-var findCanvasEventTarget = target => {
+var findEventTarget = target => {
   target = maybeCStringToJsString(target);
-  // When compiling with OffscreenCanvas support and looking up a canvas to target,
-  // we first look up if the target Canvas has been transferred to OffscreenCanvas use.
-  // These transfers are represented/tracked by GL.offscreenCanvases object, which contain
-  // the OffscreenCanvas element for each regular Canvas element that has been transferred.
-  // Note that each pthread/worker have their own set of GL.offscreenCanvases. That is,
-  // when an OffscreenCanvas is transferred from a pthread/main thread to another pthread,
-  // it will move in the GL.offscreenCanvases array between threads. Hence GL.offscreenCanvases
-  // represents the set of OffscreenCanvases owned by the current calling thread.
-  // First check out the list of OffscreenCanvases by CSS selector ID ('#myCanvasID')
-  return GL.offscreenCanvases[target.slice(1)] || (target == "canvas" && Object.values(GL.offscreenCanvases)[0]) || specialHTMLTargets[target] || globalThis.document?.querySelector(target);
+  var domElement = specialHTMLTargets[target] || globalThis.document?.querySelector(target);
+  return domElement;
 };
+
+var findCanvasEventTarget = findEventTarget;
 
 var getCanvasSizeCallingThread = (target, width, height) => {
   var canvas = findCanvasEventTarget(target);
   if (!canvas) return -4;
-  if (canvas.canvasSharedPtr) {
-    // N.B. Reading the size of the Canvas takes priority from our shared state structure, which is not the actual size.
-    // However if is possible that there is a canvas size set event pending on an OffscreenCanvas owned by another thread,
-    // so that the real sizes of the canvas have not updated yet. Therefore reading the real values would be racy.
-    var w = (growMemViews(), HEAP32)[((canvas.canvasSharedPtr) >> 2)];
-    var h = (growMemViews(), HEAP32)[(((canvas.canvasSharedPtr) + (4)) >> 2)];
-    (growMemViews(), HEAP32)[((width) >> 2)] = w;
-    (growMemViews(), HEAP32)[((height) >> 2)] = h;
-  } else if (canvas.offscreenCanvas) {
-    (growMemViews(), HEAP32)[((width) >> 2)] = canvas.offscreenCanvas.width;
-    (growMemViews(), HEAP32)[((height) >> 2)] = canvas.offscreenCanvas.height;
-  } else if (!canvas.controlTransferredOffscreen) {
+  if (!canvas.controlTransferredOffscreen) {
     (growMemViews(), HEAP32)[((width) >> 2)] = canvas.width;
     (growMemViews(), HEAP32)[((height) >> 2)] = canvas.height;
   } else {
@@ -9423,29 +9479,10 @@ var getCanvasElementSize = target => {
   return size;
 };
 
-var setOffscreenCanvasSizeOnTargetThread = (targetThread, targetCanvas, width, height) => {
-  targetCanvas = targetCanvas ? UTF8ToString(targetCanvas) : "";
-  var targetCanvasPtr = 0;
-  if (targetCanvas) {
-    targetCanvasPtr = stringToNewUTF8(targetCanvas);
-  }
-  __emscripten_set_offscreencanvas_size_on_thread(targetThread, targetCanvasPtr, width, height);
-};
-
 var setCanvasElementSizeCallingThread = (target, width, height) => {
   var canvas = findCanvasEventTarget(target);
   if (!canvas) return -4;
-  if (canvas.canvasSharedPtr) {
-    // N.B. We hold the canvasSharedPtr info structure as the authoritative source for specifying the size of a canvas
-    // since the actual canvas size changes are asynchronous if the canvas is owned by an OffscreenCanvas on another thread.
-    // Therefore when setting the size, eagerly set the size of the canvas on the calling thread here, though this thread
-    // might not be the one that actually ends up specifying the size, but the actual size change may be dispatched
-    // as an asynchronous event below.
-    (growMemViews(), HEAP32)[((canvas.canvasSharedPtr) >> 2)] = width;
-    (growMemViews(), HEAP32)[(((canvas.canvasSharedPtr) + (4)) >> 2)] = height;
-  }
-  if (canvas.offscreenCanvas || !canvas.controlTransferredOffscreen) {
-    if (canvas.offscreenCanvas) canvas = canvas.offscreenCanvas;
+  if (!canvas.controlTransferredOffscreen) {
     var autoResizeViewport = false;
     if (canvas.GLctxObject?.GLctx) {
       var prevViewport = canvas.GLctxObject.GLctx.getParameter(2978);
@@ -9459,13 +9496,10 @@ var setCanvasElementSizeCallingThread = (target, width, height) => {
       // but this can be quite disruptive.
       canvas.GLctxObject.GLctx.viewport(0, 0, width, height);
     }
-  } else if (canvas.canvasSharedPtr) {
-    var targetThread = (growMemViews(), HEAPU32)[(((canvas.canvasSharedPtr) + (8)) >> 2)];
-    setOffscreenCanvasSizeOnTargetThread(targetThread, target, width, height);
-    return 1;
   } else {
     return -4;
   }
+  if (canvas.GLctxObject) GL.resizeOffscreenFramebuffer(canvas.GLctxObject);
   return 0;
 };
 
@@ -9534,6 +9568,7 @@ var registerRestoreOldStyle = canvas => {
   function restoreOldStyle() {
     if (!getFullscreenElement()) {
       document.removeEventListener("fullscreenchange", restoreOldStyle);
+      document.removeEventListener("webkitfullscreenchange", restoreOldStyle);
       setCanvasElementSize(canvas, oldWidth, oldHeight);
       canvas.style.width = oldCssWidth;
       canvas.style.height = oldCssHeight;
@@ -9566,6 +9601,7 @@ var registerRestoreOldStyle = canvas => {
     }
   }
   document.addEventListener("fullscreenchange", restoreOldStyle);
+  document.addEventListener("webkitfullscreenchange", restoreOldStyle);
   return restoreOldStyle;
 };
 
@@ -9640,6 +9676,10 @@ var JSEvents_requestFullscreen = (target, strategy) => {
   }
   if (target.requestFullscreen) {
     target.requestFullscreen();
+  } else if (target.webkitRequestFullscreen) {
+    // Safari didn't Element.requestFullscreen support until 16.4
+    // See: https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen
+    target.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
   } else {
     return JSEvents.fullscreenEnabled() ? -3 : -1;
   }
@@ -9656,6 +9696,8 @@ function _emscripten_exit_fullscreen() {
   var d = specialHTMLTargets[1];
   if (d.exitFullscreen) {
     d.fullscreenElement && d.exitFullscreen();
+  } else if (d.webkitExitFullscreen) {
+    d.webkitFullscreenElement && d.webkitExitFullscreen();
   } else {
     return -1;
   }
@@ -9694,12 +9736,6 @@ function _emscripten_get_device_pixel_ratio() {
   if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(64, 0, 1);
   return globalThis.devicePixelRatio ?? 1;
 }
-
-var findEventTarget = target => {
-  target = maybeCStringToJsString(target);
-  var domElement = specialHTMLTargets[target] || globalThis.document?.querySelector(target);
-  return domElement;
-};
 
 function _emscripten_get_element_css_size(target, width, height) {
   if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(65, 0, 1, target, width, height);
@@ -9825,7 +9861,10 @@ var _emscripten_glBindBufferRange = (target, index, buffer, offset, ptrsize) => 
 };
 
 var _emscripten_glBindFramebuffer = (target, framebuffer) => {
-  GLctx.bindFramebuffer(target, GL.framebuffers[framebuffer]);
+  // defaultFbo may not be present if 'renderViaOffscreenBackBuffer' was not enabled during context creation time,
+  // i.e. setting -sOFFSCREEN_FRAMEBUFFER at compilation time does not yet mandate that offscreen back buffer
+  // is being used, but that is ultimately decided at context creation time.
+  GLctx.bindFramebuffer(target, framebuffer ? GL.framebuffers[framebuffer] : GL.currentContext.defaultFbo);
 };
 
 var _emscripten_glBindRenderbuffer = (target, renderbuffer) => {
@@ -9849,10 +9888,6 @@ var _emscripten_glBindVertexArray = vao => {
   var ibo = GLctx.getParameter(34965);
   GLctx.currentElementArrayBufferBinding = ibo ? (ibo.name | 0) : 0;
 };
-
-var _glBindVertexArray = _emscripten_glBindVertexArray;
-
-var _emscripten_glBindVertexArrayOES = _glBindVertexArray;
 
 var _emscripten_glBlendColor = (x0, x1, x2, x3) => GLctx.blendColor(x0, x1, x2, x3);
 
@@ -9919,10 +9954,6 @@ var _emscripten_glClientWaitSync = (sync, flags, timeout) => {
   // See https://www.khronos.org/registry/webgl/specs/latest/2.0/#5.15
   timeout = Number(timeout);
   return GLctx.clientWaitSync(GL.syncs[sync], flags, timeout);
-};
-
-var _emscripten_glClipControlEXT = (origin, depth) => {
-  GLctx.extClipControl["clipControlEXT"](origin, depth);
 };
 
 var _emscripten_glColorMask = (red, green, blue, alpha) => {
@@ -10160,10 +10191,6 @@ var _emscripten_glDeleteVertexArrays = (n, vaos) => {
   }
 };
 
-var _glDeleteVertexArrays = _emscripten_glDeleteVertexArrays;
-
-var _emscripten_glDeleteVertexArraysOES = _glDeleteVertexArrays;
-
 var _emscripten_glDepthFunc = x0 => GLctx.depthFunc(x0);
 
 var _emscripten_glDepthMask = flag => {
@@ -10195,16 +10222,6 @@ var _emscripten_glDrawArraysInstanced = (mode, first, count, primcount) => {
   GLctx.drawArraysInstanced(mode, first, count, primcount);
 };
 
-var _glDrawArraysInstanced = _emscripten_glDrawArraysInstanced;
-
-var _emscripten_glDrawArraysInstancedANGLE = _glDrawArraysInstanced;
-
-var _emscripten_glDrawArraysInstancedARB = _glDrawArraysInstanced;
-
-var _emscripten_glDrawArraysInstancedEXT = _glDrawArraysInstanced;
-
-var _emscripten_glDrawArraysInstancedNV = _glDrawArraysInstanced;
-
 var tempFixedLengthArray = [];
 
 var _emscripten_glDrawBuffers = (n, bufs) => {
@@ -10214,12 +10231,6 @@ var _emscripten_glDrawBuffers = (n, bufs) => {
   }
   GLctx.drawBuffers(bufArray);
 };
-
-var _glDrawBuffers = _emscripten_glDrawBuffers;
-
-var _emscripten_glDrawBuffersEXT = _glDrawBuffers;
-
-var _emscripten_glDrawBuffersWEBGL = _glDrawBuffers;
 
 var _emscripten_glDrawElements = (mode, count, type, indices) => {
   var buf;
@@ -10272,16 +10283,6 @@ var _emscripten_glDrawElements = (mode, count, type, indices) => {
 var _emscripten_glDrawElementsInstanced = (mode, count, type, indices, primcount) => {
   GLctx.drawElementsInstanced(mode, count, type, indices, primcount);
 };
-
-var _glDrawElementsInstanced = _emscripten_glDrawElementsInstanced;
-
-var _emscripten_glDrawElementsInstancedANGLE = _glDrawElementsInstanced;
-
-var _emscripten_glDrawElementsInstancedARB = _glDrawElementsInstanced;
-
-var _emscripten_glDrawElementsInstancedEXT = _glDrawElementsInstanced;
-
-var _emscripten_glDrawElementsInstancedNV = _glDrawElementsInstanced;
 
 var _glDrawElements = _emscripten_glDrawElements;
 
@@ -10474,10 +10475,6 @@ var _emscripten_glGenTransformFeedbacks = (n, ids) => {
 var _emscripten_glGenVertexArrays = (n, arrays) => {
   GL.genObject(n, arrays, "createVertexArray", GL.vaos);
 };
-
-var _glGenVertexArrays = _emscripten_glGenVertexArrays;
-
-var _emscripten_glGenVertexArraysOES = _glGenVertexArrays;
 
 var _emscripten_glGenerateMipmap = x0 => GLctx.generateMipmap(x0);
 
@@ -11651,10 +11648,6 @@ var _emscripten_glIsVertexArray = array => {
   return GLctx.isVertexArray(vao);
 };
 
-var _glIsVertexArray = _emscripten_glIsVertexArray;
-
-var _emscripten_glIsVertexArrayOES = _glIsVertexArray;
-
 var _emscripten_glLineWidth = x0 => GLctx.lineWidth(x0);
 
 var _emscripten_glLinkProgram = program => {
@@ -11705,15 +11698,7 @@ var _emscripten_glPixelStorei = (pname, param) => {
   GLctx.pixelStorei(pname, param);
 };
 
-var _emscripten_glPolygonModeWEBGL = (face, mode) => {
-  GLctx.webglPolygonMode["polygonModeWEBGL"](face, mode);
-};
-
 var _emscripten_glPolygonOffset = (x0, x1) => GLctx.polygonOffset(x0, x1);
-
-var _emscripten_glPolygonOffsetClampEXT = (factor, units, clamp) => {
-  GLctx.extPolygonOffsetClamp["polygonOffsetClampEXT"](factor, units, clamp);
-};
 
 var _emscripten_glProgramBinary = (program, binaryFormat, binary, length) => {
   GL.recordError(1280);
@@ -12355,16 +12340,6 @@ var _emscripten_glVertexAttribDivisor = (index, divisor) => {
   GLctx.vertexAttribDivisor(index, divisor);
 };
 
-var _glVertexAttribDivisor = _emscripten_glVertexAttribDivisor;
-
-var _emscripten_glVertexAttribDivisorANGLE = _glVertexAttribDivisor;
-
-var _emscripten_glVertexAttribDivisorARB = _glVertexAttribDivisor;
-
-var _emscripten_glVertexAttribDivisorEXT = _glVertexAttribDivisor;
-
-var _emscripten_glVertexAttribDivisorNV = _glVertexAttribDivisor;
-
 var _emscripten_glVertexAttribI4i = (x0, x1, x2, x3, x4) => GLctx.vertexAttribI4i(x0, x1, x2, x3, x4);
 
 var _emscripten_glVertexAttribI4iv = (index, v) => {
@@ -12431,7 +12406,7 @@ var doRequestFullscreen = (target, strategy) => {
   if (!JSEvents.fullscreenEnabled()) return -1;
   target = findEventTarget(target);
   if (!target) return -4;
-  if (!target.requestFullscreen) {
+  if (!target.requestFullscreen && !target.webkitRequestFullscreen) {
     return -3;
   }
   // Queue this function call if we're not currently in an event handler and
@@ -12686,6 +12661,8 @@ function _emscripten_set_fullscreenchange_callback_on_thread(target, userData, u
   if (!JSEvents.fullscreenEnabled()) return -1;
   target = findEventTarget(target);
   if (!target) return -4;
+  // TODO: When this block is removed, also change test/test_html5_remove_event_listener.c test expectation on emscripten_set_fullscreenchange_callback().
+  registerFullscreenChangeEventCallback(target, userData, useCapture, callbackfunc, 19, "webkitfullscreenchange", targetThread);
   return registerFullscreenChangeEventCallback(target, userData, useCapture, callbackfunc, 19, "fullscreenchange", targetThread);
 }
 
@@ -13307,107 +13284,23 @@ function _fd_write(fd, iov, iovcnt, pnum) {
   }
 }
 
-var _glActiveTexture = _emscripten_glActiveTexture;
+var _emscripten_glClipControlEXT = (origin, depth) => {
+  GLctx.extClipControl["clipControlEXT"](origin, depth);
+};
 
-var _glAttachShader = _emscripten_glAttachShader;
+var _glClipControlEXT = _emscripten_glClipControlEXT;
 
-var _glBindBuffer = _emscripten_glBindBuffer;
+var _emscripten_glPolygonModeWEBGL = (face, mode) => {
+  GLctx.webglPolygonMode["polygonModeWEBGL"](face, mode);
+};
 
-var _glBindFramebuffer = _emscripten_glBindFramebuffer;
+var _glPolygonModeWEBGL = _emscripten_glPolygonModeWEBGL;
 
-var _glBindTexture = _emscripten_glBindTexture;
+var _emscripten_glPolygonOffsetClampEXT = (factor, units, clamp) => {
+  GLctx.extPolygonOffsetClamp["polygonOffsetClampEXT"](factor, units, clamp);
+};
 
-var _glBlendFunc = _emscripten_glBlendFunc;
-
-var _glBufferData = _emscripten_glBufferData;
-
-var _glCheckFramebufferStatus = _emscripten_glCheckFramebufferStatus;
-
-var _glClear = _emscripten_glClear;
-
-var _glClearBufferfv = _emscripten_glClearBufferfv;
-
-var _glClearColor = _emscripten_glClearColor;
-
-var _glCompileShader = _emscripten_glCompileShader;
-
-var _glCreateProgram = _emscripten_glCreateProgram;
-
-var _glCreateShader = _emscripten_glCreateShader;
-
-var _glDeleteFramebuffers = _emscripten_glDeleteFramebuffers;
-
-var _glDeleteTextures = _emscripten_glDeleteTextures;
-
-var _glDetachShader = _emscripten_glDetachShader;
-
-var _glDisable = _emscripten_glDisable;
-
-var _glDisableVertexAttribArray = _emscripten_glDisableVertexAttribArray;
-
-var _glDrawArrays = _emscripten_glDrawArrays;
-
-var _glEnable = _emscripten_glEnable;
-
-var _glEnableVertexAttribArray = _emscripten_glEnableVertexAttribArray;
-
-var _glFramebufferTexture2D = _emscripten_glFramebufferTexture2D;
-
-var _glGenBuffers = _emscripten_glGenBuffers;
-
-var _glGenFramebuffers = _emscripten_glGenFramebuffers;
-
-var _glGenTextures = _emscripten_glGenTextures;
-
-var _glGetAttribLocation = _emscripten_glGetAttribLocation;
-
-var _glGetIntegerv = _emscripten_glGetIntegerv;
-
-var _glGetProgramInfoLog = _emscripten_glGetProgramInfoLog;
-
-var _glGetProgramiv = _emscripten_glGetProgramiv;
-
-var _glGetShaderInfoLog = _emscripten_glGetShaderInfoLog;
-
-var _glGetShaderiv = _emscripten_glGetShaderiv;
-
-var _glGetString = _emscripten_glGetString;
-
-var _glGetUniformLocation = _emscripten_glGetUniformLocation;
-
-var _glLinkProgram = _emscripten_glLinkProgram;
-
-var _glShaderSource = _emscripten_glShaderSource;
-
-var _glTexImage2D = _emscripten_glTexImage2D;
-
-var _glTexImage3D = _emscripten_glTexImage3D;
-
-var _glTexParameteri = _emscripten_glTexParameteri;
-
-var _glTexSubImage2D = _emscripten_glTexSubImage2D;
-
-var _glUniform1f = _emscripten_glUniform1f;
-
-var _glUniform1i = _emscripten_glUniform1i;
-
-var _glUniform2f = _emscripten_glUniform2f;
-
-var _glUniform2fv = _emscripten_glUniform2fv;
-
-var _glUniform4f = _emscripten_glUniform4f;
-
-var _glUniform4fv = _emscripten_glUniform4fv;
-
-var _glUniformMatrix2fv = _emscripten_glUniformMatrix2fv;
-
-var _glUniformMatrix4fv = _emscripten_glUniformMatrix4fv;
-
-var _glUseProgram = _emscripten_glUseProgram;
-
-var _glVertexAttribPointer = _emscripten_glVertexAttribPointer;
-
-var _glViewport = _emscripten_glViewport;
+var _glPolygonOffsetClampEXT = _emscripten_glPolygonOffsetClampEXT;
 
 var _uuid_compare = (uu1, uu2) => _memcmp(uu1, uu2, 16);
 
@@ -13628,7 +13521,7 @@ var missingLibrarySymbols = [ "writeI53ToI64Clamped", "writeI53ToI64Signaling", 
 
 missingLibrarySymbols.forEach(missingLibrarySymbol);
 
-var unexportedSymbols = [ "run", "out", "err", "callMain", "abort", "wasmExports", "writeStackCookie", "checkStackCookie", "writeI53ToI64", "readI53FromI64", "readI53FromU64", "INT53_MAX", "INT53_MIN", "bigintToI53Checked", "HEAP8", "HEAPU8", "HEAP16", "HEAPU16", "HEAP32", "HEAPU32", "HEAPF32", "HEAPF64", "HEAP64", "HEAPU64", "stackSave", "stackRestore", "stackAlloc", "setTempRet0", "ptrToString", "exitJS", "getHeapMax", "growMemory", "ENV", "ERRNO_CODES", "strError", "DNS", "Protocols", "Sockets", "timers", "warnOnce", "readEmAsmArgsArray", "readEmAsmArgs", "runEmAsmFunction", "runMainThreadEmAsm", "jstoi_q", "getExecutableName", "autoResumeAudioContext", "dynCall", "handleException", "keepRuntimeAlive", "runtimeKeepalivePush", "runtimeKeepalivePop", "callUserCallback", "maybeExit", "asyncLoad", "alignMemory", "mmapAlloc", "wasmTable", "wasmMemory", "getUniqueRunDependency", "noExitRuntime", "addOnPreRun", "addOnExit", "addOnPostRun", "freeTableIndexes", "functionsInTableMap", "setValue", "PATH", "PATH_FS", "UTF8Decoder", "UTF8ArrayToString", "UTF8ToString", "stringToUTF8Array", "stringToUTF8", "lengthBytesUTF8", "intArrayFromString", "UTF16Decoder", "stringToNewUTF8", "stringToUTF8OnStack", "JSEvents", "registerKeyEventCallback", "specialHTMLTargets", "maybeCStringToJsString", "findEventTarget", "findCanvasEventTarget", "getBoundingClientRect", "fillMouseEventData", "registerMouseEventCallback", "registerWheelEventCallback", "registerUiEventCallback", "registerFocusEventCallback", "fillFullscreenChangeEventData", "registerFullscreenChangeEventCallback", "callCanvasResizedCallback", "JSEvents_requestFullscreen", "JSEvents_resizeCanvasForFullscreen", "registerRestoreOldStyle", "setLetterbox", "currentFullscreenStrategy", "restoreOldWindowedStyle", "doRequestFullscreen", "fillPointerlockChangeEventData", "registerPointerlockChangeEventCallback", "requestPointerLock", "fillVisibilityChangeEventData", "registerVisibilityChangeEventCallback", "registerTouchEventCallback", "fillGamepadEventData", "registerGamepadEventCallback", "registerBeforeUnloadEventCallback", "setCanvasElementSizeCallingThread", "setOffscreenCanvasSizeOnTargetThread", "setCanvasElementSizeMainThread", "setCanvasElementSize", "getCanvasSizeCallingThread", "getCanvasSizeMainThread", "getCanvasElementSize", "jsStackTrace", "getCallstack", "UNWIND_CACHE", "ExitStatus", "getEnvStrings", "checkWasiClock", "doReadv", "doWritev", "initRandomFill", "randomFill", "safeSetTimeout", "emSetImmediate", "emClearImmediate_deps", "emClearImmediate", "registerPreMainLoop", "promiseMap", "uncaughtExceptionCount", "exceptionLast", "exceptionCaught", "ExceptionInfo", "findMatchingCatch", "getExceptionMessageCommon", "incrementExceptionRefcount", "decrementExceptionRefcount", "getExceptionMessage", "Browser", "requestFullscreen", "setCanvasSize", "getUserMedia", "getPreloadedImageData__data", "wget", "MONTH_DAYS_REGULAR", "MONTH_DAYS_LEAP", "MONTH_DAYS_REGULAR_CUMULATIVE", "MONTH_DAYS_LEAP_CUMULATIVE", "isLeapYear", "ydayFromDate", "SYSCALLS", "preloadPlugins", "FS_createPreloadedFile", "FS_modeStringToFlags", "FS_getMode", "FS_fileDataToTypedArray", "FS_stdin_getChar_buffer", "FS_stdin_getChar", "FS_readFile", "FS", "FS_root", "FS_mounts", "FS_devices", "FS_streams", "FS_nextInode", "FS_nameTable", "FS_currentPath", "FS_initialized", "FS_ignorePermissions", "FS_filesystems", "FS_syncFSRequests", "FS_lookupPath", "FS_getPath", "FS_hashName", "FS_hashAddNode", "FS_hashRemoveNode", "FS_lookupNode", "FS_createNode", "FS_destroyNode", "FS_isRoot", "FS_isMountpoint", "FS_isFile", "FS_isDir", "FS_isLink", "FS_isChrdev", "FS_isBlkdev", "FS_isFIFO", "FS_isSocket", "FS_flagsToPermissionString", "FS_nodePermissions", "FS_mayLookup", "FS_mayCreate", "FS_mayDelete", "FS_mayOpen", "FS_checkOpExists", "FS_nextfd", "FS_getStreamChecked", "FS_getStream", "FS_createStream", "FS_closeStream", "FS_dupStream", "FS_doSetAttr", "FS_chrdev_stream_ops", "FS_major", "FS_minor", "FS_makedev", "FS_registerDevice", "FS_getDevice", "FS_getMounts", "FS_syncfs", "FS_mount", "FS_unmount", "FS_lookup", "FS_mknod", "FS_statfs", "FS_statfsStream", "FS_statfsNode", "FS_create", "FS_mkdir", "FS_mkdev", "FS_symlink", "FS_link", "FS_rename", "FS_rmdir", "FS_readdir", "FS_readlink", "FS_stat", "FS_fstat", "FS_lstat", "FS_doChmod", "FS_chmod", "FS_lchmod", "FS_fchmod", "FS_doChown", "FS_chown", "FS_lchown", "FS_fchown", "FS_doTruncate", "FS_truncate", "FS_ftruncate", "FS_utime", "FS_open", "FS_close", "FS_isClosed", "FS_llseek", "FS_read", "FS_write", "FS_mmap", "FS_msync", "FS_ioctl", "FS_writeFile", "FS_cwd", "FS_chdir", "FS_createDefaultDirectories", "FS_createDefaultDevices", "FS_createSpecialDirectories", "FS_createStandardStreams", "FS_staticInit", "FS_init", "FS_quit", "FS_findObject", "FS_analyzePath", "FS_createFile", "FS_forceLoadFile", "MEMFS", "TTY", "PIPEFS", "SOCKFS", "tempFixedLengthArray", "miniTempWebGLFloatBuffers", "miniTempWebGLIntBuffers", "heapObjectForWebGLType", "toTypedArrayIndex", "webgl_enable_ANGLE_instanced_arrays", "webgl_enable_OES_vertex_array_object", "webgl_enable_WEBGL_draw_buffers", "webgl_enable_WEBGL_multi_draw", "webgl_enable_EXT_polygon_offset_clamp", "webgl_enable_EXT_clip_control", "webgl_enable_WEBGL_polygon_mode", "GL", "emscriptenWebGLGet", "computeUnpackAlignedImageSize", "colorChannelsInGlTextureFormat", "emscriptenWebGLGetTexPixelData", "emscriptenWebGLGetUniform", "webglGetProgramUniformLocation", "webglGetUniformLocation", "webglPrepareUniformLocationsBeforeFirstUse", "webglGetLeftBracePos", "emscriptenWebGLGetVertexAttrib", "__glGetActiveAttribOrUniform", "emscriptenWebGLGetBufferBinding", "emscriptenWebGLValidateMapBufferTarget", "AL", "GLUT", "EGL", "GLEW", "IDBStore", "waitAsyncPolyfilled", "emscriptenWebGLGetIndexed", "webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance", "webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance", "print", "printErr", "jstoi_s", "PThread", "terminateWorker", "cleanupThread", "registerTLSInit", "spawnThread", "exitOnMainThread", "proxyToMainThread", "proxiedJSCallArgs", "invokeEntryPoint", "checkMailbox" ];
+var unexportedSymbols = [ "run", "out", "err", "callMain", "abort", "wasmExports", "writeStackCookie", "checkStackCookie", "writeI53ToI64", "readI53FromI64", "readI53FromU64", "INT53_MAX", "INT53_MIN", "bigintToI53Checked", "HEAP8", "HEAPU8", "HEAP16", "HEAPU16", "HEAP32", "HEAPU32", "HEAPF32", "HEAPF64", "HEAP64", "HEAPU64", "stackSave", "stackRestore", "stackAlloc", "setTempRet0", "ptrToString", "exitJS", "getHeapMax", "growMemory", "ENV", "ERRNO_CODES", "strError", "DNS", "Protocols", "Sockets", "timers", "warnOnce", "readEmAsmArgsArray", "readEmAsmArgs", "runEmAsmFunction", "runMainThreadEmAsm", "jstoi_q", "getExecutableName", "autoResumeAudioContext", "dynCall", "handleException", "keepRuntimeAlive", "runtimeKeepalivePush", "runtimeKeepalivePop", "callUserCallback", "maybeExit", "asyncLoad", "alignMemory", "mmapAlloc", "wasmTable", "wasmMemory", "getUniqueRunDependency", "noExitRuntime", "addOnPreRun", "addOnExit", "addOnPostRun", "freeTableIndexes", "functionsInTableMap", "setValue", "PATH", "PATH_FS", "UTF8Decoder", "UTF8ArrayToString", "UTF8ToString", "stringToUTF8Array", "stringToUTF8", "lengthBytesUTF8", "intArrayFromString", "UTF16Decoder", "stringToNewUTF8", "stringToUTF8OnStack", "JSEvents", "registerKeyEventCallback", "specialHTMLTargets", "maybeCStringToJsString", "findEventTarget", "findCanvasEventTarget", "getBoundingClientRect", "fillMouseEventData", "registerMouseEventCallback", "registerWheelEventCallback", "registerUiEventCallback", "registerFocusEventCallback", "fillFullscreenChangeEventData", "registerFullscreenChangeEventCallback", "callCanvasResizedCallback", "JSEvents_requestFullscreen", "JSEvents_resizeCanvasForFullscreen", "registerRestoreOldStyle", "setLetterbox", "currentFullscreenStrategy", "restoreOldWindowedStyle", "doRequestFullscreen", "fillPointerlockChangeEventData", "registerPointerlockChangeEventCallback", "requestPointerLock", "fillVisibilityChangeEventData", "registerVisibilityChangeEventCallback", "registerTouchEventCallback", "fillGamepadEventData", "registerGamepadEventCallback", "registerBeforeUnloadEventCallback", "setCanvasElementSizeCallingThread", "setCanvasElementSizeMainThread", "setCanvasElementSize", "getCanvasSizeCallingThread", "getCanvasSizeMainThread", "getCanvasElementSize", "jsStackTrace", "getCallstack", "UNWIND_CACHE", "ExitStatus", "getEnvStrings", "checkWasiClock", "doReadv", "doWritev", "initRandomFill", "randomFill", "safeSetTimeout", "emSetImmediate", "emClearImmediate_deps", "emClearImmediate", "registerPreMainLoop", "promiseMap", "uncaughtExceptionCount", "exceptionLast", "exceptionCaught", "ExceptionInfo", "findMatchingCatch", "getExceptionMessageCommon", "incrementExceptionRefcount", "decrementExceptionRefcount", "getExceptionMessage", "Browser", "requestFullscreen", "setCanvasSize", "getUserMedia", "getPreloadedImageData__data", "wget", "MONTH_DAYS_REGULAR", "MONTH_DAYS_LEAP", "MONTH_DAYS_REGULAR_CUMULATIVE", "MONTH_DAYS_LEAP_CUMULATIVE", "isLeapYear", "ydayFromDate", "SYSCALLS", "preloadPlugins", "FS_createPreloadedFile", "FS_modeStringToFlags", "FS_getMode", "FS_fileDataToTypedArray", "FS_stdin_getChar_buffer", "FS_stdin_getChar", "FS_readFile", "FS", "FS_root", "FS_mounts", "FS_devices", "FS_streams", "FS_nextInode", "FS_nameTable", "FS_currentPath", "FS_initialized", "FS_ignorePermissions", "FS_filesystems", "FS_syncFSRequests", "FS_lookupPath", "FS_getPath", "FS_hashName", "FS_hashAddNode", "FS_hashRemoveNode", "FS_lookupNode", "FS_createNode", "FS_destroyNode", "FS_isRoot", "FS_isMountpoint", "FS_isFile", "FS_isDir", "FS_isLink", "FS_isChrdev", "FS_isBlkdev", "FS_isFIFO", "FS_isSocket", "FS_flagsToPermissionString", "FS_nodePermissions", "FS_mayLookup", "FS_mayCreate", "FS_mayDelete", "FS_mayOpen", "FS_checkOpExists", "FS_nextfd", "FS_getStreamChecked", "FS_getStream", "FS_createStream", "FS_closeStream", "FS_dupStream", "FS_doSetAttr", "FS_chrdev_stream_ops", "FS_major", "FS_minor", "FS_makedev", "FS_registerDevice", "FS_getDevice", "FS_getMounts", "FS_syncfs", "FS_mount", "FS_unmount", "FS_lookup", "FS_mknod", "FS_statfs", "FS_statfsStream", "FS_statfsNode", "FS_create", "FS_mkdir", "FS_mkdev", "FS_symlink", "FS_link", "FS_rename", "FS_rmdir", "FS_readdir", "FS_readlink", "FS_stat", "FS_fstat", "FS_lstat", "FS_doChmod", "FS_chmod", "FS_lchmod", "FS_fchmod", "FS_doChown", "FS_chown", "FS_lchown", "FS_fchown", "FS_doTruncate", "FS_truncate", "FS_ftruncate", "FS_utime", "FS_open", "FS_close", "FS_isClosed", "FS_llseek", "FS_read", "FS_write", "FS_mmap", "FS_msync", "FS_ioctl", "FS_writeFile", "FS_cwd", "FS_chdir", "FS_createDefaultDirectories", "FS_createDefaultDevices", "FS_createSpecialDirectories", "FS_createStandardStreams", "FS_staticInit", "FS_init", "FS_quit", "FS_findObject", "FS_analyzePath", "FS_createFile", "FS_forceLoadFile", "MEMFS", "TTY", "PIPEFS", "SOCKFS", "tempFixedLengthArray", "miniTempWebGLFloatBuffers", "miniTempWebGLIntBuffers", "heapObjectForWebGLType", "toTypedArrayIndex", "webgl_enable_ANGLE_instanced_arrays", "webgl_enable_OES_vertex_array_object", "webgl_enable_WEBGL_draw_buffers", "webgl_enable_WEBGL_multi_draw", "webgl_enable_EXT_polygon_offset_clamp", "webgl_enable_EXT_clip_control", "webgl_enable_WEBGL_polygon_mode", "GL", "emscriptenWebGLGet", "computeUnpackAlignedImageSize", "colorChannelsInGlTextureFormat", "emscriptenWebGLGetTexPixelData", "emscriptenWebGLGetUniform", "webglGetProgramUniformLocation", "webglGetUniformLocation", "webglPrepareUniformLocationsBeforeFirstUse", "webglGetLeftBracePos", "emscriptenWebGLGetVertexAttrib", "__glGetActiveAttribOrUniform", "emscriptenWebGLGetBufferBinding", "emscriptenWebGLValidateMapBufferTarget", "AL", "GLUT", "EGL", "GLEW", "IDBStore", "waitAsyncPolyfilled", "emscriptenWebGLGetIndexed", "webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance", "webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance", "print", "printErr", "jstoi_s", "PThread", "terminateWorker", "cleanupThread", "registerTLSInit", "spawnThread", "exitOnMainThread", "proxyToMainThread", "proxiedJSCallArgs", "invokeEntryPoint", "checkMailbox" ];
 
 unexportedSymbols.forEach(unexportedRuntimeSymbol);
 
@@ -13673,8 +13566,8 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  389773: () => (growMemViews(), HEAPU8).length,
-  389799: $0 => {
+  389917: () => (growMemViews(), HEAPU8).length,
+  389943: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13682,7 +13575,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  390014: () => {
+  390158: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13690,7 +13583,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  390161: () => {
+  390305: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13698,7 +13591,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  390395: $0 => {
+  390539: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13722,11 +13615,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  390947: () => {
+  391091: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  391015: ($0, $1, $2, $3) => {
+  391159: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13768,7 +13661,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  392708: ($0, $1, $2, $3) => {
+  392852: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13800,7 +13693,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  393883: ($0, $1) => {
+  394027: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13819,7 +13712,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  394488: ($0, $1) => {
+  394632: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13833,7 +13726,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  394977: $0 => {
+  395121: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13867,10 +13760,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  395983: $0 => {
+  396127: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  396023: ($0, $1, $2) => {
+  396167: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13941,7 +13834,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  397489: ($0, $1, $2, $3, $4) => {
+  397633: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13978,18 +13871,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  398477: $0 => {
+  398621: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  398560: () => {
+  398704: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  398629: () => window.innerWidth,
-  398659: () => window.innerHeight
+  398773: () => window.innerWidth,
+  398803: () => window.innerHeight
 };
 
 function InitializeWebLazyResources() {
@@ -14055,8 +13948,6 @@ var _emscripten_stack_get_end = makeInvalidEarlyAccess("_emscripten_stack_get_en
 
 var __emscripten_run_callback_on_thread = makeInvalidEarlyAccess("__emscripten_run_callback_on_thread");
 
-var __emscripten_set_offscreencanvas_size_on_thread = makeInvalidEarlyAccess("__emscripten_set_offscreencanvas_size_on_thread");
-
 var _memcpy = makeInvalidEarlyAccess("_memcpy");
 
 var __emscripten_thread_init = makeInvalidEarlyAccess("__emscripten_thread_init");
@@ -14118,7 +14009,6 @@ function assignWasmExports(wasmExports) {
   assert(typeof wasmExports["emscripten_stack_get_base"] != "undefined", "missing Wasm export: emscripten_stack_get_base");
   assert(typeof wasmExports["emscripten_stack_get_end"] != "undefined", "missing Wasm export: emscripten_stack_get_end");
   assert(typeof wasmExports["_emscripten_run_callback_on_thread"] != "undefined", "missing Wasm export: _emscripten_run_callback_on_thread");
-  assert(typeof wasmExports["_emscripten_set_offscreencanvas_size_on_thread"] != "undefined", "missing Wasm export: _emscripten_set_offscreencanvas_size_on_thread");
   assert(typeof wasmExports["memcpy"] != "undefined", "missing Wasm export: memcpy");
   assert(typeof wasmExports["_emscripten_thread_init"] != "undefined", "missing Wasm export: _emscripten_thread_init");
   assert(typeof wasmExports["__set_thread_state"] != "undefined", "missing Wasm export: __set_thread_state");
@@ -14154,7 +14044,6 @@ function assignWasmExports(wasmExports) {
   _emscripten_stack_get_base = wasmExports["emscripten_stack_get_base"];
   _emscripten_stack_get_end = wasmExports["emscripten_stack_get_end"];
   __emscripten_run_callback_on_thread = createExportWrapper("_emscripten_run_callback_on_thread", wasmExports["_emscripten_run_callback_on_thread"], 6);
-  __emscripten_set_offscreencanvas_size_on_thread = createExportWrapper("_emscripten_set_offscreencanvas_size_on_thread", wasmExports["_emscripten_set_offscreencanvas_size_on_thread"], 4);
   _memcpy = createExportWrapper("memcpy", wasmExports["memcpy"], 3);
   __emscripten_thread_init = createExportWrapper("_emscripten_thread_init", wasmExports["_emscripten_thread_init"], 6);
   ___set_thread_state = createExportWrapper("__set_thread_state", wasmExports["__set_thread_state"], 4);
@@ -14298,7 +14187,6 @@ function assignWasmImports() {
     /** @export */ emscripten_glBindTexture: _emscripten_glBindTexture,
     /** @export */ emscripten_glBindTransformFeedback: _emscripten_glBindTransformFeedback,
     /** @export */ emscripten_glBindVertexArray: _emscripten_glBindVertexArray,
-    /** @export */ emscripten_glBindVertexArrayOES: _emscripten_glBindVertexArrayOES,
     /** @export */ emscripten_glBlendColor: _emscripten_glBlendColor,
     /** @export */ emscripten_glBlendEquation: _emscripten_glBlendEquation,
     /** @export */ emscripten_glBlendEquationSeparate: _emscripten_glBlendEquationSeparate,
@@ -14317,7 +14205,6 @@ function assignWasmImports() {
     /** @export */ emscripten_glClearDepthf: _emscripten_glClearDepthf,
     /** @export */ emscripten_glClearStencil: _emscripten_glClearStencil,
     /** @export */ emscripten_glClientWaitSync: _emscripten_glClientWaitSync,
-    /** @export */ emscripten_glClipControlEXT: _emscripten_glClipControlEXT,
     /** @export */ emscripten_glColorMask: _emscripten_glColorMask,
     /** @export */ emscripten_glCompileShader: _emscripten_glCompileShader,
     /** @export */ emscripten_glCompressedTexImage2D: _emscripten_glCompressedTexImage2D,
@@ -14343,7 +14230,6 @@ function assignWasmImports() {
     /** @export */ emscripten_glDeleteTextures: _emscripten_glDeleteTextures,
     /** @export */ emscripten_glDeleteTransformFeedbacks: _emscripten_glDeleteTransformFeedbacks,
     /** @export */ emscripten_glDeleteVertexArrays: _emscripten_glDeleteVertexArrays,
-    /** @export */ emscripten_glDeleteVertexArraysOES: _emscripten_glDeleteVertexArraysOES,
     /** @export */ emscripten_glDepthFunc: _emscripten_glDepthFunc,
     /** @export */ emscripten_glDepthMask: _emscripten_glDepthMask,
     /** @export */ emscripten_glDepthRangef: _emscripten_glDepthRangef,
@@ -14352,19 +14238,9 @@ function assignWasmImports() {
     /** @export */ emscripten_glDisableVertexAttribArray: _emscripten_glDisableVertexAttribArray,
     /** @export */ emscripten_glDrawArrays: _emscripten_glDrawArrays,
     /** @export */ emscripten_glDrawArraysInstanced: _emscripten_glDrawArraysInstanced,
-    /** @export */ emscripten_glDrawArraysInstancedANGLE: _emscripten_glDrawArraysInstancedANGLE,
-    /** @export */ emscripten_glDrawArraysInstancedARB: _emscripten_glDrawArraysInstancedARB,
-    /** @export */ emscripten_glDrawArraysInstancedEXT: _emscripten_glDrawArraysInstancedEXT,
-    /** @export */ emscripten_glDrawArraysInstancedNV: _emscripten_glDrawArraysInstancedNV,
     /** @export */ emscripten_glDrawBuffers: _emscripten_glDrawBuffers,
-    /** @export */ emscripten_glDrawBuffersEXT: _emscripten_glDrawBuffersEXT,
-    /** @export */ emscripten_glDrawBuffersWEBGL: _emscripten_glDrawBuffersWEBGL,
     /** @export */ emscripten_glDrawElements: _emscripten_glDrawElements,
     /** @export */ emscripten_glDrawElementsInstanced: _emscripten_glDrawElementsInstanced,
-    /** @export */ emscripten_glDrawElementsInstancedANGLE: _emscripten_glDrawElementsInstancedANGLE,
-    /** @export */ emscripten_glDrawElementsInstancedARB: _emscripten_glDrawElementsInstancedARB,
-    /** @export */ emscripten_glDrawElementsInstancedEXT: _emscripten_glDrawElementsInstancedEXT,
-    /** @export */ emscripten_glDrawElementsInstancedNV: _emscripten_glDrawElementsInstancedNV,
     /** @export */ emscripten_glDrawRangeElements: _emscripten_glDrawRangeElements,
     /** @export */ emscripten_glEnable: _emscripten_glEnable,
     /** @export */ emscripten_glEnableVertexAttribArray: _emscripten_glEnableVertexAttribArray,
@@ -14388,7 +14264,6 @@ function assignWasmImports() {
     /** @export */ emscripten_glGenTextures: _emscripten_glGenTextures,
     /** @export */ emscripten_glGenTransformFeedbacks: _emscripten_glGenTransformFeedbacks,
     /** @export */ emscripten_glGenVertexArrays: _emscripten_glGenVertexArrays,
-    /** @export */ emscripten_glGenVertexArraysOES: _emscripten_glGenVertexArraysOES,
     /** @export */ emscripten_glGenerateMipmap: _emscripten_glGenerateMipmap,
     /** @export */ emscripten_glGetActiveAttrib: _emscripten_glGetActiveAttrib,
     /** @export */ emscripten_glGetActiveUniform: _emscripten_glGetActiveUniform,
@@ -14460,15 +14335,12 @@ function assignWasmImports() {
     /** @export */ emscripten_glIsTexture: _emscripten_glIsTexture,
     /** @export */ emscripten_glIsTransformFeedback: _emscripten_glIsTransformFeedback,
     /** @export */ emscripten_glIsVertexArray: _emscripten_glIsVertexArray,
-    /** @export */ emscripten_glIsVertexArrayOES: _emscripten_glIsVertexArrayOES,
     /** @export */ emscripten_glLineWidth: _emscripten_glLineWidth,
     /** @export */ emscripten_glLinkProgram: _emscripten_glLinkProgram,
     /** @export */ emscripten_glMapBufferRange: _emscripten_glMapBufferRange,
     /** @export */ emscripten_glPauseTransformFeedback: _emscripten_glPauseTransformFeedback,
     /** @export */ emscripten_glPixelStorei: _emscripten_glPixelStorei,
-    /** @export */ emscripten_glPolygonModeWEBGL: _emscripten_glPolygonModeWEBGL,
     /** @export */ emscripten_glPolygonOffset: _emscripten_glPolygonOffset,
-    /** @export */ emscripten_glPolygonOffsetClampEXT: _emscripten_glPolygonOffsetClampEXT,
     /** @export */ emscripten_glProgramBinary: _emscripten_glProgramBinary,
     /** @export */ emscripten_glProgramParameteri: _emscripten_glProgramParameteri,
     /** @export */ emscripten_glQueryCounterEXT: _emscripten_glQueryCounterEXT,
@@ -14549,10 +14421,6 @@ function assignWasmImports() {
     /** @export */ emscripten_glVertexAttrib4f: _emscripten_glVertexAttrib4f,
     /** @export */ emscripten_glVertexAttrib4fv: _emscripten_glVertexAttrib4fv,
     /** @export */ emscripten_glVertexAttribDivisor: _emscripten_glVertexAttribDivisor,
-    /** @export */ emscripten_glVertexAttribDivisorANGLE: _emscripten_glVertexAttribDivisorANGLE,
-    /** @export */ emscripten_glVertexAttribDivisorARB: _emscripten_glVertexAttribDivisorARB,
-    /** @export */ emscripten_glVertexAttribDivisorEXT: _emscripten_glVertexAttribDivisorEXT,
-    /** @export */ emscripten_glVertexAttribDivisorNV: _emscripten_glVertexAttribDivisorNV,
     /** @export */ emscripten_glVertexAttribI4i: _emscripten_glVertexAttribI4i,
     /** @export */ emscripten_glVertexAttribI4iv: _emscripten_glVertexAttribI4iv,
     /** @export */ emscripten_glVertexAttribI4ui: _emscripten_glVertexAttribI4ui,
@@ -14603,60 +14471,9 @@ function assignWasmImports() {
     /** @export */ fd_read: _fd_read,
     /** @export */ fd_seek: _fd_seek,
     /** @export */ fd_write: _fd_write,
-    /** @export */ glActiveTexture: _glActiveTexture,
-    /** @export */ glAttachShader: _glAttachShader,
-    /** @export */ glBindBuffer: _glBindBuffer,
-    /** @export */ glBindFramebuffer: _glBindFramebuffer,
-    /** @export */ glBindTexture: _glBindTexture,
-    /** @export */ glBindVertexArray: _glBindVertexArray,
-    /** @export */ glBlendFunc: _glBlendFunc,
-    /** @export */ glBufferData: _glBufferData,
-    /** @export */ glCheckFramebufferStatus: _glCheckFramebufferStatus,
-    /** @export */ glClear: _glClear,
-    /** @export */ glClearBufferfv: _glClearBufferfv,
-    /** @export */ glClearColor: _glClearColor,
-    /** @export */ glCompileShader: _glCompileShader,
-    /** @export */ glCreateProgram: _glCreateProgram,
-    /** @export */ glCreateShader: _glCreateShader,
-    /** @export */ glDeleteFramebuffers: _glDeleteFramebuffers,
-    /** @export */ glDeleteTextures: _glDeleteTextures,
-    /** @export */ glDetachShader: _glDetachShader,
-    /** @export */ glDisable: _glDisable,
-    /** @export */ glDisableVertexAttribArray: _glDisableVertexAttribArray,
-    /** @export */ glDrawArrays: _glDrawArrays,
-    /** @export */ glDrawBuffers: _glDrawBuffers,
-    /** @export */ glEnable: _glEnable,
-    /** @export */ glEnableVertexAttribArray: _glEnableVertexAttribArray,
-    /** @export */ glFramebufferTexture2D: _glFramebufferTexture2D,
-    /** @export */ glGenBuffers: _glGenBuffers,
-    /** @export */ glGenFramebuffers: _glGenFramebuffers,
-    /** @export */ glGenTextures: _glGenTextures,
-    /** @export */ glGenVertexArrays: _glGenVertexArrays,
-    /** @export */ glGetAttribLocation: _glGetAttribLocation,
-    /** @export */ glGetIntegerv: _glGetIntegerv,
-    /** @export */ glGetProgramInfoLog: _glGetProgramInfoLog,
-    /** @export */ glGetProgramiv: _glGetProgramiv,
-    /** @export */ glGetShaderInfoLog: _glGetShaderInfoLog,
-    /** @export */ glGetShaderiv: _glGetShaderiv,
-    /** @export */ glGetString: _glGetString,
-    /** @export */ glGetUniformLocation: _glGetUniformLocation,
-    /** @export */ glLinkProgram: _glLinkProgram,
-    /** @export */ glShaderSource: _glShaderSource,
-    /** @export */ glTexImage2D: _glTexImage2D,
-    /** @export */ glTexImage3D: _glTexImage3D,
-    /** @export */ glTexParameteri: _glTexParameteri,
-    /** @export */ glTexSubImage2D: _glTexSubImage2D,
-    /** @export */ glUniform1f: _glUniform1f,
-    /** @export */ glUniform1i: _glUniform1i,
-    /** @export */ glUniform2f: _glUniform2f,
-    /** @export */ glUniform2fv: _glUniform2fv,
-    /** @export */ glUniform4f: _glUniform4f,
-    /** @export */ glUniform4fv: _glUniform4fv,
-    /** @export */ glUniformMatrix2fv: _glUniformMatrix2fv,
-    /** @export */ glUniformMatrix4fv: _glUniformMatrix4fv,
-    /** @export */ glUseProgram: _glUseProgram,
-    /** @export */ glVertexAttribPointer: _glVertexAttribPointer,
-    /** @export */ glViewport: _glViewport,
+    /** @export */ glClipControlEXT: _glClipControlEXT,
+    /** @export */ glPolygonModeWEBGL: _glPolygonModeWEBGL,
+    /** @export */ glPolygonOffsetClampEXT: _glPolygonOffsetClampEXT,
     /** @export */ invoke_diii,
     /** @export */ invoke_fiii,
     /** @export */ invoke_i,
