@@ -89,7 +89,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: C:\Users\Isaac\AppData\Local\Temp\tmp75vbe71r.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmpxalkn8lc.js
 if (!Module["expectedDataFileDownloads"]) Module["expectedDataFileDownloads"] = 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -228,23 +228,23 @@ Module["expectedDataFileDownloads"]++;
   });
 })();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmp75vbe71r.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpzipwj9xj.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmpxalkn8lc.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmph3egtgo6.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if ((typeof ENVIRONMENT_IS_WASM_WORKER != "undefined" && ENVIRONMENT_IS_WASM_WORKER) || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD) || (typeof ENVIRONMENT_IS_AUDIO_WORKLET != "undefined" && ENVIRONMENT_IS_AUDIO_WORKLET)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpzipwj9xj.js
-// include: C:\Users\Isaac\AppData\Local\Temp\tmpn07d_bv2.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmph3egtgo6.js
+// include: C:\Users\Isaac\AppData\Local\Temp\tmp8p981fen.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: C:\Users\Isaac\AppData\Local\Temp\tmpn07d_bv2.js
+// end include: C:\Users\Isaac\AppData\Local\Temp\tmp8p981fen.js
 var programArgs = [];
 
 var thisProgram = "./this.program";
@@ -13528,8 +13528,8 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  390811: () => (growMemViews(), HEAPU8).length,
-  390837: $0 => {
+  391515: () => (growMemViews(), HEAPU8).length,
+  391541: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13537,7 +13537,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  391052: () => {
+  391756: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13545,7 +13545,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  391199: () => {
+  391903: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13553,7 +13553,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  391433: $0 => {
+  392137: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13577,11 +13577,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  391985: () => {
+  392689: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  392053: ($0, $1, $2, $3) => {
+  392757: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13623,7 +13623,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  393746: ($0, $1, $2, $3) => {
+  394450: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13655,7 +13655,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  394921: ($0, $1) => {
+  395625: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13674,7 +13674,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  395526: ($0, $1) => {
+  396230: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13688,7 +13688,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  396015: $0 => {
+  396719: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13722,10 +13722,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  397021: $0 => {
+  397725: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  397061: ($0, $1, $2) => {
+  397765: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13796,7 +13796,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  398527: ($0, $1, $2, $3, $4) => {
+  399231: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13833,18 +13833,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  399515: $0 => {
+  400219: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  399598: () => {
+  400302: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  399667: () => window.innerWidth,
-  399697: () => window.innerHeight
+  400371: () => window.innerWidth,
+  400401: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
@@ -13889,20 +13889,43 @@ function WebGetResourceBaseUrl() {
   }
 }
 
-function WebReadResource(path, resourceBaseUrl) {
+function WebGetResourceSiteBaseUrl() {
+  try {
+    const baseUrl = self.__endlessSkyWebSiteBaseUrl;
+    if (typeof baseUrl !== "string" || !baseUrl) return 0;
+    const bytes = lengthBytesUTF8(baseUrl) + 1;
+    const ptr = _malloc(bytes);
+    if (!ptr) return 0;
+    stringToUTF8(baseUrl, ptr, bytes);
+    return ptr;
+  } catch (error) {
+    return 0;
+  }
+}
+
+function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
   try {
     const virtualPath = UTF8ToString(path);
     const baseUrl = UTF8ToString(resourceBaseUrl);
+    const siteRoot = UTF8ToString(siteBaseUrl);
     if (!baseUrl) return 0;
     if (virtualPath.charAt(0) !== "/") return 0;
     const slash = virtualPath.indexOf("/", 1);
-    if (slash < 0) return 0;
-    const category = virtualPath.substring(1, slash);
-    const relativePath = virtualPath.substring(slash + 1);
-    if (!relativePath) return 0;
-    if (category !== "data" && category !== "shaders" && category !== "images" && category !== "sounds") return 0;
-    const encodedPath = relativePath.split("/").map(segment => encodeURIComponent(segment)).join("/");
-    const url = baseUrl + encodeURIComponent(category) + "/" + encodedPath;
+    let url;
+    if (slash < 0) {
+      if (!siteRoot) return 0;
+      const relativePath = virtualPath.substring(1);
+      if (!relativePath) return 0;
+      const encodedPath = relativePath.split("/").map(segment => encodeURIComponent(segment)).join("/");
+      url = siteRoot + encodedPath;
+    } else {
+      const category = virtualPath.substring(1, slash);
+      const relativePath = virtualPath.substring(slash + 1);
+      if (!relativePath) return 0;
+      if (category !== "data" && category !== "shaders" && category !== "images" && category !== "sounds") return 0;
+      const encodedPath = relativePath.split("/").map(segment => encodeURIComponent(segment)).join("/");
+      url = baseUrl + encodeURIComponent(category) + "/" + encodedPath;
+    }
     const onMainThread = (typeof window !== "undefined") && (typeof document !== "undefined");
     const xhr = new XMLHttpRequest;
     xhr.open("GET", url, false);
@@ -13952,6 +13975,7 @@ function InitializeWebLazyResources() {
   try {
     const scriptUrl = (typeof Module !== "undefined" && typeof Module.mainScriptUrlOrBlob === "string") ? Module.mainScriptUrlOrBlob : self.location.href;
     const baseUrl = new URL("resources/", scriptUrl).href;
+    self.__endlessSkyWebSiteBaseUrl = new URL(".", scriptUrl).href;
     const manifestUrl = new URL("manifest.json", baseUrl).href;
     const xhr = new XMLHttpRequest;
     xhr.open("GET", manifestUrl, false);
@@ -14115,6 +14139,7 @@ function assignWasmImports() {
   wasmImports = {
     /** @export */ InitializeWebLazyResources,
     /** @export */ WebGetResourceBaseUrl,
+    /** @export */ WebGetResourceSiteBaseUrl,
     /** @export */ WebReadResource,
     /** @export */ WebReleaseResourceManifest,
     /** @export */ WebResourceCategoryList,
