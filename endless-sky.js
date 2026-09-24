@@ -1202,7 +1202,7 @@ var PThread = {
     }
   },
   initMainThread() {
-    var pthreadPoolSize = 16;
+    var pthreadPoolSize = 24;
     // Start loading up the Worker pool, if requested.
     while (pthreadPoolSize--) {
       PThread.allocateUnusedWorker();
@@ -13372,8 +13372,8 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  391547: () => (growMemViews(), HEAPU8).length,
-  391573: $0 => {
+  391515: () => (growMemViews(), HEAPU8).length,
+  391541: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13381,7 +13381,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  391788: () => {
+  391756: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13389,7 +13389,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  391935: () => {
+  391903: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13397,7 +13397,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  392169: $0 => {
+  392137: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13421,11 +13421,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  392721: () => {
+  392689: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  392789: ($0, $1, $2, $3) => {
+  392757: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13467,7 +13467,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  394482: ($0, $1, $2, $3) => {
+  394450: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13499,7 +13499,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  395657: ($0, $1) => {
+  395625: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13518,7 +13518,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  396262: ($0, $1) => {
+  396230: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13532,7 +13532,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  396751: $0 => {
+  396719: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13566,10 +13566,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  397757: $0 => {
+  397725: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  397797: ($0, $1, $2) => {
+  397765: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13640,7 +13640,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  399263: ($0, $1, $2, $3, $4) => {
+  399231: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13677,18 +13677,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  400251: $0 => {
+  400219: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  400334: () => {
+  400302: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  400403: () => window.innerWidth,
-  400433: () => window.innerHeight
+  400371: () => window.innerWidth,
+  400401: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
