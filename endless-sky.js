@@ -13372,17 +13372,17 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  400595: () => {
+  399419: () => {
     console.log("[WEB RAW] UI::StepAll final statement complete; entering function epilogue");
   },
-  400690: () => {
+  399514: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor BEGIN");
   },
-  400769: () => {
+  399593: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor END");
   },
-  400846: () => (growMemViews(), HEAPU8).length,
-  400872: $0 => {
+  399670: () => (growMemViews(), HEAPU8).length,
+  399696: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13390,7 +13390,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  401087: () => {
+  399911: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13398,7 +13398,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  401234: () => {
+  400058: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13406,7 +13406,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  401468: $0 => {
+  400292: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13430,11 +13430,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  402020: () => {
+  400844: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  402088: ($0, $1, $2, $3) => {
+  400912: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13476,7 +13476,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  403781: ($0, $1, $2, $3) => {
+  402605: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13508,7 +13508,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  404956: ($0, $1) => {
+  403780: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13527,7 +13527,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  405561: ($0, $1) => {
+  404385: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13541,7 +13541,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  406050: $0 => {
+  404874: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13575,10 +13575,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  407056: $0 => {
+  405880: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  407096: ($0, $1, $2) => {
+  405920: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13649,7 +13649,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  408562: ($0, $1, $2, $3, $4) => {
+  407386: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13686,18 +13686,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  409550: $0 => {
+  408374: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  409633: () => {
+  408457: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  409702: () => window.innerWidth,
-  409732: () => window.innerHeight
+  408526: () => window.innerWidth,
+  408556: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
@@ -13720,12 +13720,6 @@ function WebResourceCategoryList(category) {
   } catch (error) {
     return 0;
   }
-}
-
-function WebResourceDiag(message) {
-  try {
-    console.log("[WEB RESOURCE]", UTF8ToString(message));
-  } catch (error) {}
 }
 
 function WebReleaseResourceManifest() {
@@ -13786,15 +13780,10 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       url = baseUrl + encodeURIComponent(category) + "/" + encodedPath;
     }
     const onMainThread = (typeof window !== "undefined") && (typeof document !== "undefined");
-    WebResourceDiag(("WebReadResource ENTER path=" + virtualPath + " url=" + url + " onMainThread=" + String(onMainThread)));
     const xhr = new XMLHttpRequest;
-    WebResourceDiag("WebReadResource BEFORE xhr.open");
     xhr.open("GET", url, false);
-    WebResourceDiag("WebReadResource AFTER xhr.open; synchronous=true");
     if (onMainThread) xhr.overrideMimeType("text/plain; charset=x-user-defined"); else xhr.responseType = "arraybuffer";
-    WebResourceDiag("WebReadResource BEFORE xhr.send onMainThread=" + String(onMainThread));
     xhr.send(null);
-    WebResourceDiag("WebReadResource AFTER xhr.send status=" + String(xhr.status) + " readyState=" + String(xhr.readyState));
     if (!((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)) {
       self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
       if (self.__endlessSkyWebResourceErrors < 12) {
@@ -13813,13 +13802,8 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       bytes = new Uint8Array(xhr.response || new ArrayBuffer(0));
       byteCount = bytes.byteLength;
     }
-    WebResourceDiag("WebReadResource response received bytes=" + String(byteCount) + " onMainThread=" + String(onMainThread));
     const ptr = _malloc(4 + byteCount);
-    if (!ptr) {
-      WebResourceDiag("WebReadResource malloc FAILED");
-      return 0;
-    }
-    WebResourceDiag("WebReadResource malloc OK ptr=" + String(ptr));
+    if (!ptr) return 0;
     const memoryBuffer = (typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer : (growMemViews(), 
     HEAPU8).buffer;
     const heapBytes = new Uint8Array(memoryBuffer);
@@ -13829,11 +13813,9 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       const destination = ptr + 4;
       for (let i = 0; i < byteCount; ++i) heapBytes[destination + i] = text.charCodeAt(i) & 255;
     } else heapBytes.set(bytes, ptr + 4);
-    WebResourceDiag("WebReadResource EXIT ptr=" + String(ptr) + " bytes=" + String(byteCount));
     return ptr;
   } catch (error) {
     self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
-    WebResourceDiag("WebReadResource EXCEPTION: " + String(error));
     if (self.__endlessSkyWebResourceErrors < 12) {
       console.error("[Resources] Resource request exception:", error);
       ++self.__endlessSkyWebResourceErrors;
@@ -14014,7 +13996,6 @@ function assignWasmImports() {
     /** @export */ WebReadResource,
     /** @export */ WebReleaseResourceManifest,
     /** @export */ WebResourceCategoryList,
-    /** @export */ WebResourceDiag,
     /** @export */ __assert_fail: ___assert_fail,
     /** @export */ __call_sighandler: ___call_sighandler,
     /** @export */ __cxa_begin_catch: ___cxa_begin_catch,
