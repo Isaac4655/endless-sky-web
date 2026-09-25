@@ -13372,17 +13372,17 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  399755: () => {
+  401228: () => {
     console.log("[WEB RAW] UI::StepAll final statement complete; entering function epilogue");
   },
-  399850: () => {
+  401323: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor BEGIN");
   },
-  399929: () => {
+  401402: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor END");
   },
-  400006: () => (growMemViews(), HEAPU8).length,
-  400032: $0 => {
+  401479: () => (growMemViews(), HEAPU8).length,
+  401505: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13390,7 +13390,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  400247: () => {
+  401720: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13398,7 +13398,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  400394: () => {
+  401867: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13406,7 +13406,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  400628: $0 => {
+  402101: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13430,11 +13430,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  401180: () => {
+  402653: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  401248: ($0, $1, $2, $3) => {
+  402721: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13476,7 +13476,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  402941: ($0, $1, $2, $3) => {
+  404414: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13508,7 +13508,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  404116: ($0, $1) => {
+  405589: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13527,7 +13527,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  404721: ($0, $1) => {
+  406194: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13541,7 +13541,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  405210: $0 => {
+  406683: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13575,10 +13575,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  406216: $0 => {
+  407689: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  406256: ($0, $1, $2) => {
+  407729: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13649,7 +13649,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  407722: ($0, $1, $2, $3, $4) => {
+  409195: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13686,18 +13686,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  408710: $0 => {
+  410183: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  408793: () => {
+  410266: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  408862: () => window.innerWidth,
-  408892: () => window.innerHeight
+  410335: () => window.innerWidth,
+  410365: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
@@ -13720,6 +13720,12 @@ function WebResourceCategoryList(category) {
   } catch (error) {
     return 0;
   }
+}
+
+function WebResourceDiag(message) {
+  try {
+    console.log("[WEB RESOURCE]", UTF8ToString(message));
+  } catch (error) {}
 }
 
 function WebReleaseResourceManifest() {
@@ -13780,10 +13786,15 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       url = baseUrl + encodeURIComponent(category) + "/" + encodedPath;
     }
     const onMainThread = (typeof window !== "undefined") && (typeof document !== "undefined");
+    WebResourceDiag(("WebReadResource ENTER path=" + virtualPath + " url=" + url + " onMainThread=" + String(onMainThread)));
     const xhr = new XMLHttpRequest;
+    WebResourceDiag("WebReadResource BEFORE xhr.open");
     xhr.open("GET", url, false);
+    WebResourceDiag("WebReadResource AFTER xhr.open; synchronous=true");
     if (onMainThread) xhr.overrideMimeType("text/plain; charset=x-user-defined"); else xhr.responseType = "arraybuffer";
+    WebResourceDiag("WebReadResource BEFORE xhr.send onMainThread=" + String(onMainThread));
     xhr.send(null);
+    WebResourceDiag("WebReadResource AFTER xhr.send status=" + String(xhr.status) + " readyState=" + String(xhr.readyState));
     if (!((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)) {
       self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
       if (self.__endlessSkyWebResourceErrors < 12) {
@@ -13802,8 +13813,13 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       bytes = new Uint8Array(xhr.response || new ArrayBuffer(0));
       byteCount = bytes.byteLength;
     }
+    WebResourceDiag("WebReadResource response received bytes=" + String(byteCount) + " onMainThread=" + String(onMainThread));
     const ptr = _malloc(4 + byteCount);
-    if (!ptr) return 0;
+    if (!ptr) {
+      WebResourceDiag("WebReadResource malloc FAILED");
+      return 0;
+    }
+    WebResourceDiag("WebReadResource malloc OK ptr=" + String(ptr));
     const memoryBuffer = (typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer : (growMemViews(), 
     HEAPU8).buffer;
     const heapBytes = new Uint8Array(memoryBuffer);
@@ -13813,15 +13829,23 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       const destination = ptr + 4;
       for (let i = 0; i < byteCount; ++i) heapBytes[destination + i] = text.charCodeAt(i) & 255;
     } else heapBytes.set(bytes, ptr + 4);
+    WebResourceDiag("WebReadResource EXIT ptr=" + String(ptr) + " bytes=" + String(byteCount));
     return ptr;
   } catch (error) {
     self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
+    WebResourceDiag("WebReadResource EXCEPTION: " + String(error));
     if (self.__endlessSkyWebResourceErrors < 12) {
       console.error("[Resources] Resource request exception:", error);
       ++self.__endlessSkyWebResourceErrors;
     }
     return 0;
   }
+}
+
+function WebImageDiag(message) {
+  try {
+    console.log("[WEB IMAGE]", UTF8ToString(message));
+  } catch (error) {}
 }
 
 function InitializeWebLazyResources() {
@@ -13993,9 +14017,11 @@ function assignWasmImports() {
     /** @export */ InitializeWebLazyResources,
     /** @export */ WebGetResourceBaseUrl,
     /** @export */ WebGetResourceSiteBaseUrl,
+    /** @export */ WebImageDiag,
     /** @export */ WebReadResource,
     /** @export */ WebReleaseResourceManifest,
     /** @export */ WebResourceCategoryList,
+    /** @export */ WebResourceDiag,
     /** @export */ __assert_fail: ___assert_fail,
     /** @export */ __call_sighandler: ___call_sighandler,
     /** @export */ __cxa_begin_catch: ___cxa_begin_catch,
@@ -14514,17 +14540,6 @@ function invoke_vii(index, a1, a2) {
   }
 }
 
-function invoke_iiii(index, a1, a2, a3) {
-  var sp = stackSave();
-  try {
-    return getWasmTableEntry(index)(a1, a2, a3);
-  } catch (e) {
-    stackRestore(sp);
-    if (!(e instanceof EmscriptenEH)) throw e;
-    _setThrew(1, 0);
-  }
-}
-
 function invoke_viii(index, a1, a2, a3) {
   var sp = stackSave();
   try {
@@ -14547,10 +14562,21 @@ function invoke_ii(index, a1) {
   }
 }
 
-function invoke_iiiii(index, a1, a2, a3, a4) {
+function invoke_vi(index, a1) {
   var sp = stackSave();
   try {
-    return getWasmTableEntry(index)(a1, a2, a3, a4);
+    getWasmTableEntry(index)(a1);
+  } catch (e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiii(index, a1, a2, a3) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)(a1, a2, a3);
   } catch (e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -14569,10 +14595,10 @@ function invoke_iii(index, a1, a2) {
   }
 }
 
-function invoke_vi(index, a1) {
+function invoke_iiiii(index, a1, a2, a3, a4) {
   var sp = stackSave();
   try {
-    getWasmTableEntry(index)(a1);
+    return getWasmTableEntry(index)(a1, a2, a3, a4);
   } catch (e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
