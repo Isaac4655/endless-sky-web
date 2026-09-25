@@ -13372,17 +13372,17 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  396715: () => {
+  398987: () => {
     console.log("[WEB RAW] UI::StepAll final statement complete; entering function epilogue");
   },
-  396810: () => {
+  399082: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor BEGIN");
   },
-  396889: () => {
+  399161: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor END");
   },
-  396966: () => (growMemViews(), HEAPU8).length,
-  396992: $0 => {
+  399238: () => (growMemViews(), HEAPU8).length,
+  399264: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13390,7 +13390,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  397207: () => {
+  399479: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13398,7 +13398,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  397354: () => {
+  399626: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13406,7 +13406,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  397588: $0 => {
+  399860: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13430,11 +13430,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  398140: () => {
+  400412: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  398208: ($0, $1, $2, $3) => {
+  400480: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13476,7 +13476,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  399901: ($0, $1, $2, $3) => {
+  402173: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13508,7 +13508,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  401076: ($0, $1) => {
+  403348: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13527,7 +13527,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  401681: ($0, $1) => {
+  403953: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13541,7 +13541,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  402170: $0 => {
+  404442: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13575,10 +13575,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  403176: $0 => {
+  405448: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  403216: ($0, $1, $2) => {
+  405488: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13649,7 +13649,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  404682: ($0, $1, $2, $3, $4) => {
+  406954: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13686,18 +13686,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  405670: $0 => {
+  407942: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  405753: () => {
+  408025: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  405822: () => window.innerWidth,
-  405852: () => window.innerHeight
+  408094: () => window.innerWidth,
+  408124: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
