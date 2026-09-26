@@ -13372,17 +13372,17 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  400284: () => {
+  401046: () => {
     console.log("[WEB RAW] UI::StepAll final statement complete; entering function epilogue");
   },
-  400379: () => {
+  401141: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor BEGIN");
   },
-  400458: () => {
+  401220: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor END");
   },
-  400535: () => (growMemViews(), HEAPU8).length,
-  400561: $0 => {
+  401297: () => (growMemViews(), HEAPU8).length,
+  401323: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13390,7 +13390,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  400776: () => {
+  401538: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13398,7 +13398,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  400923: () => {
+  401685: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13406,7 +13406,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  401157: $0 => {
+  401919: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13430,11 +13430,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  401709: () => {
+  402471: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  401777: ($0, $1, $2, $3) => {
+  402539: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13476,7 +13476,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  403470: ($0, $1, $2, $3) => {
+  404232: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13508,7 +13508,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  404645: ($0, $1) => {
+  405407: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13527,7 +13527,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  405250: ($0, $1) => {
+  406012: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13541,7 +13541,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  405739: $0 => {
+  406501: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13575,10 +13575,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  406745: $0 => {
+  407507: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  406785: ($0, $1, $2) => {
+  407547: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13649,7 +13649,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  408251: ($0, $1, $2, $3, $4) => {
+  409013: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13686,18 +13686,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  409239: $0 => {
+  410001: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  409322: () => {
+  410084: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  409391: () => window.innerWidth,
-  409421: () => window.innerHeight
+  410153: () => window.innerWidth,
+  410183: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
@@ -13780,7 +13780,6 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       url = baseUrl + encodeURIComponent(category) + "/" + encodedPath;
     }
     const onMainThread = (typeof window !== "undefined") && (typeof document !== "undefined");
-    const WAIT_TIMEOUT_MS = 15e3;
     function reportError(label, detail) {
       self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
       if (self.__endlessSkyWebResourceErrors < 12) {
@@ -13804,41 +13803,85 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       const sab = new SharedArrayBuffer(4);
       const flag = new Int32Array(sab);
       Atomics.store(flag, 0, 0);
+      const STALL_TIMEOUT_MS = 500;
       let settled = false;
-      let resultBytes = null;
-      let httpStatus = 0;
+      let resultChunks = [];
+      let totalBytes = 0;
       let failureReason = null;
+      let httpStatus = 0;
       const controller = new AbortController;
-      const timeoutId = setTimeout(() => controller.abort("timeout"), WAIT_TIMEOUT_MS);
-      fetch(url, {
-        signal: controller.signal
-      }).then(response => {
-        httpStatus = response.status;
-        if (!((response.status >= 200 && response.status < 300) || response.status === 304)) {
-          failureReason = "HTTP " + response.status;
-          return null;
-        }
-        return response.arrayBuffer();
-      }).then(buffer => {
-        if (buffer !== null && buffer !== undefined) resultBytes = new Uint8Array(buffer);
-      }).catch(error => {
-        failureReason = (error && error.name === "AbortError") ? "timeout/aborted" : String(error);
-      }).finally(() => {
-        clearTimeout(timeoutId);
-        settled = true;
+      function wake() {
         Atomics.store(flag, 0, 1);
         Atomics.notify(flag, 0);
-      });
-      const waitResult = Atomics.wait(flag, 0, 0, WAIT_TIMEOUT_MS + 2e3);
-      if (!settled) {
-        reportError("Resource request timed out (no settle)", url);
+      }
+      function finish(reason) {
+        if (settled) return;
+        settled = true;
+        if (reason) failureReason = reason;
+        wake();
+      }
+      (async () => {
+        try {
+          const response = await fetch(url, {
+            signal: controller.signal
+          });
+          httpStatus = response.status;
+          if (!((response.status >= 200 && response.status < 300) || response.status === 304)) {
+            finish("HTTP " + response.status);
+            return;
+          }
+          if (!response.body) {
+            const buffer = await response.arrayBuffer();
+            resultChunks.push(new Uint8Array(buffer));
+            totalBytes += buffer.byteLength;
+            finish(null);
+            return;
+          }
+          const reader = response.body.getReader();
+          while (true) {
+            const {done, value} = await reader.read();
+            if (done) break;
+            if (value && value.byteLength) {
+              resultChunks.push(value);
+              totalBytes += value.byteLength;
+              wake();
+            }
+          }
+          finish(null);
+        } catch (error) {
+          finish((error && error.name === "AbortError") ? "stalled/aborted" : String(error));
+        }
+      })();
+      for (;;) {
+        const before = totalBytes;
+        const waitResult = Atomics.wait(flag, 0, 0, STALL_TIMEOUT_MS);
+        Atomics.store(flag, 0, 0);
+        if (settled) break;
+        if (waitResult === "timed-out" && totalBytes === before) {
+          controller.abort("stalled");
+          Atomics.wait(flag, 0, 0, 250);
+          break;
+        }
+      }
+      if (!settled && totalBytes === 0) {
+        reportError("Resource request stalled (no data received)", url);
         return 0;
       }
-      if (resultBytes === null) {
+      if (resultChunks.length === 0 && failureReason) {
         reportError("Resource request failed", failureReason || ("HTTP " + httpStatus));
         return 0;
       }
-      return packBytes(resultBytes);
+      if (!settled) {
+        reportError("Resource request stalled mid-transfer", url);
+        return 0;
+      }
+      const combined = new Uint8Array(totalBytes);
+      let offset = 0;
+      for (const chunk of resultChunks) {
+        combined.set(chunk, offset);
+        offset += chunk.byteLength;
+      }
+      return packBytes(combined);
     }
     const xhr = new XMLHttpRequest;
     xhr.open("GET", url, false);
