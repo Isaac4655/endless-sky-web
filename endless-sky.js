@@ -13808,7 +13808,7 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl, gatePtr) {
       return ptr;
     }
     if (!onMainThread) {
-      const MAX_CONCURRENT_FETCHES = 4;
+      const MAX_CONCURRENT_FETCHES = 8;
       const gateWords = new Int32Array((typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer : (growMemViews(), 
       HEAPU8).buffer);
       const gateIndex = gatePtr >>> 2;
@@ -13823,7 +13823,7 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl, gatePtr) {
       const sab = new SharedArrayBuffer(4);
       const flag = new Int32Array(sab);
       Atomics.store(flag, 0, 0);
-      const FIRST_BYTE_TIMEOUT_MS = 8e3;
+      const FIRST_BYTE_TIMEOUT_MS = 2e3;
       const STALL_AFTER_PROGRESS_TIMEOUT_MS = 2e3;
       let settled = false;
       let resultChunks = [];
