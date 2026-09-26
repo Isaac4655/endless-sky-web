@@ -13372,17 +13372,17 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  401046: () => {
+  401933: () => {
     console.log("[WEB RAW] UI::StepAll final statement complete; entering function epilogue");
   },
-  401141: () => {
+  402028: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor BEGIN");
   },
-  401220: () => {
+  402107: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor END");
   },
-  401297: () => (growMemViews(), HEAPU8).length,
-  401323: $0 => {
+  402184: () => (growMemViews(), HEAPU8).length,
+  402210: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13390,7 +13390,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  401538: () => {
+  402425: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13398,7 +13398,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  401685: () => {
+  402572: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13406,7 +13406,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  401919: $0 => {
+  402806: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13430,11 +13430,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  402471: () => {
+  403358: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  402539: ($0, $1, $2, $3) => {
+  403426: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13476,7 +13476,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  404232: ($0, $1, $2, $3) => {
+  405119: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13508,7 +13508,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  405407: ($0, $1) => {
+  406294: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13527,7 +13527,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  406012: ($0, $1) => {
+  406899: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13541,7 +13541,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  406501: $0 => {
+  407388: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13575,10 +13575,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  407507: $0 => {
+  408394: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  407547: ($0, $1, $2) => {
+  408434: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13649,7 +13649,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  409013: ($0, $1, $2, $3, $4) => {
+  409900: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13686,18 +13686,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  410001: $0 => {
+  410888: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  410084: () => {
+  410971: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  410153: () => window.innerWidth,
-  410183: () => window.innerHeight
+  411040: () => window.innerWidth,
+  411070: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
@@ -13756,7 +13756,15 @@ function WebGetResourceSiteBaseUrl() {
   }
 }
 
-function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
+function WebResourceFetchGateInit() {
+  const ptr = _malloc(4);
+  const memoryBuffer = (typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer : (growMemViews(), 
+  HEAPU8).buffer;
+  Atomics.store(new Int32Array(memoryBuffer), ptr >>> 2, 0);
+  return ptr;
+}
+
+function WebReadResource(path, resourceBaseUrl, siteBaseUrl, gatePtr) {
   try {
     const virtualPath = UTF8ToString(path);
     const baseUrl = UTF8ToString(resourceBaseUrl);
@@ -13800,10 +13808,23 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       return ptr;
     }
     if (!onMainThread) {
+      const MAX_CONCURRENT_FETCHES = 4;
+      const gateWords = new Int32Array((typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer : (growMemViews(), 
+      HEAPU8).buffer);
+      const gateIndex = gatePtr >>> 2;
+      for (;;) {
+        const current = Atomics.load(gateWords, gateIndex);
+        if (current < MAX_CONCURRENT_FETCHES && Atomics.compareExchange(gateWords, gateIndex, current, current + 1) === current) break;
+        Atomics.wait(gateWords, gateIndex, current, 25);
+      }
+      function releaseGateSlot() {
+        Atomics.sub(gateWords, gateIndex, 1);
+      }
       const sab = new SharedArrayBuffer(4);
       const flag = new Int32Array(sab);
       Atomics.store(flag, 0, 0);
-      const STALL_TIMEOUT_MS = 500;
+      const FIRST_BYTE_TIMEOUT_MS = 8e3;
+      const STALL_AFTER_PROGRESS_TIMEOUT_MS = 2e3;
       let settled = false;
       let resultChunks = [];
       let totalBytes = 0;
@@ -13854,7 +13875,8 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       })();
       for (;;) {
         const before = totalBytes;
-        const waitResult = Atomics.wait(flag, 0, 0, STALL_TIMEOUT_MS);
+        const windowMs = (before === 0) ? FIRST_BYTE_TIMEOUT_MS : STALL_AFTER_PROGRESS_TIMEOUT_MS;
+        const waitResult = Atomics.wait(flag, 0, 0, windowMs);
         Atomics.store(flag, 0, 0);
         if (settled) break;
         if (waitResult === "timed-out" && totalBytes === before) {
@@ -13863,6 +13885,7 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
           break;
         }
       }
+      releaseGateSlot();
       if (!settled && totalBytes === 0) {
         reportError("Resource request stalled (no data received)", url);
         return 0;
@@ -14078,6 +14101,7 @@ function assignWasmImports() {
     /** @export */ WebReadResource,
     /** @export */ WebReleaseResourceManifest,
     /** @export */ WebResourceCategoryList,
+    /** @export */ WebResourceFetchGateInit,
     /** @export */ __assert_fail: ___assert_fail,
     /** @export */ __call_sighandler: ___call_sighandler,
     /** @export */ __cxa_begin_catch: ___cxa_begin_catch,
