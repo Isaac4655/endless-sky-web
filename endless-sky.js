@@ -13372,17 +13372,17 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  401325: () => {
+  398427: () => {
     console.log("[WEB RAW] UI::StepAll final statement complete; entering function epilogue");
   },
-  401420: () => {
+  398522: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor BEGIN");
   },
-  401499: () => {
+  398601: () => {
     console.log("[WEB RAW] UI::StepAll C++ scope cleanup / destructor END");
   },
-  401576: () => (growMemViews(), HEAPU8).length,
-  401602: $0 => {
+  398678: () => (growMemViews(), HEAPU8).length,
+  398704: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13390,7 +13390,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  401817: () => {
+  398919: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13398,7 +13398,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  401964: () => {
+  399066: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13406,7 +13406,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  402198: $0 => {
+  399300: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13430,11 +13430,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  402750: () => {
+  399852: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  402818: ($0, $1, $2, $3) => {
+  399920: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13476,7 +13476,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  404511: ($0, $1, $2, $3) => {
+  401613: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13508,7 +13508,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  405686: ($0, $1) => {
+  402788: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13527,7 +13527,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  406291: ($0, $1) => {
+  403393: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13541,7 +13541,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  406780: $0 => {
+  403882: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13575,10 +13575,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  407786: $0 => {
+  404888: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  407826: ($0, $1, $2) => {
+  404928: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -13649,7 +13649,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  409292: ($0, $1, $2, $3, $4) => {
+  406394: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -13686,18 +13686,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  410280: $0 => {
+  407382: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  410363: () => {
+  407465: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  410432: () => window.innerWidth,
-  410462: () => window.innerHeight
+  407534: () => window.innerWidth,
+  407564: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
@@ -13756,15 +13756,7 @@ function WebGetResourceSiteBaseUrl() {
   }
 }
 
-function WebResourceFetchGateInit() {
-  const ptr = _malloc(4);
-  const memoryBuffer = (typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer : (growMemViews(), 
-  HEAPU8).buffer;
-  Atomics.store(new Int32Array(memoryBuffer), ptr >>> 2, 0);
-  return ptr;
-}
-
-function WebReadResource(path, resourceBaseUrl, siteBaseUrl, gatePtr) {
+function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
   try {
     const virtualPath = UTF8ToString(path);
     const baseUrl = UTF8ToString(resourceBaseUrl);
@@ -13788,137 +13780,40 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl, gatePtr) {
       url = baseUrl + encodeURIComponent(category) + "/" + encodedPath;
     }
     const onMainThread = (typeof window !== "undefined") && (typeof document !== "undefined");
-    function reportError(label, detail) {
-      self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
-      if (self.__endlessSkyWebResourceErrors < 12) {
-        console.error("[Resources] " + label + ":", url, detail === undefined ? "" : detail);
-        ++self.__endlessSkyWebResourceErrors;
-      }
-    }
-    function packBytes(byteArray) {
-      const byteCount = byteArray.byteLength;
-      const ptr = _malloc(4 + byteCount);
-      if (!ptr) return 0;
-      const memoryBuffer = (typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer : (growMemViews(), 
-      HEAPU8).buffer;
-      const heapBytes = new Uint8Array(memoryBuffer);
-      const heapWords = new Uint32Array(memoryBuffer);
-      heapWords[ptr >>> 2] = byteCount;
-      heapBytes.set(byteArray, ptr + 4);
-      return ptr;
-    }
-    if (!onMainThread) {
-      const MAX_CONCURRENT_FETCHES = 8;
-      const gateWords = new Int32Array((typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer : (growMemViews(), 
-      HEAPU8).buffer);
-      const gateIndex = gatePtr >>> 2;
-      for (;;) {
-        const current = Atomics.load(gateWords, gateIndex);
-        if (current < MAX_CONCURRENT_FETCHES && Atomics.compareExchange(gateWords, gateIndex, current, current + 1) === current) break;
-        Atomics.wait(gateWords, gateIndex, current, 25);
-      }
-      function releaseGateSlot() {
-        Atomics.sub(gateWords, gateIndex, 1);
-      }
-      const sab = new SharedArrayBuffer(4);
-      const flag = new Int32Array(sab);
-      Atomics.store(flag, 0, 0);
-      const FIRST_BYTE_TIMEOUT_MS = 2e3;
-      const STALL_AFTER_PROGRESS_TIMEOUT_MS = 2e3;
-      let settled = false;
-      let resultChunks = [];
-      let totalBytes = 0;
-      let failureReason = null;
-      let httpStatus = 0;
-      const controller = new AbortController;
-      function wake() {
-        Atomics.store(flag, 0, 1);
-        Atomics.notify(flag, 0);
-      }
-      function finish(reason) {
-        if (settled) return;
-        settled = true;
-        if (reason) failureReason = reason;
-        wake();
-      }
-      (async () => {
-        try {
-          const response = await fetch(url, {
-            signal: controller.signal
-          });
-          httpStatus = response.status;
-          if (!((response.status >= 200 && response.status < 300) || response.status === 304)) {
-            finish("HTTP " + response.status);
-            return;
-          }
-          if (!response.body) {
-            const buffer = await response.arrayBuffer();
-            resultChunks.push(new Uint8Array(buffer));
-            totalBytes += buffer.byteLength;
-            finish(null);
-            return;
-          }
-          const reader = response.body.getReader();
-          while (true) {
-            const {done, value} = await reader.read();
-            if (done) break;
-            if (value && value.byteLength) {
-              resultChunks.push(value);
-              totalBytes += value.byteLength;
-              wake();
-            }
-          }
-          finish(null);
-        } catch (error) {
-          finish((error && error.name === "AbortError") ? "stalled/aborted" : String(error));
-        }
-      })();
-      for (;;) {
-        const before = totalBytes;
-        const windowMs = (before === 0) ? FIRST_BYTE_TIMEOUT_MS : STALL_AFTER_PROGRESS_TIMEOUT_MS;
-        const waitResult = Atomics.wait(flag, 0, 0, windowMs);
-        Atomics.store(flag, 0, 0);
-        if (settled) break;
-        if (waitResult === "timed-out" && totalBytes === before) {
-          controller.abort("stalled");
-          Atomics.wait(flag, 0, 0, 250);
-          break;
-        }
-      }
-      releaseGateSlot();
-      if (!settled && totalBytes === 0) {
-        reportError("Resource request stalled (no data received)", url);
-        return 0;
-      }
-      if (resultChunks.length === 0 && failureReason) {
-        reportError("Resource request failed", failureReason || ("HTTP " + httpStatus));
-        return 0;
-      }
-      if (!settled) {
-        reportError("Resource request stalled mid-transfer", url);
-        return 0;
-      }
-      const combined = new Uint8Array(totalBytes);
-      let offset = 0;
-      for (const chunk of resultChunks) {
-        combined.set(chunk, offset);
-        offset += chunk.byteLength;
-      }
-      return packBytes(combined);
-    }
     const xhr = new XMLHttpRequest;
     xhr.open("GET", url, false);
-    xhr.overrideMimeType("text/plain; charset=x-user-defined");
+    if (onMainThread) xhr.overrideMimeType("text/plain; charset=x-user-defined"); else xhr.responseType = "arraybuffer";
     xhr.send(null);
     if (!((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)) {
-      reportError("Resource request failed", "HTTP " + xhr.status);
+      self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
+      if (self.__endlessSkyWebResourceErrors < 12) {
+        console.error("[Resources] Resource request failed:", url, "HTTP", xhr.status);
+        ++self.__endlessSkyWebResourceErrors;
+      }
       return 0;
     }
-    const text = xhr.responseText || "";
-    const byteCount = text.length;
-    const textBytes = new Uint8Array(byteCount);
-    for (let i = 0; i < byteCount; ++i) textBytes[i] = text.charCodeAt(i) & 255;
-    return packBytes(textBytes);
+    let bytes = null;
+    let text = "";
+    let byteCount = 0;
+    if (onMainThread) {
+      text = xhr.responseText || "";
+      byteCount = text.length;
+    } else {
+      bytes = new Uint8Array(xhr.response || new ArrayBuffer(0));
+      byteCount = bytes.byteLength;
+    }
+    const ptr = _malloc(4 + byteCount);
+    if (!ptr) return 0;
+    const memoryBuffer = (typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer : (growMemViews(), 
+    HEAPU8).buffer;
+    const heapBytes = new Uint8Array(memoryBuffer);
+    const heapWords = new Uint32Array(memoryBuffer);
+    heapWords[ptr >>> 2] = byteCount;
+    if (onMainThread) {
+      const destination = ptr + 4;
+      for (let i = 0; i < byteCount; ++i) heapBytes[destination + i] = text.charCodeAt(i) & 255;
+    } else heapBytes.set(bytes, ptr + 4);
+    return ptr;
   } catch (error) {
     self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
     if (self.__endlessSkyWebResourceErrors < 12) {
@@ -14101,7 +13996,6 @@ function assignWasmImports() {
     /** @export */ WebReadResource,
     /** @export */ WebReleaseResourceManifest,
     /** @export */ WebResourceCategoryList,
-    /** @export */ WebResourceFetchGateInit,
     /** @export */ __assert_fail: ___assert_fail,
     /** @export */ __call_sighandler: ___call_sighandler,
     /** @export */ __cxa_begin_catch: ___cxa_begin_catch,
