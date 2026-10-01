@@ -13527,60 +13527,6 @@ var _glVertexAttribPointer = _emscripten_glVertexAttribPointer;
 
 var _glViewport = _emscripten_glViewport;
 
-var _uuid_compare = (uu1, uu2) => _memcmp(uu1, uu2, 16);
-
-var _uuid_copy = (dst, src) => _memcpy(dst, src, 16);
-
-var _uuid_is_null = uu => {
-  // int uuid_is_null(const uuid_t uu);
-  for (var i = 0; i < 4; i++, uu = (uu + 4) | 0) {
-    var val = (growMemViews(), HEAP32)[((uu) >> 2)];
-    if (val) {
-      return 0;
-    }
-  }
-  return 1;
-};
-
-var _uuid_parse = (inp, uu) => {
-  // int uuid_parse(const char *in, uuid_t uu);
-  inp = UTF8ToString(inp);
-  if (inp.length === 36) {
-    var i = 0;
-    var uuid = new Array(16);
-    inp.toLowerCase().replace(/[0-9a-f]{2}/g, function(byte) {
-      if (i < 16) {
-        uuid[i++] = parseInt(byte, 16);
-      }
-    });
-    if (i < 16) {
-      return -1;
-    }
-    writeArrayToMemory(uuid, uu);
-    return 0;
-  }
-  return -1;
-};
-
-/** @param {number|boolean=} upper */ var _uuid_unparse = (uu, out, upper) => {
-  // void uuid_unparse(const uuid_t uu, char *out);
-  var i = 0;
-  var uuid = "xxxx-xx-xx-xx-xxxxxx".replace(/[x]/g, function(c) {
-    var r = upper ? ((growMemViews(), HEAPU8)[(uu) + (i)]).toString(16).toUpperCase() : ((growMemViews(), 
-    HEAPU8)[(uu) + (i)]).toString(16);
-    r = (r.length === 1) ? "0" + r : r;
-    // Zero pad single digit hex values
-    i++;
-    return r;
-  });
-  stringToUTF8(uuid, out, 37);
-};
-
-var _uuid_unparse_lower = (uu, out) => {
-  // void uuid_unparse_lower(const uuid_t uu, char *out);
-  _uuid_unparse(uu, out);
-};
-
 var dynCall = (sig, ptr, args = [], promising = false) => {
   assert(ptr, `null function pointer in dynCall`);
   assert(!promising, "async dynCall is not supported in this mode");
@@ -13791,8 +13737,8 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  391515: () => (growMemViews(), HEAPU8).length,
-  391541: $0 => {
+  391563: () => (growMemViews(), HEAPU8).length,
+  391589: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13800,7 +13746,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  391756: () => {
+  391804: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13808,7 +13754,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  391903: () => {
+  391951: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13816,7 +13762,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  392137: $0 => {
+  392185: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13840,11 +13786,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  392689: () => {
+  392737: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  392757: ($0, $1, $2, $3) => {
+  392805: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13886,7 +13832,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  394450: ($0, $1, $2, $3) => {
+  394498: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13918,7 +13864,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  395625: ($0, $1) => {
+  395673: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13937,7 +13883,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  396230: ($0, $1) => {
+  396278: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13951,7 +13897,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  396719: $0 => {
+  396767: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13985,10 +13931,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  397725: $0 => {
+  397773: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  397765: ($0, $1, $2) => {
+  397813: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -14059,7 +14005,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  399231: ($0, $1, $2, $3, $4) => {
+  399279: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -14096,18 +14042,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  400219: $0 => {
+  400267: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  400302: () => {
+  400350: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  400371: () => window.innerWidth,
-  400401: () => window.innerHeight
+  400419: () => window.innerWidth,
+  400449: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
@@ -14255,8 +14201,6 @@ function InitializeWebLazyResources() {
 }
 
 // Imports from the Wasm binary.
-var _memcmp = makeInvalidEarlyAccess("_memcmp");
-
 var _malloc = makeInvalidEarlyAccess("_malloc");
 
 var _free = makeInvalidEarlyAccess("_free");
@@ -14272,8 +14216,6 @@ var _fflush = makeInvalidEarlyAccess("_fflush");
 var __emscripten_tls_init = makeInvalidEarlyAccess("__emscripten_tls_init");
 
 var __emscripten_run_callback_on_thread = makeInvalidEarlyAccess("__emscripten_run_callback_on_thread");
-
-var _memcpy = makeInvalidEarlyAccess("_memcpy");
 
 var __emscripten_thread_init = makeInvalidEarlyAccess("__emscripten_thread_init");
 
@@ -14326,7 +14268,6 @@ var __indirect_function_table = makeInvalidEarlyAccess("__indirect_function_tabl
 var wasmTable = makeInvalidEarlyAccess("wasmTable");
 
 function assignWasmExports(wasmExports) {
-  assert(typeof wasmExports["memcmp"] != "undefined", "missing Wasm export: memcmp");
   assert(typeof wasmExports["malloc"] != "undefined", "missing Wasm export: malloc");
   assert(typeof wasmExports["free"] != "undefined", "missing Wasm export: free");
   assert(typeof wasmExports["pthread_self"] != "undefined", "missing Wasm export: pthread_self");
@@ -14335,7 +14276,6 @@ function assignWasmExports(wasmExports) {
   assert(typeof wasmExports["fflush"] != "undefined", "missing Wasm export: fflush");
   assert(typeof wasmExports["_emscripten_tls_init"] != "undefined", "missing Wasm export: _emscripten_tls_init");
   assert(typeof wasmExports["_emscripten_run_callback_on_thread"] != "undefined", "missing Wasm export: _emscripten_run_callback_on_thread");
-  assert(typeof wasmExports["memcpy"] != "undefined", "missing Wasm export: memcpy");
   assert(typeof wasmExports["_emscripten_thread_init"] != "undefined", "missing Wasm export: _emscripten_thread_init");
   assert(typeof wasmExports["__set_thread_state"] != "undefined", "missing Wasm export: __set_thread_state");
   assert(typeof wasmExports["_emscripten_thread_crashed"] != "undefined", "missing Wasm export: _emscripten_thread_crashed");
@@ -14360,7 +14300,6 @@ function assignWasmExports(wasmExports) {
   assert(typeof wasmExports["__cxa_can_catch"] != "undefined", "missing Wasm export: __cxa_can_catch");
   assert(typeof wasmExports["__cxa_get_exception_ptr"] != "undefined", "missing Wasm export: __cxa_get_exception_ptr");
   assert(typeof wasmExports["__indirect_function_table"] != "undefined", "missing Wasm export: __indirect_function_table");
-  _memcmp = createExportWrapper("memcmp", wasmExports["memcmp"], 3);
   _malloc = createExportWrapper("malloc", wasmExports["malloc"], 1);
   _free = createExportWrapper("free", wasmExports["free"], 1);
   _pthread_self = wasmExports["pthread_self"];
@@ -14369,7 +14308,6 @@ function assignWasmExports(wasmExports) {
   _fflush = createExportWrapper("fflush", wasmExports["fflush"], 1);
   __emscripten_tls_init = createExportWrapper("_emscripten_tls_init", wasmExports["_emscripten_tls_init"], 0);
   __emscripten_run_callback_on_thread = createExportWrapper("_emscripten_run_callback_on_thread", wasmExports["_emscripten_run_callback_on_thread"], 6);
-  _memcpy = createExportWrapper("memcpy", wasmExports["memcpy"], 3);
   __emscripten_thread_init = createExportWrapper("_emscripten_thread_init", wasmExports["_emscripten_thread_init"], 6);
   ___set_thread_state = createExportWrapper("__set_thread_state", wasmExports["__set_thread_state"], 4);
   __emscripten_thread_crashed = createExportWrapper("_emscripten_thread_crashed", wasmExports["_emscripten_thread_crashed"], 0);
@@ -14904,12 +14842,7 @@ function assignWasmImports() {
     /** @export */ invoke_viiiiiiiiiiiiiii,
     /** @export */ invoke_viijii,
     /** @export */ memory: wasmMemory,
-    /** @export */ proc_exit: _proc_exit,
-    /** @export */ uuid_compare: _uuid_compare,
-    /** @export */ uuid_copy: _uuid_copy,
-    /** @export */ uuid_is_null: _uuid_is_null,
-    /** @export */ uuid_parse: _uuid_parse,
-    /** @export */ uuid_unparse_lower: _uuid_unparse_lower
+    /** @export */ proc_exit: _proc_exit
   };
 }
 
