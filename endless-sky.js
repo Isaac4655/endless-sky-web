@@ -13739,8 +13739,74 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  393483: () => (growMemViews(), HEAPU8).length,
-  393509: $0 => {
+  391435: () => {
+    const fs = (typeof Module !== "undefined" && Module.FS) ? Module.FS : (typeof FS !== "undefined" ? FS : null);
+    if (fs && typeof fs.syncfs === "function") fs.syncfs(false, function(error) {
+      if (error) console.error("[WEB] Save storage sync failed:", error);
+    });
+  },
+  391724: ($0, $1, $2, $3) => {
+    const statusPtr = $0 >> 2;
+    const fileNamePtr = $1;
+    const fileNameCapacity = $2;
+    const destPath = UTF8ToString($3);
+    const setStatus = function(value) {
+      Atomics.store((growMemViews(), HEAP32), statusPtr, value);
+    };
+    const fs = (typeof Module !== "undefined" && Module.FS) ? Module.FS : (typeof FS !== "undefined" ? FS : null);
+    if (!fs || typeof document === "undefined") {
+      console.error("[WEB] Save import unavailable: browser filesystem is missing.");
+      setStatus(-1);
+      return;
+    }
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".txt;text/plain";
+    input.style.display = "none";
+    (document.body || document.documentElement).appendChild(input);
+    const cleanup = function() {
+      if (input.parentNode) input.parentNode.removeChild(input);
+    };
+    input.onchange = function() {
+      const file = input.files && input.files.length ? input.files[0] : null;
+      if (!file) {
+        cleanup();
+        setStatus(-2);
+        return;
+      }
+      file.arrayBuffer().then(function(buffer) {
+        try {
+          fs.writeFile(destPath, new Uint8Array(buffer));
+          stringToUTF8(file.name, fileNamePtr, fileNameCapacity);
+        } catch (error) {
+          cleanup();
+          console.error("[WEB] Save import write failed:", error);
+          setStatus(-1);
+          return;
+        }
+        if (typeof fs.syncfs !== "function") {
+          console.warn("[WEB] Save imported but FS.syncfs is unavailable; it may not survive reload.");
+          cleanup();
+          setStatus(2);
+          return;
+        }
+        fs.syncfs(false, function(error) {
+          cleanup();
+          if (error) {
+            console.error("[WEB] Save import syncfs failed:", error);
+            setStatus(2);
+          } else setStatus(1);
+        });
+      }).catch(function(error) {
+        cleanup();
+        console.error("[WEB] Save import failed:", error);
+        setStatus(-1);
+      });
+    };
+    input.click();
+  },
+  393558: () => (growMemViews(), HEAPU8).length,
+  393584: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13748,7 +13814,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  393724: () => {
+  393799: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13756,7 +13822,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  393871: () => {
+  393946: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13764,7 +13830,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  394105: $0 => {
+  394180: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13788,11 +13854,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  394657: () => {
+  394732: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  394725: ($0, $1, $2, $3) => {
+  394800: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13834,7 +13900,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  396418: ($0, $1, $2, $3) => {
+  396493: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13866,7 +13932,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  397593: ($0, $1) => {
+  397668: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13885,7 +13951,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  398198: ($0, $1) => {
+  398273: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13899,7 +13965,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  398687: $0 => {
+  398762: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13933,10 +13999,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  399693: $0 => {
+  399768: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  399733: ($0, $1, $2) => {
+  399808: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -14007,7 +14073,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  401199: ($0, $1, $2, $3, $4) => {
+  401274: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -14044,18 +14110,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  402187: $0 => {
+  402262: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  402270: () => {
+  402345: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  402339: () => window.innerWidth,
-  402369: () => window.innerHeight
+  402414: () => window.innerWidth,
+  402444: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
