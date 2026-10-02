@@ -114,6 +114,12 @@
     </script>
     <script src="coi-serviceworker.js"></script>
 
+    <!-- Multiplayer (v1): must load before endless-sky.js so that
+         self.__esNetTransport exists by the time NetTransport.cpp's EM_JS
+         calls run. See source/net/NetTransport.cpp for the C++ side and
+         web/net-transport.js for what this installs. -->
+    <script src="net-transport.js"></script>
+
     <script>
         var Module = {
             // The engine script is loaded from a normal URL below. Emscripten can
