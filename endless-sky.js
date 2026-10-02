@@ -778,7 +778,7 @@ function initMemory() {
     return;
   }
   {
-    var INITIAL_MEMORY = 268435456;
+    var INITIAL_MEMORY = 536870912;
     assert(INITIAL_MEMORY >= 65536, `INITIAL_MEMORY should be larger than STACK_SIZE, was ${INITIAL_MEMORY}! (STACK_SIZE=65536)`);
     /** @suppress {checkTypes} */ wasmMemory = new WebAssembly.Memory({
       "initial": INITIAL_MEMORY / 65536,
