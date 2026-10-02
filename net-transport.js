@@ -42,19 +42,42 @@ const ES_NET_STATE_FAILED = 3;
 		],
 	};
 
+	// Encodes a JS string to a null-terminated UTF-8 buffer in wasm memory
+	// and returns the pointer. Caller is responsible for Module._free'ing
+	// the returned pointer once done with it.
+	//
+	// This exists instead of using Emscripten's own allocateUTF8 helper
+	// because that helper is only attached to `Module` when
+	// -sEXPORTED_RUNTIME_METHODS includes it at link time, and in this
+	// project's build it does not (confirmed by a
+	// "allocateUTF8 is not a function" TypeError at runtime) - whereas
+	// Module._malloc/Module._free/Module.HEAPU8 are reliably present
+	// (reportMessage below already depended on them working). Doing the
+	// UTF-8 encoding by hand with TextEncoder sidesteps the missing
+	// helper entirely rather than requiring a CMake/link-flag change this
+	// project's build setup wasn't available to make here.
+	function allocateUTF8Manual(text)
+	{
+		const encoded = new TextEncoder().encode(text);
+		const ptr = Module._malloc(encoded.length + 1);
+		Module.HEAPU8.set(encoded, ptr);
+		Module.HEAPU8[ptr + encoded.length] = 0; // null terminator
+		return ptr;
+	}
+
 	function reportState(state, detail)
 	{
 		if(typeof Module === "undefined" || !Module._esNetTransportOnStateChange)
 			return;
 		try
 		{
-			const detailPtr = allocateUTF8(detail || "");
+			const detailPtr = allocateUTF8Manual(detail || "");
 			Module._esNetTransportOnStateChange(state, detailPtr);
 			Module._free(detailPtr);
 		}
 		catch(error)
 		{
-			console.error("[Net] reportState failed - allocateUTF8/_malloc/_free may not be exported:", error);
+			console.error("[Net] reportState failed:", error);
 		}
 	}
 
@@ -62,26 +85,15 @@ const ES_NET_STATE_FAILED = 3;
 	{
 		if(typeof Module === "undefined" || !Module._esNetTransportOnLocalDescription)
 			return;
-		// NOTE: allocateUTF8 (and reportState/reportMessage's use of
-		// Module._malloc/HEAPU8/Module.HEAPU8) are Emscripten runtime
-		// helpers that must be present in the build's
-		// -sEXPORTED_RUNTIME_METHODS list (and, for _malloc/_free, in
-		// -sEXPORTED_FUNCTIONS) to exist on `Module` at all. This project's
-		// Emscripten link flags live in a CMake file that wasn't available
-		// when this was written, so this call could silently do nothing
-		// (or throw, caught below) if allocateUTF8 isn't exported - if the
-		// connection code still never appears after the
-		// onicegatheringstatechange fix, check the browser devtools
-		// console for a ReferenceError here as the next thing to rule out.
 		try
 		{
-			const sdpPtr = allocateUTF8(sdpText);
+			const sdpPtr = allocateUTF8Manual(sdpText);
 			Module._esNetTransportOnLocalDescription(sdpPtr);
 			Module._free(sdpPtr);
 		}
 		catch(error)
 		{
-			console.error("[Net] reportLocalDescription failed - allocateUTF8/_malloc/_free may not be exported:", error);
+			console.error("[Net] reportLocalDescription failed:", error);
 		}
 	}
 
