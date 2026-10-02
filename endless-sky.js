@@ -13739,13 +13739,13 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  396571: () => {
+  396315: () => {
     const fs = (typeof Module !== "undefined" && Module.FS) ? Module.FS : (typeof FS !== "undefined" ? FS : null);
     if (fs && typeof fs.syncfs === "function") fs.syncfs(false, function(error) {
       if (error) console.error("[WEB] Save storage sync failed:", error);
     });
   },
-  396860: ($0, $1, $2, $3) => {
+  396604: ($0, $1, $2, $3) => {
     const statusPtr = $0 >> 2;
     const fileNamePtr = $1;
     const fileNameCapacity = $2;
@@ -13805,8 +13805,8 @@ var ASM_CONSTS = {
     };
     input.click();
   },
-  398694: () => (growMemViews(), HEAPU8).length,
-  398720: $0 => {
+  398438: () => (growMemViews(), HEAPU8).length,
+  398464: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13814,7 +13814,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  398935: () => {
+  398679: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13822,7 +13822,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  399082: () => {
+  398826: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13830,7 +13830,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  399316: $0 => {
+  399060: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13854,11 +13854,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  399868: () => {
+  399612: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  399936: ($0, $1, $2, $3) => {
+  399680: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13900,7 +13900,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  401629: ($0, $1, $2, $3) => {
+  401373: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13932,7 +13932,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  402804: ($0, $1) => {
+  402548: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13951,7 +13951,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  403409: ($0, $1) => {
+  403153: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13965,7 +13965,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  403898: $0 => {
+  403642: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13999,10 +13999,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  404904: $0 => {
+  404648: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  404944: ($0, $1, $2) => {
+  404688: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -14073,7 +14073,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  406410: ($0, $1, $2, $3, $4) => {
+  406154: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -14110,18 +14110,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  407398: $0 => {
+  407142: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  407481: () => {
+  407225: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  407550: () => window.innerWidth,
-  407580: () => window.innerHeight
+  407294: () => window.innerWidth,
+  407324: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
