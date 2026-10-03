@@ -14302,6 +14302,10 @@ var _free = makeInvalidEarlyAccess("_free");
 
 var _pthread_self = makeInvalidEarlyAccess("_pthread_self");
 
+var _esNetTransportAlloc = Module["_esNetTransportAlloc"] = makeInvalidEarlyAccess("_esNetTransportAlloc");
+
+var _esNetTransportFree = Module["_esNetTransportFree"] = makeInvalidEarlyAccess("_esNetTransportFree");
+
 var _esNetTransportOnMessage = Module["_esNetTransportOnMessage"] = makeInvalidEarlyAccess("_esNetTransportOnMessage");
 
 var _esNetTransportOnStateChange = Module["_esNetTransportOnStateChange"] = makeInvalidEarlyAccess("_esNetTransportOnStateChange");
@@ -14372,6 +14376,8 @@ function assignWasmExports(wasmExports) {
   assert(typeof wasmExports["malloc"] != "undefined", "missing Wasm export: malloc");
   assert(typeof wasmExports["free"] != "undefined", "missing Wasm export: free");
   assert(typeof wasmExports["pthread_self"] != "undefined", "missing Wasm export: pthread_self");
+  assert(typeof wasmExports["esNetTransportAlloc"] != "undefined", "missing Wasm export: esNetTransportAlloc");
+  assert(typeof wasmExports["esNetTransportFree"] != "undefined", "missing Wasm export: esNetTransportFree");
   assert(typeof wasmExports["esNetTransportOnMessage"] != "undefined", "missing Wasm export: esNetTransportOnMessage");
   assert(typeof wasmExports["esNetTransportOnStateChange"] != "undefined", "missing Wasm export: esNetTransportOnStateChange");
   assert(typeof wasmExports["esNetTransportOnLocalDescription"] != "undefined", "missing Wasm export: esNetTransportOnLocalDescription");
@@ -14407,6 +14413,8 @@ function assignWasmExports(wasmExports) {
   _malloc = createExportWrapper("malloc", wasmExports["malloc"], 1);
   _free = createExportWrapper("free", wasmExports["free"], 1);
   _pthread_self = wasmExports["pthread_self"];
+  _esNetTransportAlloc = Module["_esNetTransportAlloc"] = createExportWrapper("esNetTransportAlloc", wasmExports["esNetTransportAlloc"], 1);
+  _esNetTransportFree = Module["_esNetTransportFree"] = createExportWrapper("esNetTransportFree", wasmExports["esNetTransportFree"], 1);
   _esNetTransportOnMessage = Module["_esNetTransportOnMessage"] = createExportWrapper("esNetTransportOnMessage", wasmExports["esNetTransportOnMessage"], 2);
   _esNetTransportOnStateChange = Module["_esNetTransportOnStateChange"] = createExportWrapper("esNetTransportOnStateChange", wasmExports["esNetTransportOnStateChange"], 2);
   _esNetTransportOnLocalDescription = Module["_esNetTransportOnLocalDescription"] = createExportWrapper("esNetTransportOnLocalDescription", wasmExports["esNetTransportOnLocalDescription"], 1);
