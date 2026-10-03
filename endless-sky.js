@@ -14296,7 +14296,7 @@ function InitializeWebLazyResources() {
 }
 
 // Imports from the Wasm binary.
-var _malloc = makeInvalidEarlyAccess("_malloc");
+var _malloc = Module["_malloc"] = makeInvalidEarlyAccess("_malloc");
 
 var _free = makeInvalidEarlyAccess("_free");
 
@@ -14312,7 +14312,7 @@ var _esNetTransportOnStateChange = Module["_esNetTransportOnStateChange"] = make
 
 var _esNetTransportOnLocalDescription = Module["_esNetTransportOnLocalDescription"] = makeInvalidEarlyAccess("_esNetTransportOnLocalDescription");
 
-var _main = Module["_main"] = makeInvalidEarlyAccess("_main");
+var _main = makeInvalidEarlyAccess("_main");
 
 var _strerror = makeInvalidEarlyAccess("_strerror");
 
@@ -14410,7 +14410,7 @@ function assignWasmExports(wasmExports) {
   assert(typeof wasmExports["__cxa_can_catch"] != "undefined", "missing Wasm export: __cxa_can_catch");
   assert(typeof wasmExports["__cxa_get_exception_ptr"] != "undefined", "missing Wasm export: __cxa_get_exception_ptr");
   assert(typeof wasmExports["__indirect_function_table"] != "undefined", "missing Wasm export: __indirect_function_table");
-  _malloc = createExportWrapper("malloc", wasmExports["malloc"], 1);
+  _malloc = Module["_malloc"] = createExportWrapper("malloc", wasmExports["malloc"], 1);
   _free = createExportWrapper("free", wasmExports["free"], 1);
   _pthread_self = wasmExports["pthread_self"];
   _esNetTransportAlloc = Module["_esNetTransportAlloc"] = createExportWrapper("esNetTransportAlloc", wasmExports["esNetTransportAlloc"], 1);
@@ -14418,7 +14418,7 @@ function assignWasmExports(wasmExports) {
   _esNetTransportOnMessage = Module["_esNetTransportOnMessage"] = createExportWrapper("esNetTransportOnMessage", wasmExports["esNetTransportOnMessage"], 2);
   _esNetTransportOnStateChange = Module["_esNetTransportOnStateChange"] = createExportWrapper("esNetTransportOnStateChange", wasmExports["esNetTransportOnStateChange"], 2);
   _esNetTransportOnLocalDescription = Module["_esNetTransportOnLocalDescription"] = createExportWrapper("esNetTransportOnLocalDescription", wasmExports["esNetTransportOnLocalDescription"], 1);
-  _main = Module["_main"] = createExportWrapper("__main_argc_argv", wasmExports["__main_argc_argv"], 2);
+  _main = createExportWrapper("__main_argc_argv", wasmExports["__main_argc_argv"], 2);
   _strerror = createExportWrapper("strerror", wasmExports["strerror"], 1);
   _fflush = createExportWrapper("fflush", wasmExports["fflush"], 1);
   __emscripten_tls_init = createExportWrapper("_emscripten_tls_init", wasmExports["_emscripten_tls_init"], 0);
@@ -15256,29 +15256,6 @@ function invoke_jiii(index, a1, a2, a3) {
 // === Auto-generated postamble setup entry stuff ===
 var calledRun;
 
-function callMain(args = []) {
-  assert(runDependencies == 0, 'cannot call main when async dependencies remain! (listen on Module["onRuntimeInitialized"])');
-  assert(typeof onPreRuns === "undefined" || onPreRuns.length == 0, "cannot call main when preRun functions remain to be called");
-  var entryFunction = _main;
-  args.unshift(thisProgram);
-  var argc = args.length;
-  var argv = stackAlloc((argc + 1) * 4);
-  var argv_ptr = argv;
-  for (var arg of args) {
-    (growMemViews(), HEAPU32)[((argv_ptr) >> 2)] = stringToUTF8OnStack(arg);
-    argv_ptr += 4;
-  }
-  (growMemViews(), HEAPU32)[((argv_ptr) >> 2)] = 0;
-  try {
-    var ret = entryFunction(argc, argv);
-    // if we're not running an evented main loop, it's time to exit
-    exitJS(ret, /* implicit = */ true);
-    return ret;
-  } catch (e) {
-    return handleException(e);
-  }
-}
-
 function stackCheckInit() {
   // This is normally called automatically during __wasm_call_ctors but need to
   // get these values before even running any of the ctors so we call it redundantly
@@ -15312,11 +15289,9 @@ async function run(args = programArgs) {
   }
   if (ABORT) return;
   initRuntime();
-  // No ATMAINS hooks
   Module["onRuntimeInitialized"]?.();
   consumedModuleProp("onRuntimeInitialized");
-  var noInitialRun = Module["noInitialRun"] || false;
-  if (!noInitialRun) callMain(args);
+  assert(!Module["_main"], 'compiled without a main, but one is present. if you added it from JS, use Module["onRuntimeInitialized"]');
   postRun();
 }
 
