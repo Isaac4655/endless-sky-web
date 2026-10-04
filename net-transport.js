@@ -7,14 +7,13 @@
 // through the three Module._esNetTransport... exports defined in
 // source/net/NetTransport.cpp.
 //
-// v1 signaling is manual copy/paste of SDP text (see the plan's open
+// v1 signaling is manual copy/paste of the SDP payload (see the plan's open
 // question about signaling approach): StartHosting produces an SDP offer
-// that the host shares with a guest out of band (a chat link, Discord
-// message, whatever); the guest pastes it in, which produces an SDP answer
-// that the host pastes back. This keeps v1 free of any external signaling
-// server. A future version can swap this file's internals for a WebSocket
-// relay without touching the C++ side at all, since the C++/JS boundary is
-// just "local description became available" / "remote description arrived."
+// that the host shares with a guest out of band; the guest pastes it in,
+// which produces an SDP answer that the host pastes back. Only the SDP text
+// itself crosses the C++/JS signaling boundary; the WebRTC `type` is known
+// from which side of the handshake is processing it. This keeps the player
+// facing a simple join code instead of a JSON RTCSessionDescription object.
 //
 // Connection state numbering must match NetTransport::ConnectionState in
 // source/net/NetTransport.h exactly.
@@ -161,7 +160,7 @@ const ES_NET_STATE_FAILED = 3;
 		connection.onicegatheringstatechange = function()
 		{
 			if(connection.iceGatheringState === "complete")
-				reportLocalDescription(JSON.stringify(connection.localDescription));
+				reportLocalDescription(connection.localDescription.sdp || "");
 		};
 		connection.onconnectionstatechange = function()
 		{
@@ -190,24 +189,22 @@ const ES_NET_STATE_FAILED = 3;
 					reportState(ES_NET_STATE_FAILED, "createOffer failed: " + error);
 				});
 			// reportLocalDescription fires from onicegatheringstatechange
-			// once ICE gathering completes, carrying the full offer +
-			// candidates as one JSON blob for the host to hand to the guest.
+			// once ICE gathering completes, carrying only the SDP text for the
+			// host to hand to the guest.
 		},
 
 		joinHost: function(offerText)
 		{
 			isHost = false;
 			reportState(ES_NET_STATE_SIGNALING, "");
-			let offer;
-			try
+			const trimmedOffer = String(offerText || "").trim();
+			if(!trimmedOffer)
 			{
-				offer = JSON.parse(offerText);
-			}
-			catch(error)
-			{
-				reportState(ES_NET_STATE_FAILED, "Could not parse host's connection code: " + error);
+				reportState(ES_NET_STATE_FAILED, "Host connection code is empty.");
 				return;
 			}
+
+			const offer = { type: "offer", sdp: trimmedOffer };
 
 			peerConnection = new RTCPeerConnection(RTC_CONFIG);
 			wirePeerConnection(peerConnection);
@@ -228,7 +225,7 @@ const ES_NET_STATE_FAILED = 3;
 					reportState(ES_NET_STATE_FAILED, "Failed to join host: " + error);
 				});
 			// reportLocalDescription fires once ICE gathering completes,
-			// carrying the answer the player pastes back to the host.
+			// carrying only the answer SDP text the player pastes back to the host.
 		},
 
 		acceptRemoteDescription: function(descriptionText)
@@ -238,16 +235,14 @@ const ES_NET_STATE_FAILED = 3;
 				reportState(ES_NET_STATE_FAILED, "No connection in progress to accept a description for.");
 				return;
 			}
-			let description;
-			try
+			const trimmedDescription = String(descriptionText || "").trim();
+			if(!trimmedDescription)
 			{
-				description = JSON.parse(descriptionText);
-			}
-			catch(error)
-			{
-				reportState(ES_NET_STATE_FAILED, "Could not parse connection code: " + error);
+				reportState(ES_NET_STATE_FAILED, "Guest connection code is empty.");
 				return;
 			}
+
+			const description = { type: "answer", sdp: trimmedDescription };
 			// Only the host still needs to accept a remote description after
 			// startup (the guest's answer); the guest supplied its remote
 			// description already in joinHost.
