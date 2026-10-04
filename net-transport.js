@@ -43,23 +43,21 @@ const ES_NET_STATE_FAILED = 3;
 	};
 
 	// Encodes a JS string to a null-terminated UTF-8 buffer in wasm memory
-	// and returns the pointer. Caller is responsible for Module._free'ing
-	// the returned pointer once done with it.
+	// and returns the pointer. Caller is responsible for calling
+	// Module._esNetTransportFree(ptr) once done with it.
 	//
-	// This exists instead of using Emscripten's own allocateUTF8 helper
-	// because that helper is only attached to `Module` when
-	// -sEXPORTED_RUNTIME_METHODS includes it at link time, and in this
-	// project's build it does not (confirmed by a
-	// "allocateUTF8 is not a function" TypeError at runtime) - whereas
-	// Module._malloc/Module._free/Module.HEAPU8 are reliably present
-	// (reportMessage below already depended on them working). Doing the
-	// UTF-8 encoding by hand with TextEncoder sidesteps the missing
-	// helper entirely rather than requiring a CMake/link-flag change this
-	// project's build setup wasn't available to make here.
+	// Do not use Module._malloc/_free here. This build intentionally exposes
+	// a small allocator pair from NetTransport.cpp specifically for this
+	// browser-main-thread bridge. That keeps this file independent of
+	// Emscripten's generic malloc exports and avoids requiring _malloc/_free
+	// to be added to EXPORTED_FUNCTIONS.
 	function allocateUTF8Manual(text)
 	{
 		const encoded = new TextEncoder().encode(text);
-		const ptr = Module._malloc(encoded.length + 1);
+		const ptr = Module._esNetTransportAlloc(encoded.length + 1);
+		if(!ptr)
+			throw new Error("esNetTransportAlloc failed");
+
 		Module.HEAPU8.set(encoded, ptr);
 		Module.HEAPU8[ptr + encoded.length] = 0; // null terminator
 		return ptr;
@@ -73,7 +71,7 @@ const ES_NET_STATE_FAILED = 3;
 		{
 			const detailPtr = allocateUTF8Manual(detail || "");
 			Module._esNetTransportOnStateChange(state, detailPtr);
-			Module._free(detailPtr);
+			Module._esNetTransportFree(detailPtr);
 		}
 		catch(error)
 		{
@@ -89,7 +87,7 @@ const ES_NET_STATE_FAILED = 3;
 		{
 			const sdpPtr = allocateUTF8Manual(sdpText);
 			Module._esNetTransportOnLocalDescription(sdpPtr);
-			Module._free(sdpPtr);
+			Module._esNetTransportFree(sdpPtr);
 		}
 		catch(error)
 		{
@@ -103,14 +101,16 @@ const ES_NET_STATE_FAILED = 3;
 			return;
 		try
 		{
-			const ptr = Module._malloc(bytes.byteLength);
+			const ptr = Module._esNetTransportAlloc(bytes.byteLength);
+			if(!ptr)
+				throw new Error("esNetTransportAlloc failed");
 			Module.HEAPU8.set(new Uint8Array(bytes), ptr);
 			Module._esNetTransportOnMessage(ptr, bytes.byteLength);
-			Module._free(ptr);
+			Module._esNetTransportFree(ptr);
 		}
 		catch(error)
 		{
-			console.error("[Net] reportMessage failed - _malloc/_free may not be exported:", error);
+			console.error("[Net] reportMessage failed:", error);
 		}
 	}
 
