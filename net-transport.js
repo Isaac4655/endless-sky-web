@@ -2,14 +2,10 @@
 //
 // Browser-main-thread WebRTC bridge for Endless Sky multiplayer.
 //
-// This version is completely serverless. Signaling is user-mediated: the host
-// generates a compressed connection code, the guest pastes it, the guest then
-// generates a compressed reply code, and the host pastes that reply back.
-//
-// The connection code contains only compressed WebRTC negotiation data. It uses
-// a URL-safe base64 alphabet (A-Z, a-z, 0-9, '-' and '_') with no whitespace,
-// so it can be copied as one uninterrupted string with the game's normal
-// Ctrl+C / Ctrl+V clipboard handling.
+// Signaling is fully serverless: the host and guest manually exchange compact,
+// compressed connection codes. The signaling UI lives in the browser DOM rather
+// than in Endless Sky's C++ panel stack, so asynchronous code generation never
+// pauses the game simulation.
 
 const ES_NET_STATE_DISCONNECTED = 0;
 const ES_NET_STATE_SIGNALING = 1;
@@ -22,18 +18,15 @@ const ES_NET_STATE_FAILED = 3;
 	let dataChannel = null;
 	let isHost = false;
 
-	// Fully self-contained WebRTC configuration. We intentionally do not use a
-	// public STUN or TURN server here: all negotiation data is carried inside the
-	// user-mediated connection codes. Without STUN/TURN, Internet connections
-	// between peers behind NAT may not be possible; direct/LAN connections and
-	// environments with directly reachable ICE candidates still work.
 	const RTC_CONFIG = {
 		iceServers: [],
 	};
 
-	const CODE_VERSION = 1;
+	const CODE_VERSION = 2;
 	const TYPE_OFFER = 0;
 	const TYPE_ANSWER = 1;
+	const COMPRESSION_GZIP = 1;
+	const COMPRESSION_RAW = 0;
 
 	function allocateUTF8Manual(text)
 	{
@@ -41,7 +34,6 @@ const ES_NET_STATE_FAILED = 3;
 		const ptr = Module._esNetTransportAlloc(encoded.length + 1);
 		if(!ptr)
 			throw new Error("esNetTransportAlloc failed");
-
 		Module.HEAPU8.set(encoded, ptr);
 		Module.HEAPU8[ptr + encoded.length] = 0;
 		return ptr;
@@ -125,8 +117,7 @@ const ES_NET_STATE_FAILED = 3;
 			.replace(/_/g, "/");
 		if(!normalized.length)
 			throw new Error("The connection code is empty.");
-
-		if(!/^[A-Za-z0-9+/]*={0,2}$/.test(normalized))
+		if(!/^[A-Za-z0-9+/]*$/.test(normalized))
 			throw new Error("The connection code contains invalid characters.");
 
 		const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
@@ -149,19 +140,26 @@ const ES_NET_STATE_FAILED = 3;
 	async function compressBytes(bytes)
 	{
 		if(typeof CompressionStream === "undefined")
-			throw new Error("This browser does not support the built-in connection-code compressor.");
+			return {method: COMPRESSION_RAW, bytes};
 
 		const compressor = new CompressionStream("gzip");
 		const writer = compressor.writable.getWriter();
 		await writer.write(bytes);
 		await writer.close();
-		return new Uint8Array(await new Response(compressor.readable).arrayBuffer());
+		return {
+			method: COMPRESSION_GZIP,
+			bytes: new Uint8Array(await new Response(compressor.readable).arrayBuffer()),
+		};
 	}
 
-	async function decompressBytes(bytes)
+	async function decompressBytes(bytes, method)
 	{
+		if(method === COMPRESSION_RAW)
+			return bytes;
+		if(method !== COMPRESSION_GZIP)
+			throw new Error("The connection code uses an unsupported compression format.");
 		if(typeof DecompressionStream === "undefined")
-			throw new Error("This browser does not support the built-in connection-code decompressor.");
+			throw new Error("This browser cannot decompress this connection code.");
 
 		const decompressor = new DecompressionStream("gzip");
 		const writer = decompressor.writable.getWriter();
@@ -175,47 +173,267 @@ const ES_NET_STATE_FAILED = 3;
 		if(!description || typeof description.sdp !== "string" || !description.sdp.length)
 			throw new Error("WebRTC did not produce a usable connection description.");
 
-		const sdpBytes = new TextEncoder().encode(description.sdp);
 		const typeByte = description.type === "offer" ? TYPE_OFFER :
 			description.type === "answer" ? TYPE_ANSWER : -1;
 		if(typeByte < 0)
 			throw new Error("WebRTC produced an unsupported description type.");
 
-		// Tiny binary envelope before compression:
-		//   byte 0: connection-code format version
-		//   byte 1: 0 = offer, 1 = answer
-		//   bytes 2+: UTF-8 SDP text
-		const payload = new Uint8Array(2 + sdpBytes.length);
-		payload[0] = CODE_VERSION;
-		payload[1] = typeByte;
-		payload.set(sdpBytes, 2);
-
-		const compressed = await compressBytes(payload);
-		return base64UrlEncode(compressed);
+		const sdpBytes = new TextEncoder().encode(description.sdp);
+		const compressed = await compressBytes(sdpBytes);
+		// The envelope contains format version, description type, compression
+		// method, then the compressed SDP bytes.
+		const finalPayload = new Uint8Array(3 + compressed.bytes.length);
+		finalPayload[0] = CODE_VERSION;
+		finalPayload[1] = typeByte;
+		finalPayload[2] = compressed.method;
+		finalPayload.set(compressed.bytes, 3);
+		return base64UrlEncode(finalPayload);
 	}
 
 	async function decodeConnectionCode(codeText)
 	{
-		const compressed = base64UrlDecode(codeText);
-		const payload = await decompressBytes(compressed);
-		if(payload.length < 3)
+		const encoded = base64UrlDecode(codeText);
+		if(encoded.length < 4)
 			throw new Error("The connection code is too short.");
-		if(payload[0] !== CODE_VERSION)
+		if(encoded[0] !== CODE_VERSION)
 			throw new Error("The connection code uses an unsupported version.");
 
 		let type;
-		if(payload[1] === TYPE_OFFER)
+		if(encoded[1] === TYPE_OFFER)
 			type = "offer";
-		else if(payload[1] === TYPE_ANSWER)
+		else if(encoded[1] === TYPE_ANSWER)
 			type = "answer";
 		else
 			throw new Error("The connection code contains an invalid description type.");
 
-		const sdp = new TextDecoder().decode(payload.subarray(2));
+		const payload = await decompressBytes(encoded.subarray(3), encoded[2]);
+		const sdp = new TextDecoder().decode(payload);
 		if(!sdp.startsWith("v=0\r\n") && !sdp.startsWith("v=0\n"))
 			throw new Error("The connection code does not contain valid SDP.");
-
 		return {type, sdp};
+	}
+
+	function selectAndCopy(element)
+	{
+		element.focus();
+		element.select();
+		try { document.execCommand("copy"); }
+		catch(error) {}
+	}
+
+	async function copyText(text, element, statusElement)
+	{
+		try
+		{
+			if(navigator.clipboard && window.isSecureContext)
+				await navigator.clipboard.writeText(text);
+			else
+				selectAndCopy(element);
+			statusElement.textContent = "Copied.";
+		}
+		catch(error)
+		{
+			selectAndCopy(element);
+			statusElement.textContent = "Selected. Press Ctrl+C to copy.";
+		}
+	}
+
+	let overlay = null;
+	let overlayTitle = null;
+	let overlayStatus = null;
+	let overlayBody = null;
+
+	function closeMultiplayerUI()
+	{
+		if(overlay)
+			overlay.remove();
+		overlay = null;
+		overlayTitle = null;
+		overlayStatus = null;
+		overlayBody = null;
+	}
+
+	function buildOverlay(title)
+	{
+		closeMultiplayerUI();
+
+		let style = document.getElementById("es-mp-style");
+		if(!style)
+		{
+			style = document.createElement("style");
+			style.id = "es-mp-style";
+			style.textContent = `
+			#es-mp-overlay { position:fixed; inset:0; z-index:10000; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.82); font-family:sans-serif; color:white; }
+			#es-mp-card { width:min(900px,92vw); max-height:88vh; box-sizing:border-box; padding:24px; border:1px solid rgba(255,255,255,.25); border-radius:10px; background:#111; box-shadow:0 12px 40px rgba(0,0,0,.6); }
+			#es-mp-card h2 { margin:0 0 12px; font-size:24px; }
+			#es-mp-status { margin:0 0 14px; opacity:.8; white-space:pre-wrap; }
+			#es-mp-body { display:flex; flex-direction:column; gap:12px; }
+			#es-mp-code, #es-mp-input { width:100%; min-height:120px; box-sizing:border-box; padding:12px; border-radius:6px; border:1px solid #555; background:#050505; color:#fff; font:14px/1.45 monospace; resize:vertical; }
+			#es-mp-code { min-height:180px; }
+			#es-mp-actions { display:flex; gap:10px; flex-wrap:wrap; }
+			#es-mp-actions button { padding:9px 16px; border:1px solid #666; border-radius:6px; background:#222; color:#fff; cursor:pointer; }
+			#es-mp-actions button:hover { background:#333; }
+		`;
+			document.head.appendChild(style);
+		}
+
+		overlay = document.createElement("div");
+		overlay.id = "es-mp-overlay";
+		const card = document.createElement("div");
+		card.id = "es-mp-card";
+		overlayTitle = document.createElement("h2");
+		overlayTitle.textContent = title;
+		overlayStatus = document.createElement("div");
+		overlayStatus.id = "es-mp-status";
+		overlayBody = document.createElement("div");
+		overlayBody.id = "es-mp-body";
+		card.append(overlayTitle, overlayStatus, overlayBody);
+		overlay.appendChild(card);
+		document.body.appendChild(overlay);
+		return overlay;
+	}
+
+	function setOverlayStatus(text, error = false)
+	{
+		if(!overlayStatus)
+			return;
+		overlayStatus.textContent = text;
+		overlayStatus.style.opacity = error ? "1" : ".8";
+		overlayStatus.style.color = error ? "#ff8080" : "";
+	}
+
+	function setError(text)
+	{
+		setOverlayStatus(text, true);
+		if(!overlayBody)
+			return;
+		const actions = document.createElement("div");
+		actions.id = "es-mp-actions";
+		const close = document.createElement("button");
+		close.textContent = "Close";
+		close.onclick = closeMultiplayerUI;
+		actions.appendChild(close);
+		overlayBody.appendChild(actions);
+	}
+
+	function showCode(title, status, code, nextLabel, onNext)
+	{
+		buildOverlay(title);
+		setOverlayStatus(status);
+
+		const codeBox = document.createElement("textarea");
+		codeBox.id = "es-mp-code";
+		codeBox.readOnly = true;
+		codeBox.value = code;
+		codeBox.addEventListener("click", function() { codeBox.select(); });
+
+		const actions = document.createElement("div");
+		actions.id = "es-mp-actions";
+		const copy = document.createElement("button");
+		copy.textContent = "Copy Code";
+		copy.onclick = function() { copyText(code, codeBox, overlayStatus); };
+		actions.appendChild(copy);
+
+		if(nextLabel && onNext)
+		{
+			const next = document.createElement("button");
+			next.textContent = nextLabel;
+			next.onclick = onNext;
+			actions.appendChild(next);
+		}
+
+		const close = document.createElement("button");
+		close.textContent = "Close";
+		close.onclick = function()
+		{
+			closePeerConnection();
+			closeMultiplayerUI();
+		};
+		actions.appendChild(close);
+
+		overlayBody.append(codeBox, actions);
+		codeBox.focus();
+		codeBox.select();
+	}
+
+	function showHostCode(code)
+	{
+		showCode("Host a Multiplayer Game",
+			"Send this connection code to the other player. They can paste it directly into their browser.",
+			code,
+			"Enter Reply Code",
+			showHostReplyInput);
+	}
+
+	function showHostReplyInput()
+	{
+		buildOverlay("Host a Multiplayer Game");
+		setOverlayStatus("Paste the guest's reply code below, then connect.");
+
+		const input = document.createElement("textarea");
+		input.id = "es-mp-input";
+		input.placeholder = "Paste the reply code here...";
+		const actions = document.createElement("div");
+		actions.id = "es-mp-actions";
+		const connect = document.createElement("button");
+		connect.textContent = "Connect";
+		connect.onclick = async function()
+		{
+			const text = input.value.trim();
+			if(!text)
+			{
+				setOverlayStatus("Paste the reply code first.", true);
+				return;
+			}
+			connect.disabled = true;
+			setOverlayStatus("Connecting...");
+			await self.__esNetTransport.acceptRemoteDescription(text);
+		};
+		const close = document.createElement("button");
+		close.textContent = "Close";
+		close.onclick = function() { closePeerConnection(); closeMultiplayerUI(); };
+		actions.append(connect, close);
+		overlayBody.append(input, actions);
+		input.focus();
+	}
+
+	function showGuestUI()
+	{
+		buildOverlay("Join a Multiplayer Game");
+		setOverlayStatus("Paste the host's connection code below.");
+
+		const input = document.createElement("textarea");
+		input.id = "es-mp-input";
+		input.placeholder = "Paste the host code here...";
+		const actions = document.createElement("div");
+		actions.id = "es-mp-actions";
+		const connect = document.createElement("button");
+		connect.textContent = "Join Game";
+		connect.onclick = async function()
+		{
+			const text = input.value.trim();
+			if(!text)
+			{
+				setOverlayStatus("Paste the host code first.", true);
+				return;
+			}
+			connect.disabled = true;
+			input.disabled = true;
+			setOverlayStatus("Creating your reply code...");
+			await self.__esNetTransport.joinHost(text);
+		};
+		const close = document.createElement("button");
+		close.textContent = "Close";
+		close.onclick = function() { closePeerConnection(); closeMultiplayerUI(); };
+		actions.append(connect, close);
+		overlayBody.append(input, actions);
+		input.focus();
+	}
+
+	function showHostUI()
+	{
+		buildOverlay("Host a Multiplayer Game");
+		setOverlayStatus("Generating your connection code...");
 	}
 
 	async function publishLocalDescription(description)
@@ -225,12 +443,30 @@ const ES_NET_STATE_FAILED = 3;
 			const code = await encodeConnectionCode(description);
 			reportLocalDescription(code);
 			console.log("[Net] Generated " + description.type + " connection code (" + code.length + " characters).");
+			if(description.type === "offer")
+				showHostCode(code);
+			else
+				showCode("Reply to Multiplayer Host",
+					"Send this reply code back to the host.",
+					code,
+					"Close",
+					closeMultiplayerUI);
 		}
 		catch(error)
 		{
+			setOverlayError("Could not generate the connection code: " + error.message);
 			reportState(ES_NET_STATE_FAILED, "Could not generate the connection code: " + error.message);
 			console.error("[Net] Connection-code generation failed:", error);
 		}
+	}
+
+	function setOverlayError(message)
+	{
+		if(!overlay)
+		{
+			buildOverlay("Multiplayer Error");
+		}
+		setError(message);
 	}
 
 	function waitForIceGatheringComplete(connection)
@@ -240,22 +476,21 @@ const ES_NET_STATE_FAILED = 3;
 
 		return new Promise((resolve, reject) => {
 			let settled = false;
-			const finish = () => {
-				if(settled)
-					return;
-				settled = true;
+			const cleanup = () => {
 				clearTimeout(timer);
 				connection.removeEventListener("icegatheringstatechange", checkState);
 				connection.removeEventListener("icecandidate", checkCandidate);
+			};
+			const finish = () => {
+				if(settled) return;
+				settled = true;
+				cleanup();
 				resolve();
 			};
 			const fail = error => {
-				if(settled)
-					return;
+				if(settled) return;
 				settled = true;
-				clearTimeout(timer);
-				connection.removeEventListener("icegatheringstatechange", checkState);
-				connection.removeEventListener("icecandidate", checkCandidate);
+				cleanup();
 				reject(error);
 			};
 			const checkState = () => {
@@ -264,10 +499,9 @@ const ES_NET_STATE_FAILED = 3;
 			};
 			const checkCandidate = event => {
 				if(event.candidate === null)
-					checkState();
+					finish();
 			};
 			const timer = setTimeout(() => fail(new Error("ICE gathering timed out.")), 30000);
-
 			connection.addEventListener("icegatheringstatechange", checkState);
 			connection.addEventListener("icecandidate", checkCandidate);
 			checkState();
@@ -278,14 +512,12 @@ const ES_NET_STATE_FAILED = 3;
 	{
 		if(dataChannel)
 		{
-			try { dataChannel.close(); }
-			catch(error) {}
+			try { dataChannel.close(); } catch(error) {}
 			dataChannel = null;
 		}
 		if(peerConnection)
 		{
-			try { peerConnection.close(); }
-			catch(error) {}
+			try { peerConnection.close(); } catch(error) {}
 			peerConnection = null;
 		}
 	}
@@ -296,6 +528,7 @@ const ES_NET_STATE_FAILED = 3;
 		channel.onopen = function()
 		{
 			reportState(ES_NET_STATE_CONNECTED, "");
+			closeMultiplayerUI();
 		};
 		channel.onclose = function()
 		{
@@ -303,8 +536,9 @@ const ES_NET_STATE_FAILED = 3;
 		};
 		channel.onerror = function(event)
 		{
-			reportState(ES_NET_STATE_FAILED,
-				"WebRTC data channel error: " + (event && event.message ? event.message : "unknown"));
+			const message = "WebRTC data channel error: " + (event && event.message ? event.message : "unknown");
+			setOverlayError(message);
+			reportState(ES_NET_STATE_FAILED, message);
 		};
 		channel.onmessage = function(event)
 		{
@@ -320,28 +554,30 @@ const ES_NET_STATE_FAILED = 3;
 		connection.onconnectionstatechange = function()
 		{
 			if(connection.connectionState === "failed")
-				reportState(ES_NET_STATE_FAILED,
-					"WebRTC connection failed. Direct browser-to-browser networking may be unavailable between these networks without a STUN/TURN service.");
+			{
+				const message = "WebRTC connection failed. A direct connection may not be possible between these networks without a STUN/TURN service.";
+				setOverlayError(message);
+				reportState(ES_NET_STATE_FAILED, message);
+			}
 			else if(connection.connectionState === "closed")
 				reportState(ES_NET_STATE_DISCONNECTED, "WebRTC connection closed");
 		};
 	}
 
 	self.__esNetTransport = {
+		showHostUI,
+		showGuestUI,
 		startHosting: async function()
 		{
 			isHost = true;
 			closePeerConnection();
 			reportState(ES_NET_STATE_SIGNALING, "");
-
 			try
 			{
 				peerConnection = new RTCPeerConnection(RTC_CONFIG);
 				wirePeerConnection(peerConnection);
-
 				dataChannel = peerConnection.createDataChannel("endless-sky-net", {ordered: true});
 				wireDataChannel(dataChannel);
-
 				const offer = await peerConnection.createOffer();
 				await peerConnection.setLocalDescription(offer);
 				await waitForIceGatheringComplete(peerConnection);
@@ -349,6 +585,7 @@ const ES_NET_STATE_FAILED = 3;
 			}
 			catch(error)
 			{
+				setOverlayError("Could not create a multiplayer connection code: " + error.message);
 				reportState(ES_NET_STATE_FAILED, "Could not create a multiplayer connection code: " + error.message);
 				console.error("[Net] Host setup failed:", error);
 			}
@@ -359,13 +596,11 @@ const ES_NET_STATE_FAILED = 3;
 			isHost = false;
 			closePeerConnection();
 			reportState(ES_NET_STATE_SIGNALING, "");
-
 			try
 			{
 				const offer = await decodeConnectionCode(codeText);
 				if(offer.type !== "offer")
 					throw new Error("This is not a host connection code.");
-
 				peerConnection = new RTCPeerConnection(RTC_CONFIG);
 				wirePeerConnection(peerConnection);
 				peerConnection.ondatachannel = function(event)
@@ -373,7 +608,6 @@ const ES_NET_STATE_FAILED = 3;
 					dataChannel = event.channel;
 					wireDataChannel(dataChannel);
 				};
-
 				await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 				const answer = await peerConnection.createAnswer();
 				await peerConnection.setLocalDescription(answer);
@@ -382,6 +616,7 @@ const ES_NET_STATE_FAILED = 3;
 			}
 			catch(error)
 			{
+				setOverlayError("Failed to use the host connection code: " + error.message);
 				reportState(ES_NET_STATE_FAILED, "Failed to use the host connection code: " + error.message);
 				console.error("[Net] Guest setup failed:", error);
 			}
@@ -391,20 +626,20 @@ const ES_NET_STATE_FAILED = 3;
 		{
 			if(!peerConnection)
 			{
-				reportState(ES_NET_STATE_FAILED, "No multiplayer connection is waiting for a reply code.");
+				setOverlayError("No host connection is waiting for a reply code.");
 				return;
 			}
-
 			try
 			{
 				const answer = await decodeConnectionCode(codeText);
 				if(answer.type !== "answer")
 					throw new Error("This is not a guest reply code.");
-
 				await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+				setOverlayStatus("Answer accepted. Waiting for the direct connection...");
 			}
 			catch(error)
 			{
+				setOverlayError("Could not accept the guest connection code: " + error.message);
 				reportState(ES_NET_STATE_FAILED, "Could not accept the guest connection code: " + error.message);
 				console.error("[Net] Remote connection-code decode failed:", error);
 			}
