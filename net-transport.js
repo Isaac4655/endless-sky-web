@@ -141,27 +141,56 @@ const ES_NET_STATE_FAILED = 3;
 
 	function wirePeerConnection(connection)
 	{
-		// Using the "wait for ICE gathering to complete, then use the
-		// single consolidated description" approach (simpler for manual
-		// copy/paste signaling than trickling individual candidates one at
-		// a time) rather than streaming each candidate separately.
-		//
-		// IMPORTANT: this must be driven by onicegatheringstatechange, NOT
-		// by checking connection.iceGatheringState inside onicecandidate.
-		// onicecandidate only fires when a candidate is found; there is no
-		// guarantee it fires again (or fires at all) at the exact moment
-		// gathering state flips to "complete" - that transition is reported
-		// separately and asynchronously via its own event. Relying on
-		// onicecandidate here was the bug: gathering would complete but
-		// nothing ever noticed, so no local description was ever reported
-		// and the "still generating your connection code" message never
-		// went away no matter how long you waited or how many times you
-		// retried.
+		// Use the consolidated SDP after ICE gathering completes. Keep the
+		// completion check in one idempotent helper so we cannot miss the
+		// transition or report the same code more than once.
+		let localDescriptionReported = false;
+		let fallbackTimer = null;
+
+		function tryReportLocalDescription()
+		{
+			if(localDescriptionReported)
+				return true;
+
+			const description = connection.localDescription;
+			if(connection.iceGatheringState !== "complete" || !description || !description.sdp)
+				return false;
+
+			localDescriptionReported = true;
+			if(fallbackTimer !== null)
+			{
+				clearTimeout(fallbackTimer);
+				fallbackTimer = null;
+			}
+			reportLocalDescription(description.sdp);
+			return true;
+		}
+
 		connection.onicegatheringstatechange = function()
 		{
-			if(connection.iceGatheringState === "complete")
-				reportLocalDescription(connection.localDescription.sdp || "");
+			tryReportLocalDescription();
 		};
+
+		// Also handle the standard end-of-candidates signal. This is redundant
+		// with the gathering-state event in normal browsers, but makes completion
+		// robust against implementations that deliver the final null candidate
+		// before the state-change callback reaches this script.
+		connection.onicecandidate = function(event)
+		{
+			if(event.candidate === null)
+				tryReportLocalDescription();
+		};
+
+		// Normally onicegatheringstatechange is sufficient. This delayed check
+		// covers browsers where the state reaches "complete" around the same
+		// turn of the event loop as setLocalDescription(), so a state transition
+		// observed too early cannot leave the UI waiting forever.
+		fallbackTimer = setTimeout(function()
+		{
+			fallbackTimer = null;
+			if(!tryReportLocalDescription())
+				console.warn("[Net] ICE gathering did not complete within 15 seconds; state:", connection.iceGatheringState);
+		}, 15000);
 		connection.onconnectionstatechange = function()
 		{
 			if(connection.connectionState === "failed" || connection.connectionState === "closed")
@@ -184,6 +213,10 @@ const ES_NET_STATE_FAILED = 3;
 
 			peerConnection.createOffer()
 				.then(function(offer) { return peerConnection.setLocalDescription(offer); })
+				.then(function() {
+					if(peerConnection.iceGatheringState === "complete")
+						console.log("[Net] ICE was already complete after setLocalDescription().");
+				})
 				.catch(function(error)
 				{
 					reportState(ES_NET_STATE_FAILED, "createOffer failed: " + error);
@@ -220,6 +253,10 @@ const ES_NET_STATE_FAILED = 3;
 			peerConnection.setRemoteDescription(new RTCSessionDescription(offer))
 				.then(function() { return peerConnection.createAnswer(); })
 				.then(function(answer) { return peerConnection.setLocalDescription(answer); })
+				.then(function() {
+					if(peerConnection.iceGatheringState === "complete")
+						console.log("[Net] ICE was already complete after setLocalDescription().");
+				})
 				.catch(function(error)
 				{
 					reportState(ES_NET_STATE_FAILED, "Failed to join host: " + error);
