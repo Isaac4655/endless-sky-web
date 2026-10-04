@@ -571,6 +571,25 @@ const ES_NET_STATE_FAILED = 3;
 		{
 			isHost = true;
 			closePeerConnection();
+			// Build the "Generating..." placeholder here, synchronously, as
+			// part of the same call that will go on to build the real code.
+			// Previously MultiplayerPanel.cpp dispatched showHostUI() and
+			// startHosting() as two SEPARATE async main-thread calls. Both are
+			// proxied independently via emscripten_async_run_in_main_runtime_thread,
+			// which gives no ordering guarantee between two distinct proxied
+			// calls relative to each other - only that each one's own body
+			// runs to completion once started. If startHosting()'s awaits
+			// (createOffer/setLocalDescription/ICE gathering) resolved fast
+			// enough, it could finish and call showHostCode() BEFORE the
+			// separately-queued showHostUI() call ran; showHostUI() would
+			// then call buildOverlay(), which tears down and replaces
+			// whatever overlay is currently showing - wiping out the real
+			// code and leaving the empty placeholder on screen permanently,
+			// since startHosting() has already finished and will never call
+			// showHostCode() again. Calling showHostUI() here guarantees the
+			// placeholder is always built before the code-generating work
+			// starts, in the same synchronous call, with no race possible.
+			showHostUI();
 			reportState(ES_NET_STATE_SIGNALING, "");
 			try
 			{
@@ -598,6 +617,15 @@ const ES_NET_STATE_FAILED = 3;
 			reportState(ES_NET_STATE_SIGNALING, "");
 			try
 			{
+				// Guard against the same clobbering race as startHosting():
+				// if an overlay isn't already up (e.g. this is being invoked
+				// as the very first step of the join flow rather than from
+				// the paste-code button inside an existing guest overlay),
+				// make sure one exists before we start awaiting, so a
+				// fast-resolving decode/connect can't finish before some
+				// separately-dispatched UI call gets around to building it.
+				if(!overlay)
+					showGuestUI();
 				const offer = await decodeConnectionCode(codeText);
 				if(offer.type !== "offer")
 					throw new Error("This is not a host connection code.");
