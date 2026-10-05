@@ -143,12 +143,29 @@ const ES_NET_STATE_FAILED = 3;
 			return {method: COMPRESSION_RAW, bytes};
 
 		const compressor = new CompressionStream("gzip");
+		// IMPORTANT: start reading compressor.readable BEFORE/CONCURRENTLY
+		// with writing, not after awaiting write()+close(). A
+		// CompressionStream is a TransformStream with a bounded internal
+		// queue (backpressure): write()'s returned promise does not resolve
+		// until there's room in that queue, and room is only freed up by
+		// something consuming the readable side. The previous code awaited
+		// writer.write() and writer.close() to finish BEFORE starting
+		// new Response(compressor.readable).arrayBuffer() - i.e. nothing was
+		// draining the readable side while the write/close were pending. For
+		// small inputs that fit entirely within the default high-water mark
+		// this can happen to resolve, but it is not guaranteed, and once the
+		// compressed output doesn't fit in one internal chunk the write (and
+		// therefore close) promise never settles: a deadlock with no error
+		// and no timeout, since nothing here was ever waiting with a timer.
+		// Kicking off the read here lets the two sides run concurrently, as
+		// a TransformStream's write/read pair is meant to be used.
+		const readPromise = new Response(compressor.readable).arrayBuffer();
 		const writer = compressor.writable.getWriter();
 		await writer.write(bytes);
 		await writer.close();
 		return {
 			method: COMPRESSION_GZIP,
-			bytes: new Uint8Array(await new Response(compressor.readable).arrayBuffer()),
+			bytes: new Uint8Array(await readPromise),
 		};
 	}
 
@@ -162,10 +179,14 @@ const ES_NET_STATE_FAILED = 3;
 			throw new Error("This browser cannot decompress this connection code.");
 
 		const decompressor = new DecompressionStream("gzip");
+		// Same concurrent read-while-writing fix as compressBytes() above -
+		// start draining decompressor.readable before awaiting write()/close()
+		// so the stream can't deadlock on backpressure.
+		const readPromise = new Response(decompressor.readable).arrayBuffer();
 		const writer = decompressor.writable.getWriter();
 		await writer.write(bytes);
 		await writer.close();
-		return new Uint8Array(await new Response(decompressor.readable).arrayBuffer());
+		return new Uint8Array(await readPromise);
 	}
 
 	async function encodeConnectionCode(description)
@@ -593,28 +614,17 @@ const ES_NET_STATE_FAILED = 3;
 			reportState(ES_NET_STATE_SIGNALING, "");
 			try
 			{
-				console.log("[Net][debug] creating RTCPeerConnection");
 				peerConnection = new RTCPeerConnection(RTC_CONFIG);
-				console.log("[Net][debug] peerConnection created, signalingState=", peerConnection.signalingState,
-					"iceGatheringState=", peerConnection.iceGatheringState);
 				wirePeerConnection(peerConnection);
 				dataChannel = peerConnection.createDataChannel("endless-sky-net", {ordered: true});
-				console.log("[Net][debug] data channel created");
 				wireDataChannel(dataChannel);
-				console.log("[Net][debug] calling createOffer");
 				const offer = await peerConnection.createOffer();
-				console.log("[Net][debug] createOffer resolved", offer && offer.type);
 				await peerConnection.setLocalDescription(offer);
-				console.log("[Net][debug] setLocalDescription resolved, iceGatheringState=",
-					peerConnection.iceGatheringState);
 				await waitForIceGatheringComplete(peerConnection);
-				console.log("[Net][debug] ICE gathering complete");
 				await publishLocalDescription(peerConnection.localDescription);
-				console.log("[Net][debug] publishLocalDescription resolved");
 			}
 			catch(error)
 			{
-				console.error("[Net][debug] caught error in startHosting:", error);
 				setOverlayError("Could not create a multiplayer connection code: " + error.message);
 				reportState(ES_NET_STATE_FAILED, "Could not create a multiplayer connection code: " + error.message);
 				console.error("[Net] Host setup failed:", error);
