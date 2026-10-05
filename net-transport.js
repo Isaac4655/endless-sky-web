@@ -593,17 +593,28 @@ const ES_NET_STATE_FAILED = 3;
 			reportState(ES_NET_STATE_SIGNALING, "");
 			try
 			{
+				console.log("[Net][debug] creating RTCPeerConnection");
 				peerConnection = new RTCPeerConnection(RTC_CONFIG);
+				console.log("[Net][debug] peerConnection created, signalingState=", peerConnection.signalingState,
+					"iceGatheringState=", peerConnection.iceGatheringState);
 				wirePeerConnection(peerConnection);
 				dataChannel = peerConnection.createDataChannel("endless-sky-net", {ordered: true});
+				console.log("[Net][debug] data channel created");
 				wireDataChannel(dataChannel);
+				console.log("[Net][debug] calling createOffer");
 				const offer = await peerConnection.createOffer();
+				console.log("[Net][debug] createOffer resolved", offer && offer.type);
 				await peerConnection.setLocalDescription(offer);
+				console.log("[Net][debug] setLocalDescription resolved, iceGatheringState=",
+					peerConnection.iceGatheringState);
 				await waitForIceGatheringComplete(peerConnection);
+				console.log("[Net][debug] ICE gathering complete");
 				await publishLocalDescription(peerConnection.localDescription);
+				console.log("[Net][debug] publishLocalDescription resolved");
 			}
 			catch(error)
 			{
+				console.error("[Net][debug] caught error in startHosting:", error);
 				setOverlayError("Could not create a multiplayer connection code: " + error.message);
 				reportState(ES_NET_STATE_FAILED, "Could not create a multiplayer connection code: " + error.message);
 				console.error("[Net] Host setup failed:", error);
