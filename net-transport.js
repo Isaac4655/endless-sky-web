@@ -698,7 +698,34 @@ const ES_NET_STATE_FAILED = 3;
 		{
 			if(!dataChannel || dataChannel.readyState !== "open")
 				return;
-			dataChannel.send(bytes);
+			// This is invoked synchronously from the C++ side via
+			// emscripten_sync_run_in_main_runtime_thread (see NetTransport::Send's
+			// comment), which BLOCKS the calling thread until this function
+			// returns. RTCDataChannel.send() throws a synchronous DOMException
+			// ("InvalidStateError"/"OperationError") when its outgoing buffer is
+			// saturated - e.g. right after the tab was backgrounded for a while
+			// and a burst of queued state needs to flush at once, or any time
+			// the peer can't drain data as fast as it's being produced. Letting
+			// that exception escape this EM_JS-invoked function is unsafe: it
+			// propagates up through the Emscripten runtime's internal call
+			// machinery with nothing on the C++ side able to catch or recover
+			// from it, and can leave that call (and anything after it in the
+			// same synchronous proxy call) in a broken state with no retry -
+			// which is consistent with sends simply never working again after
+			// a backgrounded-tab stall, rather than a clean, resumable error.
+			// Swallow it here instead: drop this one message (the data channel
+			// is ordered+reliable for messages that DO get sent, but an app
+			// level send() failure like this was never going to be retried
+			// automatically either way) and let the next tick's send attempt
+			// normally, once bufferedAmount has drained.
+			try
+			{
+				dataChannel.send(bytes);
+			}
+			catch(error)
+			{
+				console.warn("[Net] Dropped outgoing message; data channel send buffer is saturated:", error);
+			}
 		},
 	};
 })();
