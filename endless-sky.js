@@ -800,6 +800,12 @@ assert(globalThis.Int32Array && globalThis.Float64Array && Int32Array.prototype.
 function preRun() {
   assert(!ENVIRONMENT_IS_PTHREAD);
   // PThreads reuse the runtime from the main thread.
+  var preRun = Module["preRun"];
+  if (preRun) {
+    if (typeof preRun == "function") preRun = [ preRun ];
+    onPreRuns.push(...preRun);
+  }
+  consumedModuleProp("preRun");
   // Begin ATPRERUNS hooks
   callRuntimeCallbacks(onPreRuns);
 }
@@ -13652,7 +13658,6 @@ function checkIncomingModuleAPI() {
   ignoredModuleProp("onRuntimeInitialized");
   ignoredModuleProp("postRun");
   ignoredModuleProp("preInit");
-  ignoredModuleProp("preRun");
   ignoredModuleProp("print");
   ignoredModuleProp("printErr");
   ignoredModuleProp("statusMessage");
