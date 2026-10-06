@@ -1,135 +1,203 @@
-/*! coi-serviceworker v0.1.7 - Guido Zuidhof, licensed under MIT */
-// https://github.com/gzuidhof/coi-serviceworker
-// This service worker intercepts all requests made by the page and injects
-// the Cross-Origin-Opener-Policy and Cross-Origin-Embedder-Policy headers,
-// which are required for SharedArrayBuffer / pthreads to work, but which
-// static hosts like GitHub Pages don't let you set server-side.
+/* Endless Sky Web COI bootstrap.
+ *
+ * Cross-origin isolation is required by the pthread build of Endless Sky.
+ * This file works as both:
+ *   1. a small page-side bootstrap that registers/activates the service worker, and
+ *   2. the service worker itself, which injects COOP/COEP/Permissions-Policy headers.
+ *
+ * For static hosts such as GitHub Pages, the service-worker header injection is
+ * the fallback because the host does not let the site author set HTTP headers.
+ *
+ * COEP deliberately uses "require-corp" rather than "credentialless". This is
+ * the more conservative choice for Safari/WebKit compatibility and is suitable
+ * here because the Endless Sky web build serves its application resources from
+ * the same origin.
+ */
+(() => {
+    const VERSION = "endless-sky-coi-v2";
+    const RELOAD_KEY = "__esCoiReloadCount";
+    const MAX_RELOADS = 2;
 
-// Change this line at the very top of coi-serviceworker.js:
-let coepCredentialless = true;
+    // Service-worker context: no window/document exists.
+    if (typeof window === "undefined") {
+        self.addEventListener("install", event => {
+            event.waitUntil(self.skipWaiting());
+        });
 
-if (typeof window === 'undefined') {
-    self.addEventListener("install", () => self.skipWaiting());
-    self.addEventListener("activate", (event) => event.waitUntil(self.clients.claim()));
+        self.addEventListener("activate", event => {
+            event.waitUntil(self.clients.claim());
+        });
 
-    self.addEventListener("message", (ev) => {
-        if (!ev.data) {
-            return;
-        } else if (ev.data.type === "deregister") {
-            self.registration
-                .unregister()
-                .then(() => {
-                    return self.clients.matchAll();
-                })
-                .then((clients) => {
-                    clients.forEach((client) => client.navigate(client.url));
+        self.addEventListener("fetch", event => {
+            const request = event.request;
+
+            // Required for Firefox/cache semantics: don't respond to a cross-origin
+            // only-if-cached request from a service worker.
+            if (request.cache === "only-if-cached" && request.mode !== "same-origin")
+                return;
+
+            event.respondWith((async () => {
+                const response = await fetch(request);
+
+                // Opaque responses cannot have their headers/body reconstructed.
+                if (response.type === "opaque" || response.status === 0)
+                    return response;
+
+                const headers = new Headers(response.headers);
+
+                headers.set("Cross-Origin-Opener-Policy", "same-origin");
+                headers.set("Cross-Origin-Embedder-Policy", "require-corp");
+                headers.set("Permissions-Policy", "cross-origin-isolated=(self)");
+
+                // Same-origin resources are already eligible under COEP. Supplying
+                // CORP explicitly makes their intent unambiguous to browsers and
+                // helps with embedded worker/resource edge cases.
+                try {
+                    if (new URL(request.url).origin === self.location.origin)
+                        headers.set("Cross-Origin-Resource-Policy", "same-origin");
+                } catch (_) {
+                    // If URL parsing somehow fails, keep the original headers.
+                }
+
+                return new Response(response.body, {
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers
                 });
-        } else if (ev.data.type === "coepCredentialless") {
-            coepCredentialless = ev.data.value;
+            })());
+        });
+
+        return;
+    }
+
+    const currentScript = document.currentScript;
+    const state = {
+        version: VERSION,
+        secureContext: window.isSecureContext === true,
+        serviceWorkerSupported: "serviceWorker" in navigator,
+        crossOriginIsolated: window.crossOriginIsolated === true,
+        sharedArrayBufferSupported: typeof window.SharedArrayBuffer === "function",
+        atomicsSupported: typeof window.Atomics === "object"
+            && typeof window.Atomics.wait === "function"
+    };
+
+    window.__endlessSkyCOI = state;
+
+    function publish(ok, reason) {
+        state.ok = !!ok;
+        state.reason = reason || "";
+        window.__endlessSkyCOI = state;
+        if (typeof window.dispatchEvent === "function")
+            window.dispatchEvent(new CustomEvent("endless-sky-coi", { detail: state }));
+        return !!ok;
+    }
+
+    // The headers may already be supplied by the real web server/CDN. In that
+    // case, service-worker registration is unnecessary and only adds complexity.
+    if (state.crossOriginIsolated && state.sharedArrayBufferSupported) {
+        try {
+            sessionStorage.removeItem(RELOAD_KEY);
+        } catch (_) {}
+        window.__endlessSkyCOIReady = Promise.resolve(publish(true, "Server-provided COI is active."));
+        return;
+    }
+
+    async function waitForController() {
+        if (navigator.serviceWorker.controller)
+            return true;
+
+        return new Promise(resolve => {
+            let done = false;
+            const finish = value => {
+                if (done)
+                    return;
+                done = true;
+                clearTimeout(timer);
+                navigator.serviceWorker.removeEventListener("controllerchange", onChange);
+                resolve(value);
+            };
+            const onChange = () => finish(true);
+            const timer = setTimeout(() => finish(!!navigator.serviceWorker.controller), 2500);
+
+            navigator.serviceWorker.addEventListener("controllerchange", onChange, { once: true });
+        });
+    }
+
+    async function bootstrap() {
+        if (!state.secureContext) {
+            return publish(false,
+                "Cross-origin isolation requires HTTPS (or localhost).");
         }
-    });
 
-    self.addEventListener("fetch", function (event) {
-        const r = event.request;
-        if (r.cache === "only-if-cached" && r.mode !== "same-origin") {
-            return;
+        if (!state.serviceWorkerSupported) {
+            return publish(false,
+                "This browser does not support Service Workers. Serve the site over HTTPS or use a browser with Service Worker support.");
         }
 
-        const request = (coepCredentialless && r.mode === "no-cors")
-            ? new Request(r, {
-                credentials: "omit",
-            })
-            : r;
-        event.respondWith(
-            fetch(request)
-                .then((response) => {
-                    if (response.status === 0) {
-                        return response;
-                    }
+        if (!currentScript || !currentScript.src) {
+            return publish(false,
+                "The COI service worker script could not determine its own URL.");
+        }
 
-                    const newHeaders = new Headers(response.headers);
-                    newHeaders.set("Cross-Origin-Embedder-Policy",
-                        coepCredentialless ? "credentialless" : "require-corp"
-                    );
-                    if (!coepCredentialless) {
-                        newHeaders.set("Cross-Origin-Resource-Policy", "cross-origin");
-                    }
-                    newHeaders.set("Cross-Origin-Opener-Policy", "same-origin");
+        let reloadCount = 0;
+        try {
+            reloadCount = Number.parseInt(sessionStorage.getItem(RELOAD_KEY) || "0", 10) || 0;
+        } catch (_) {
+            reloadCount = 0;
+        }
 
-                    return new Response(response.body, {
-                        status: response.status,
-                        statusText: response.statusText,
-                        headers: newHeaders,
-                    });
-                })
-                .catch((e) => console.error(e))
-        );
-    });
+        if (reloadCount > MAX_RELOADS) {
+            return publish(false,
+                "Cross-origin isolation did not become active after multiple reloads. Check the browser's Service Worker settings and site headers.");
+        }
 
-} else {
-    (() => {
-        const reloadedBySelf = window.sessionStorage.getItem("coiReloadedBySelf");
-        window.sessionStorage.removeItem("coiReloadedBySelf");
-        const coepDegrading = (reloadedBySelf == "coepdegrade");
+        try {
+            const scriptURL = new URL(currentScript.src, document.baseURI).href;
+            const scopeURL = new URL("./", scriptURL).href;
 
-        // You can customize the behavior of this script through a global `coi` variable.
-        const coi = {
-            shouldRegister: () => true,
-            shouldDeregister: () => false,
-            coepCredentialless: () => true,
-            coepDegrade: () => true,
-            doReload: () => window.location.reload(),
-            quiet: false,
-            ...window.coi
-        };
-
-        const n = navigator;
-
-        if (n.serviceWorker && n.serviceWorker.controller) {
-            n.serviceWorker.controller.postMessage({
-                type: "coepCredentialless",
-                value: coepDegrading ? false : coi.coepCredentialless(),
+            const registration = await navigator.serviceWorker.register(scriptURL, {
+                scope: scopeURL,
+                updateViaCache: "none"
             });
 
-            if (coi.shouldDeregister()) {
-                n.serviceWorker.controller.postMessage({ type: "deregister" });
+            // Make a new SW version take effect quickly without waiting for the
+            // browser's normal update interval.
+            try {
+                await registration.update();
+            } catch (_) {
+                // A failed update is not fatal when an existing active worker exists.
             }
-        }
 
-        // If we're already coi: do nothing. Perhaps it's due to this script doing its job, or
-        // it could be that the current context is "inherently" coi.
-        if (window.crossOriginIsolated !== false || !n.serviceWorker) {
-            return;
-        }
+            await navigator.serviceWorker.ready;
 
-        if (!window.isSecureContext) {
-            !coi.quiet && console.log("[coi] Deployment requires a secure context.");
-            return;
-        }
-
-        // In some environments (e.g. Firefox private mode) serviceWorker.register() will
-        // never resolve/reject, so we need to add a timeout to avoid hanging.
-        const registrationPromise = coi.shouldRegister() ? n.serviceWorker.register(window.document.currentScript.src).then(
-            (registration) => {
-                !coi.quiet && console.log("[coi] Registered service worker:", registration.scope);
-
-                registration.addEventListener("updatefound", () => {
-                    !coi.quiet && console.log("[coi] Reloading page to make use of updated service worker.");
-                    window.sessionStorage.setItem("coiReloadedBySelf", "updatefound");
-                    coi.doReload();
-                });
-
-                // If the registration is active, but it's not controlling the page
-                if (registration.active && !n.serviceWorker.controller) {
-                    !coi.quiet && console.log("[coi] Reloading page to make use of service worker.");
-                    window.sessionStorage.setItem("coiReloadedBySelf", "notcontrolling");
-                    coi.doReload();
-                }
+            if (!navigator.serviceWorker.controller) {
+                await waitForController();
             }
-        ) : Promise.resolve();
 
-        if (coepDegrading) {
-            !coi.quiet && console.log("[coi] Assuming the previous reload was due to the coepCredentialless setting, and the browser is caching an outdated (potentially failing) response. Attempting to fix by degrading coepCredentialless.");
+            // A service worker can be installed but not have controlled the
+            // document that loaded it yet. A navigation is needed for the COOP/
+            // COEP response headers to apply to the document itself.
+            if (!window.crossOriginIsolated || !window.SharedArrayBuffer) {
+                try {
+                    sessionStorage.setItem(RELOAD_KEY, String(reloadCount + 1));
+                } catch (_) {}
+
+                window.location.reload();
+                return false;
+            }
+
+            try {
+                sessionStorage.removeItem(RELOAD_KEY);
+            } catch (_) {}
+
+            return publish(true,
+                `Cross-origin isolation active via service worker (${registration.scope}).`);
+        } catch (error) {
+            console.error("[COI] Service worker bootstrap failed:", error);
+            return publish(false,
+                "The COI service worker could not be installed. The site must be HTTPS/localhost and Service Workers must be allowed.");
         }
-    })();
-}
+    }
+
+    window.__endlessSkyCOIReady = bootstrap();
+})();

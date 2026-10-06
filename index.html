@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Endless Sky</title>
 
+    <!--
+        MUST remain the first executable script in <head>.
+        It needs to register/control the page before Emscripten starts creating
+        pthread workers. The script is local because Service Workers cannot be
+        registered from a CDN/cross-origin URL.
+    -->
+    <script src="./coi-serviceworker.js"></script>
+
     <style>
         html, body {
             margin: 0;
@@ -31,6 +39,8 @@
             transform: translate(-50%, -50%);
             text-align: center;
             z-index: 10;
+            max-width: min(90vw, 800px);
+            white-space: pre-wrap;
         }
 
         /* On-screen debug console */
@@ -49,7 +59,7 @@
             z-index: 9999;
             white-space: pre-wrap;
             word-wrap: break-word;
-            display: block; /* Visible by default to catch early initialization */
+            display: block;
         }
     </style>
 </head>
@@ -59,22 +69,31 @@
     <div id="debug-console"></div>
     <canvas id="canvas" tabindex="0"></canvas>
 
-    <!-- Logging Interceptor (MUST BE FIRST) -->
+    <!-- Logging interceptor -->
     <script>
-        const debugConsole = document.getElementById('debug-console');
-        
+        const debugConsole = document.getElementById("debug-console");
+
         function formatArgs(args) {
             return args.map(a => {
-                if (a instanceof Error) return a.stack || a.message;
-                if (typeof a === 'object') return JSON.stringify(a);
+                if (a instanceof Error)
+                    return a.stack || a.message;
+
+                if (typeof a === "object") {
+                    try {
+                        return JSON.stringify(a);
+                    } catch (_) {
+                        return String(a);
+                    }
+                }
+
                 return String(a);
-            }).join(' ');
+            }).join(" ");
         }
 
         function printToScreen(msg, color) {
-            const span = document.createElement('span');
+            const span = document.createElement("span");
             span.style.color = color;
-            span.innerText = msg + '\n';
+            span.innerText = msg + "\n";
             debugConsole.appendChild(span);
             debugConsole.scrollTop = debugConsole.scrollHeight;
         }
@@ -82,104 +101,139 @@
         const origLog = console.log;
         console.log = function(...args) {
             origLog.apply(console, args);
-            printToScreen(formatArgs(args), '#0f0'); // Green for standard logs
+            printToScreen(formatArgs(args), "#0f0");
         };
 
         const origWarn = console.warn;
         console.warn = function(...args) {
             origWarn.apply(console, args);
-            printToScreen(formatArgs(args), '#ff0'); // Yellow for warnings
+            printToScreen(formatArgs(args), "#ff0");
         };
 
         const origError = console.error;
         console.error = function(...args) {
             origError.apply(console, args);
-            printToScreen(formatArgs(args), '#f00'); // Red for errors
+            printToScreen(formatArgs(args), "#f00");
         };
 
-        window.addEventListener('error', function(e) {
+        window.addEventListener("error", function(e) {
             console.error("Global Error:", e.message, "at", e.filename, ":", e.lineno);
         });
 
-        window.addEventListener('unhandledrejection', function(e) {
+        window.addEventListener("unhandledrejection", function(e) {
             console.error("Unhandled Promise Rejection:", e.reason);
         });
-    </script>
 
-    <script>
-        window.coi = {
-            // FIXED: Must be true for GitHub Pages to allow cross-origin isolation
-            coepCredentialless: () => true
-        };
+        function reportCOIState() {
+            const state = window.__endlessSkyCOI || {};
+            console.log("[COI]", state.reason || "No COI diagnostic available.");
+        }
+
+        window.addEventListener("endless-sky-coi", reportCOIState);
+        reportCOIState();
     </script>
-    <script src="coi-serviceworker.js"></script>
 
     <!-- Multiplayer (v1): must load before endless-sky.js so that
          self.__esNetTransport exists by the time NetTransport.cpp's EM_JS
-         calls run. See source/net/NetTransport.cpp for the C++ side and
-         web/net-transport.js for what this installs. -->
-    <script src="net-transport.js"></script>
+         calls run. -->
+    <script src="./net-transport.js"></script>
 
     <script>
         var Module = {
-            // The engine script is loaded from a normal URL below. Emscripten can
-            // determine its own main script URL for pthread workers, so no
-            // mainScriptUrlOrBlob override is needed here.
             canvas: document.getElementById("canvas"),
-
 
             setStatus: function(text) {
                 var statusEl = document.getElementById("status");
-                if (statusEl) {
-                    if (text) {
-                        statusEl.innerText = text;
-                        console.log("[Status]", text);
+                if (!statusEl)
+                    return;
 
-                        // Emscripten reports "Running..." once main() has started.
-                        // At that point the game canvas is active, so remove the
-                        // full-screen debug overlay that was only intended to
-                        // catch early startup failures.
-                        if (text === "Running...") {
-                            debugConsole.style.display = "none";
-                            statusEl.style.display = "none";
-                        }
-                    } else {
+                if (text) {
+                    statusEl.innerText = text;
+                    console.log("[Status]", text);
+
+                    // Emscripten reports "Running..." once main() has started.
+                    if (text === "Running...") {
+                        debugConsole.style.display = "none";
                         statusEl.style.display = "none";
                     }
+                } else {
+                    statusEl.style.display = "none";
                 }
             }
         };
 
         let gameScriptStarted = false;
 
+        function failCOI(message) {
+            const statusEl = document.getElementById("status");
+            if (statusEl) {
+                statusEl.style.display = "block";
+                statusEl.innerText =
+                    "Endless Sky could not start because browser threading is unavailable.\n\n"
+                    + message
+                    + "\n\n"
+                    + "This build requires HTTPS (or localhost), SharedArrayBuffer, "
+                    + "and cross-origin isolation.";
+            }
+
+            console.error("[COI] " + message);
+        }
+
         function loadGameScript() {
             if (gameScriptStarted) {
                 console.warn("[Loader] Main engine load requested more than once; ignoring duplicate.");
                 return;
             }
+
             gameScriptStarted = true;
 
-            // The generated engine installs the resource manifest itself from
-            // the application pthread. This page only starts the engine runtime.
-            console.log("Cross-origin isolation confirmed. Injecting main engine...");
+            // Because endless-sky.js is injected dynamically, explicitly tell
+            // Emscripten the exact URL it must use when creating pthread workers.
+            // This avoids browser-specific currentScript/worker URL resolution
+            // differences, especially on Safari and nested GitHub Pages paths.
+            const gameURL = new URL("./endless-sky.js", document.baseURI);
+            gameURL.searchParams.set("v", Date.now().toString());
 
-            var script = document.createElement("script");
-            script.src = "endless-sky.js?t=" + new Date().getTime();
+            Module.mainScriptUrlOrBlob = gameURL.href;
+
+            console.log("[COI] Cross-origin isolation confirmed. Injecting main engine:", gameURL.href);
+
+            const script = document.createElement("script");
+            script.src = gameURL.href;
             script.async = false;
+            script.crossOrigin = "anonymous";
             document.body.appendChild(script);
         }
-        if (window.crossOriginIsolated) {
-            loadGameScript();
-        } else {
-            console.warn("[COI] Waiting for Cross-Origin Isolation reload...");
-            setTimeout(function() {
-                if (!window.crossOriginIsolated) {
-                    console.error("Cross-Origin Isolation failed. Check browser restrictions.");
-                    document.getElementById("status").innerText = 
-                        "Cross-Origin Isolation failed. Check browser restrictions.";
+
+        async function startWhenReady() {
+            try {
+                const ready = await window.__endlessSkyCOIReady;
+
+                const isolated = window.crossOriginIsolated === true;
+                const sab = typeof window.SharedArrayBuffer === "function";
+                const atomics = typeof window.Atomics === "object"
+                    && typeof window.Atomics.wait === "function";
+
+                console.log("[COI] crossOriginIsolated =", isolated);
+                console.log("[COI] SharedArrayBuffer =", sab);
+                console.log("[COI] Atomics.wait =", atomics);
+
+                if (!ready || !isolated || !sab || !atomics) {
+                    const state = window.__endlessSkyCOI || {};
+                    failCOI(
+                        state.reason
+                        || "crossOriginIsolated/SharedArrayBuffer/Atomics checks did not pass."
+                    );
+                    return;
                 }
-            }, 3000);
+
+                loadGameScript();
+            } catch (error) {
+                failCOI(error && error.message ? error.message : String(error));
+            }
         }
+
+        startWhenReady();
     </script>
 </body>
 </html>
