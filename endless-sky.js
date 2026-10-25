@@ -13696,13 +13696,13 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  401890: () => {
+  402970: () => {
     const fs = (typeof Module !== "undefined" && Module.FS) ? Module.FS : (typeof FS !== "undefined" ? FS : null);
     if (fs && typeof fs.syncfs === "function") fs.syncfs(false, function(error) {
       if (error) console.error("[WEB] Save storage sync failed:", error);
     });
   },
-  402179: ($0, $1, $2, $3) => {
+  403259: ($0, $1, $2, $3) => {
     const statusPtr = $0 >> 2;
     const fileNamePtr = $1;
     const fileNameCapacity = $2;
@@ -13762,8 +13762,8 @@ var ASM_CONSTS = {
     };
     input.click();
   },
-  404013: () => (growMemViews(), HEAPU8).length,
-  404039: $0 => {
+  405093: () => (growMemViews(), HEAPU8).length,
+  405119: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -13771,7 +13771,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  404254: () => {
+  405334: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -13779,7 +13779,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  404401: () => {
+  405481: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -13787,7 +13787,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  404635: $0 => {
+  405715: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -13811,11 +13811,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  405187: () => {
+  406267: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  405255: ($0, $1, $2, $3) => {
+  406335: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13857,7 +13857,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  406948: ($0, $1, $2, $3) => {
+  408028: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -13889,7 +13889,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  408123: ($0, $1) => {
+  409203: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -13908,7 +13908,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  408728: ($0, $1) => {
+  409808: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -13922,7 +13922,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  409217: $0 => {
+  410297: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -13956,10 +13956,10 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  410223: $0 => {
+  411303: $0 => {
     window.open(UTF8ToString($0), "_blank");
   },
-  410263: ($0, $1, $2) => {
+  411343: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -14030,7 +14030,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  411729: ($0, $1, $2, $3, $4) => {
+  412809: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -14067,18 +14067,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  412717: $0 => {
+  413797: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  412800: () => {
+  413880: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  412869: () => window.innerWidth,
-  412899: () => window.innerHeight
+  413949: () => window.innerWidth,
+  413979: () => window.innerHeight
 };
 
 function WebResourceCategoryList(category) {
@@ -14138,8 +14138,14 @@ function WebGetResourceSiteBaseUrl() {
 }
 
 function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
+  let traceVirtualPath = "(path not decoded)";
+  let traceUrl = "(URL not constructed)";
+  let traceByteCount = -1;
+  let traceRequestedAllocation = -1;
+  let traceMemoryBytes = -1;
   try {
     const virtualPath = UTF8ToString(path);
+    traceVirtualPath = virtualPath;
     const baseUrl = UTF8ToString(resourceBaseUrl);
     const siteRoot = UTF8ToString(siteBaseUrl);
     if (!baseUrl) return 0;
@@ -14160,6 +14166,7 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       const encodedPath = relativePath.split("/").map(segment => encodeURIComponent(segment)).join("/");
       url = baseUrl + encodeURIComponent(category) + "/" + encodedPath;
     }
+    traceUrl = url;
     const onMainThread = (typeof window !== "undefined") && (typeof document !== "undefined");
     const xhr = new XMLHttpRequest;
     xhr.open("GET", url, false);
@@ -14183,8 +14190,21 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
       bytes = new Uint8Array(xhr.response || new ArrayBuffer(0));
       byteCount = bytes.byteLength;
     }
-    const ptr = _malloc(4 + byteCount);
-    if (!ptr) return 0;
+    traceByteCount = byteCount;
+    traceRequestedAllocation = 4 + byteCount;
+    traceMemoryBytes = (typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer.byteLength : ((typeof (growMemViews(), 
+    HEAPU8) !== "undefined" && (growMemViews(), HEAPU8)) ? (growMemViews(), HEAPU8).byteLength : -1);
+    const ptr = _malloc(traceRequestedAllocation);
+    if (!ptr) {
+      console.error("[Resources] malloc returned null:", {
+        path: traceVirtualPath,
+        url: traceUrl,
+        byteCount: traceByteCount,
+        requestedAllocation: traceRequestedAllocation,
+        wasmMemoryBytesBeforeMalloc: traceMemoryBytes
+      });
+      return 0;
+    }
     const memoryBuffer = (typeof wasmMemory !== "undefined" && wasmMemory) ? wasmMemory.buffer : (growMemViews(), 
     HEAPU8).buffer;
     const heapBytes = new Uint8Array(memoryBuffer);
@@ -14198,8 +14218,19 @@ function WebReadResource(path, resourceBaseUrl, siteBaseUrl) {
   } catch (error) {
     self.__endlessSkyWebResourceErrors = self.__endlessSkyWebResourceErrors || 0;
     if (self.__endlessSkyWebResourceErrors < 12) {
-      console.error("[Resources] Resource request exception:", error);
+      console.error("[Resources] Resource request exception:", {
+        path: traceVirtualPath,
+        url: traceUrl,
+        byteCount: traceByteCount,
+        requestedAllocation: traceRequestedAllocation,
+        wasmMemoryBytesBeforeMalloc: traceMemoryBytes,
+        error
+      });
       ++self.__endlessSkyWebResourceErrors;
+    }
+    if (typeof WebAssembly !== "undefined" && error instanceof WebAssembly.RuntimeError) {
+      console.error("[Resources] Re-throwing WebAssembly.RuntimeError; refusing to continue after a WASM memory trap.");
+      throw error;
     }
     return 0;
   }
