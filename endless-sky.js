@@ -14099,13 +14099,13 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  399965: () => {
+  401773: () => {
     const fs = (typeof Module !== "undefined" && Module.FS) ? Module.FS : (typeof FS !== "undefined" ? FS : null);
     if (fs && typeof fs.syncfs === "function") fs.syncfs(false, function(error) {
       if (error) console.error("[WEB] Save storage sync failed:", error);
     });
   },
-  400254: ($0, $1, $2, $3) => {
+  402062: ($0, $1, $2, $3) => {
     const statusPtr = $0 >> 2;
     const fileNamePtr = $1;
     const fileNameCapacity = $2;
@@ -14165,8 +14165,8 @@ var ASM_CONSTS = {
     };
     input.click();
   },
-  402088: () => (growMemViews(), HEAPU8).length,
-  402114: $0 => {
+  403896: () => (growMemViews(), HEAPU8).length,
+  403922: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -14174,7 +14174,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  402329: () => {
+  404137: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -14182,7 +14182,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  402476: () => {
+  404284: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -14190,7 +14190,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  402710: $0 => {
+  404518: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -14214,11 +14214,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  403262: () => {
+  405070: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  403330: ($0, $1, $2, $3) => {
+  405138: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -14260,7 +14260,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  405023: ($0, $1, $2, $3) => {
+  406831: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -14292,7 +14292,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  406198: ($0, $1) => {
+  408006: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -14311,7 +14311,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  406803: ($0, $1) => {
+  408611: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -14325,7 +14325,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  407292: $0 => {
+  409100: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -14359,7 +14359,7 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  408298: ($0, $1, $2) => {
+  410106: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -14430,7 +14430,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  409764: ($0, $1, $2, $3, $4) => {
+  411572: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -14467,19 +14467,90 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  410752: $0 => {
+  412560: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  410835: () => {
+  412643: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  410904: () => window.innerWidth,
-  410934: () => window.innerHeight
+  412712: () => window.innerWidth,
+  412742: () => window.innerHeight
 };
+
+function WebRequestSavePersist() {
+  try {
+    const fs = (typeof Module !== "undefined" && Module.FS) ? Module.FS : (typeof FS !== "undefined" ? FS : null);
+    if (!fs || typeof fs.syncfs !== "function") return;
+    let state = Module.__esSavePersist;
+    if (!state) {
+      const originalSyncfs = fs.syncfs.bind(fs);
+      let chain = Promise.resolve();
+      fs.syncfs = function(populate, callback) {
+        if (typeof populate === "function") {
+          callback = populate;
+          populate = false;
+        }
+        chain = chain.then(function() {
+          return new Promise(function(resolve) {
+            const done = function(error) {
+              try {
+                if (callback) callback(error || null);
+              } catch (e) {
+                console.error("[WEB] syncfs callback threw:", e);
+              }
+              resolve();
+            };
+            try {
+              originalSyncfs(!!populate, done);
+            } catch (e) {
+              done(e);
+            }
+          });
+        });
+      };
+      state = Module.__esSavePersist = {
+        timer: 0,
+        queued: false,
+        failures: 0,
+        flush: null
+      };
+      state.flush = function() {
+        if (state.timer) {
+          clearTimeout(state.timer);
+          state.timer = 0;
+        }
+        if (state.queued) return;
+        state.queued = true;
+        fs.syncfs(false, function(error) {
+          state.queued = false;
+          if (error) {
+            state.failures++;
+            console.error("[WEB] Save storage sync failed (attempt " + state.failures + "):", error);
+            if (state.failures <= 5 && !state.timer) state.timer = setTimeout(state.flush, 1e3 * state.failures);
+          } else state.failures = 0;
+        });
+      };
+      const flushNow = function() {
+        if (state.timer || state.failures) state.flush();
+      };
+      if (typeof document !== "undefined") document.addEventListener("visibilitychange", function() {
+        if (document.visibilityState === "hidden") flushNow();
+      });
+      if (typeof window !== "undefined") {
+        window.addEventListener("pagehide", flushNow);
+        window.addEventListener("beforeunload", flushNow);
+      }
+    }
+    if (state.timer) clearTimeout(state.timer);
+    state.timer = setTimeout(state.flush, 300);
+  } catch (error) {
+    console.error("[WEB] Could not schedule save storage sync:", error);
+  }
+}
 
 function WebResourceCategoryList(category) {
   try {
@@ -14872,6 +14943,7 @@ function assignWasmImports() {
     /** @export */ WebGetSaveFolderName,
     /** @export */ WebReadResource,
     /** @export */ WebReleaseResourceManifest,
+    /** @export */ WebRequestSavePersist,
     /** @export */ WebResourceCategoryList,
     /** @export */ __assert_fail: ___assert_fail,
     /** @export */ __call_sighandler: ___call_sighandler,
