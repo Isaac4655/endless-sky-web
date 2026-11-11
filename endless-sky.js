@@ -1179,7 +1179,7 @@ function initMemory() {
   }
   {
     var INITIAL_MEMORY = 536870912;
-    assert(INITIAL_MEMORY >= 65536, `INITIAL_MEMORY should be larger than STACK_SIZE, was ${INITIAL_MEMORY}! (STACK_SIZE=65536)`);
+    assert(INITIAL_MEMORY >= 1048576, `INITIAL_MEMORY should be larger than STACK_SIZE, was ${INITIAL_MEMORY}! (STACK_SIZE=1048576)`);
     /** @suppress {checkTypes} */ wasmMemory = new WebAssembly.Memory({
       "initial": INITIAL_MEMORY / 65536,
       // In theory we should not need to emit the maximum if we want "unlimited"
@@ -5774,7 +5774,7 @@ var __emscripten_init_main_thread_js = tb => {
   // Pass the thread address to the native code where they are stored in wasm
   // globals which act as a form of TLS. Global constructors trying
   // to access this value will read the wrong value, but that is UB anyway.
-  __emscripten_thread_init(tb, /*is_main=*/ !ENVIRONMENT_IS_WORKER, /*is_runtime=*/ 1, can_block, /*default_stacksize=*/ 65536, /*start_profiling=*/ false);
+  __emscripten_thread_init(tb, /*is_main=*/ !ENVIRONMENT_IS_WORKER, /*is_runtime=*/ 1, can_block, /*default_stacksize=*/ 1048576, /*start_profiling=*/ false);
   PThread.threadInitTLS();
 };
 
@@ -5878,7 +5878,7 @@ var handleException = e => {
   checkStackCookie();
   if (e instanceof WebAssembly.RuntimeError) {
     if (_emscripten_stack_get_current() <= 0) {
-      err("Stack overflow detected.  You can try increasing -sSTACK_SIZE (currently set to 65536)");
+      err("Stack overflow detected.  You can try increasing -sSTACK_SIZE (currently set to 1048576)");
     }
   }
   quit_(1, e);
@@ -14099,13 +14099,13 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  401981: () => {
+  1385021: () => {
     const fs = (typeof Module !== "undefined" && Module.FS) ? Module.FS : (typeof FS !== "undefined" ? FS : null);
     if (fs && typeof fs.syncfs === "function") fs.syncfs(false, function(error) {
       if (error) console.error("[WEB] Save storage sync failed:", error);
     });
   },
-  402270: ($0, $1, $2, $3) => {
+  1385310: ($0, $1, $2, $3) => {
     const statusPtr = $0 >> 2;
     const fileNamePtr = $1;
     const fileNameCapacity = $2;
@@ -14165,8 +14165,8 @@ var ASM_CONSTS = {
     };
     input.click();
   },
-  404104: () => (growMemViews(), HEAPU8).length,
-  404130: $0 => {
+  1387144: () => (growMemViews(), HEAPU8).length,
+  1387170: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -14174,7 +14174,7 @@ var ASM_CONSTS = {
     }
     return reply.length === 1 ? reply.charCodeAt(0) : -1;
   },
-  404345: () => {
+  1387385: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -14182,7 +14182,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  404492: () => {
+  1387532: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -14190,7 +14190,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  404726: $0 => {
+  1387766: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -14214,11 +14214,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  405278: () => {
+  1388318: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  405346: ($0, $1, $2, $3) => {
+  1388386: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -14260,7 +14260,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  407039: ($0, $1, $2, $3) => {
+  1390079: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -14292,7 +14292,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  408214: ($0, $1) => {
+  1391254: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -14311,7 +14311,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  408819: ($0, $1) => {
+  1391859: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -14325,7 +14325,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  409308: $0 => {
+  1392348: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -14359,7 +14359,7 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  410314: ($0, $1, $2) => {
+  1393354: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -14430,7 +14430,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  411780: ($0, $1, $2, $3, $4) => {
+  1394820: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -14467,18 +14467,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  412768: $0 => {
+  1395808: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  412851: () => {
+  1395891: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  412920: () => window.innerWidth,
-  412950: () => window.innerHeight
+  1395960: () => window.innerWidth,
+  1395990: () => window.innerHeight
 };
 
 function WebRequestSavePersist() {
